@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- jquery/jqm -->
+        <script src="lib/jquery-1.7.1.min.js"></script>
+        <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+
+        <!-- css -->
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
+        <link rel="stylesheet" href="css/fullscreen-pages.css"/>
+
+        <!-- Display custom Theme -->
+        <!-- <link rel="stylesheet" href="css/themes/mycustomtheme.css" /> -->
+        <!-- <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" /> -->
+
+        <!-- scripts -->
+        <script src="js/events.js"></script>
+
+
+        <div data-role="page" id="home">
+            <div data-role="header" data-position="fixed" data-tap-toggle="false">
+                <h1>Smell Pittsburgh!</h1>
+            </div>
+
+            <div role="main" class="ui-content" data-iscroll>
+                <h2>How does it smell to you right now?</h2>
+                <input type="range" name="slider_smell_value" id="slider_smell_value" value="1" min="1" max="5" step="1">
+                <ul>
+                    <li>1 Just fine!</li>
+                    <li>2 Barely noticeable</li>
+                    <li>3 Definitely noticeable</li>
+                    <li>4 It's getting pretty bad</li>
+                    <li>5 About as bad as it gets!</li>
+                </ul>
+
+                <label>Describe the smell (optional)</label>
+                <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true">
+                <label>Any feelings or symptoms? (optional)</label>
+                <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true">
+
+                <a class="ui-btn" onclick="onClickSubmit()">Send Smell Report!</a>
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
+                <div data-role="navbar">
+                  <ul>
+                    <li><a href="#home" data-icon="home"class="ui-btn-active ui-state-persist" data-transition="none">Smell Report</a></li>
+                    <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div data-role="page" id="map" class="page-fullscreened">
+            <div data-role="header" data-position="fixed" data-tap-toggle="false">
+                <h1>Smell Pittsburgh!</h1>
+            </div>
+
+            <div role="main" class="ui-content" data-iscroll style="padding:0;margin:0;">
+                <iframe id="iframe-map" src="http://localhost/visualization" width="100%" height="100%" style="padding:0;margin:0;">
+                  <p>Your browser does not support iframes.</p>
+                </iframe>
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
+                <div data-role="navbar">
+                  <ul>
+                    <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
+                    <li><a href="#map" data-icon="star" class="ui-btn-active ui-state-persist" data-transition="none">Map</a></li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- (requried for StatusBar plugin) -->
+        <script src="cordova.js"></script>
+        <script src="statusbar.js"></script>
+        <!-- /StatusBar -->
+    
+    </head>
+    <body></body>
+</html>
