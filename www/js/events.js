@@ -19,8 +19,12 @@ function onClickSubmit() {
     var smell_value = $("#slider_smell_value")[0].value;
     var smell_description = $("#textfield_smell_description")[0].value;
     var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
-    // TODO generate this
-    var userhash = "someuniquehash";
+    // userHash
+    var random = Math.floor(Math.random()*9007199254740991);
+	var date = new Date();
+	var epoch = ((date.getTime()-date.getMilliseconds())/1000);
+	var input = "" + random + " " + epoch;
+	var userHash = CryptoJS.MD5(input);
 
     $.ajax({
         type: "POST",
