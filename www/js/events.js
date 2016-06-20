@@ -1,5 +1,26 @@
 
 var coords;
+var USER_HASH_KEY = "user_hash";
+
+
+/* We may want to use a database because on iOS the local storage may be cleared
+   if the device needs space. */
+function generateUserHash() {
+	var userHash;
+
+    var storage = window.localStorage;
+	userHash = storage.getItem(USER_HASH_KEY);
+	if (userHash === null) {
+		var random = Math.floor(Math.random()*9007199254740991);
+		var date = new Date();
+		var epoch = ((date.getTime()-date.getMilliseconds())/1000);
+		var input = "" + random + " " + epoch;
+		userHash = CryptoJS.MD5(input);
+		storage.setItem(USER_HASH_KEY, userHash);
+	}
+
+    return userHash;
+}
 
 
 function requestLocation() {
@@ -20,11 +41,7 @@ function onClickSubmit() {
     var smell_description = $("#textfield_smell_description")[0].value;
     var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
     // userHash
-    var random = Math.floor(Math.random()*9007199254740991);
-	var date = new Date();
-	var epoch = ((date.getTime()-date.getMilliseconds())/1000);
-	var input = "" + random + " " + epoch;
-	var userHash = CryptoJS.MD5(input);
+	var userHash = generateUserHash();
 
     $.ajax({
         type: "POST",
