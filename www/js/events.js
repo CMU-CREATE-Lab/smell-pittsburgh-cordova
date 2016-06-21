@@ -3,8 +3,6 @@ var coords;
 var USER_HASH_KEY = "user_hash";
 
 
-/* We may want to use a database because on iOS the local storage may be cleared
-   if the device needs space. */
 function generateUserHash() {
 	var userHash;
 
@@ -27,9 +25,13 @@ function requestLocation() {
     var onSuccess = function(position) {
         coords = position.coords;
         console.log("got coords="+coords);
+		console.log("accuracy: " + coords.accuracy);
     };
+	var onError = function (error) {
+		console.log(error.message);
+	}
 
-    navigator.geolocation.getCurrentPosition(onSuccess);
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
 }
 
 
