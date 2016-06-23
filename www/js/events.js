@@ -32,6 +32,11 @@ function requestLocation() {
 		console.log("Heading: " + coords.heading);
 		console.log("Speed: " + coords.speed);
 		console.log("Timestamp: " + position.timestamp);
+		
+		// Testing lat long library
+		var first = new LatLon(coords.latitude, coords.longitude);
+		var last = new LatLon(40.443500, -79.9463300);
+		console.log("The position " + first.lat + ", " + first.lon + " is approximately" + first.distanceTo(last) + " meters away from the position 40.443500, -79.9463300.");
     };
 	var onError = function (error) {
 		console.log("error code: " + error.code);
