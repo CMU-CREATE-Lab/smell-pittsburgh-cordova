@@ -62,7 +62,7 @@ function onClickSubmit() {
         dataType: "json",
         url: "http://localhost/api/v1/smell_reports",
         data: {
-            "user_hash" : userhash,
+            "user_hash" : userHash,
             "latitude" : latitude,
             "longitude" : longitude,
             "smell_value" : smell_value,
