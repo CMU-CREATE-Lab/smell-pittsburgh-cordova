@@ -17,24 +17,13 @@
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log('Received Device Ready Event');
-		$.mobile.changePage($("#home"), {changeHash:false, transition: "none"});
+		// TODO - figure out a way to have an initialize page that the user cannot go back to
+		// once it has been initialized
+		//$.mobile.changePage($("#home"), {changeHash:false, transition: "none"});
     }
 };
 
 app.initialize();
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
  
  

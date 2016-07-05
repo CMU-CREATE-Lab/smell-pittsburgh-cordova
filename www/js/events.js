@@ -4,16 +4,17 @@ var USER_HASH_KEY = "user_hash";
 
 
 function generateUserHash() {
+	
 	var userHash;
-
     var storage = window.localStorage;
+	
 	userHash = storage.getItem(USER_HASH_KEY);
 	if (userHash === null) {
 		var random = Math.floor(Math.random()*9007199254740991);
 		var date = new Date();
 		var epoch = ((date.getTime()-date.getMilliseconds())/1000);
 		var input = "" + random + " " + epoch;
-		userHash = CryptoJS.MD5(input);
+		userHash = md5(input);
 		storage.setItem(USER_HASH_KEY, userHash);
 	}
 
@@ -32,11 +33,6 @@ function requestLocation() {
 		console.log("Heading: " + coords.heading);
 		console.log("Speed: " + coords.speed);
 		console.log("Timestamp: " + position.timestamp);
-		
-		// Testing lat long library
-		var first = new LatLon(coords.latitude, coords.longitude);
-		var last = new LatLon(40.443500, -79.9463300);
-		console.log("The position " + first.lat + ", " + first.lon + " is approximately" + first.distanceTo(last) + " meters away from the position 40.443500, -79.9463300.");
     };
 	var onError = function (error) {
 		console.log("error code: " + error.code);
