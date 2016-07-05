@@ -17,9 +17,7 @@
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log('Received Device Ready Event');
-		// TODO - figure out a way to have an initialize page that the user cannot go back to
-		// once it has been initialized
-		//$.mobile.changePage($("#home"), {changeHash:false, transition: "none"});
+		navigator.splashscreen.hide();
     }
 };
 

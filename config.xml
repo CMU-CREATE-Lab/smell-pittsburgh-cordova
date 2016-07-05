@@ -26,9 +26,18 @@
     <allow-navigation href="http://localhost/visualization" />
     <platform name="android">
         <allow-intent href="market:*" />
+		<splash src="www/img/smellpgh.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+		<splash src="www/img/smellpgh.png" />
     </platform>
+	
+	<preference name="AutoHideSplashScreen" value="true" />
+	<preference name="FadeSplashScreen" value="false"/>
+	<preference name="SplashScreenDelay" value="3000" />
+	<preference name="SplashMaintainAspectRatio" value="true|false" />
+	<preference name="SplashShowOnlyFirstTime" value="true|false" />
+
 </widget>
