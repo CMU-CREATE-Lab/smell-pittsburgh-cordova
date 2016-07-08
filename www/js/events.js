@@ -22,6 +22,43 @@ function generateUserHash() {
 }
 
 
+function initializeFCM() {
+	FCMPlugin.getToken(
+		// success
+		function(token) {
+			alert(token);
+		},
+		// error
+		function(error) {
+			console.log("error retrieving token: " + error);
+		}
+	);
+	
+	FCMPlugin.onNotification(
+		// callback
+		function(data) {
+			if (data.wasTapped) {
+				//Notification was received on device tray and tapped by the user. 
+				alert(JSON.stringify(data));
+			} else {
+				//Notification was received in foreground. Maybe the user needs to be notified.
+				alert(JSON.stringify(data));
+			}
+		},
+		// success
+		function(message) {
+			console.log("callback successfully registers: " + message);
+		},
+		// error
+		function(error) {
+			console.log("error registering callback: " + error);
+		}
+	);
+	
+	FCMPlugin.subscribeToTopic('topicExample');
+}
+
+
 function requestLocation() {
     var onSuccess = function(position) {
         coords = position.coords;
@@ -79,7 +116,9 @@ function onClickSubmit() {
 
 
 $(document).on("pageshow", "#home", function(){
-    requestLocation();
+	if (isDeviceReady) {
+		requestLocation();
+	}
 });
 $(document).on("pageshow", "#map", function(){
     console.log("refreshing iframe");

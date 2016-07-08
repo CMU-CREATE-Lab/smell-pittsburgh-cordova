@@ -1,4 +1,6 @@
 
+var isDeviceReady = false;
+
  var app = {
     // Application Constructor
     initialize: function() {
@@ -18,10 +20,10 @@
     onDeviceReady: function() {
         console.log('Received Device Ready Event');
 		navigator.splashscreen.hide();
+		deviceready = true;
+		initializeFCM();
+		requestLocation();
     }
 };
 
 app.initialize();
- 
- 
- 

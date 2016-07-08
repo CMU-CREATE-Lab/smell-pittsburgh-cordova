@@ -8,21 +8,24 @@
     },
     "installed_plugins": {
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "cmu.createlab.edu.smell_pittsburgh"
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+        },
+        "cordova-plugin-fcm": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
         }
     }
 }
