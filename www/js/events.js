@@ -25,14 +25,6 @@ function generateUserHash() {
 function requestLocation() {
     var onSuccess = function(position) {
         coords = position.coords;
-        console.log("got coords="+coords);
-		console.log("Latitude: " + coords.latitude);
-		console.log("Longitude: " + coords.longitude);
-		console.log("Altitude: " + coords.altitude);
-		console.log("Accuracy: " + coords.accuracy);
-		console.log("Heading: " + coords.heading);
-		console.log("Speed: " + coords.speed);
-		console.log("Timestamp: " + position.timestamp);
     };
 	var onError = function (error) {
 		console.log("error code: " + error.code);
@@ -79,7 +71,9 @@ function onClickSubmit() {
 
 
 $(document).on("pageshow", "#home", function(){
-    requestLocation();
+	if (isDeviceReady) {
+		requestLocation();
+	}
 });
 $(document).on("pageshow", "#map", function(){
     console.log("refreshing iframe");
