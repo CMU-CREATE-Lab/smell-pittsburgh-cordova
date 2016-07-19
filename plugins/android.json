@@ -21,6 +21,9 @@
         },
         "cordova-plugin-fcm": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
         }
     },
     "dependent_plugins": {
