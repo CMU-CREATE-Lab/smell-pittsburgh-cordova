@@ -26,7 +26,9 @@ var isDeviceReady = false;
 		requestLocation();
 		
 		function onResume() {
-			requestLocation();
+			if (isSmellReportPage) {
+				requestLocation();
+			}
 		}
 		
 		function onPause() {
