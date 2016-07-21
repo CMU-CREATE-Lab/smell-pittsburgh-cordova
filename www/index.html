@@ -21,6 +21,8 @@
         <!-- scripts -->
         <script src="js/events.js"></script>
 		<script src="js/init.js"></script>
+		<script src="js/globalfunctions.js"></script>
+		<script src="js/localstorage.js"></script>
 
         <div data-role="page" id="home">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -43,7 +45,7 @@
                 <label>Any feelings or symptoms? (optional)</label>
                 <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true">
 
-                <a class="ui-btn" onclick="onClickSubmit()">Send Smell Report!</a>
+                <button type="button" id="submitReport" onclick="onClickSubmit()" disabled="true">Send Smell Report!</button>
             </div>
 
             <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">

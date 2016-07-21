@@ -15,6 +15,15 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+        },
+        "cordova-plugin-spinner": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
         }
     },
     "dependent_plugins": {
