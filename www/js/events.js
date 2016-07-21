@@ -1,6 +1,7 @@
 
 var coords;
 var isRequestingLocation = false;
+var isSmellReportPage = false;
 
 
 function requestLocation() {
@@ -104,9 +105,11 @@ function onClickSubmit() {
 
 $(document).on("pageshow", "#home", function(){
 	requestLocation();
+	isSmellReportPage = true;
 });
 $(document).on("pageshow", "#map", function(){
     console.log("refreshing iframe");
     $('#iframe-map').attr('src', $('#iframe-map').attr('src'));
 	$('#submitReport').attr('disabled', 'true');
+	isSmellReportPage = false;
 });
