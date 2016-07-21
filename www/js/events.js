@@ -42,7 +42,7 @@ function requestLocation() {
 	} else {
 		if (isDeviceReady) {
 			navigator.notification.alert(
-				"Connect to the internet then click 'Retry'.",
+				"Connect to the internet then click 'Retry' in order to request location.",
 				alertDismissed,
 				"No Internet Connection",
 				"Retry"
@@ -89,6 +89,15 @@ function onClickSubmit() {
 				alert(msg.message);
 			}
 		});
+	} else {
+		if (isDeviceReady) {
+			navigator.notification.alert(
+				"Connect to the internet before submitting a smell report.",
+				null,
+				"No Internet Connection",
+				"Ok"
+			);
+		}
 	}
 }
 
