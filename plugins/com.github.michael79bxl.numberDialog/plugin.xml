@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+           id="com.github.michael79bxl.numberDialog"
+      version="0.2.2">
+
+    <name>NumericDialog</name>
+    
+	<description>
+			PhoneGap numeric text/password dialog plugin for Android and iOS
+	</description>
+	<license>MIT</license>
+	<keywords>phonegap,android,ios,numeric,password,pin,dialog</keywords>
+
+	<js-module src="www/numberDialog.js" name="NumberDialog">
+	  <merges target="window.plugins.numberDialog" />
+	</js-module>
+	
+	<!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="NumberDialog">
+                <param name="android-package" value="com.github.michael79bxl.plugins.NumberDialog"/>
+            </feature>
+        </config-file>
+        
+        <source-file src="src/android/NumberDialog.java" target-dir="src/com/github/michael79bxl/plugins" />
+        
+    </platform>
+
+	<!-- ios -->
+	<platform name="ios">
+	  <config-file target="config.xml" parent="/*">
+		<feature name="NumberDialog">
+		  <param name="ios-package" value="CDVNumberDialog"/>
+		</feature>
+	  </config-file>
+
+	  <header-file src="src/ios/CDVNumberDialog.h" />
+	  <source-file src="src/ios/CDVNumberDialog.m" />
+	</platform>
+	
+</plugin>
+

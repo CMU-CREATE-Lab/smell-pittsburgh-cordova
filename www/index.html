@@ -35,10 +35,22 @@
         <!-- scripts -->
 		<script src="js/init.js"></script>
 		<script src="js/events.js"></script>
+		<script src="js/localstorage.js"></script>
+		<script src="js/globalfunctions.js"></script>
 
-        <div data-role="page" id="home">
+
+        <!-- (requried for StatusBar plugin) -->
+        <script src="cordova.js"></script>
+        <script src="statusbar.js"></script>
+        <!-- /StatusBar -->
+    
+    </head>
+    <body>
+	
+	<div data-role="page" id="home" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
+				<a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll>
@@ -57,7 +69,7 @@
                 <label>Any feelings or symptoms? (optional)</label>
                 <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true">
 
-                <a class="ui-btn" onclick="onClickSubmit()">Send Smell Report!</a>
+                <button type="button" id="submitReport" onclick="onClickSubmit()" disabled="true">Send Smell Report!</button>
             </div>
 
             <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
@@ -74,6 +86,7 @@
         <div data-role="page" id="map" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
+				<a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll style="padding:0;margin:0;">
@@ -91,13 +104,29 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- (requried for StatusBar plugin) -->
-        <script src="cordova.js"></script>
-        <script src="statusbar.js"></script>
-        <!-- /StatusBar -->
-    
-    </head>
-    <body></body>
+		
+		<div date-role="page" id="settings" class="page-fullscreened">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+                <h1>Settings</h1>
+            </div>
+			
+			<div date-role="main" class="ui-content" data-iscroll>
+				<h3>Notifications</h3>
+				<ul style="display:inline;display: inline-block;">
+					<li style="display:inline;display: inline-block;"><label>By zipcode</label></li>
+					<li style="display:inline;display: inline-block;"><input id="zipcodeInput" type="checkbox" onclick="onToggleZipcode()" /></li>
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+                  <ul>
+                    <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
+                    <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+                  </ul>
+                </div>
+			</div>
+		</div>
+	
+	</body>
 </html>

@@ -1,95 +1,86 @@
 
 var coords;
-var USER_HASH_KEY = "user_hash";
+var isRequestingLocation = false;
+var isSmellReportPage = false;
+var isZipcode;
+var zipcode;
 
 
-function isConnected() {
-	var result = false;
-	
-	if (navigator.connection.type != Connection.NONE) {
-		result = true;
-	}
-	
-	return result;
-}
-
-
-function generateUserHash() {
-	
-	var userHash;
-    var storage = window.localStorage;
-	
-	userHash = storage.getItem(USER_HASH_KEY);
-	if (userHash === null) {
-		var random = Math.floor(Math.random()*9007199254740991);
-		var date = new Date();
-		var epoch = ((date.getTime()-date.getMilliseconds())/1000);
-		var input = "" + random + " " + epoch;
-		userHash = md5(input);
-		storage.setItem(USER_HASH_KEY, userHash);
-	}
-
-    return userHash;
-}
-
-
-function initializeFCM() {
-	FCMPlugin.getToken(
-		// success
-		function(token) {
-			alert(token);
-		},
-		// error
-		function(error) {
-			console.log("error retrieving token: " + error);
-		}
-	);
-	
-	FCMPlugin.onNotification(
-		// callback
-		function(data) {
-			if (data.wasTapped) {
-				//Notification was received on device tray and tapped by the user. 
-				alert(JSON.stringify(data));
+function onToggleZipcode() {
+	if (isZipcode) {
+		FCMPlugin.unsubscribeFromTopic(zipcode);
+		setIsZipcode(false);
+		setZipcode(null);
+		console.log("zipcode enabled: " + isZipcode);
+		console.log("zipcode: " + zipcode);
+	} else {
+		isZipcode = true;
+		window.localStorage.setItem(ZIPCODE_ENABLED_KEY, isZipcode);
+		window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
+			if (result.input1 != "") {
+				setZipcode(result.input1);
+				FCMPlugin.subscribeToTopic(zipcode);
 			} else {
-				//Notification was received in foreground. Maybe the user needs to be notified.
-				alert(JSON.stringify(data));
+				setIsZipcode(false);
+				setZipcode(null);
 			}
 		},
-		// success
-		function(message) {
-			console.log("callback successfully registers: " + message);
-		},
-		// error
-		function(error) {
-			console.log("error registering callback: " + error);
-		}
-	);
-	
-	FCMPlugin.subscribeToTopic('topicExample');
+		"Notifications", ["Ok", "Cancel"]);
+		console.log("zipcode enabled: " + isZipcode);
+		console.log("zipcode: " + zipcode);
+	}
 }
 
 
 function requestLocation() {
-	if (isConnected()) {
-		var onSuccess = function(position) {
-			coords = position.coords;
-			console.log("got coords="+coords);
-			console.log("Latitude: " + coords.latitude);
-			console.log("Longitude: " + coords.longitude);
-			console.log("Altitude: " + coords.altitude);
-			console.log("Accuracy: " + coords.accuracy);
-			console.log("Heading: " + coords.heading);
-			console.log("Speed: " + coords.speed);
-			console.log("Timestamp: " + position.timestamp);
-		};
-		var onError = function (error) {
-			console.log("error code: " + error.code);
-			console.log("error message: " + error.message);
+	if (isDeviceReady && isConnected()) {
+		if (!isRequestingLocation) {
+			isRequestingLocation = true;
+			showSpinner();
+			
+			var onSuccess = function(position) {
+				isRequestingLocation = false;
+				coords = position.coords;
+				console.log("got coords: " + coords);
+				document.getElementById("submitReport").disabled = false;
+				hideSpinner();
+			};
+			var onError = function (error) {
+				isRequestingLocation = false;
+				console.log("error code: " + error.code);
+				console.log("error message: " + error.message);
+				hideSpinner();
+				navigator.notification.confirm(
+					"Would you like to retry?",
+					onConfirm,
+					"Failure Requesting Location",
+					["Retry", "Cancel"]
+				);
+				
+				function onConfirm(index) {
+					if (index == 1) {
+						requestLocation();
+					}
+				}
+			};
+
+			console.log("requesting location");
+			navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 8000 });
 		}
-		navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 5000, enableHighAccuracy: true });
+		
 	} else {
-		alert("No network connection.\n\nRequesting location requires connection to a network.");
+		if (isDeviceReady) {
+			navigator.notification.alert(
+				"Connect to the internet then click 'Retry' in order to request location.",
+				alertDismissed,
+				"No Internet Connection",
+				"Retry"
+			);
+			
+			function alertDismissed() {
+				requestLocation();
+			}
+		}
 	}
 }
 
@@ -128,18 +119,34 @@ function onClickSubmit() {
 			}
 		});
 	} else {
-		alert("No network connection.\n\nSending smell reports requires connection to a network.");
+		if (isDeviceReady) {
+			navigator.notification.alert(
+				"Connect to the internet before submitting a smell report.",
+				null,
+				"No Internet Connection",
+				"Ok"
+			);
+		}
 	}
     
 }
 
-
-$(document).on("pageshow", "#home", function(){
-	if (isDeviceReady) {
-		requestLocation();
+$(document).on("pagecontainershow", function(someEvent, ui){
+	var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
+	
+	switch (pageId) {
+		case "home":
+			requestLocation();
+			isSmellReportPage = true;
+			break;
+		case "map":
+			console.log("refreshing iframe");
+			$('#iframe-map').attr('src', $('#iframe-map').attr('src'));
+			$('#submitReport').attr('disabled', 'true');
+			isSmellReportPage = false;
+			break;
+		case "settings":
+			$('#zipcodeInput').attr('checked', isZipcode);
+			break;
 	}
-});
-$(document).on("pageshow", "#map", function(){
-    console.log("refreshing iframe");
-    $('#iframe-map').attr('src', $('#iframe-map').attr('src'));
 });
