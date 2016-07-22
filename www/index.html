@@ -111,11 +111,12 @@
             </div>
 			
 			<div date-role="main" class="ui-content" data-iscroll>
-				<h3>Notifications</h3>
-				<ul style="display:inline;display: inline-block;">
-					<li style="display:inline;display: inline-block;"><label>By zipcode</label></li>
-					<li style="display:inline;display: inline-block;"><input id="zipcodeInput" type="checkbox" onclick="onToggleZipcode()" /></li>
-				</ul>
+				<div data-role="collapsible">
+					<h3>Notifications</h3>
+					<input type="checkbox" id="zipcodeInput" class="custom" onclick="onToggleZipcode()" />
+					<label for="zipcodeInput">By Zipcode</label>
+				</div>
+				
 			</div>
 			
 			<div data-role="footer" data-position="fixed">

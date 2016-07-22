@@ -12,6 +12,8 @@ var isDeviceReady = false;
     },
     // deviceready Event Handler
     onDeviceReady: function() {
+		// TODO - We may take away all of the request for locations except onDeviceReady and onResume events
+		// TODO - A refresh location button??
         console.log('Received Device Ready Event');
 		isDeviceReady = true;
 		document.addEventListener("resume", onResume, false);
@@ -20,9 +22,7 @@ var isDeviceReady = false;
 		requestLocation();
 		
 		function onResume() {
-			if (isSmellReportPage) {
-				requestLocation();
-			}
+			requestLocation();
 		}
 		
 		function onPause() {

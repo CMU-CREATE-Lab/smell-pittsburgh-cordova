@@ -23,6 +23,7 @@ function onToggleZipcode() {
 			} else {
 				setIsZipcode(false);
 				setZipcode(null);
+				$('#zipcodeInput').prop('checked', isZipcode).checkboxradio('refresh');
 			}
 		},
 		"Notifications", ["Ok", "Cancel"]);
@@ -135,18 +136,12 @@ $(document).on("pagecontainershow", function(someEvent, ui){
 	var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
 	
 	switch (pageId) {
-		case "home":
-			requestLocation();
-			isSmellReportPage = true;
-			break;
 		case "map":
 			console.log("refreshing iframe");
 			$('#iframe-map').attr('src', $('#iframe-map').attr('src'));
-			$('#submitReport').attr('disabled', 'true');
-			isSmellReportPage = false;
 			break;
 		case "settings":
-			$('#zipcodeInput').attr('checked', isZipcode);
+			$('#zipcodeInput').prop('checked', isZipcode).checkboxradio('refresh');
 			break;
 	}
 });

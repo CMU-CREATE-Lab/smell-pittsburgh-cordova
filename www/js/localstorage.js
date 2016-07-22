@@ -25,8 +25,8 @@ function generateUserHash() {
 
 /* ZIPCODE STORAGE */
 
-var ZIPCODE_ENABLED_KEY;
-var ZIPCODE_KEY;
+var ZIPCODE_ENABLED_KEY = "zipcode_enabled";
+var ZIPCODE_KEY = "zipcode";
 
 isZipcode = window.localStorage.getItem(ZIPCODE_ENABLED_KEY);
 if (isZipcode == null) {
