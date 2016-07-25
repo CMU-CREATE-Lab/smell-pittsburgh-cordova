@@ -17,7 +17,7 @@ function onToggleZipcode() {
 		isZipcode = true;
 		window.localStorage.setItem(ZIPCODE_ENABLED_KEY, isZipcode);
 		window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
-			if (result.input1 != "") {
+			if (result.buttonIndex == 1 && result.input1 != "") {
 				setZipcode(result.input1);
 				FCMPlugin.subscribeToTopic(zipcode);
 			} else {
@@ -129,7 +129,6 @@ function onClickSubmit() {
 			);
 		}
 	}
-    
 }
 
 $(document).on("pagecontainershow", function(someEvent, ui){

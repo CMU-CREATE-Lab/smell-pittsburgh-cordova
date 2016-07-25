@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
-        },
         "cordova-plugin-fcm": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
         },
@@ -29,6 +26,9 @@
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
         "com.github.michael79bxl.numberDialog": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
+        },
+        "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         }
     },

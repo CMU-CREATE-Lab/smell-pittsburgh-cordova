@@ -47,6 +47,14 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-spinner": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-spinner"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "com.github.michael79bxl.numberDialog": {
         "source": {
             "type": "registry",
@@ -59,14 +67,6 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-dialogs"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-spinner": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-spinner"
         },
         "is_top_level": true,
         "variables": {}
