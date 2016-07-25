@@ -7,28 +7,28 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
+        },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
         "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
         "cordova-plugin-spinner": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pittsburgh"
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         }
     }
 }
