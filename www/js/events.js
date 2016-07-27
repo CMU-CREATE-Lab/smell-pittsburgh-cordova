@@ -1,20 +1,28 @@
 
 var coords;
 var isRequestingLocation = false;
+var isDeniedAccuracy = false;
 
 
 function requestLocation() {
 	if (isDeviceReady && isConnected()) {
+		console.log("trying to request location");
 		if (!isRequestingLocation) {
+			console.log("requesting location");
 			isRequestingLocation = true;
+			isDeniedAccuracy = false;
 			showSpinner();
 			
+			// This block of code uses html5 location services
+			// which makes this compatible with pretty much everthing.
+			// Plugin: cordova-plugin-geolocation
 			var onSuccess = function(position) {
 				isRequestingLocation = false;
 				coords = position.coords;
-				console.log("got coords: " + coords);
+				console.log("got coords: " + coords.latitude + ", " + coords.longitude);
 				document.getElementById("submitReport").disabled = false;
 				hideSpinner();
+				navigator.geolocation.clearWatch(watchId);
 			};
 			var onError = function (error) {
 				isRequestingLocation = false;
@@ -34,11 +42,44 @@ function requestLocation() {
 					}
 				}
 			};
-
-			console.log("requesting location");
-			navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 60000 });
+			
+			var platform = device.platform;
+			var watchId;
+			if (platform === "Android") {
+				console.log("Platform: " + platform);
+				// change settings if we need to
+				cordova.plugins.locationAccuracy.request(function(success) {
+					isDeniedAccuracy = false;
+					showSpinner();
+					watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 0, timeout: 60000, enableHighAccuracy: true });
+				}, function(error) {
+					isDeniedAccuracy = true;
+					console.log("error code: " + error.code + "\nerror message: " + error.message);
+					navigator.notification.confirm(
+						"Error Message: " + error.message,
+						null,
+						"Error Code: " + error.code,
+						["Ok"]
+					);
+				}, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+			} else {
+				console.log("Platform: " + platform);
+				// change settings if we need to
+				cordova.plugins.locationAccuracy.request(function(success) {
+					isDeniedAccuracy = false;
+					showSpinner();
+					navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 0, timeout: 60000, enableHighAccuracy: true });
+				}, function(error) {
+					isDeniedAccuracy = true;
+					navigator.notification.confirm(
+						"Error Message: " + error.message,
+						null,
+						"Error Code: " + error.code,
+						["Ok"]
+					);
+				});
+			}
 		}
-		
 	} else {
 		if (isDeviceReady) {
 			navigator.notification.alert(
