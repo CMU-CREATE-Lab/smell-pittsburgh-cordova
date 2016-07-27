@@ -16,7 +16,18 @@ function onToggleZipcode() {
 	} else {
 		isZipcode = true;
 		window.localStorage.setItem(ZIPCODE_ENABLED_KEY, isZipcode);
-		window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
+		/* window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
+			if (result.buttonIndex == 1 && result.input1 != "") {
+				setZipcode(result.input1);
+				FCMPlugin.subscribeToTopic(zipcode);
+			} else {
+				setIsZipcode(false);
+				setZipcode(null);
+				$('#zipcodeInput').prop('checked', isZipcode).checkboxradio('refresh');
+			}
+		},
+		"Notifications", ["Ok", "Cancel"]); */
+		navigator.notification.prompt("Enter a zipcode", function(result) {
 			if (result.buttonIndex == 1 && result.input1 != "") {
 				setZipcode(result.input1);
 				FCMPlugin.subscribeToTopic(zipcode);
@@ -30,6 +41,11 @@ function onToggleZipcode() {
 		console.log("zipcode enabled: " + isZipcode);
 		console.log("zipcode: " + zipcode);
 	}
+}
+
+
+function onToggleACHD() {
+	
 }
 
 
@@ -66,7 +82,7 @@ function requestLocation() {
 			};
 
 			console.log("requesting location");
-			navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 8000 });
+			navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 60000 });
 		}
 		
 	} else {
