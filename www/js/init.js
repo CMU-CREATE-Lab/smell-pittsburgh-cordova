@@ -20,16 +20,21 @@ var isDeviceReady = false;
     onDeviceReady: function() {
         console.log("Received Device Ready Event");
 		isDeviceReady = true;
-		showSpinner();
 		document.addEventListener("resume", onResume, false);
 		document.addEventListener("pause", onPause, false);
+		showSpinner();
 		requestLocation();
 		
 		function onResume() {
+			showSpinner();
 			requestLocation();
 		}
 		
 		function onPause() {
+			hideSpinner();
+			if (isDeniedAccuracy) {
+				isRequestingLocation = false;
+			}
 			$('#submitReport').attr('disabled', 'true');
 		}
     }
