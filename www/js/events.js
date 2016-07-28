@@ -30,6 +30,8 @@ function onToggleZipcode() {
 		console.log("zipcode enabled: " + isZipcode);
 		console.log("zipcode: " + zipcode);
 	}
+	
+}
 
 
 function onToggleACHD() {
@@ -84,15 +86,16 @@ function requestLocation() {
 				cordova.plugins.locationAccuracy.request(function(success) {
 					isDeniedAccuracy = false;
 					showSpinner();
-					watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+					watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true });
 				}, function(error) {
 					isDeniedAccuracy = true;
 					console.log("error code: " + error.code + "\nerror message: " + error.message);
 					navigator.notification.confirm(
 						"The app may not function as expected without the appropiate location settings enabled.",
 						function() {
+							isDeniedAccuracy = false;
 							showSpinner();
-							watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+							watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true });
 						},
 						"Failure Changing Location Settings",
 						["Ok"]
@@ -104,14 +107,15 @@ function requestLocation() {
 				cordova.plugins.locationAccuracy.request(function(success) {
 					isDeniedAccuracy = false;
 					showSpinner();
-					navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+					navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true });
 				}, function(error) {
 					isDeniedAccuracy = true;
 					navigator.notification.confirm(
 						"The app may not function as expected without the appropiate location settings enabled.",
 						function() {
+							isDeniedAccuracy = false;
 							showSpinner();
-							watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+							watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true });
 						},
 						"Failure Changing Location Settings",
 						["Ok"]
@@ -181,7 +185,7 @@ function onClickSubmit() {
 	}
 }
 
-$(document).on("pagecontainershow", function(someEvent, ui) {
+$(document).on("pagecontainershow", function(someEvent, ui){
 	var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
 	
 	switch (pageId) {
@@ -194,11 +198,3 @@ $(document).on("pagecontainershow", function(someEvent, ui) {
 			break;
 	}
 });
-
-
-
-
-
-
-
-
