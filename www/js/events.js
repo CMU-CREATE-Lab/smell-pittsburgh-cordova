@@ -2,6 +2,35 @@
 var coords;
 var isRequestingLocation = false;
 var isDeniedAccuracy = false;
+var isZipcode;
+var zipcode;
+
+
+function onToggleZipcode() {
+	if (isZipcode) {
+		FCMPlugin.unsubscribeFromTopic(zipcode);
+		setIsZipcode(false);
+		setZipcode(null);
+		console.log("zipcode enabled: " + isZipcode);
+		console.log("zipcode: " + zipcode);
+	} else {
+		isZipcode = true;
+		window.localStorage.setItem(ZIPCODE_ENABLED_KEY, isZipcode);
+		window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
+			if (result.buttonIndex == 1 && result.input1 != "") {
+				setZipcode(result.input1);
+				FCMPlugin.subscribeToTopic(zipcode);
+			} else {
+				setIsZipcode(false);
+				setZipcode(null);
+				$('#zipcodeInput').prop('checked', isZipcode).checkboxradio('refresh');
+			}
+		},
+		"Notifications", ["Ok", "Cancel"]);
+		console.log("zipcode enabled: " + isZipcode);
+		console.log("zipcode: " + zipcode);
+	}
+}
 
 
 function requestLocation() {
@@ -10,7 +39,6 @@ function requestLocation() {
 		if (!isRequestingLocation) {
 			console.log("requesting location");
 			isRequestingLocation = true;
-			isDeniedAccuracy = false;
 			showSpinner();
 			
 			// This block of code uses html5 location services
@@ -51,14 +79,17 @@ function requestLocation() {
 				cordova.plugins.locationAccuracy.request(function(success) {
 					isDeniedAccuracy = false;
 					showSpinner();
-					watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 0, timeout: 60000, enableHighAccuracy: true });
+					watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
 				}, function(error) {
 					isDeniedAccuracy = true;
 					console.log("error code: " + error.code + "\nerror message: " + error.message);
 					navigator.notification.confirm(
-						"Error Message: " + error.message,
-						null,
-						"Error Code: " + error.code,
+						"The app may not function as expected without the appropiate location settings enabled.",
+						function() {
+							showSpinner();
+							watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+						},
+						"Failure Changing Location Settings",
 						["Ok"]
 					);
 				}, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
@@ -68,13 +99,16 @@ function requestLocation() {
 				cordova.plugins.locationAccuracy.request(function(success) {
 					isDeniedAccuracy = false;
 					showSpinner();
-					navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 0, timeout: 60000, enableHighAccuracy: true });
+					navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
 				}, function(error) {
 					isDeniedAccuracy = true;
 					navigator.notification.confirm(
-						"Error Message: " + error.message,
-						null,
-						"Error Code: " + error.code,
+						"The app may not function as expected without the appropiate location settings enabled.",
+						function() {
+							showSpinner();
+							watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+						},
+						"Failure Changing Location Settings",
 						["Ok"]
 					);
 				});
@@ -142,7 +176,16 @@ function onClickSubmit() {
 	}
 }
 
-$(document).on("pageshow", "#map", function(){
-    console.log("refreshing iframe");
-    $('#iframe-map').attr('src', $('#iframe-map').attr('src'));
+$(document).on("pagecontainershow", function(someEvent, ui){
+	var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
+	
+	switch (pageId) {
+		case "map":
+			console.log("refreshing iframe");
+			$('#iframe-map').attr('src', $('#iframe-map').attr('src'));
+			break;
+		case "settings":
+			$('#zipcodeInput').prop('checked', isZipcode).checkboxradio('refresh');
+			break;
+	}
 });

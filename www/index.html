@@ -27,6 +27,7 @@
         <div data-role="page" id="home">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
+				<a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll>
@@ -62,6 +63,7 @@
         <div data-role="page" id="map" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
+				<a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll style="padding:0;margin:0;">
@@ -79,6 +81,31 @@
                 </div>
             </div>
         </div>
+		
+		
+		<div date-role="page" id="settings" class="page-fullscreened">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+                <h1>Settings</h1>
+            </div>
+			
+			<div date-role="main" class="ui-content" data-iscroll>
+				<div data-role="collapsible">
+					<h3>Notifications</h3>
+					<input type="checkbox" id="zipcodeInput" class="custom" onclick="onToggleZipcode()" />
+					<label for="zipcodeInput">By Zipcode</label>
+				</div>
+				
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+                  <ul>
+                    <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
+                    <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+                  </ul>
+                </div>
+			</div>
+		</div>
 
 
         <!-- (requried for StatusBar plugin) -->

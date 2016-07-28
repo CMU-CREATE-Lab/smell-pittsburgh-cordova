@@ -22,25 +22,64 @@ var isDeviceReady = false;
 		isDeviceReady = true;
 		document.addEventListener("resume", onResume, false);
 		document.addEventListener("pause", onPause, false);
+		initializeFCM();
 		showSpinner();
 		requestLocation();
 		
 		function onResume() {
-			showSpinner();
-			requestLocation();
+			console.log(isDeniedAccuracy);
+			if (!isDeniedAccuracy) {
+				showSpinner();
+				requestLocation();
+			}
 		}
 		
 		function onPause() {
 			hideSpinner();
-			if (isDeniedAccuracy) {
-				isRequestingLocation = false;
-			}
+			isRequestingLocation = false;
 			$('#submitReport').attr('disabled', 'true');
 		}
     }
 };
 
 app.initialize();
+
+
+ function initializeFCM() {
+	FCMPlugin.getToken(
+		// success
+		function(token) {
+			//alert(token);
+		},
+		// error
+		function(error) {
+			console.log("error retrieving token: " + error);
+		}
+	);
+	
+	FCMPlugin.onNotification(
+		// callback
+		function(data) {
+			if (data.wasTapped) {
+				//Notification was received on device tray and tapped by the user. 
+				alert(JSON.stringify(data));
+			} else {
+				//Notification was received in foreground. Maybe the user needs to be notified.
+				alert(JSON.stringify(data));
+			}
+		},
+		// success
+		function(message) {
+			console.log("callback successfully registers: " + message);
+		},
+		// error
+		function(error) {
+			console.log("error registering callback: " + error);
+		}
+	);
+	
+	FCMPlugin.subscribeToTopic('topicExample');
+}
  
  
  

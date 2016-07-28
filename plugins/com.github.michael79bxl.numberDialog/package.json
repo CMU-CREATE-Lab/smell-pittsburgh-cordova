@@ -1,0 +1,36 @@
+{
+  "name": "cordova-plugin-number-dialog",
+  "version": "0.2.2",
+  "description": "PhoneGap numeric text/password dialog plugin for Android and iOS",
+  "cordova": {
+    "id": "cordova-plugin-number-dialog",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michael79/cordova-number-dialog.git"
+  },
+  "keywords": [
+    "cordova",
+    "dialog",
+    "number",
+    "pin",
+    "password",
+    "android",
+    "ios",
+    "install",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "homepage": "https://github.com/michael79/cordova-number-dialog#readme"
+}
