@@ -7,6 +7,6 @@ This application was designed using [Cordova](https://cordova.apache.org/). It u
 
 Keep in mind 'cordova-plugin-request-location-accuracy' and 'cordova-plugin-fcm' do not play nice. I had to change 'cordova-plugin-request-location-accuracy' plugin.xml.
 	This line:
-		<framework src="com.google.android.gms:play-services-location:+" />
+		framework src="com.google.android.gms:play-services-location:+"
 	to
-		<framework src="com.google.android.gms:play-services-location:9.2.0" />
+		framework src="com.google.android.gms:play-services-location:9.2.0"
