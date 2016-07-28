@@ -1,7 +1,7 @@
 
 var coords;
 var isRequestingLocation = false;
-var isSmellReportPage = false;
+var isDeniedAccuracy = false;
 var isZipcode;
 var zipcode;
 
@@ -16,18 +16,7 @@ function onToggleZipcode() {
 	} else {
 		isZipcode = true;
 		window.localStorage.setItem(ZIPCODE_ENABLED_KEY, isZipcode);
-		/* window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
-			if (result.buttonIndex == 1 && result.input1 != "") {
-				setZipcode(result.input1);
-				FCMPlugin.subscribeToTopic(zipcode);
-			} else {
-				setIsZipcode(false);
-				setZipcode(null);
-				$('#zipcodeInput').prop('checked', isZipcode).checkboxradio('refresh');
-			}
-		},
-		"Notifications", ["Ok", "Cancel"]); */
-		navigator.notification.prompt("Enter a zipcode", function(result) {
+		window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
 			if (result.buttonIndex == 1 && result.input1 != "") {
 				setZipcode(result.input1);
 				FCMPlugin.subscribeToTopic(zipcode);
@@ -41,7 +30,6 @@ function onToggleZipcode() {
 		console.log("zipcode enabled: " + isZipcode);
 		console.log("zipcode: " + zipcode);
 	}
-}
 
 
 function onToggleACHD() {
@@ -51,16 +39,23 @@ function onToggleACHD() {
 
 function requestLocation() {
 	if (isDeviceReady && isConnected()) {
+		console.log("trying to request location");
 		if (!isRequestingLocation) {
+			console.log("requesting location");
 			isRequestingLocation = true;
 			showSpinner();
 			
+			// This block of code uses html5 location services
+			// which makes this compatible with pretty much everthing.
+			// Plugin: cordova-plugin-geolocation
 			var onSuccess = function(position) {
 				isRequestingLocation = false;
 				coords = position.coords;
-				console.log("got coords: " + coords);
+				console.log("got coords: " + coords.latitude + ", " + coords.longitude);
 				document.getElementById("submitReport").disabled = false;
 				hideSpinner();
+				navigator.geolocation.clearWatch(watchId);
+
 			};
 			var onError = function (error) {
 				isRequestingLocation = false;
@@ -80,11 +75,50 @@ function requestLocation() {
 					}
 				}
 			};
-
-			console.log("requesting location");
-			navigator.geolocation.getCurrentPosition(onSuccess, onError, { timeout: 60000 });
+			
+			var platform = device.platform;
+			var watchId;
+			if (platform === "Android") {
+				console.log("Platform: " + platform);
+				// change settings if we need to
+				cordova.plugins.locationAccuracy.request(function(success) {
+					isDeniedAccuracy = false;
+					showSpinner();
+					watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+				}, function(error) {
+					isDeniedAccuracy = true;
+					console.log("error code: " + error.code + "\nerror message: " + error.message);
+					navigator.notification.confirm(
+						"The app may not function as expected without the appropiate location settings enabled.",
+						function() {
+							showSpinner();
+							watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+						},
+						"Failure Changing Location Settings",
+						["Ok"]
+					);
+				}, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+			} else {
+				console.log("Platform: " + platform);
+				// change settings if we need to
+				cordova.plugins.locationAccuracy.request(function(success) {
+					isDeniedAccuracy = false;
+					showSpinner();
+					navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+				}, function(error) {
+					isDeniedAccuracy = true;
+					navigator.notification.confirm(
+						"The app may not function as expected without the appropiate location settings enabled.",
+						function() {
+							showSpinner();
+							watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000 });
+						},
+						"Failure Changing Location Settings",
+						["Ok"]
+					);
+				});
+			}
 		}
-		
 	} else {
 		if (isDeviceReady) {
 			navigator.notification.alert(
@@ -147,7 +181,7 @@ function onClickSubmit() {
 	}
 }
 
-$(document).on("pagecontainershow", function(someEvent, ui){
+$(document).on("pagecontainershow", function(someEvent, ui) {
 	var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
 	
 	switch (pageId) {
@@ -160,3 +194,11 @@ $(document).on("pagecontainershow", function(someEvent, ui){
 			break;
 	}
 });
+
+
+
+
+
+
+
+

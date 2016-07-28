@@ -23,22 +23,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-geolocation": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-geolocation"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-fcm": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-fcm"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-network-information": {
         "source": {
             "type": "registry",
@@ -55,6 +39,30 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-dialogs": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-dialogs"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-geolocation"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "com.github.michael79bxl.numberDialog": {
         "source": {
             "type": "registry",
@@ -63,10 +71,18 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-dialogs": {
+    "cordova-plugin-fcm": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-dialogs"
+            "id": "cordova-plugin-fcm"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-request-location-accuracy": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-request-location-accuracy"
         },
         "is_top_level": true,
         "variables": {}

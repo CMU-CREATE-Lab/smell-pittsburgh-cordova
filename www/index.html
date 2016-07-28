@@ -4,20 +4,6 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Firebase -->
-        <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-app.js"></script>
-        <script>
-          // Initialize Firebase
-          var config = {
-            apiKey: "AIzaSyDT9OMfT4bZV-rXAgn9vsWxE_hK8tB-vFY",
-            authDomain: "",
-            databaseURL: "",
-            storageBucket: "",
-          };
-          firebase.initializeApp(config);
-        </script>
     
         <!-- Libraries -->
         <script src="lib/jquery-1.7.1.min.js"></script>
@@ -35,17 +21,12 @@
         <!-- scripts -->
 		<script src="js/init.js"></script>
 		<script src="js/events.js"></script>
-		<script src="js/localstorage.js"></script>
 		<script src="js/globalfunctions.js"></script>
+		<script src="js/localstorage.js"></script>
 
-
-        <!-- (requried for StatusBar plugin) -->
-        <script src="cordova.js"></script>
-        <script src="statusbar.js"></script>
         <!-- /StatusBar -->
     
     </head>
-    <body>
 	
 	<div data-role="page" id="home" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -116,11 +97,13 @@
 					<input type="checkbox" id="zipcodeInput" class="custom" onclick="onToggleZipcode()" />
 					<label for="zipcodeInput">By Zipcode</label>
 				</div>
+
 				<div data-role="collapsible">
 					<h3>Reporting Smells</h3>
 					<input type="checkbox" id="reportToACHD" class="custom" onclick="onToggleACHD()" />
 					<label for="reportToACHD">Report to ACHD</label>
 				</div>
+				
 			</div>
 			
 			<div data-role="footer" data-position="fixed">
@@ -132,6 +115,14 @@
                 </div>
 			</div>
 		</div>
-	
-	</body>
+
+
+
+        <!-- (requried for StatusBar plugin) -->
+        <script src="cordova.js"></script>
+        <script src="statusbar.js"></script>
+        <!-- /StatusBar -->
+    
+    </head>
+    <body></body>
 </html>

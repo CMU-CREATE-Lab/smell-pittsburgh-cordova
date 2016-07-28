@@ -8,7 +8,7 @@ var isDeviceReady = false;
     },
     // Bind Event Listeners
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener("deviceready", this.onDeviceReady, false);
     },
     // deviceready Event Handler
     onDeviceReady: function() {
@@ -19,13 +19,20 @@ var isDeviceReady = false;
 		document.addEventListener("resume", onResume, false);
 		document.addEventListener("pause", onPause, false);
 		initializeFCM();
+		showSpinner();
 		requestLocation();
 		
 		function onResume() {
-			requestLocation();
+			console.log(isDeniedAccuracy);
+			if (!isDeniedAccuracy) {
+				showSpinner();
+				requestLocation();
+			}
 		}
 		
 		function onPause() {
+			hideSpinner();
+			isRequestingLocation = false;
 			$('#submitReport').attr('disabled', 'true');
 		}
     }
@@ -33,7 +40,7 @@ var isDeviceReady = false;
 app.initialize();
 
 
-function initializeFCM() {
+ function initializeFCM() {
 	FCMPlugin.getToken(
 		// success
 		function(token) {
