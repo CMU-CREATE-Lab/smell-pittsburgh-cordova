@@ -19,10 +19,11 @@
         <!-- <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" /> -->
 
         <!-- scripts -->
-		<script src="js/init.js"></script>
+		<script src="js/app.js"></script>
 		<script src="js/events.js"></script>
 		<script src="js/globalfunctions.js"></script>
 		<script src="js/localstorage.js"></script>
+		<script src="js/constants.js"></script>
 
         <!-- /StatusBar -->
     
@@ -31,7 +32,6 @@
 	<div data-role="page" id="home" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
-				<a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll>
@@ -67,11 +67,10 @@
         <div data-role="page" id="map" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
-				<a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll style="padding:0;margin:0;">
-                <iframe id="iframe-map" src="http://localhost/visualization" width="100%" height="100%" style="padding:0;margin:0;">
+                <iframe id="iframe-map" src="http://staging.api.smellpittsburgh.org/visualization" width="100%" height="100%" style="padding:0;margin:0;">
                   <p>Your browser does not support iframes.</p>
                 </iframe>
             </div>
@@ -85,36 +84,6 @@
                 </div>
             </div>
         </div>
-		
-		<div date-role="page" id="settings" class="page-fullscreened">
-			<div data-role="header" data-position="fixed" data-tap-toggle="false">
-                <h1>Settings</h1>
-            </div>
-			
-			<div date-role="main" class="ui-content" data-iscroll>
-				<div data-role="collapsible">
-					<h3>Notifications</h3>
-					<input type="checkbox" id="zipcodeInput" class="custom" onclick="onToggleZipcode()" />
-					<label for="zipcodeInput">By Zipcode</label>
-				</div>
-
-				<div data-role="collapsible">
-					<h3>Reporting Smells</h3>
-					<input type="checkbox" id="reportToACHD" class="custom" onclick="onToggleACHD()" />
-					<label for="reportToACHD">Report to ACHD</label>
-				</div>
-				
-			</div>
-			
-			<div data-role="footer" data-position="fixed">
-				<div data-role="navbar">
-                  <ul>
-                    <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-                    <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-                  </ul>
-                </div>
-			</div>
-		</div>
 
 
 

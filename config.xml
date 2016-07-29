@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.cmucreatelab.smell_pgh" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-
+<widget id="org.cmucreatelab.smell_pgh" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Smell PGH</name>
     <icon density="mdpi" height="57" src="www/img/smellpgh.png" width="57" />
     <description>
@@ -22,16 +21,15 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <allow-navigation href="http://localhost/visualization" />
+    <allow-navigation href="http://staging.api.smellpittsburgh.org/visualization" />
     <platform name="android">
         <allow-intent href="market:*" />
-		<splash src="www/img/smellpgh.png" />
+        <splash src="www/img/smellpgh.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-		<splash src="www/img/smellpgh.png" />
+        <splash src="www/img/smellpgh.png" />
     </platform>
     <engine name="android" spec="~5.2.1" />
-	
 </widget>

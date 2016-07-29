@@ -16,9 +16,6 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
-        "cordova-plugin-fcm": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
-        },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
@@ -35,6 +32,9 @@
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
+        },
+        "cordova.plugins.diagnostic": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         }
     },

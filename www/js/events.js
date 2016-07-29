@@ -2,41 +2,7 @@
 var coords;
 var isRequestingLocation = false;
 var isDeniedAccuracy = false;
-var isZipcode;
-var zipcode;
-
-
-function onToggleZipcode() {
-	if (isZipcode) {
-		FCMPlugin.unsubscribeFromTopic(zipcode);
-		setIsZipcode(false);
-		setZipcode(null);
-		console.log("zipcode enabled: " + isZipcode);
-		console.log("zipcode: " + zipcode);
-	} else {
-		isZipcode = true;
-		window.localStorage.setItem(ZIPCODE_ENABLED_KEY, isZipcode);
-		window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
-			if (result.buttonIndex == 1 && result.input1 != "") {
-				setZipcode(result.input1);
-				FCMPlugin.subscribeToTopic(zipcode);
-			} else {
-				setIsZipcode(false);
-				setZipcode(null);
-				$('#zipcodeInput').prop('checked', isZipcode).checkboxradio('refresh');
-			}
-		},
-		"Notifications", ["Ok", "Cancel"]);
-		console.log("zipcode enabled: " + isZipcode);
-		console.log("zipcode: " + zipcode);
-	}
-	
-}
-
-
-function onToggleACHD() {
-	
-}
+var watchId;
 
 
 function requestLocation() {
@@ -47,15 +13,13 @@ function requestLocation() {
 			isRequestingLocation = true;
 			showSpinner();
 			
-			// This block of code uses html5 location services
-			// which makes this compatible with pretty much everthing.
-			// Plugin: cordova-plugin-geolocation
 			var onSuccess = function(position) {
 				isRequestingLocation = false;
 				coords = position.coords;
 				console.log("got coords: " + coords.latitude + ", " + coords.longitude);
 				document.getElementById("submitReport").disabled = false;
 				hideSpinner();
+				console.log("watchId: " + watchId);
 				navigator.geolocation.clearWatch(watchId);
 
 			};
@@ -79,7 +43,6 @@ function requestLocation() {
 			};
 			
 			var platform = device.platform;
-			var watchId;
 			if (platform === "Android") {
 				console.log("Platform: " + platform);
 				// change settings if we need to
@@ -87,6 +50,7 @@ function requestLocation() {
 					isDeniedAccuracy = false;
 					showSpinner();
 					watchId = navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true });
+					console.log("watchId: " + watchId);
 				}, function(error) {
 					isDeniedAccuracy = true;
 					console.log("error code: " + error.code + "\nerror message: " + error.message);
@@ -154,7 +118,7 @@ function onClickSubmit() {
 		$.ajax({
 			type: "POST",
 			dataType: "json",
-			url: "http://localhost/api/v1/smell_reports",
+			url: "http://staging.api.smellpittsburgh.org/api/v1/smell_reports",
 			data: {
 				"user_hash" : userHash,
 				"latitude" : latitude,
@@ -192,9 +156,6 @@ $(document).on("pagecontainershow", function(someEvent, ui){
 		case "map":
 			console.log("refreshing iframe");
 			$('#iframe-map').attr('src', $('#iframe-map').attr('src'));
-			break;
-		case "settings":
-			$('#zipcodeInput').prop('checked', isZipcode).checkboxradio('refresh');
 			break;
 	}
 });

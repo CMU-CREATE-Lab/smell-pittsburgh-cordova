@@ -22,24 +22,3 @@ function generateUserHash() {
 
     return userHash;
 }
-
-/* ZIPCODE STORAGE */
-
-var ZIPCODE_ENABLED_KEY = "zipcode_enabled";
-var ZIPCODE_KEY = "zipcode";
-
-isZipcode = window.localStorage.getItem(ZIPCODE_ENABLED_KEY);
-if (isZipcode == null) {
-	isZipcode = false;
-	window.localStorage.setItem(ZIPCODE_ENABLED_KEY, isZipcode);
-}
-zipcode = window.localStorage.getItem(ZIPCODE_KEY);
-
-function setIsZipcode(val) {
-	isZipcode = val;
-	window.localStorage.setItem(ZIPCODE_ENABLED_KEY, isZipcode);
-}
-function setZipcode(zip) {
-	zipcode = zip;
-	window.localStorage.setItem(ZIPCODE_KEY, zipcode);
-}
