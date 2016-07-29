@@ -1,8 +1,10 @@
 
-var isDeviceReady = false;
-var isDeniedAuthorization = true;
 
 var App = {
+	
+	isDeviceReady: false,
+	authorizationStatus: Constants.AuthorizationEnum.NOT_REQUESTED,
+	accuracyStatus: Constants.AccuracyEnum.DISABLED,
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -11,35 +13,34 @@ var App = {
     bindEvents: function() {
         document.addEventListener("deviceready", this.onDeviceReady, false);
     },
+	// onResume
+	onResume: function() {
+		console.log('onResume');
+		console.log(Location.isAccuracyPrompt);
+		if (Location.isAccuracyPrompt && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
+			Location.requestLocation();
+		} else if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED && !Location.isAccuracyPrompt) {
+			Location.requestLocation();
+		}
+	},
+	// onPause
+	onPause: function() {
+		console.log("onPause");
+		if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED) {
+			Location.stopRequestLocation();
+		} else if (App.isDeviceReady) {
+			hideSpinner();
+		}
+	},
     // deviceready Event Handler
     onDeviceReady: function() {
-		// TODO - We may take away all of the request for locations except onDeviceReady and onResume events
-		// TODO - A refresh location button??
         console.log('Received Device Ready Event');
-		isDeviceReady = true;
-		document.addEventListener("resume", onResume, false);
-		document.addEventListener("pause", onPause, false);
+		document.addEventListener('resume', App.onResume, false);
+		document.addEventListener('pause', App.onPause, false);
 		
+		App.isDeviceReady = true;
+		App.isConnected = isConnected();
 		App.requestLocationPermission();
-		
-		function onResume() {
-			if (isDeniedAuthorization) app.requestLocationPermission();
-			if (!isDeniedAccuracy && !isDeniedAuthorization) {
-				console.log("onResume");
-				showSpinner();
-				requestLocation();
-			}
-		}
-		
-		function onPause() {
-			hideSpinner();
-			isRequestingLocation = false;
-			if (!isDeniedAuthorization) {
-				console.log("watchId: " + watchId);
-				navigator.geolocation.clearWatch(watchId);
-			}
-			$('#submitReport').attr('disabled', 'true');
-		}
     },
 	// Requests permission from the user if they are using android 6.0 or above
 	requestLocationPermission: function() {
@@ -52,11 +53,11 @@ var App = {
 						switch(status) {
 							case cordova.plugins.diagnostic.permissionStatus.GRANTED:
 								console.log("Permission granted");
-								isDeniedAuthorization = false;
+								App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
 								break;
 							case cordova.plugins.diagnostic.permissionStatus.DENIED:
 								console.log("Permission denied");
-								isDeniedAuthorization = true;
+								App.authorizationStatus = Constants.AuthorizationEnum.DENIED;
 								break;
 						}
 					},
@@ -66,9 +67,8 @@ var App = {
 					break;
 				case cordova.plugins.diagnostic.permissionStatus.GRANTED:
 					console.log("Permission granted");
-					isDeniedAuthorization = false;
-					showSpinner();
-					requestLocation();
+					App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
+					Location.requestLocation();
 					break;
 				case cordova.plugins.diagnostic.permissionStatus.DENIED:
 					console.log("Permission denied");
@@ -76,11 +76,11 @@ var App = {
 						switch(status) {
 							case cordova.plugins.diagnostic.permissionStatus.GRANTED:
 								console.log("Permission granted");
-								isDeniedAuthorization = false;
+								App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
 								break;
 							case cordova.plugins.diagnostic.permissionStatus.DENIED:
 								console.log("Permission denied");
-								isDeniedAuthorization = true;
+								App.authorizationStatus = Constants.AuthorizationEnum.DENIED;
 								break;
 						}
 					},
