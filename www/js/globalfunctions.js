@@ -1,5 +1,4 @@
 
-
 function isConnected() {
 	var result = false;
 	
@@ -16,6 +15,39 @@ function showSpinner() {
 
 function hideSpinner() {
 	SpinnerPlugin.activityStop(null, null);
+}
+
+
+function onToggleZipcode() {
+	
+	if (LocalStorage.isZipcode) {
+		FCMPlugin.unsubscribeFromTopic(LocalStorage.zipcode);
+		LocalStorage.setIsZipcode(false);
+		LocalStorage.setZipcode(null);
+		console.log("zipcode enabled: " + LocalStorage.isZipcode);
+		console.log("zipcode: " + LocalStorage.zipcode);
+	} else {
+		window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
+			if (result.buttonIndex == 1 && result.input1 != "") {
+				LocalStorage.setIsZipcode(true);
+				LocalStorage.setZipcode(result.input1);
+				FCMPlugin.subscribeToTopic(LocalStorage.zipcode);
+				console.log("isZipcode: " + LocalStorage.isZipcode);
+				console.log("zipecode: " + LocalStorage.zipcode);
+			} else {
+				LocalStorage.setIsZipcode(false);
+				LocalStorage.setZipcode(null);
+				$('#zipcodeInput').prop('checked', LocalStorage.isZipcode).checkboxradio('refresh');
+			}
+		},
+		"Notifications", ["Ok", "Cancel"]);
+	}
+	
+}
+
+
+function onToggleACHD() {
+	
 }
 
 
@@ -72,6 +104,9 @@ $(document).on("pagecontainershow", function(someEvent, ui){
 		case "map":
 			console.log("refreshing iframe");
 			$('#iframe-map').attr('src', $('#iframe-map').attr('src'));
+			break;
+		case "settings":
+			$('#zipcodeInput').prop('checked', LocalStorage.isZipcode).checkboxradio('refresh');
 			break;
 	}
 });

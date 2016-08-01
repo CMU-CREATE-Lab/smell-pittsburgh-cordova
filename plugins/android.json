@@ -36,6 +36,9 @@
         },
         "cordova.plugins.diagnostic": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
+        },
+        "cordova-plugin-fcm": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         }
     },
     "dependent_plugins": {

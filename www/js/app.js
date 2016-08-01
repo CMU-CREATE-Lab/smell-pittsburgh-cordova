@@ -16,8 +16,11 @@ var App = {
 	// onResume
 	onResume: function() {
 		console.log('onResume');
-		console.log(Location.isAccuracyPrompt);
-		if (Location.isAccuracyPrompt && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
+		console.log("isDeviceReady: " + App.isDeviceReady);
+		console.log("isAccuracyPrompt: " + Location.isAccuracyPrompt);
+		console.log("accuracyStatus: " + App.accuracyStatus);
+		
+		if (App.isDeviceReady&& Location.isAccuracyPrompt && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
 			Location.requestLocation();
 		} else if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED && !Location.isAccuracyPrompt) {
 			Location.requestLocation();
@@ -26,6 +29,8 @@ var App = {
 	// onPause
 	onPause: function() {
 		console.log("onPause");
+		console.log("isDeviceReady: " + App.isDeviceReady);
+		console.log("authorizationStatus: " + App.authorizationStatus);
 		if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED) {
 			Location.stopRequestLocation();
 		} else if (App.isDeviceReady) {
@@ -35,11 +40,12 @@ var App = {
     // deviceready Event Handler
     onDeviceReady: function() {
         console.log('Received Device Ready Event');
+		
 		document.addEventListener('resume', App.onResume, false);
 		document.addEventListener('pause', App.onPause, false);
 		
 		App.isDeviceReady = true;
-		App.isConnected = isConnected();
+		App.initializeFCM();
 		App.requestLocationPermission();
     },
 	// Requests permission from the user if they are using android 6.0 or above
@@ -92,7 +98,49 @@ var App = {
 		}, function(error){
 			console.error(error);
 		});
+	},
+	// initialize firebase cloud messaging
+	initializeFCM: function() {
+		FCMPlugin.getToken(
+			// success
+			function(token) {
+				//alert(token);
+			},
+			// error
+			function(error) {
+				console.log("error retrieving token: " + error);
+			}
+		);
+		
+		FCMPlugin.onNotification(
+			// callback
+			function(data) {
+				if (data.wasTapped) {
+					//Notification was received on device tray and tapped by the user. 
+					alert(JSON.stringify(data));
+				} else {
+					//Notification was received in foreground. Maybe the user needs to be notified.
+					alert(JSON.stringify(data));
+				}
+			},
+			// success
+			function(message) {
+				console.log("callback successfully registers: " + message);
+			},
+			// error
+			function(error) {
+				console.log("error registering callback: " + error);
+			}
+		);
+		
+		FCMPlugin.subscribeToTopic('topicExample');
 	}
 };
 
 App.initialize();
+
+
+
+
+
+
