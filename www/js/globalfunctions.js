@@ -98,6 +98,7 @@ function onClickSubmit() {
 
 
 $(document).on("pagecontainershow", function(someEvent, ui){
+	console.log("onPageContainerShow");
 	var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
 	
 	switch (pageId) {
@@ -107,6 +108,12 @@ $(document).on("pagecontainershow", function(someEvent, ui){
 			break;
 		case "settings":
 			$('#zipcodeInput').prop('checked', LocalStorage.isZipcode).checkboxradio('refresh');
+			$( "#notificationsCollapsible" ).collapsible({
+			  collapsed: false
+			});
+			$( "#reportsCollapsible" ).collapsible({
+			  collapsed: false
+			});
 			break;
 	}
 });
