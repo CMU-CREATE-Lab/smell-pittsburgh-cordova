@@ -4,15 +4,29 @@ var LocalStorage = {
 	
 	isZipcode: false,
 	zipcode: null,
+	isACHD: false,
+	email: null,
 	
 	initialize: function() {
-		this.isZipcode = window.localStorage.getItem(Constants.ZIPCODE_ENABLED_KEY);
+		var temp = window.localStorage.getItem(Constants.ZIPCODE_ENABLED_KEY);
 		this.zipcode = window.localStorage.getItem(Constants.ZIPCODE_KEY);
-		
-		if (this.isZipcode == null) {
-			this.isZipcode = false;
-			window.localStorage.setItem(Constants.ZIPCODE_ENABLED_KEY, this.isZipcode);
+		if (temp == null) {
+			temp = false;
+			window.localStorage.setItem(Constants.ZIPCODE_ENABLED_KEY, false);
 		}
+		if (temp == "false") temp = false;
+		if (temp == "true") temp = true;
+		this.isZipcode = Boolean(temp);
+		
+		temp = window.localStorage.getItem(Constants.ACHD_ENABLED_KEY);
+		this.email = window.localStorage.getItem(Constants.EMAIL_KEY);
+		if (temp == null) {
+			temp = false;
+			window.localStorage.setItem(Constants.ACHD_ENABLED_KEY, false);
+		}
+		if (temp == "false") temp = false;
+		if (temp == "true") temp = true;
+		this.isACHD = Boolean(temp);
 	},
 	
 	/* USERHASH STORAGE */
@@ -40,13 +54,25 @@ var LocalStorage = {
 
 	setIsZipcode: function(val) {
 		this.isZipcode = val;
-		window.localStorage.setItem(Constants.ZIPCODE_ENABLED_KEY, this.isZipcode);
+		window.localStorage.setItem(Constants.ZIPCODE_ENABLED_KEY, val);
 	},
 	
 	
 	setZipcode: function(zip) {
 		this.zipcode = zip;
-		window.localStorage.setItem(Constants.ZIPCODE_KEY, this.zipcode);
+		window.localStorage.setItem(Constants.ZIPCODE_KEY, zip);
+	},
+	
+	/* ACHD STORAGE */
+	
+	setIsACHD: function(val) {
+		this.isACHD = val;
+		window.localStorage.setItem(Constants.ACHD_ENABLED_KEY, val);
+	},
+	
+	setEmail: function(string) {
+		this.email = string;
+		window.localStorage.setItem(Constants.EMAIL_KEY, string);
 	}
 	
 }

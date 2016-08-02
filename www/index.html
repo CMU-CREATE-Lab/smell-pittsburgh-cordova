@@ -22,9 +22,9 @@
 
         <!-- scripts -->
 		<script src="js/constants.js"></script>
+		<script src="js/localstorage.js"></script>
 		<script src="js/location.js"></script>
 		<script src="js/globalfunctions.js"></script>
-		<script src="js/localstorage.js"></script>
 		<script src="js/app.js"></script>
     
     </head>
@@ -95,14 +95,17 @@
 			<div date-role="main" class="ui-content" data-iscroll>
 				<div id="notificationsCollapsible" data-role="collapsible">
 					<h3>Notifications</h3>
-					<input type="checkbox" id="zipcodeInput" class="custom" onclick="onToggleZipcode()" />
-					<label for="zipcodeInput">By Zipcode</label>
+					<input type="checkbox" id="zipcodeCheckbox" onclick="onToggleZipcode()" />
+					<label for="zipcodeCheckbox">By Zipcode</label>
 				</div>
 
 				<div id="reportsCollapsible" data-role="collapsible">
 					<h3>Reporting Smells</h3>
-					<input type="checkbox" id="reportToACHD" class="custom" onclick="onToggleACHD()" />
-					<label for="reportToACHD">Report to ACHD</label>
+					<input type="checkbox" id="achdCheckbox" onclick="onToggleACHD()" />
+					<label for="achdCheckbox">Report to ACHD</label>
+					<ul style="list-style-type: none;">
+						<li><input type="text" name="textfield_email" id="textfield_email" value ="" placeholder="Enter your email" data-clear-btn="true" disabled="true"></li>
+					</ul>
 				</div>
 				
 			</div>

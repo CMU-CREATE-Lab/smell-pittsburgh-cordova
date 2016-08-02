@@ -16,9 +16,6 @@ var App = {
 	// onResume
 	onResume: function() {
 		console.log('onResume');
-		console.log("isDeviceReady: " + App.isDeviceReady);
-		console.log("isAccuracyPrompt: " + Location.isAccuracyPrompt);
-		console.log("accuracyStatus: " + App.accuracyStatus);
 		
 		if (App.isDeviceReady&& Location.isAccuracyPrompt && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
 			Location.requestLocation();
@@ -29,8 +26,6 @@ var App = {
 	// onPause
 	onPause: function() {
 		console.log("onPause");
-		console.log("isDeviceReady: " + App.isDeviceReady);
-		console.log("authorizationStatus: " + App.authorizationStatus);
 		if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED) {
 			Location.stopRequestLocation();
 		} else if (App.isDeviceReady) {
