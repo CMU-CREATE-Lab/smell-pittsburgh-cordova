@@ -2,27 +2,41 @@
 
 var LocalStorage = {
 	
-	isZipcode: false,
-	zipcode: null,
-	isACHD: false,
+	isNotification: true,
+	
+	isSmellNotification: false,
+	smellMax: null,
+	smellMin: null,
+	
+	isACHD: true,
 	email: null,
 	
 	initialize: function() {
-		var temp = window.localStorage.getItem(Constants.ZIPCODE_ENABLED_KEY);
-		this.zipcode = window.localStorage.getItem(Constants.ZIPCODE_KEY);
+		var temp = window.localStorage.getItem(Constants.NOTIFICATION_ENABLED_KEY);
 		if (temp == null) {
-			temp = false;
-			window.localStorage.setItem(Constants.ZIPCODE_ENABLED_KEY, false);
+			temp = true;
+			window.localStorage.setItem(Constants.NOTIFICATION_ENABLED_KEY, true);
 		}
 		if (temp == "false") temp = false;
 		if (temp == "true") temp = true;
-		this.isZipcode = Boolean(temp);
+		this.isNotification = Boolean(temp);
+		
+		temp = window.localStorage.getItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY);
+		this.smellMax = window.localStorage.getItem(Constants.SMELL_MAX_KEY);
+		this.smellMin = window.localStorage.getItem(Constants.SMELL_MIN_KEY);
+		if (temp == null) {
+			temp = false;
+			window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, false);
+		}
+		if (temp == "false") temp = false;
+		if (temp == "true") temp = true;
+		this.isSmellNotification = Boolean(temp);
 		
 		temp = window.localStorage.getItem(Constants.ACHD_ENABLED_KEY);
 		this.email = window.localStorage.getItem(Constants.EMAIL_KEY);
 		if (temp == null) {
-			temp = false;
-			window.localStorage.setItem(Constants.ACHD_ENABLED_KEY, false);
+			temp = true;
+			window.localStorage.setItem(Constants.ACHD_ENABLED_KEY, true);
 		}
 		if (temp == "false") temp = false;
 		if (temp == "true") temp = true;
@@ -50,17 +64,27 @@ var LocalStorage = {
 		return userHash;
 	},
 	
-	/* ZIPCODE STORAGE */	
+	/* NOTIFICATION STORAGE */	
+	
+	setIsNotification: function(val) {
+		this.isNotification = val;
+		window.localStorage.setItem(Constants.NOTIFICATION_ENABLED_KEY, val);
+	},
 
-	setIsZipcode: function(val) {
-		this.isZipcode = val;
-		window.localStorage.setItem(Constants.ZIPCODE_ENABLED_KEY, val);
+	setIsSmellNotification: function(val) {
+		this.isSmellNotification = val;
+		window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, val);
 	},
 	
 	
-	setZipcode: function(zip) {
-		this.zipcode = zip;
-		window.localStorage.setItem(Constants.ZIPCODE_KEY, zip);
+	setSmellMax: function(max) {
+		this.smellMax = max;
+		window.localStorage.setItem(Constants.SMELL_MAX_KEY, max);
+	},
+	
+	setSmellMin: function(min) {
+		this.smellMin = min;
+		window.localStorage.setItem(Constants.SMELL_MIN_KEY, min);
 	},
 	
 	/* ACHD STORAGE */

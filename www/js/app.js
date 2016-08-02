@@ -99,11 +99,11 @@ var App = {
 		FCMPlugin.getToken(
 			// success
 			function(token) {
-				//alert(token);
+				// empty for now
 			},
 			// error
 			function(error) {
-				console.log("error retrieving token: " + error);
+				// empty for now
 			}
 		);
 		
@@ -112,23 +112,20 @@ var App = {
 			function(data) {
 				if (data.wasTapped) {
 					//Notification was received on device tray and tapped by the user. 
-					alert(JSON.stringify(data));
 				} else {
 					//Notification was received in foreground. Maybe the user needs to be notified.
-					alert(JSON.stringify(data));
 				}
 			},
 			// success
 			function(message) {
-				console.log("callback successfully registers: " + message);
+				// empty for now
 			},
 			// error
 			function(error) {
-				console.log("error registering callback: " + error);
+				// empty for now
 			}
 		);
 		
-		FCMPlugin.subscribeToTopic('topicExample');
 	}
 };
 

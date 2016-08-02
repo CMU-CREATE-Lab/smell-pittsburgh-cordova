@@ -18,32 +18,87 @@ function hideSpinner() {
 }
 
 
-function onToggleZipcode() {
-	if (LocalStorage.isZipcode) {
-		FCMPlugin.unsubscribeFromTopic(LocalStorage.zipcode);
-		LocalStorage.setIsZipcode(false);
-		LocalStorage.setZipcode(null);
+function onToggleNotifications() {
+	if (LocalStorage.isNotification) {
+		// make sure to update all of the local storage elements
+		LocalStorage.setIsNotification(false);
+		LocalStorage.setIsSmellNotification(false);
+		$("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
+		$("#checkbox_smell_notifications").checkboxradio("disable");
+		$("#slider_smell_notification").slider("disable");
+		
+		// make sure to unsubscribe from all possible notifications
+		clearSmellNotifications();
+		FCMPlugin.unsubscribeFromTopic(Constants.GLOBAL_TOPIC);
+		console.log("unsubcribed from: " + Constants.GLOBAL_TOPIC);
 	} else {
-		window.plugins.numberDialog.promptClear("Enter a zipcode", function(result) {
-			if (result.buttonIndex == 1 && result.input1 != "") {
-				LocalStorage.setIsZipcode(true);
-				LocalStorage.setZipcode(result.input1);
-				FCMPlugin.subscribeToTopic(LocalStorage.zipcode);
-			} else {
-				LocalStorage.setIsZipcode(false);
-				LocalStorage.setZipcode(null);
-				$('#zipcodeCheckbox').prop('checked', LocalStorage.isZipcode).checkboxradio('refresh');
-			}
-		},
-		"Notifications", ["Ok", "Cancel"]);
+		$("#checkbox_smell_notifications").checkboxradio("enable");
+		LocalStorage.setIsNotification(true);
+		FCMPlugin.subscribeToTopic(Constants.GLOBAL_TOPIC);
+		console.log("subcribed to: " + Constants.GLOBAL_TOPIC);
+		
 	}
 }
+
+
+function onToggleSmellNotifications() {
+	if (LocalStorage.isSmellNotification) {
+		$("#slider_smell_notification").slider("disable");
+		LocalStorage.setIsSmellNotification(false);
+		LocalStorage.setSmellMax(null);
+		LocalStorage.setSmellMin(null);
+		clearSmellNotifications();
+	} else {
+		$("#slider_smell_notification").slider("enable");
+		LocalStorage.setIsSmellNotification(true);
+		var max = 5;
+		var min = $("#slider_smell_notification")[0].value;
+		LocalStorage.setSmellMax(max);
+		LocalStorage.setSmellMin(min);
+		
+		for (var i = max; i >= min; i--) {
+			FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + i);
+			console.log("subscribed to: SmellReport-" + i);
+		}
+	}
+}
+
+
+function clearSmellNotifications() {
+	for (var i = 1; i <= 5; i++) {
+		FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + i);
+		console.log("unsubcribed from: SmellReport-" + i);
+	}
+}
+
+
+$(document).bind("pagecreate", function(event, ui) {
+	
+	$("#slider_smell_notification").on("slidestop", function(event) {
+		var max = 5;
+		var min = $("#slider_smell_notification")[0].value;
+		LocalStorage.setSmellMax(max);
+		LocalStorage.setSmellMin(min);
+		
+		clearSmellNotifications();
+		for (var i = max; i >= min; i--) {
+			FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + i);
+			console.log("subscribed to: SmellReport-" + i);
+		}
+	});
+	
+	$("#textfield_email").bind("change", function(event, ui) {
+		LocalStorage.setEmail(this.value);
+	});
+});
+
 
 
 function onToggleACHD() {
 	if (LocalStorage.isACHD) {
 		LocalStorage.setIsACHD(false);
 		$("#textfield_email").textinput("disable");
+		$("#textfield_email").prop("value", null);
 		LocalStorage.setEmail(null);
 	} else {
 		var email = "";
@@ -129,9 +184,25 @@ $(document).on("pagecontainershow", function(someEvent, ui){
 			$('#iframe-map').attr('src', $('#iframe-map').attr('src'));
 			break;
 		case "settings":
-			$("#zipcodeCheckbox").prop("checked", LocalStorage.isZipcode).checkboxradio("refresh");
-			$("#achdCheckbox").prop("checked", LocalStorage.isACHD).checkboxradio("refresh");
-			if (LocalStorage.isACHD) $("#textfield_email").textinput("enable");
+		
+			// global notification
+			$("#checkbox_notifications").prop("checked", LocalStorage.isNotification).checkboxradio("refresh");
+			if (LocalStorage.isNotification) $("#checkbox_smell_notifications").checkboxradio("enable");
+			else $("#checkbox_smell_notifications").checkboxradio("disable");
+			
+			// smell notification
+			$("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
+			if (LocalStorage.smellMin != null) $("#slider_smell_notification").val(LocalStorage.smellMin).slider("refresh");
+			if (LocalStorage.isSmellNotification) $("#slider_smell_notification").slider("enable");
+			else $("#slider_smell_notification").slider("disable");
+			
+			// achd reports
+			$("#checkbox_achd_report").prop("checked", LocalStorage.isACHD).checkboxradio("refresh");
+			if (LocalStorage.isACHD) {
+				$("#textfield_email").textinput("enable");
+				$("#textfield_email").prop("value", LocalStorage.email);
+				console.log(LocalStorage.email);
+			} 
 			else $("#textfield_email").textinput("disable");
 			
 			$( "#notificationsCollapsible" ).collapsible({

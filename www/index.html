@@ -95,14 +95,19 @@
 			<div date-role="main" class="ui-content" data-iscroll>
 				<div id="notificationsCollapsible" data-role="collapsible">
 					<h3>Notifications</h3>
-					<input type="checkbox" id="zipcodeCheckbox" onclick="onToggleZipcode()" />
-					<label for="zipcodeCheckbox">By Zipcode</label>
+					<input type="checkbox" id="checkbox_notifications" onclick="onToggleNotifications()" />
+					<label for="checkbox_notifications">Receive General App Notifications</label>
+					<input type="checkbox" id="checkbox_smell_notifications" disabled="true" onclick="onToggleSmellNotifications()" />
+					<label for="checkbox_smell_notifications">Smell Notification Range</label>
+					<ul style="list-style-type: none;">
+						<li><input type="range" name="slider_smell_notification" id="slider_smell_notification" value="4" min="1" max="5" step="1" disabled="true"></li>
+					</ul>
 				</div>
 
 				<div id="reportsCollapsible" data-role="collapsible">
 					<h3>Reporting Smells</h3>
-					<input type="checkbox" id="achdCheckbox" onclick="onToggleACHD()" />
-					<label for="achdCheckbox">Report to ACHD</label>
+					<input type="checkbox" id="checkbox_achd_report" onclick="onToggleACHD()" />
+					<label for="checkbox_achd_report">Report to ACHD</label>
 					<ul style="list-style-type: none;">
 						<li><input type="text" name="textfield_email" id="textfield_email" value ="" placeholder="Enter your email" data-clear-btn="true" disabled="true"></li>
 					</ul>
