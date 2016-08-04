@@ -72,28 +72,6 @@ function clearSmellNotifications() {
 }
 
 
-$(document).bind("pagecreate", function(event, ui) {
-	
-	$("#slider_smell_notification").on("slidestop", function(event) {
-		var max = 5;
-		var min = $("#slider_smell_notification")[0].value;
-		LocalStorage.setSmellMax(max);
-		LocalStorage.setSmellMin(min);
-		
-		clearSmellNotifications();
-		for (var i = max; i >= min; i--) {
-			FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + i);
-			console.log("subscribed to: SmellReport-" + i);
-		}
-	});
-	
-	$("#textfield_email").bind("change", function(event, ui) {
-		LocalStorage.setEmail(this.value);
-	});
-});
-
-
-
 function onToggleACHD() {
 	if (LocalStorage.isACHD) {
 		LocalStorage.setIsACHD(false);
@@ -174,6 +152,32 @@ function onClickSubmit() {
 }
 
 
+$(document).bind("pagecreate", function(event, ui) {
+	
+	// TODO - on change maybe?
+	$("#slider_smell_notification").on("change", function(event) {
+		this.value = 5-this.value+1;
+	});
+	
+	$("#slider_smell_notification").on("slidestop", function(event) {
+		var max = 5;
+		var min = $("#slider_smell_notification")[0].value;
+		LocalStorage.setSmellMax(max);
+		LocalStorage.setSmellMin(min);
+		
+		clearSmellNotifications();
+		for (var i = max; i >= min; i--) {
+			FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + i);
+			console.log("subscribed to: SmellReport-" + i);
+		}
+	});
+	
+	$("#textfield_email").bind("change", function(event, ui) {
+		LocalStorage.setEmail(this.value);
+	});
+});
+
+
 $(document).on("pagecontainershow", function(someEvent, ui){
 	console.log("onPageContainerShow");
 	var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
@@ -193,6 +197,10 @@ $(document).on("pagecontainershow", function(someEvent, ui){
 			// smell notification
 			$("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
 			if (LocalStorage.smellMin != null) $("#slider_smell_notification").val(LocalStorage.smellMin).slider("refresh");
+			else{
+				$("#slider_smell_notification").val(2).slider("refresh");
+				$("#slider_smell_notification").val(4);
+			}
 			if (LocalStorage.isSmellNotification) $("#slider_smell_notification").slider("enable");
 			else $("#slider_smell_notification").slider("disable");
 			

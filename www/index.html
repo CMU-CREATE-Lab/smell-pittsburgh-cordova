@@ -16,10 +16,6 @@
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
         <link rel="stylesheet" href="css/fullscreen-pages.css"/>
 
-        <!-- Display custom Theme -->
-        <!-- <link rel="stylesheet" href="css/themes/mycustomtheme.css" /> -->
-        <!-- <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" /> -->
-
         <!-- scripts -->
 		<script src="js/constants.js"></script>
 		<script src="js/localstorage.js"></script>
@@ -47,9 +43,9 @@
                 </ul>
 
                 <label>Describe the smell (optional)</label>
-                <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true">
+                <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
                 <label>Any feelings or symptoms? (optional)</label>
-                <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true">
+                <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
 
                 <button type="button" id="submitReport" onclick="onClickSubmit()" disabled="true">Send Smell Report!</button>
             </div>
@@ -100,7 +96,7 @@
 					<input type="checkbox" id="checkbox_smell_notifications" disabled="true" onclick="onToggleSmellNotifications()" />
 					<label for="checkbox_smell_notifications">Smell Notification Range</label>
 					<ul style="list-style-type: none;">
-						<li><input type="range" name="slider_smell_notification" id="slider_smell_notification" value="4" min="1" max="5" step="1" disabled="true"></li>
+						<li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true"="true" value="4" min="1" max="5" step="1" disabled="true" /></li>
 					</ul>
 				</div>
 
@@ -109,7 +105,7 @@
 					<input type="checkbox" id="checkbox_achd_report" onclick="onToggleACHD()" />
 					<label for="checkbox_achd_report">Report to ACHD</label>
 					<ul style="list-style-type: none;">
-						<li><input type="text" name="textfield_email" id="textfield_email" value ="" placeholder="Enter your email" data-clear-btn="true" disabled="true"></li>
+						<li><input type="text" name="textfield_email" id="textfield_email" value ="" placeholder="Enter your email" data-clear-btn="true" disabled="true" /></li>
 					</ul>
 				</div>
 				
