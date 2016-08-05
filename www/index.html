@@ -46,7 +46,7 @@
                 <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
                 <label>Any feelings or symptoms? (optional)</label>
                 <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
-
+				<i>By pressing submit, this smell report will also be sent to the ACHD Air Quality program. If you wish to receive a reply from them, please go to settings (top right) and provide a response email.</i>
                 <button type="button" id="submitReport" onclick="onClickSubmit()" disabled="true">Send Smell Report!</button>
             </div>
 
@@ -98,14 +98,14 @@
 					<ul style="list-style-type: none;">
 						<li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true"="true" value="4" min="1" max="5" step="1" disabled="true" /></li>
 					</ul>
+					<p id="p_slider_info"></p>
 				</div>
 
 				<div id="reportsCollapsible" data-role="collapsible">
 					<h3>Reporting Smells</h3>
-					<input type="checkbox" id="checkbox_achd_report" onclick="onToggleACHD()" />
-					<label for="checkbox_achd_report">Report to ACHD</label>
 					<ul style="list-style-type: none;">
-						<li><input type="text" name="textfield_email" id="textfield_email" value ="" placeholder="Enter your email" data-clear-btn="true" disabled="true" /></li>
+						<label for="textfield_email">Report to ACHD</label>
+						<li><input type="text" name="textfield_email" id="textfield_email" value ="" placeholder="Enter your email" data-clear-btn="true" /></li>
 					</ul>
 				</div>
 				

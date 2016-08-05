@@ -72,21 +72,6 @@ function clearSmellNotifications() {
 }
 
 
-function onToggleACHD() {
-	if (LocalStorage.isACHD) {
-		LocalStorage.setIsACHD(false);
-		$("#textfield_email").textinput("disable");
-		$("#textfield_email").prop("value", null);
-		LocalStorage.setEmail(null);
-	} else {
-		var email = "";
-		LocalStorage.setIsACHD(true);
-		$("#textfield_email").textinput("enable");
-		LocalStorage.setEmail(email);
-	}
-}
-
-
 function onClickSubmit() {
 	var coords = Location.coords;
 	if (isConnected()) {
@@ -98,7 +83,7 @@ function onClickSubmit() {
 		var smell_value = $("#slider_smell_value")[0].value;
 		var smell_description = $("#textfield_smell_description")[0].value;
 		var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
-		var submitACHD = $("#achdCheckbox").prop("checked");
+		var submitACHD = true;
 		var email = $("#textfield_email")[0].value;
 		// userHash
 		var userHash = LocalStorage.generateUserHash();
@@ -157,6 +142,7 @@ $(document).bind("pagecreate", function(event, ui) {
 	// TODO - on change maybe?
 	$("#slider_smell_notification").on("change", function(event) {
 		this.value = 5-this.value+1;
+		$("#p_slider_info").text("receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher");
 	});
 	
 	$("#slider_smell_notification").on("slidestop", function(event) {
@@ -196,23 +182,21 @@ $(document).on("pagecontainershow", function(someEvent, ui){
 			
 			// smell notification
 			$("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
-			if (LocalStorage.smellMin != null) $("#slider_smell_notification").val(LocalStorage.smellMin).slider("refresh");
+			if (LocalStorage.smellMin != null){
+				$("#slider_smell_notification").val(5-LocalStorage.smellMin+1).slider("refresh");
+				$("#slider_smell_notification").val(LocalStorage.smellMin);
+			}
 			else{
 				$("#slider_smell_notification").val(2).slider("refresh");
 				$("#slider_smell_notification").val(4);
 			}
+			$("#p_slider_info").text("receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher");
+			
 			if (LocalStorage.isSmellNotification) $("#slider_smell_notification").slider("enable");
 			else $("#slider_smell_notification").slider("disable");
 			
-			// achd reports
-			$("#checkbox_achd_report").prop("checked", LocalStorage.isACHD).checkboxradio("refresh");
-			if (LocalStorage.isACHD) {
-				$("#textfield_email").textinput("enable");
-				$("#textfield_email").prop("value", LocalStorage.email);
-				console.log(LocalStorage.email);
-			} 
-			else $("#textfield_email").textinput("disable");
-			
+			$("#textfield_email").prop("value", LocalStorage.email);
+
 			$( "#notificationsCollapsible" ).collapsible({
 			  collapsed: false
 			});
