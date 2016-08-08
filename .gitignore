@@ -1,5 +1,8 @@
 /platforms
 SMELL-PITTSBURGH-CERTIFICATE.txt
 SmellPittsburghCordova.jks
-android-alpha-release.apk
+smell-pittsburgh-cordova.jsproj
+smell-pittsburgh-cordova.jsproj.user
+smell-pittsburgh-cordova.sln
+taco.json
 *.DS_Store

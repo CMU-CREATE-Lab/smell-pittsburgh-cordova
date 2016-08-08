@@ -1,4 +1,6 @@
 
+var smellValue = 1;
+
 function isConnected() {
 	var result = false;
 	
@@ -80,11 +82,12 @@ function onClickSubmit() {
 		var longitude = (coords != null) ? coords.longitude : 0;
 		var horizontalAccuracy = (coords != null) ? coords.accuracy : null;
 		var altitudeAccuracy = (coords != null) ? coords.altitudeAccuracy : null;
-		var smell_value = $("#slider_smell_value")[0].value;
+		var smell_value = smellValue;
 		var smell_description = $("#textfield_smell_description")[0].value;
 		var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
 		var submitACHD = true;
 		var email = $("#textfield_email")[0].value;
+		
 		// userHash
 		var userHash = LocalStorage.generateUserHash();
 		
@@ -134,6 +137,13 @@ function onClickSubmit() {
 			);
 		}
 	}
+}
+
+
+function onClickSmell(item) {
+	$('.remove-active').removeClass('ui-btn-active');
+	$("#smell_value_" + item.value).addClass('ui-btn-active');
+	smellValue = item.value;
 }
 
 
