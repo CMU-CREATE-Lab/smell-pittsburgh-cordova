@@ -25,21 +25,23 @@
     
     </head>
 	
-	<div data-role="page" id="home" class="page-fullscreened">
+    <body>
+
+        <div data-role="page" id="home" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
-				<a href="#settings" data-icon="gear" class="ui-btn-right" data-transition="none">Settings</a>
+                <a href="#settings" data-icon="gear" class="ui-btn-right" data-transition="none">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll>
                 <h2>How does it smell to you right now?</h2>
-				<div data-role="controlgroup" data-type="horizontal">
-					<button id="smell_value_1" class="remove-active ui-btn ui-corner-all ui-btn-active" onclick="onClickSmell(this);" value="1">1</button>
-					<button id="smell_value_2" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="2">2</button>
-					<button id="smell_value_3" class="remove-active ui-btn ui-corner-all"onclick="onClickSmell(this);" value="3">3</button>
-					<button id="smell_value_4" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="4">4</button>
-					<button id="smell_value_5" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="5">5</button>
-				</div>
+                <div data-role="controlgroup" data-type="horizontal">
+                    <button id="smell_value_1" class="remove-active ui-btn ui-corner-all ui-btn-active" onclick="onClickSmell(this);" value="1">1</button>
+                    <button id="smell_value_2" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="2">2</button>
+                    <button id="smell_value_3" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="3">3</button>
+                    <button id="smell_value_4" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="4">4</button>
+                    <button id="smell_value_5" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="5">5</button>
+                </div>
                 <ul style="list-style-type: square;">
                     <li style="color: rgb(0,255,0);"><span style="color: black;">1 Just fine!</span></li>
                     <li style="color: rgb(248,229,64);"><span style="color: black;">2 Barely noticeable</span></li>
@@ -52,16 +54,16 @@
                 <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
                 <label>Any feelings or symptoms? (optional)</label>
                 <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
-				<i>By pressing submit, this smell report will also be sent to the ACHD Air Quality program. If you wish to receive a reply from them, please go to settings (top right) and provide a response email.</i>
+                <i>By pressing submit, this smell report will also be sent to the ACHD Air Quality program. If you wish to receive a reply from them, please go to settings (top right) and provide a response email.</i>
                 <button type="button" id="submitReport" onclick="onClickSubmit()" disabled="true">Send Smell Report!</button>
             </div>
 
             <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
                 <div data-role="navbar">
-                  <ul>
-                    <li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist" data-transition="none">Smell Report</a></li>
-                    <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-                  </ul>
+                    <ul>
+                        <li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist" data-transition="none">Smell Report</a></li>
+                        <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -70,62 +72,62 @@
         <div data-role="page" id="map" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
-				<a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
+                <a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll style="padding:0;margin:0;">
                 <iframe id="iframe-map" src="http://localhost/visualization" width="100%" height="100%" style="padding:0;margin:0;">
-                  <p>Your browser does not support iframes.</p>
+                    <p>Your browser does not support iframes.</p>
                 </iframe>
             </div>
 
             <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
                 <div data-role="navbar">
-                  <ul>
-                    <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-                    <li><a href="#map" data-icon="star" class="ui-btn-active ui-state-persist" data-transition="none">Map</a></li>
-                  </ul>
+                    <ul>
+                        <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
+                        <li><a href="#map" data-icon="star" class="ui-btn-active ui-state-persist" data-transition="none">Map</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-		
-		<div date-role="page" id="settings" class="page-fullscreened">
-			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+
+        <div date-role="page" id="settings" class="page-fullscreened">
+            <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Settings</h1>
             </div>
-			
-			<div date-role="main" class="ui-content" data-iscroll>
-				<div id="notificationsCollapsible" data-role="collapsible">
-					<h3>Notifications</h3>
-					<input type="checkbox" id="checkbox_notifications" onclick="onToggleNotifications()" />
-					<label for="checkbox_notifications">Receive General App Notifications</label>
-					<input type="checkbox" id="checkbox_smell_notifications" disabled="true" onclick="onToggleSmellNotifications()" />
-					<label for="checkbox_smell_notifications">Smell Notification Range</label>
-					<ul style="list-style-type: none;">
-						<li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true"="true" value="4" min="1" max="5" step="1" disabled="true" /></li>
-					</ul>
-					<p id="p_slider_info"></p>
-				</div>
 
-				<div id="reportsCollapsible" data-role="collapsible">
-					<h3>Reporting Smells</h3>
-					<ul style="list-style-type: none;">
-						<label for="textfield_email">Report to ACHD</label>
-						<li><input type="text" name="textfield_email" id="textfield_email" value ="" placeholder="Enter your email" data-clear-btn="true" /></li>
-					</ul>
-				</div>
-				
-			</div>
-			
-			<div data-role="footer" data-position="fixed">
-				<div data-role="navbar">
-                  <ul>
-                    <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-                    <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-                  </ul>
+            <div date-role="main" class="ui-content" data-iscroll>
+                <div id="notificationsCollapsible" data-role="collapsible">
+                    <h3>Notifications</h3>
+                    <input type="checkbox" id="checkbox_notifications" onclick="onToggleNotifications()" />
+                    <label for="checkbox_notifications">Receive General App Notifications</label>
+                    <input type="checkbox" id="checkbox_smell_notifications" disabled="true" onclick="onToggleSmellNotifications()" />
+                    <label for="checkbox_smell_notifications">Smell Notification Range</label>
+                    <ul style="list-style-type: none;">
+                        <li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true" ="true" value="4" min="1" max="5" step="1" disabled="true" /></li>
+                    </ul>
+                    <p id="p_slider_info"></p>
                 </div>
-			</div>
-		</div>
+
+                <div id="reportsCollapsible" data-role="collapsible">
+                    <h3>Reporting Smells</h3>
+                    <ul style="list-style-type: none;">
+                        <label for="textfield_email">Report to ACHD</label>
+                        <li><input type="text" name="textfield_email" id="textfield_email" value="" placeholder="Enter your email" data-clear-btn="true" /></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
+                        <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -133,7 +135,6 @@
         <script src="cordova.js"></script>
         <script src="statusbar.js"></script>
         <!-- /StatusBar -->
-    
-    </head>
-    <body></body>
+
+    </body>
 </html>
