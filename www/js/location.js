@@ -6,6 +6,57 @@ var Location = {
 	isRequestingLocation: false,
 	watchIds: [],
 	coords: {},
+
+	requestLocationPermission: function() {
+	    // Android>=6.0
+	    cordova.plugins.diagnostic.getLocationAuthorizationStatus(function(status){
+	        switch(status){
+	            case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+	                console.log("Permission not requested");
+	                cordova.plugins.diagnostic.requestLocationAuthorization(function(status) {
+	                    switch(status) {
+	                        case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+	                            console.log("Permission granted");
+	                            App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
+	                            break;
+	                        case cordova.plugins.diagnostic.permissionStatus.DENIED:
+	                            console.log("Permission denied");
+	                            App.authorizationStatus = Constants.AuthorizationEnum.DENIED;
+	                            break;
+	                    }
+	                },
+					function() {
+					    console.log("error in requesting location authorization");
+					});
+	                break;
+	            case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+	                console.log("Permission granted");
+	                App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
+	                Location.requestLocation();
+	                break;
+	            case cordova.plugins.diagnostic.permissionStatus.DENIED:
+	                console.log("Permission denied");
+	                cordova.plugins.diagnostic.requestLocationAuthorization(function(status) {
+	                    switch(status) {
+	                        case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+	                            console.log("Permission granted");
+	                            App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
+	                            break;
+	                        case cordova.plugins.diagnostic.permissionStatus.DENIED:
+	                            console.log("Permission denied");
+	                            App.authorizationStatus = Constants.AuthorizationEnum.DENIED;
+	                            break;
+	                    }
+	                },
+					function() {
+					    console.log("error in requesting location authorization");
+					});
+	                break;
+	        }
+	    }, function(error){
+	        console.error(error);
+	    });
+	},
 	
 	// request the users location
 	requestLocation: function() {
@@ -15,13 +66,13 @@ var Location = {
 			if (!this.isRequestingLocation) {
 				console.log("in requestLocation");
 				this.isRequestingLocation = true;
-				document.getElementById("submitReport").disabled = true;
+				document.getElementById("button_submit_report").disabled = true;
 				showSpinner();
 				
 				var onSuccess = function(position) {
 					Location.coords = position.coords;
 					console.log("got coords: " + Location.coords.latitude + ", " + Location.coords.longitude);
-					document.getElementById("submitReport").disabled = false;
+					document.getElementById("button_submit_report").disabled = false;
 					Location.stopRequestLocation();
 					Location.isAccuracyPrompt = false;
 				};

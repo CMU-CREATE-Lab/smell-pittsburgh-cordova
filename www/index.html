@@ -3,29 +3,23 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
         <!-- Libraries -->
         <script src="lib/jquery-1.7.1.min.js"></script>
         <script src="lib/jquery.mobile-1.4.5.min.js"></script>
-		<script src="lib/md5.js"></script>
+        <script src="lib/md5.js"></script>
 
         <!-- css -->
-        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css"/>
-        <link rel="stylesheet" href="css/fullscreen-pages.css"/>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" href="css/fullscreen-pages.css" />
 
-        <!-- scripts -->
-		<script src="js/constants.js"></script>
-		<script src="js/localstorage.js"></script>
-		<script src="js/location.js"></script>
-		<script src="js/globalfunctions.js"></script>
-		<script src="js/app.js"></script>
-    
     </head>
-	
-    <body>
+
+    <body onload="onLoad();">
 
         <div data-role="page" id="home" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -36,11 +30,11 @@
             <div role="main" class="ui-content" data-iscroll>
                 <h2>How does it smell to you right now?</h2>
                 <div data-role="controlgroup" data-type="horizontal">
-                    <button id="smell_value_1" class="remove-active ui-btn ui-corner-all ui-btn-active" onclick="onClickSmell(this);" value="1">1</button>
-                    <button id="smell_value_2" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="2">2</button>
-                    <button id="smell_value_3" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="3">3</button>
-                    <button id="smell_value_4" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="4">4</button>
-                    <button id="smell_value_5" class="remove-active ui-btn ui-corner-all" onclick="onClickSmell(this);" value="5">5</button>
+                    <button id="smell_value_1" class="remove-active ui-btn ui-corner-all ui-btn-active" onclick="HomePage.onClickSmell(this);" value="1">1</button>
+                    <button id="smell_value_2" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="2">2</button>
+                    <button id="smell_value_3" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="3">3</button>
+                    <button id="smell_value_4" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="4">4</button>
+                    <button id="smell_value_5" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="5">5</button>
                 </div>
                 <ul style="list-style-type: square;">
                     <li style="color: rgb(0,255,0);"><span style="color: black;">1 Just fine!</span></li>
@@ -55,7 +49,7 @@
                 <label>Any feelings or symptoms? (optional)</label>
                 <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
                 <i>By pressing submit, this smell report will also be sent to the ACHD Air Quality program. If you wish to receive a reply from them, please go to settings (top right) and provide a response email.</i>
-                <button type="button" id="submitReport" onclick="onClickSubmit()" disabled="true">Send Smell Report!</button>
+                <button type="button" id="button_submit_report" disabled>Send Smell Report!</button>
             </div>
 
             <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
@@ -68,7 +62,6 @@
             </div>
         </div>
 
-
         <div data-role="page" id="map" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Smell Pittsburgh!</h1>
@@ -76,7 +69,7 @@
             </div>
 
             <div role="main" class="ui-content" data-iscroll style="padding:0;margin:0;">
-                <iframe id="iframe-map" src="http://localhost/visualization" width="100%" height="100%" style="padding:0;margin:0;">
+                <iframe id="iframe-map" src="http://localhost/visualization" style="padding:0; margin:0;  height: 100%; width: 100%;">
                     <p>Your browser does not support iframes.</p>
                 </iframe>
             </div>
@@ -99,12 +92,12 @@
             <div date-role="main" class="ui-content" data-iscroll>
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
-                    <input type="checkbox" id="checkbox_notifications" onclick="onToggleNotifications()" />
+                    <input type="checkbox" id="checkbox_notifications" />
                     <label for="checkbox_notifications">Receive General App Notifications</label>
-                    <input type="checkbox" id="checkbox_smell_notifications" disabled="true" onclick="onToggleSmellNotifications()" />
+                    <input type="checkbox" id="checkbox_smell_notifications" disabled />
                     <label for="checkbox_smell_notifications">Smell Notification Range</label>
                     <ul style="list-style-type: none;">
-                        <li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true" ="true" value="4" min="1" max="5" step="1" disabled="true" /></li>
+                        <li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true" value="4" min="1" max="5" step="1" disabled /></li>
                     </ul>
                     <p id="p_slider_info"></p>
                 </div>
@@ -116,7 +109,6 @@
                         <li><input type="text" name="textfield_email" id="textfield_email" value="" placeholder="Enter your email" data-clear-btn="true" /></li>
                     </ul>
                 </div>
-
             </div>
 
             <div data-role="footer" data-position="fixed">
@@ -129,12 +121,15 @@
             </div>
         </div>
 
-
-
-        <!-- (requried for StatusBar plugin) -->
         <script src="cordova.js"></script>
         <script src="statusbar.js"></script>
-        <!-- /StatusBar -->
+        <script src="js/constants.js"></script>
+        <script src="js/localstorage.js"></script>
+        <script src="js/globalfunctions.js"></script>
+        <script src="js/location.js"></script>
+        <script src="js/pages/homepage.js"></script>
+        <script src="js/pages/settingspage.js"></script>
+        <script src="js/app.js"></script>
 
     </body>
 </html>

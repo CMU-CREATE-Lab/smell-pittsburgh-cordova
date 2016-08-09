@@ -24,6 +24,8 @@ var LocalStorage = {
 		temp = window.localStorage.getItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY);
 		this.smellMax = window.localStorage.getItem(Constants.SMELL_MAX_KEY);
 		this.smellMin = window.localStorage.getItem(Constants.SMELL_MIN_KEY);
+		console.log(this.smellMax);
+		console.log(this.smellMin);
 		if (temp == null) {
 			temp = false;
 			window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, false);
@@ -102,10 +104,3 @@ var LocalStorage = {
 }
 
 LocalStorage.initialize();
-
-
-
-
-
-
-

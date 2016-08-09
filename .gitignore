@@ -1,5 +1,7 @@
 /platforms
 /.vs
+/bin
+/bld
 SMELL-PITTSBURGH-CERTIFICATE.txt
 SmellPittsburghCordova.jks
 smell-pittsburgh-cordova.jsproj
