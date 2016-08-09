@@ -1,6 +1,11 @@
 
 
 var Constants = {
+
+    // Page Ids
+    HOME_PAGE: "home",
+    MAP_PAGE: "map",
+    SETTINGS_PAGE: "settings",
 	
 	// Local Storage keys
 	USER_HASH_KEY: "user_hash",
@@ -16,6 +21,10 @@ var Constants = {
 	// must append the number for it to work
 	// ex. SmellReport-5
 	SMELL_REPORT_TOPIC: "SmellReport-",
+
+    // Integer Constants
+	MAX_SMELL_NOTIFICATION: 5,
+    MIN_SMELL_NOTIFICATION: 1,
 	
 	AuthorizationEnum: {
 		NOT_REQUESTED: "not requested",
