@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "com.github.michael79bxl.numberDialog": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },

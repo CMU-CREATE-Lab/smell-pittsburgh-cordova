@@ -9,7 +9,12 @@ var App = {
 
     initialize: function () {
         console.log("onInitialize");
-        this.bindEvents();
+        if (!LocalStorage.isStartupDone) {
+            $.mobile.changePage($("#startup"), { changeHash: false, transition: "none" });
+        } else {
+            //$.mobile.changePage($("#home"), { changeHash: false, transition: "none" });
+            this.bindEvents();
+        }
     },
 
     bindEvents: function () {

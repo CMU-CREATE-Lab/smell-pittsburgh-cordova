@@ -1,6 +1,8 @@
 
 
 var LocalStorage = {
+
+    isStartupDone: false,
 	
 	isNotification: true,
 	
@@ -11,8 +13,17 @@ var LocalStorage = {
 	isACHD: true,
 	email: null,
 	
-	initialize: function() {
-		var temp = window.localStorage.getItem(Constants.NOTIFICATION_ENABLED_KEY);
+	initialize: function () {
+	    var temp = window.localStorage.getItem(Constants.STARTUP_KEY);
+	    if (temp == null) {
+	        temp = false;
+	        window.localStorage.setItem(Constants.STARTUP_KEY, false);
+	    }
+	    if (temp == "false") temp = false;
+	    if (temp == "true") temp = true;
+	    this.isStartupDone = Boolean(temp);
+
+		temp = window.localStorage.getItem(Constants.NOTIFICATION_ENABLED_KEY);
 		if (temp == null) {
 			temp = true;
 			window.localStorage.setItem(Constants.NOTIFICATION_ENABLED_KEY, true);
@@ -24,8 +35,6 @@ var LocalStorage = {
 		temp = window.localStorage.getItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY);
 		this.smellMax = window.localStorage.getItem(Constants.SMELL_MAX_KEY);
 		this.smellMin = window.localStorage.getItem(Constants.SMELL_MIN_KEY);
-		console.log(this.smellMax);
-		console.log(this.smellMin);
 		if (temp == null) {
 			temp = false;
 			window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, false);
@@ -66,7 +75,12 @@ var LocalStorage = {
 		return userHash;
 	},
 	
-	/* NOTIFICATION STORAGE */	
+    /* NOTIFICATION STORAGE */
+
+	setIsStartUpDone: function(val) {
+	    this.isStartupDone = val;
+	    window.localStorage.setItem(Constants.STARTUP_KEY, val);
+	},
 	
 	setIsNotification: function(val) {
 		this.isNotification = val;

@@ -15,6 +15,7 @@ var Constants = {
 	SMELL_MIN_KEY: "smell_min",
 	ACHD_ENABLED_KEY: "achd_enabled",
 	EMAIL_KEY: "email",
+    STARTUP_KEY: "startup",
 	
 	// Topic strings
 	GLOBAL_TOPIC: "GlobalTopic",

@@ -23,12 +23,12 @@
 
         <div data-role="page" id="home" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
-                <h1>Smell Pittsburgh!</h1>
-                <a href="#settings" data-icon="gear" class="ui-btn-right" data-transition="none">Settings</a>
+                <h1>Smell PGH</h1>
+                <a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
             <div role="main" class="ui-content" data-iscroll>
-                <h2>How does it smell to you right now?</h2>
+                <h3>How does it smell to you right now?</h3>
                 <div data-role="controlgroup" data-type="horizontal">
                     <button id="smell_value_1" class="remove-active ui-btn ui-corner-all ui-btn-active" onclick="HomePage.onClickSmell(this);" value="1">1</button>
                     <button id="smell_value_2" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="2">2</button>
@@ -48,7 +48,7 @@
                 <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
                 <label>Any feelings or symptoms? (optional)</label>
                 <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
-                <i>By pressing submit, this smell report will also be sent to the ACHD Air Quality program. If you wish to receive a reply from them, please go to settings (top right) and provide a response email.</i>
+                <i>By pressing submit, this smell report will also be sent to the ACHD Air Quality program. (Unless '1' is selected.) If you wish to receive a reply from them, please go to settings (top right) and provide a response email.</i>
                 <button type="button" id="button_submit_report" disabled>Send Smell Report!</button>
             </div>
 
@@ -64,7 +64,7 @@
 
         <div data-role="page" id="map" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
-                <h1>Smell Pittsburgh!</h1>
+                <h1>Smell PGH</h1>
                 <a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
             </div>
 
@@ -74,7 +74,7 @@
                 </iframe>
             </div>
 
-            <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
+            <div data-role="footer" data-position="fixed" data-id="map_1" data-tap-toggle="false">
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
@@ -89,7 +89,7 @@
                 <h1>Settings</h1>
             </div>
 
-            <div date-role="main" class="ui-content" data-iscroll>
+            <div role="main" class="ui-content" data-iscroll>
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
                     <input type="checkbox" id="checkbox_notifications" />
@@ -111,11 +111,29 @@
                 </div>
             </div>
 
-            <div data-role="footer" data-position="fixed">
+            <div data-role="footer" data-id="settings_1" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
                         <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="page" id="startup" class="page-fullscreened">
+            <div data-role="header" data-position="fixed" data-tap-toggle="false">
+                <h1>Smell PGH</h1>
+            </div>
+
+            <div role="main" class="ui-content" data-iscroll style="padding:0;margin:0;">
+                <h3>Explantion goes here</h3>
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-id="startup_1" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#settings" data-icon="carat-r" data-transition="none" onclick="LocalStorage.setIsStartUpDone(true); App.initialize();">Done</a></li>
                     </ul>
                 </div>
             </div>
