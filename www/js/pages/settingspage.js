@@ -20,7 +20,7 @@ var SettingsPage = {
             $("#slider_smell_notification").val(2).slider("refresh");
             $("#slider_smell_notification").val(4);
         }
-        $("#p_slider_info").text("receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher");
+        $("#p_slider_info").text("Receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher.");
 
         if (LocalStorage.isSmellNotification) $("#slider_smell_notification").slider("enable");
         else $("#slider_smell_notification").slider("disable");
@@ -33,6 +33,9 @@ var SettingsPage = {
         $("#reportsCollapsible").collapsible({
             collapsed: false
         });
+
+        // disable text input on slider
+        $("#slider_smell_notification").addClass('ui-disabled');
     },
 
     clearSmellNotifications: function () {
@@ -87,11 +90,13 @@ var SettingsPage = {
     },
 
     onSmellSliderChange: function (event) {
+        console.log("onSliderChange");
         this.value = 5 - this.value + 1;
-        $("#p_slider_info").text("receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher");
+        $("#p_slider_info").text("Receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher.");
     },
 
-    onSmellSliderStop: function(event) {
+    onSmellSliderStop: function (event) {
+        console.log("onSliderStop");
         var max = Constants.MAX_SMELL_NOTIFICATION;
         var min = $("#slider_smell_notification")[0].value;
         LocalStorage.setSmellMax(max);

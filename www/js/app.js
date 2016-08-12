@@ -12,7 +12,6 @@ var App = {
         if (!LocalStorage.isStartupDone) {
             $.mobile.changePage($("#startup"), { changeHash: false, transition: "none" });
         } else {
-            //$.mobile.changePage($("#home"), { changeHash: false, transition: "none" });
             this.bindEvents();
         }
     },

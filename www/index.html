@@ -92,10 +92,11 @@
             <div role="main" class="ui-content" data-iscroll>
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
-                    <input type="checkbox" id="checkbox_notifications" />
                     <label for="checkbox_notifications">Receive General App Notifications</label>
-                    <input type="checkbox" id="checkbox_smell_notifications" disabled />
+                    <input type="checkbox" id="checkbox_notifications" />
                     <label for="checkbox_smell_notifications">Smell Notification Range</label>
+                    <input type="checkbox" id="checkbox_smell_notifications" disabled />
+                    <label for="slider_smell_notification"></label>
                     <ul style="list-style-type: none;">
                         <li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true" value="4" min="1" max="5" step="1" disabled /></li>
                     </ul>
@@ -104,8 +105,8 @@
 
                 <div id="reportsCollapsible" data-role="collapsible">
                     <h3>Reporting Smells</h3>
+                    <label for="textfield_email">Report to ACHD</label>
                     <ul style="list-style-type: none;">
-                        <label for="textfield_email">Report to ACHD</label>
                         <li><input type="text" name="textfield_email" id="textfield_email" value="" placeholder="Enter your email" data-clear-btn="true" /></li>
                     </ul>
                 </div>
