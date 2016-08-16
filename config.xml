@@ -32,7 +32,6 @@
     <splash src="www/img/smellpgh.png" />
   </platform>
   <engine name="android" spec="~5.2.1" />
-  <plugin name="com.github.michael79bxl.numberDialog" version="0.2.2" />
   <plugin name="cordova-plugin-compat" version="1.0.0" />
   <plugin name="cordova-plugin-device" version="1.1.2" />
   <plugin name="cordova-plugin-dialogs" version="1.2.1" />
