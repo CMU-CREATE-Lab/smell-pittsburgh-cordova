@@ -3,6 +3,11 @@
 
 var SettingsPage = {
 
+    validateEmail: function(email) { 
+        var regexp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regexp.test(email);
+     }, 
+
     initialize: function () {
         // global notification
         $("#checkbox_notifications").prop("checked", LocalStorage.isNotification).checkboxradio("refresh");
@@ -20,6 +25,7 @@ var SettingsPage = {
             $("#slider_smell_notification").val(2).slider("refresh");
             $("#slider_smell_notification").val(4);
         }
+        SettingsPage.previousValue = $("#slider_smell_notification").val();
         $("#p_slider_info").text("Receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher.");
 
         if (LocalStorage.isSmellNotification) $("#slider_smell_notification").slider("enable");
@@ -89,14 +95,39 @@ var SettingsPage = {
         }
     },
 
+   
     onSmellSliderChange: function (event) {
         console.log("onSliderChange");
         this.value = 5 - this.value + 1;
-        $("#p_slider_info").text("Receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher.");
+        $("#p_slider_info").text("Receive notifications of smell reports " + this.value + " or higher.");
     },
 
+    previousValue: 0,
     onSmellSliderStop: function (event) {
         console.log("onSliderStop");
+        // A little hack so that the value changes if the user clicks on a position in the slider instead of actually sliding it.
+        if ($("#slider_smell_notification")[0].value == SettingsPage.previousValue) {
+            
+            var value = SettingsPage.previousValue;
+            console.log(value);
+            switch (value) {
+                case "5":
+                    this.value = 1;
+                    break;
+                case "4":
+                    this.value = 2;
+                    break;
+                case "2":
+                    this.value = 4;
+                    break;
+                case "1":
+                    this.value = 5;
+                    break;
+            }
+        }
+        $("#p_slider_info").text("Receive notifications of smell reports " + this.value + " or higher.");
+        SettingsPage.previousValue = this.value;
+
         var max = Constants.MAX_SMELL_NOTIFICATION;
         var min = $("#slider_smell_notification")[0].value;
         LocalStorage.setSmellMax(max);
@@ -110,7 +141,17 @@ var SettingsPage = {
     },
 
     onEmailChange: function (event) {
-        LocalStorage.setEmail(this.value);
+        if (SettingsPage.validateEmail(this.value) || this.value == "") {
+            LocalStorage.setEmail(this.value);
+        } else {
+            this.value = "";
+            navigator.notification.alert(
+                "Enter a valid email address.",
+                null,
+                "Invalid Email Entry",
+                "Ok"
+            );
+        }
     }
 
 }
