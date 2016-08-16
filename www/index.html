@@ -29,13 +29,16 @@
 
             <div role="main" class="ui-content" data-iscroll>
                 <h3>How does it smell to you right now?</h3>
-                <div data-role="controlgroup" data-type="horizontal">
-                    <button id="smell_value_1" class="remove-active ui-btn ui-corner-all ui-btn-active" onclick="HomePage.onClickSmell(this);" value="1">1</button>
-                    <button id="smell_value_2" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="2">2</button>
-                    <button id="smell_value_3" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="3">3</button>
-                    <button id="smell_value_4" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="4">4</button>
-                    <button id="smell_value_5" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="5">5</button>
+                <div data-role="navbar">
+                    <ul>
+                        <li><button id="smell_value_1" class="remove-active ui-btn ui-corner-all ui-btn-active" onclick="HomePage.onClickSmell(this);" value="1">1</button></li>
+                        <li><button id="smell_value_2" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="2">2</button></li>
+                        <li><button id="smell_value_3" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="3">3</button></li>
+                        <li><button id="smell_value_4" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="4">4</button></li>
+                        <li><button id="smell_value_5" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="5">5</button></li>
+                    </ul>  
                 </div>
+
                 <ul style="list-style-type: square;">
                     <li style="color: rgb(0,255,0);"><span style="color: black;">1 Just fine!</span></li>
                     <li style="color: rgb(248,229,64);"><span style="color: black;">2 Barely noticeable</span></li>

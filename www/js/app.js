@@ -78,7 +78,6 @@ var App = {
                 $('#iframe-map').attr('src', $('#iframe-map').attr('src'));
                 break;
             case Constants.SETTINGS_PAGE:
-                // TODO - I may only need to call this once in a pagecreate method
                 SettingsPage.initialize();
                 break;
         }
