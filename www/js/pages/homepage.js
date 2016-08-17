@@ -51,7 +51,7 @@ var HomePage = {
                 success: function (data) {
                     console.log("success!");
                     console.log(data);
-                    $.mobile.changePage($("#map"), { changeHash: false, transition: "none" });
+                    $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
                     for (var key in data) {
                         if (data.hasOwnProperty(key)) {
                             console.log(key + "-> " + data[key]);
