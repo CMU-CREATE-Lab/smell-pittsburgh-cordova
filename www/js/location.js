@@ -8,54 +8,37 @@ var Location = {
 	coords: {},
 
 	requestLocationPermission: function() {
-	    // Android>=6.0
-	    cordova.plugins.diagnostic.getLocationAuthorizationStatus(function(status){
-	        switch(status){
-	            case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-	                console.log("Permission not requested");
-	                cordova.plugins.diagnostic.requestLocationAuthorization(function(status) {
-	                    switch(status) {
-	                        case cordova.plugins.diagnostic.permissionStatus.GRANTED:
-	                            console.log("Permission granted");
-	                            App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
-	                            break;
-	                        case cordova.plugins.diagnostic.permissionStatus.DENIED:
-	                            console.log("Permission denied");
-	                            App.authorizationStatus = Constants.AuthorizationEnum.DENIED;
-	                            break;
-	                    }
-	                },
-					function() {
-					    console.log("error in requesting location authorization");
-					});
-	                break;
-	            case cordova.plugins.diagnostic.permissionStatus.GRANTED:
-	                console.log("Permission granted");
-	                App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
-	                Location.requestLocation();
-	                break;
-	            case cordova.plugins.diagnostic.permissionStatus.DENIED:
-	                console.log("Permission denied");
-	                cordova.plugins.diagnostic.requestLocationAuthorization(function(status) {
-	                    switch(status) {
-	                        case cordova.plugins.diagnostic.permissionStatus.GRANTED:
-	                            console.log("Permission granted");
-	                            App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
-	                            break;
-	                        case cordova.plugins.diagnostic.permissionStatus.DENIED:
-	                            console.log("Permission denied");
-	                            App.authorizationStatus = Constants.AuthorizationEnum.DENIED;
-	                            break;
-	                    }
-	                },
-					function() {
-					    console.log("error in requesting location authorization");
-					});
-	                break;
-	        }
-	    }, function(error){
-	        console.error(error);
-	    });
+
+	    var onError = function(error) {
+	        var msg = "An error occurred: " + error;
+	        console.error(msg);
+	        alert(msg);
+	        checkState();
+	    }
+
+	    var handleSuccess = function(str) {
+	    	console.log(str);
+	    	Location.requestLocation();
+	    }
+
+	    // TODO need to put this in a "merge" to separate android/ios platform code
+        cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
+            if(enabled){
+                cordova.plugins.diagnostic.isLocationAuthorized(function (authorized) {
+                    if(!authorized){
+                        cordova.plugins.diagnostic.requestLocationAuthorization(function (status) {
+                            handleSuccess("Requested location authorization: authorization was " + status);
+                            checkState();
+                        }, onError, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
+                    }else{
+                        //onError("App is already authorized to use location");
+                        Location.requestLocation();
+                    }
+                }, onError);
+            }else{
+                onError("Cannot request location authorization while Location Services is OFF");
+            }
+        }, onError);
 	},
 	
 	// request the users location
@@ -122,25 +105,10 @@ var Location = {
 					console.log("Platform: " + platform);
 					// change settings if we need to
 					this.isAccuracyPrompt = true;
-					cordova.plugins.locationAccuracy.request(function(success) {
-						App.accuracyStatus = Constants.AccuracyEnum.ENABLED;
-						showSpinner();
-						Location.isRequestingLocation = true;
-						Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
-					}, function(error) {
-						console.log("error code: " + error.code + "\nerror message: " + error.message);
-						App.accuracyStatus = Constants.AccuracyEnum.DISABLED;
-						navigator.notification.confirm(
-							"The app may not function as expected without the appropiate location settings enabled.",
-							function() {
-								showSpinner();
-								Location.isRequestingLocation = true;
-								Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
-							},
-							"Failure Changing Location Settings",
-							["Ok"]
-						);
-					});
+					App.accuracyStatus = Constants.AccuracyEnum.DISABLED;
+					showSpinner();
+					Location.isRequestingLocation = true;
+					Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
 				}
 			}
 		} else {

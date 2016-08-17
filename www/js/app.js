@@ -10,9 +10,11 @@ var App = {
     initialize: function () {
         console.log("onInitialize");
         if (!LocalStorage.isStartupDone) {
-            $.mobile.pageContainer.pagecontainer("change", "#startup", { changeHash: false, transition: "none" });
+            // TODO making 'changeHash: true' is required to get the page to change from here
+            //$.mobile.changePage($("#startup"), { changeHash: false, transition: "none" });
+            $.mobile.changePage($("#startup"), { changeHash: true, transition: "none" });
         } else {
-            this.bindEvents();
+            App.bindEvents();
         }
     },
 
@@ -84,6 +86,7 @@ var App = {
     },
 
     initializeFCM: function () {
+        console.log("onInitializeFCM");
         FCMPlugin.getToken(
 			// success
 			function (token) {
@@ -118,5 +121,6 @@ var App = {
 }
 
 function onLoad() {
+    console.log("onLoad");
     App.initialize();
 }
