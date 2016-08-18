@@ -64,6 +64,8 @@ var App = {
         $("#slider_smell_notification").on("change", SettingsPage.onSmellSliderChange);
         $("#slider_smell_notification").on("slidestop", SettingsPage.onSmellSliderStop);
         $("#textfield_email").on("change", SettingsPage.onEmailChange);
+        $("#textfield_name").on("change", SettingsPage.onNameChange);
+        $("#textfield_phone").on("change", SettingsPage.onPhoneChange);
     },
 
     onPageContainerShow: function (event, ui) {
@@ -72,6 +74,8 @@ var App = {
 
         // Use this if the page needs initialized everytime the page is viewed
         switch (pageId) {
+            case Constants.STARTUP_PAGE:
+                break;
             case Constants.HOME_PAGE:
                 break;
             case Constants.MAP_PAGE:

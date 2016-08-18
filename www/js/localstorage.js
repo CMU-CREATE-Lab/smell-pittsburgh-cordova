@@ -12,6 +12,8 @@ var LocalStorage = {
 	
 	isACHD: true,
 	email: null,
+	name: null,
+    phone: null,
 	
 	initialize: function () {
 	    var temp = window.localStorage.getItem(Constants.STARTUP_KEY);
@@ -45,6 +47,8 @@ var LocalStorage = {
 		
 		temp = window.localStorage.getItem(Constants.ACHD_ENABLED_KEY);
 		this.email = window.localStorage.getItem(Constants.EMAIL_KEY);
+		this.name = window.localStorage.getItem(Constants.NAME_KEY);
+		this.phone = window.localStorage.getItem(Constants.PHONE_KEY);
 		if (temp == null) {
 			temp = true;
 			window.localStorage.setItem(Constants.ACHD_ENABLED_KEY, true);
@@ -113,6 +117,16 @@ var LocalStorage = {
 	setEmail: function(string) {
 		this.email = string;
 		window.localStorage.setItem(Constants.EMAIL_KEY, string);
+	},
+
+	setName: function (string) {
+	    this.name = string;
+	    window.localStorage.setItem(Constants.NAME_KEY, string);
+	},
+
+	setPhone: function (string) {
+	    this.phone = string;
+	    window.localStorage.setItem(Constants.PHONE_KEY, string);
 	}
 	
 }

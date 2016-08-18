@@ -32,6 +32,8 @@ var SettingsPage = {
         else $("#slider_smell_notification").slider("disable");
 
         $("#textfield_email").prop("value", LocalStorage.email);
+        $("#textfield_name").prop("value", LocalStorage.name);
+        $("#textfield_phone").prop("value", LocalStorage.phone);
 
         $("#notificationsCollapsible").collapsible({
             collapsed: false
@@ -161,5 +163,13 @@ var SettingsPage = {
                 "Ok"
             );
         }
+    },
+
+    onNameChange: function(event) {
+        LocalStorage.setName(this.value);
+    },
+
+    onPhoneChange: function (event) {
+        LocalStorage.setPhone(this.value);
     }
 }
