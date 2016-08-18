@@ -60,6 +60,7 @@ var App = {
     onPageCreate: function (event, ui) {
         console.log("onPageCreate");
         // Bindings that must be within page create
+        $("#slider_smell_notification").on("slidestart", SettingsPage.onSmellSliderStart);
         $("#slider_smell_notification").on("change", SettingsPage.onSmellSliderChange);
         $("#slider_smell_notification").on("slidestop", SettingsPage.onSmellSliderStop);
         $("#textfield_email").on("change", SettingsPage.onEmailChange);
