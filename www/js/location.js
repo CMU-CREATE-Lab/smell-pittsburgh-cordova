@@ -108,7 +108,7 @@ var Location = {
 					App.accuracyStatus = Constants.AccuracyEnum.DISABLED;
 					showSpinner();
 					Location.isRequestingLocation = true;
-					Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
+					navigator.geolocation.getCurrentPosition( onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true } );
 				}
 			}
 		} else {
