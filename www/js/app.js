@@ -122,5 +122,7 @@ var App = {
 
 function onLoad() {
     console.log("onLoad");
+    // avoid click delay on ios
+    FastClick.attach(document.body);
     App.initialize();
 }
