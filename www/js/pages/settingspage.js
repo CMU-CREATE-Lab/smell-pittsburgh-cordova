@@ -171,5 +171,16 @@ var SettingsPage = {
 
     onPhoneChange: function (event) {
         LocalStorage.setPhone(this.value);
+    },
+
+    onCheckboxClick: function (item) {
+        // some smell value 1-5 (string)
+        var smellValue = item.value;
+
+        if (item.checked) {
+            SettingsPage.subscribeToSmell(smellValue);
+        } else {
+            SettingsPage.unsubscribeToSmell(smellValue);
+        }
     }
 }
