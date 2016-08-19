@@ -79,8 +79,8 @@ var HomePage = {
     },
 
     onClickSmell: function (item) {
-        $('.remove-active').removeClass('ui-btn-active');
-        $("#smell_value_" + item.value).addClass('ui-btn-active');
+        // $('.remove-active').removeClass('ui-btn-active');
+        // $("#smell_value_" + item.value).addClass('ui-btn-active');
         HomePage.smellValue = item.value;
     }
 

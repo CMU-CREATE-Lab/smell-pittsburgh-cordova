@@ -17,6 +17,44 @@
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
         <link rel="stylesheet" href="css/fullscreen-pages.css" />
 
+<style>
+.smell-1 {
+    display: inline-block;
+    width: 2em;
+    min-height: 1em;
+    height: 100%;
+    background-color: rgb(0,255,0);
+}
+.smell-2 {
+    display: inline-block;
+    width: 2em;
+    min-height: 1em;
+    height: 100%;
+    background-color: rgb(248,229,64);
+}
+.smell-3 {
+    display: inline-block;
+    width: 2em;
+    min-height: 1em;
+    height: 100%;
+    background-color: rgb(218,136,0);
+}
+.smell-4 {
+    display: inline-block;
+    width: 2em;
+    min-height: 1em;
+    height: 100%;
+    background-color: rgb(235,38,103);
+}
+.smell-5 {
+    display: inline-block;
+    width: 2em;
+    min-height: 1em;
+    height: 100%;
+    background-color: rgb(95,14,54);
+}
+</style>
+
     </head>
 
     <body onload="onLoad();">
@@ -29,28 +67,23 @@
 
             <div role="main" class="ui-content" data-iscroll>
                 <h3>How does it smell to you right now?</h3>
-                <div data-role="navbar">
-                    <label for="smell_value_1"></label>
-                    <label for="smell_value_2"></label>
-                    <label for="smell_value_3"></label>
-                    <label for="smell_value_4"></label>
-                    <label for="smell_value_5"></label>
-                    <ul>
-                        <li><button id="smell_value_1" class="remove-active" onclick="HomePage.onClickSmell(this);" value="1">1</button></li>
-                        <li><button id="smell_value_2" class="remove-active" onclick="HomePage.onClickSmell(this);" value="2">2</button></li>
-                        <li><button id="smell_value_3" class="remove-active" onclick="HomePage.onClickSmell(this);" value="3">3</button></li>
-                        <li><button id="smell_value_4" class="remove-active" onclick="HomePage.onClickSmell(this);" value="4">4</button></li>
-                        <li><button id="smell_value_5" class="remove-active" onclick="HomePage.onClickSmell(this);" value="5">5</button></li>
-                    </ul>  
-                </div>
 
-                <ul style="list-style-type: square;">
-                    <li style="color: rgb(0,255,0);"><span style="color: black;">1 Just fine!</span></li>
-                    <li style="color: rgb(248,229,64);"><span style="color: black;">2 Barely noticeable</span></li>
-                    <li style="color: rgb(218,136,0);"><span style="color: black;">3 Definitely noticeable</span></li>
-                    <li style="color: rgb(235,38,103);"><span style="color: black;">4 It's getting pretty bad</span></li>
-                    <li style="color: rgb(95,14,54);"><span style="color: black;">5 About as bad as it gets!</span></li>
-                </ul>
+                <fieldset data-role="controlgroup">
+                  <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1">
+                  <label for="radio-choice-1"><div class="smell-1"></div> 1 Just fine!</label>
+                 
+                  <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2">
+                  <label for="radio-choice-2"><div class="smell-2"></div> 2 Barely noticeable</label>
+                 
+                  <input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3">
+                  <label for="radio-choice-3"><div class="smell-3"></div> 3 Definitely noticeable</label>
+                 
+                  <input type="radio" name="radio-choice" id="radio-choice-4" value="choice-4">
+                  <label for="radio-choice-4"><div class="smell-4"></div> 4 It's getting pretty bad</label>
+
+                  <input type="radio" name="radio-choice" id="radio-choice-5" value="choice-5">
+                  <label for="radio-choice-5"><div class="smell-5"></div> 5 About as bad as it gets!</label>
+                </fieldset>
 
                 <label>Describe the smell (optional)</label>
                 <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
@@ -109,6 +142,23 @@
                         <li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true" value="4" min="1" max="5" step="1" /></li>
                     </ul>
                     <p id="p_slider_info"></p>
+
+                    <fieldset data-role="controlgroup">
+                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-1" value="choice-1">
+                      <label for="checkbox-choice-1"><div class="smell-1"></div> 1 Just fine!</label>
+                     
+                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-2" value="choice-2">
+                      <label for="checkbox-choice-2"><div class="smell-2"></div> 2 Barely noticeable</label>
+                     
+                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-3" value="choice-3">
+                      <label for="checkbox-choice-3"><div class="smell-3"></div> 3 Definitely noticeable</label>
+                     
+                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-4" value="choice-4">
+                      <label for="checkbox-choice-4"><div class="smell-4"></div> 4 It's getting pretty bad</label>
+
+                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-5" value="choice-5">
+                      <label for="checkbox-choice-5"><div class="smell-5"></div> 5 About as bad as it gets!</label>
+                    </fieldset>
                 </div>
 
                 <div id="reportsCollapsible" data-role="collapsible">
