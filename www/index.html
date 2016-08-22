@@ -20,7 +20,7 @@
 
     </head>
 
-    <body onload="onLoad();">
+    <body>
 
         <div data-role="page" id="home" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -79,12 +79,12 @@
             </div>
         </div>
 
-        <div date-role="page" id="settings" class="page-fullscreened">
+        <div data-role="page" id="settings" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Settings</h1>
             </div>
-            
-            <div role="main" class="ui-content" data-iscroll>
+
+            <div role="main" class="ui-content">
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
                     <label for="flip_notification">Enable Notifications</label>
@@ -97,11 +97,11 @@
                     <p id="p_slider_info"></p>
 
                     <fieldset data-role="controlgroup" id="checkboxes">
-                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-1" value="1" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
-                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-2" value="2" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-2"><div class="picker-color-smell-2"></div> 2 Barely noticeable</label>
-                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-3" value="3" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-3"><div class="picker-color-smell-3"></div> 3 Definitely noticeable</label>
-                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-4" value="4" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
-                      <input type="checkbox" name="checkbox-choice" id="checkbox-choice-5" value="5" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-1" value="1" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-2" value="2" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-2"><div class="picker-color-smell-2"></div> 2 Barely noticeable</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-3" value="3" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-3"><div class="picker-color-smell-3"></div> 3 Definitely noticeable</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-4" value="4" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-5" value="5" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
                     </fieldset>
 
                 </div>
@@ -109,15 +109,17 @@
                 <div id="reportsCollapsible" data-role="collapsible">
                     <h3>Reporting Smells</h3>
                     <label for="textfield_email">Report to ACHD</label>
-                    <ul style="list-style-type: none;">
-                        <li><input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true"/></li>
-                        <li><input type="text" name="textfield_email" id="textfield_email" value="" placeholder="email" data-clear-btn="true"/></li>
-                        <li><input type="tel" name="textfield_phone" id="textfield_phone" placeholder="999-999-9999" data-clear-btn="true"/></li>
-                    </ul>
+                    <div>
+                        <ul style="list-style-type: none;">
+                            <li><input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true" /></li>
+                            <li><input type="text" name="textfield_email" id="textfield_email" placeholder="email" data-clear-btn="true" /></li>
+                            <li><input type="number" name="textfield_phone" id="textfield_phone" placeholder="999-999-9999" data-clear-btn="true" /></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div data-role="footer" data-id="settings_1" data-position="fixed">
+            <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
@@ -133,16 +135,14 @@
             </div>
 
             <div role="main" class="ui-content">
-                <!--<div style="position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);">-->
-                    <h3>Welcome to Smell PGH!</h3>
-                    <p>
-                        Thank you for installing the Smell Pittsburgh mobile app! Along with displaying all smell reports from its users,
-                        Smell Pittsburgh automatically submits these reports to the Allegheny County Health Department (ACHD).
-                    </p>
-                    <p>
-                        In order to improve the effectiveness of user reports, please provide your name and email (and optionally a phone number) on the next screen.
-                    </p>
-                <!--</div>-->
+                <h3>Welcome to Smell PGH!</h3>
+                <p>
+                    Thank you for installing the Smell Pittsburgh mobile app! Along with displaying all smell reports from its users,
+                    Smell Pittsburgh automatically submits these reports to the Allegheny County Health Department (ACHD).
+                </p>
+                <p>
+                    In order to improve the effectiveness of user reports, please provide your name and email (and optionally a phone number) on the next screen.
+                </p>
             </div>
 
             <div data-role="footer" data-position="fixed" data-id="startup_1" data-tap-toggle="false">

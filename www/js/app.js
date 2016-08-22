@@ -28,9 +28,12 @@ var App = {
         $(document).on("pagecontainershow", App.onPageContainerShow);
 
         // Static Input Bindings
-        $(document).on("pagecreate", App.onPageCreate);
+        //$(document).on("pagecreate", App.onPageCreate);
         $("#flip_notification").change(SettingsPage.onToggleNotifications);
         $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
+        $("#textfield_email").change(SettingsPage.onEmailChange);
+        $("#textfield_name").change(SettingsPage.onNameChange);
+        $("#textfield_phone").change(SettingsPage.onPhoneChange);
         $("#button_submit_report").click(HomePage.onClickSubmit);
 
         App.isDeviceReady = true;
@@ -54,18 +57,6 @@ var App = {
         } else if (App.isDeviceReady) {
             hideSpinner();
         }
-    },
-
-    // TODO - learn more about this kind of event and why I need these bindings in here
-    onPageCreate: function (event, ui) {
-        console.log("onPageCreate");
-        // Bindings that must be within page create
-        $("#slider_smell_notification").on("slidestart", SettingsPage.onSmellSliderStart);
-        $("#slider_smell_notification").on("change", SettingsPage.onSmellSliderChange);
-        $("#slider_smell_notification").on("slidestop", SettingsPage.onSmellSliderStop);
-        $("#textfield_email").on("change", SettingsPage.onEmailChange);
-        $("#textfield_name").on("change", SettingsPage.onNameChange);
-        $("#textfield_phone").on("change", SettingsPage.onPhoneChange);
     },
 
     onPageContainerShow: function (event, ui) {
@@ -122,6 +113,6 @@ var App = {
 
 }
 
-function onLoad() {
+$(document).ready(function () {
     App.initialize();
-}
+})
