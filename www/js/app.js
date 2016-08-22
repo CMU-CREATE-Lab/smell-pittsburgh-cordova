@@ -29,7 +29,7 @@ var App = {
 
         // Static Input Bindings
         $(document).on("pagecreate", App.onPageCreate);
-        $("#checkbox_notifications").click(SettingsPage.onToggleNotifications);
+        $("#flip_notification").change(SettingsPage.onToggleNotifications);
         $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
         $("#button_submit_report").click(HomePage.onClickSubmit);
 

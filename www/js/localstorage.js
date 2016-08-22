@@ -7,8 +7,7 @@ var LocalStorage = {
 	isNotification: true,
 	
 	isSmellNotification: false,
-	smellMax: null,
-	smellMin: null,
+	smells: new Array(),
 	
 	isACHD: true,
 	email: null,
@@ -35,8 +34,6 @@ var LocalStorage = {
 		this.isNotification = Boolean(temp);
 		
 		temp = window.localStorage.getItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY);
-		this.smellMax = window.localStorage.getItem(Constants.SMELL_MAX_KEY);
-		this.smellMin = window.localStorage.getItem(Constants.SMELL_MIN_KEY);
 		if (temp == null) {
 			temp = false;
 			window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, false);
@@ -44,6 +41,17 @@ var LocalStorage = {
 		if (temp == "false") temp = false;
 		if (temp == "true") temp = true;
 		this.isSmellNotification = Boolean(temp);
+
+		temp = JSON.parse(window.localStorage.getItem(Constants.SMELLS_KEY));
+		if (temp == null) {
+		    temp = new Array();
+		    for (var i = 1; i < 4; i++) {
+		        temp[i] = false;
+		    }
+		    temp[4] = true;
+		    temp[5] = true;
+		}
+		this.smells = temp;
 		
 		temp = window.localStorage.getItem(Constants.ACHD_ENABLED_KEY);
 		this.email = window.localStorage.getItem(Constants.EMAIL_KEY);
@@ -95,16 +103,10 @@ var LocalStorage = {
 		this.isSmellNotification = val;
 		window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, val);
 	},
-	
-	
-	setSmellMax: function(max) {
-		this.smellMax = max;
-		window.localStorage.setItem(Constants.SMELL_MAX_KEY, max);
-	},
-	
-	setSmellMin: function(min) {
-		this.smellMin = min;
-		window.localStorage.setItem(Constants.SMELL_MIN_KEY, min);
+
+	setSmells: function(val) {
+	    this.smells = val;
+	    window.localStorage.setItem(Constants.SMELLS_KEY, JSON.stringify(val));
 	},
 	
 	/* ACHD STORAGE */

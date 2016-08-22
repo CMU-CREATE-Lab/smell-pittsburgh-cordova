@@ -83,35 +83,35 @@
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Settings</h1>
             </div>
-
+            
             <div role="main" class="ui-content" data-iscroll>
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
-                    <label for="checkbox_notifications">Receive General App Notifications</label>
-                    <input type="checkbox" id="checkbox_notifications" />
-                    <label for="checkbox_smell_notifications">Smell Notification Range</label>
+                    <label for="flip_notification">Enable Notifications</label>
+                    <select name="flip_notification" id="flip_notification" data-role="slider">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                    <label for="checkbox_smell_notifications">Enable Smell Notifications</label>
                     <input type="checkbox" id="checkbox_smell_notifications" />
-                    <label for="slider_smell_notification"></label>
-                    <ul style="list-style-type: none;">
-                        <li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true" value="4" min="1" max="5" step="1" /></li>
-                    </ul>
                     <p id="p_slider_info"></p>
 
-                    <fieldset data-role="controlgroup">
+                    <fieldset data-role="controlgroup" id="checkboxes">
                       <input type="checkbox" name="checkbox-choice" id="checkbox-choice-1" value="1" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
                       <input type="checkbox" name="checkbox-choice" id="checkbox-choice-2" value="2" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-2"><div class="picker-color-smell-2"></div> 2 Barely noticeable</label>
                       <input type="checkbox" name="checkbox-choice" id="checkbox-choice-3" value="3" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-3"><div class="picker-color-smell-3"></div> 3 Definitely noticeable</label>
                       <input type="checkbox" name="checkbox-choice" id="checkbox-choice-4" value="4" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
                       <input type="checkbox" name="checkbox-choice" id="checkbox-choice-5" value="5" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
                     </fieldset>
+
                 </div>
 
                 <div id="reportsCollapsible" data-role="collapsible">
                     <h3>Reporting Smells</h3>
                     <label for="textfield_email">Report to ACHD</label>
                     <ul style="list-style-type: none;">
-                        <li><input type="text" name="textfield_name" id="textfield_name" placeholder="Your name" data-clear-btn="true"/></li>
-                        <li><input type="text" name="textfield_email" id="textfield_email" value="" placeholder="Enter your email" data-clear-btn="true"/></li>
+                        <li><input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true"/></li>
+                        <li><input type="text" name="textfield_email" id="textfield_email" value="" placeholder="email" data-clear-btn="true"/></li>
                         <li><input type="tel" name="textfield_phone" id="textfield_phone" placeholder="999-999-9999" data-clear-btn="true"/></li>
                     </ul>
                 </div>
