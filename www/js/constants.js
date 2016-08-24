@@ -3,6 +3,7 @@
 var Constants = {
 
     // Page Ids
+    STARTUP_PAGE: "startup",
     HOME_PAGE: "home",
     MAP_PAGE: "map",
     SETTINGS_PAGE: "settings",
@@ -11,11 +12,12 @@ var Constants = {
 	USER_HASH_KEY: "user_hash",
 	NOTIFICATION_ENABLED_KEY: "notification",
 	SMELL_NOTIFICATION_ENABLED_KEY: "smell_notification",
-	SMELL_MAX_KEY: "smell_max",
-	SMELL_MIN_KEY: "smell_min",
+	SMELLS_KEY: "smells",
 	ACHD_ENABLED_KEY: "achd_enabled",
 	EMAIL_KEY: "email",
-    STARTUP_KEY: "startup",
+	STARTUP_KEY: "startup",
+	NAME_KEY: "name",
+    PHONE_KEY: "phone",
 	
 	// Topic strings
 	GLOBAL_TOPIC: "GlobalTopic",

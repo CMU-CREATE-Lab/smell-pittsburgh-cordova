@@ -17,10 +17,11 @@
         <!-- css -->
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
         <link rel="stylesheet" href="css/fullscreen-pages.css" />
+        <link rel="stylesheet" href="css/radio-checkbox-widget.css" />
 
     </head>
 
-    <body onload="onLoad();">
+    <body>
 
         <div data-role="page" id="home" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -30,23 +31,14 @@
 
             <div role="main" class="ui-content" data-iscroll>
                 <h3>How does it smell to you right now?</h3>
-                <div data-role="navbar">
-                    <ul>
-                        <li><button id="smell_value_1" class="remove-active ui-btn ui-corner-all ui-btn-active" onclick="HomePage.onClickSmell(this);" value="1">1</button></li>
-                        <li><button id="smell_value_2" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="2">2</button></li>
-                        <li><button id="smell_value_3" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="3">3</button></li>
-                        <li><button id="smell_value_4" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="4">4</button></li>
-                        <li><button id="smell_value_5" class="remove-active ui-btn ui-corner-all" onclick="HomePage.onClickSmell(this);" value="5">5</button></li>
-                    </ul>  
-                </div>
 
-                <ul style="list-style-type: square;">
-                    <li style="color: rgb(0,255,0);"><span style="color: black;">1 Just fine!</span></li>
-                    <li style="color: rgb(248,229,64);"><span style="color: black;">2 Barely noticeable</span></li>
-                    <li style="color: rgb(218,136,0);"><span style="color: black;">3 Definitely noticeable</span></li>
-                    <li style="color: rgb(235,38,103);"><span style="color: black;">4 It's getting pretty bad</span></li>
-                    <li style="color: rgb(95,14,54);"><span style="color: black;">5 About as bad as it gets!</span></li>
-                </ul>
+                <fieldset data-role="controlgroup">
+                  <input type="radio" name="radio-choice" id="radio-choice-1" value="1" onclick="HomePage.onClickSmell(this)" /><label for="radio-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
+                  <input type="radio" name="radio-choice" id="radio-choice-2" value="2" onclick="HomePage.onClickSmell(this)" /><label for="radio-choice-2"><div class="picker-color-smell-2"></div> 2 Barely noticeable</label>
+                  <input type="radio" name="radio-choice" id="radio-choice-3" value="3" onclick="HomePage.onClickSmell(this)" /><label for="radio-choice-3"><div class="picker-color-smell-3"></div> 3 Definitely noticeable</label>
+                  <input type="radio" name="radio-choice" id="radio-choice-4" value="4" onclick="HomePage.onClickSmell(this)" /><label for="radio-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
+                  <input type="radio" name="radio-choice" id="radio-choice-5" value="5" onclick="HomePage.onClickSmell(this)" /><label for="radio-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
+                </fieldset>
 
                 <label>Describe the smell (optional)</label>
                 <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
@@ -88,35 +80,47 @@
             </div>
         </div>
 
-        <div date-role="page" id="settings" class="page-fullscreened">
+        <div data-role="page" id="settings" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
                 <h1>Settings</h1>
             </div>
 
-            <div role="main" class="ui-content" data-iscroll>
+            <div role="main" class="ui-content">
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
-                    <label for="checkbox_notifications">Receive General App Notifications</label>
-                    <input type="checkbox" id="checkbox_notifications" />
-                    <label for="checkbox_smell_notifications">Smell Notification Range</label>
+                    <label for="flip_notification">Enable Notifications</label>
+                    <select name="flip_notification" id="flip_notification" data-role="slider">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                    <label for="checkbox_smell_notifications">Enable Smell Notifications</label>
                     <input type="checkbox" id="checkbox_smell_notifications" />
-                    <label for="slider_smell_notification"></label>
-                    <ul style="list-style-type: none;">
-                        <li><input type="range" name="slider_smell_notification" id="slider_smell_notification" data-highlight="true" value="4" min="1" max="5" step="1" /></li>
-                    </ul>
                     <p id="p_slider_info"></p>
+
+                    <fieldset data-role="controlgroup" id="checkboxes">
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-1" value="1" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-2" value="2" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-2"><div class="picker-color-smell-2"></div> 2 Barely noticeable</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-3" value="3" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-3"><div class="picker-color-smell-3"></div> 3 Definitely noticeable</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-4" value="4" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
+                        <input type="checkbox" name="checkbox-choice" id="checkbox-choice-5" value="5" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
+                    </fieldset>
+
                 </div>
 
                 <div id="reportsCollapsible" data-role="collapsible">
                     <h3>Reporting Smells</h3>
                     <label for="textfield_email">Report to ACHD</label>
-                    <ul style="list-style-type: none;">
-                        <li><input type="text" name="textfield_email" id="textfield_email" value="" placeholder="Enter your email" data-clear-btn="true" /></li>
-                    </ul>
+                    <div>
+                        <ul style="list-style-type: none;">
+                            <li><input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true" /></li>
+                            <li><input type="text" name="textfield_email" id="textfield_email" placeholder="email" data-clear-btn="true" /></li>
+                            <li><input type="number" name="textfield_phone" id="textfield_phone" placeholder="999-999-9999" data-clear-btn="true" /></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div data-role="footer" data-id="settings_1" data-position="fixed">
+            <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
@@ -131,8 +135,15 @@
                 <h1>Smell PGH</h1>
             </div>
 
-            <div role="main" class="ui-content" data-iscroll style="padding:0;margin:0;">
-                <h3>Explantion goes here</h3>
+            <div role="main" class="ui-content">
+                <h3>Welcome to Smell PGH!</h3>
+                <p>
+                    Thank you for installing the Smell Pittsburgh mobile app! Along with displaying all smell reports from its users,
+                    Smell Pittsburgh automatically submits these reports to the Allegheny County Health Department (ACHD).
+                </p>
+                <p>
+                    In order to improve the effectiveness of user reports, please provide your name and email (and optionally a phone number) on the next screen.
+                </p>
             </div>
 
             <div data-role="footer" data-position="fixed" data-id="startup_1" data-tap-toggle="false">

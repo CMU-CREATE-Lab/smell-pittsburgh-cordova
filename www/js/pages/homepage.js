@@ -21,7 +21,9 @@ var HomePage = {
             var smell_description = $("#textfield_smell_description")[0].value;
             var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
             var submitACHD = true;
-            var email = $("#textfield_email")[0].value;
+            var email = LocalStorage.email;
+            var name = LocalStorage.name;
+            var phone_number = LocalStorage.phone;
 
             // userHash
             var userHash = LocalStorage.generateUserHash();
@@ -40,6 +42,8 @@ var HomePage = {
             if (submitACHD) {
                 data["submit_achd_form"] = Boolean(submitACHD);
                 if (email != "") data["email"] = email;
+                if (name != "") data["name"] = name;
+                if (phone_number != "") data["phone_number"] = phone_number;
             }
 
             $.ajax({
@@ -75,8 +79,8 @@ var HomePage = {
     },
 
     onClickSmell: function (item) {
-        $('.remove-active').removeClass('ui-btn-active');
-        $("#smell_value_" + item.value).addClass('ui-btn-active');
+        // $('.remove-active').removeClass('ui-btn-active');
+        // $("#smell_value_" + item.value).addClass('ui-btn-active');
         HomePage.smellValue = item.value;
     }
 

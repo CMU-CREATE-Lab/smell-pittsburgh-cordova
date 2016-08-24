@@ -1,0 +1,22 @@
+html,
+body,
+.page-fullscreened {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-fullscreened,
+.page-fullscreened * {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.page-fullscreened .ui-content {
+  height: inherit; /* inherit height without padding nor border */
+}
+
+.ui-page .ui-content {
+  height: inherit;
+}

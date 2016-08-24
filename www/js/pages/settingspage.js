@@ -3,6 +3,8 @@
 
 var SettingsPage = {
 
+    activeSmells: new Array(),
+
     validateEmail: function(email) { 
         var regexp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regexp.test(email);
@@ -10,28 +12,30 @@ var SettingsPage = {
 
     initialize: function () {
         // global notification
-        $("#checkbox_notifications").prop("checked", LocalStorage.isNotification).checkboxradio("refresh");
-        if (LocalStorage.isNotification) $("#checkbox_smell_notifications").checkboxradio("enable");
-        else $("#checkbox_smell_notifications").checkboxradio("disable");
+        console.log(LocalStorage.isNotification);
+        if (LocalStorage.isNotification) {
+            $("#flip_notification").val("on").slider("refresh");
+            $("#checkbox_smell_notifications").checkboxradio("enable");
+        }
+        else {
+            $("#flip_notification").val("off").slider("refresh");
+            $("#checkbox_smell_notifications").checkboxradio("disable");
+        }
 
         // smell notification
         $("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
-        if (LocalStorage.smellMin != null) {
-            console.log(LocalStorage.SmellMin);
-            $("#slider_smell_notification").val(5 - LocalStorage.smellMin + 1).slider("refresh");
-            $("#slider_smell_notification").val(LocalStorage.smellMin);
-        }
-        else {
-            $("#slider_smell_notification").val(2).slider("refresh");
-            $("#slider_smell_notification").val(4);
-        }
-        SettingsPage.previousValue = $("#slider_smell_notification").val();
         $("#p_slider_info").text("Receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher.");
+        if (LocalStorage.isSmellNotification) $("#checkboxes input[type='checkbox']").checkboxradio('enable');
+        else $("#checkboxes input[type='checkbox']").checkboxradio('disable');
 
-        if (LocalStorage.isSmellNotification) $("#slider_smell_notification").slider("enable");
-        else $("#slider_smell_notification").slider("disable");
+        for (var i = 1; i < LocalStorage.smells.length; i++) {
+            if (LocalStorage.smells[i]) $("#checkbox-choice-" + i).prop("checked", true).checkboxradio("refresh");
+            else $("#checkbox-choice-" + i).prop("checked", false).checkboxradio("refresh");
+        }
 
         $("#textfield_email").prop("value", LocalStorage.email);
+        $("#textfield_name").prop("value", LocalStorage.name);
+        $("#textfield_phone").prop("value", LocalStorage.phone);
 
         $("#notificationsCollapsible").collapsible({
             collapsed: false
@@ -40,8 +44,7 @@ var SettingsPage = {
             collapsed: false
         });
 
-        // disable text input on slider
-        $("#slider_smell_notification").addClass('ui-disabled');
+        this.activeSmells = LocalStorage.smells;
     },
 
     clearSmellNotifications: function () {
@@ -51,6 +54,32 @@ var SettingsPage = {
         }
     },
 
+    subscribeToSmell: function(value) {
+        FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + value);
+        console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC + value);
+    },
+
+    unsubscribeToSmell: function(value) {
+        FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + value);
+        console.log("unsubcribed from: SmellReport-" + value);
+    },
+
+    updateSmellInfo: function () {
+        var textInfo = "";
+        for (var i = 0; i < LocalStorage.smellNotifications.length; i++) {
+            if (LocalStorage.smellNotifications[i]) {
+                textInfo += "" + i + ", ";
+            }
+        }
+        if (textInfo != "") {
+            textInfo = textInfo.substr(0, textInfo.length - 2);
+            $("#p_notification_info").text("Receive notifications of smell reports " + textInfo + ".");
+        } else {
+            $("#p_notification_info").text("Reveiving no notifications of smell reports.");
+        }
+        
+    },
+
     onToggleNotifications: function() {
         if (LocalStorage.isNotification) {
             // make sure to update all of the local storage elements
@@ -58,7 +87,7 @@ var SettingsPage = {
             LocalStorage.setIsSmellNotification(false);
             $("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
             $("#checkbox_smell_notifications").checkboxradio("disable");
-            $("#slider_smell_notification").slider("disable");
+            $("#checkboxes input[type='checkbox']").checkboxradio('disable');
 
             // make sure to unsubscribe from all possible notifications
             SettingsPage.clearSmellNotifications();
@@ -75,69 +104,46 @@ var SettingsPage = {
 
     onToggleSmellNotifications: function() {
         if (LocalStorage.isSmellNotification) {
-            $("#slider_smell_notification").slider("disable");
             LocalStorage.setIsSmellNotification(false);
-            LocalStorage.setSmellMax(Constants.MAX_SMELL_NOTIFICATION);
-            LocalStorage.setSmellMin($("#slider_smell_notification")[0].value);
+            $("#checkboxes input[type='checkbox']").checkboxradio('disable');
             SettingsPage.clearSmellNotifications();
         } else {
-            $("#slider_smell_notification").slider("enable");
             LocalStorage.setIsSmellNotification(true);
-            var max = 5;
-            var min = $("#slider_smell_notification")[0].value;
-            LocalStorage.setSmellMax(max);
-            LocalStorage.setSmellMin(min);
+            $("#checkboxes input[type='checkbox']").checkboxradio('enable');
 
-            for (var i = max; i >= min; i--) {
-                FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + i);
-                console.log("subscribed to: SmellReport-" + i);
+            for (var i = 1; i < SettingsPage.activeSmells.length; i++) {
+                if (SettingsPage.activeSmells[i]) SettingsPage.subscribeToSmell(i);
             }
         }
-    },
-
-   
-    onSmellSliderChange: function (event) {
-        console.log("onSliderChange");
-        this.value = 5 - this.value + 1;
-        $("#p_slider_info").text("Receive notifications of smell reports " + this.value + " or higher.");
     },
 
     previousValue: 0,
+    isSliderStarted: false,
+    onSmellSliderStart: function(event) {
+        console.log("onSmellSliderStart");
+        SettingsPage.isSliderStarted = true;
+        SettingsPage.previousValue = this.value;
+        this.value = null;
+    },
+   
+    onSmellSliderChange: function () {
+        if (SettingsPage.isSliderStarted) {
+            console.log("onSliderChange");
+            if (this.value != null) {
+                SettingsPage.previousValue = this.value;
+            }
+            this.value = NaN;
+            $("#p_slider_info").text("Receive notifications of smell reports " + (5 - SettingsPage.previousValue + 1) + " or higher.");
+        }
+    },
+
     onSmellSliderStop: function (event) {
         console.log("onSliderStop");
-        // A little hack so that the value changes if the user clicks on a position in the slider instead of actually sliding it.
-        if ($("#slider_smell_notification")[0].value == SettingsPage.previousValue) {
-            
-            var value = SettingsPage.previousValue;
-            console.log(value);
-            switch (value) {
-                case "5":
-                    this.value = 1;
-                    break;
-                case "4":
-                    this.value = 2;
-                    break;
-                case "2":
-                    this.value = 4;
-                    break;
-                case "1":
-                    this.value = 5;
-                    break;
-            }
-        }
+        this.value = SettingsPage.previousValue;
+        $("#slider_smell_notification").slider("refresh");
+        this.value = 5 - this.value + 1;
+        SettingsPage.isSliderStarted = false;
         $("#p_slider_info").text("Receive notifications of smell reports " + this.value + " or higher.");
-        SettingsPage.previousValue = this.value;
-
-        var max = Constants.MAX_SMELL_NOTIFICATION;
-        var min = $("#slider_smell_notification")[0].value;
-        LocalStorage.setSmellMax(max);
-        LocalStorage.setSmellMin(min);
-
-        SettingsPage.clearSmellNotifications();
-        for (var i = max; i >= min; i--) {
-            FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + i);
-            console.log("subscribed to: SmellReport-" + i);
-        }
     },
 
     onEmailChange: function (event) {
@@ -152,6 +158,28 @@ var SettingsPage = {
                 "Ok"
             );
         }
-    }
+    },
 
+    onNameChange: function(event) {
+        LocalStorage.setName(this.value);
+    },
+
+    onPhoneChange: function (event) {
+        LocalStorage.setPhone(this.value);
+    },
+
+    onCheckboxClick: function (item) {
+        // some smell value 1-5 (string)
+        var smellValue = item.value;
+
+        if (item.checked) {
+            SettingsPage.subscribeToSmell(smellValue);
+            SettingsPage.activeSmells[smellValue] = true;
+            LocalStorage.setSmells(SettingsPage.activeSmells);
+        } else {
+            SettingsPage.unsubscribeToSmell(smellValue);
+            SettingsPage.activeSmells[smellValue] = false;
+            LocalStorage.setSmells(SettingsPage.activeSmells);
+        }
+    }
 }
