@@ -48,9 +48,9 @@ var App = {
 
     onResume: function() {
         console.log("onResume");
-        if (App.isDeviceReady && Location.isAccuracyPrompt && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
+        if (App.isDeviceReady && Location.isRequestingLocation && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
             Location.requestLocation();
-        } else if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED && !Location.isAccuracyPrompt) {
+        } else if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED && !Location.isRequestingLocation) {
             Location.requestLocation();
         }
     },

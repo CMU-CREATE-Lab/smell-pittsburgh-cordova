@@ -2,9 +2,8 @@
 
 var Location = {
 	
-	isAccuracyPrompt: false,
+	hasLocation: false,
 	isRequestingLocation: false,
-	watchIds: [],
 	coords: {},
 
 	requestLocationPermission: function() {
@@ -21,9 +20,10 @@ var Location = {
 			latitude: 0.0,
 			longitude: 0.0
 		};
+		Location.hasLocation = true;
 		Location.stopRequestLocation();
-		Location.isAccuracyPrompt = false;
-		document.getElementById("button_submit_report").disabled = false;
+		//document.getElementById("button_submit_report").disabled = false;
+		HomePage.checkSubmitStatus();
 	},
 	
 	// stop requesting the users location
@@ -31,12 +31,6 @@ var Location = {
 		console.log("stopRequestLocation");
 		this.isRequestingLocation = false;
 		hideSpinner();
-		var l = this.watchIds.length;
-		for (var i = l-1; i >= 0; i--) {
-			navigator.geolocation.clearWatch(this.watchIds[i]);
-			this.watchIds.pop();
-		}
-		
 	}
 	
 	

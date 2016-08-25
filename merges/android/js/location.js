@@ -2,10 +2,11 @@
 
 var Location = {
 	
-	isAccuracyPrompt: false,
+	hasLocation: false,
 	isRequestingLocation: false,
-	watchIds: [],
 	coords: {},
+	
+	watchIds: [],
 
 	requestLocationPermission: function() {
 		console.log("requestLocationPermission");
@@ -62,27 +63,24 @@ var Location = {
 	// request the users location
 	requestLocation: function() {
 		console.log("requestLocation");
-		console.log("isRequestingLocation: " + this.isRequestingLocation);
 		
 		if (isConnected()) {
 			if (!this.isRequestingLocation) {
 				console.log("in requestLocation");
 				this.isRequestingLocation = true;
-				document.getElementById("button_submit_report").disabled = true;
 				showSpinner();
 				
 				var onSuccess = function(position) {
 					Location.coords = position.coords;
+					Location.hasLocation = true;
 					console.log("got coords: " + Location.coords.latitude + ", " + Location.coords.longitude);
-					document.getElementById("button_submit_report").disabled = false;
 					Location.stopRequestLocation();
-					Location.isAccuracyPrompt = false;
+					HomePage.checkSubmitStatus();
 				};
 				var onError = function (error) {
 					console.log("error code: " + error.code);
 					console.log("error message: " + error.message);
 					Location.stopRequestLocation();
-					Location.isAccuracyPrompt = false;
 					navigator.notification.confirm(
 						"Would you like to retry?",
 						onConfirm,
@@ -100,11 +98,9 @@ var Location = {
 				if (platform === "Android") {
 					console.log("Platform: " + platform);
 					// change settings if we need to
-					this.isAccuracyPrompt = true;
 					cordova.plugins.locationAccuracy.request(function(success) {
 						App.accuracyStatus = Constants.AccuracyEnum.ENABLED;
 						showSpinner();
-						Location.isRequestingLocation = true;
 						Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
 					}, function(error) {
 						console.log("error code: " + error.code + "\nerror message: " + error.message);
@@ -113,7 +109,6 @@ var Location = {
 							"The app may not function as expected without the appropiate location settings enabled.",
 							function() {
 								showSpinner();
-								Location.isRequestingLocation = true;
 								Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
 							},
 							"Failure Changing Location Settings",
@@ -123,11 +118,9 @@ var Location = {
 				} else {
 					console.log("Platform: " + platform);
 					// change settings if we need to
-					this.isAccuracyPrompt = true;
 					cordova.plugins.locationAccuracy.request(function(success) {
 						App.accuracyStatus = Constants.AccuracyEnum.ENABLED;
 						showSpinner();
-						Location.isRequestingLocation = true;
 						Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
 					}, function(error) {
 						console.log("error code: " + error.code + "\nerror message: " + error.message);
@@ -136,7 +129,6 @@ var Location = {
 							"The app may not function as expected without the appropiate location settings enabled.",
 							function() {
 								showSpinner();
-								Location.isRequestingLocation = true;
 								Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
 							},
 							"Failure Changing Location Settings",

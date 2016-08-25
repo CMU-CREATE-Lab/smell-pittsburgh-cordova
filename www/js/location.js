@@ -2,9 +2,8 @@
 
 var Location = {
 	
-	isAccuracyPrompt: false,
+	hasLocation: false,
 	isRequestingLocation: false,
-	watchIds: [],
 	coords: {},
 
 	requestLocationPermission: function() {
