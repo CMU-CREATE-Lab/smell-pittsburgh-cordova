@@ -41,8 +41,9 @@ var App = {
         Location.requestLocationPermission();
         
         // TODO browser doesn't use onResume
-        //App.onResume();
-        Location.requestLocation();
+        if (!Constants.PLATFORM_CALLBACK_ONREADY) {
+            Location.requestLocation();
+        }
     },
 
     onResume: function() {
