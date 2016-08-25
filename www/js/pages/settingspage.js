@@ -3,6 +3,7 @@
 
 var SettingsPage = {
 
+    flipswitchReady: false,
     activeSmells: new Array(),
 
     validateEmail: function(email) { 
@@ -14,13 +15,16 @@ var SettingsPage = {
         // global notification
         console.log(LocalStorage.isNotification);
         if (LocalStorage.isNotification) {
-            $("#flip_notification").val("on").slider("refresh");
+            $("#flip_notification").val("on");
+            $("#flip_notification").flipswitch("refresh");
             $("#checkbox_smell_notifications").checkboxradio("enable");
         }
         else {
-            $("#flip_notification").val("off").slider("refresh");
+            $("#flip_notification").val("off");
+            $("#flip_notification").flipswitch("refresh");
             $("#checkbox_smell_notifications").checkboxradio("disable");
         }
+        SettingsPage.flipswitchReady = true;
 
         // smell notification
         $("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
@@ -81,6 +85,8 @@ var SettingsPage = {
     },
 
     onToggleNotifications: function() {
+        if (!SettingsPage.flipswitchReady)
+            return;
         if (LocalStorage.isNotification) {
             // make sure to update all of the local storage elements
             LocalStorage.setIsNotification(false);

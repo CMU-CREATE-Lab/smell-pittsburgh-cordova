@@ -87,11 +87,16 @@
             <div role="main" class="ui-content">
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
-                    <label for="flip_notification">Enable Notifications</label>
-                    <select name="flip_notification" id="flip_notification" data-role="slider">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select>
+                    <fieldset>
+                      <div data-role="fieldcontain">
+                        <label for="flip_notification">Enable Notifications</label>
+                        <select id="flip_notification" data-role="flipswitch">
+                          <option value="off">Off</option>
+                          <option value="on">On</option>
+                        </select>
+                      </div>
+                    </fieldset>
+
                     <label for="checkbox_smell_notifications">Enable Smell Notifications</label>
                     <input type="checkbox" id="checkbox_smell_notifications" />
                     <p id="p_slider_info"></p>
