@@ -39,6 +39,10 @@ var App = {
         App.isDeviceReady = true;
         App.initializeFCM();
         Location.requestLocationPermission();
+        
+        // TODO browser doesn't use onResume
+        //App.onResume();
+        Location.requestLocation();
     },
 
     onResume: function() {

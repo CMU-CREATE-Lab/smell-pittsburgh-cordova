@@ -8,6 +8,10 @@ var Location = {
 	coords: {},
 
 	requestLocationPermission: function() {
+		console.log("requestLocationPermission");
+			if (!Constants.LOCATION_SERVICES) {
+				return;
+			}
 	    // Android>=6.0
 	    cordova.plugins.diagnostic.getLocationAuthorizationStatus(function(status){
 	        switch(status){
@@ -62,6 +66,16 @@ var Location = {
 	requestLocation: function() {
 		console.log("requestLocation");
 		console.log("isRequestingLocation: " + this.isRequestingLocation);
+		if (!Constants.LOCATION_SERVICES) {
+			Location.coords = {
+				latitude: 0.0,
+				longitude: 0.0
+			};
+			Location.stopRequestLocation();
+			Location.isAccuracyPrompt = false;
+			document.getElementById("button_submit_report").disabled = false;
+			return;
+		}
 		if (isConnected()) {
 			if (!this.isRequestingLocation) {
 				console.log("in requestLocation");

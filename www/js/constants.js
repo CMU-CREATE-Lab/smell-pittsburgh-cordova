@@ -2,6 +2,8 @@
 
 var Constants = {
 
+  LOCATION_SERVICES: false,
+  
     // Page Ids
     STARTUP_PAGE: "startup",
     HOME_PAGE: "home",
