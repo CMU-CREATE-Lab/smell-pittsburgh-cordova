@@ -74,7 +74,6 @@ var Location = {
                     }
                 };
                 
-                console.log("Platform: " + platform);
                 // change settings if we need to
                 this.isAccuracyPrompt = true;
                 App.accuracyStatus = Constants.AccuracyEnum.DISABLED;
@@ -98,6 +97,8 @@ var Location = {
     // stop requesting the users location
     stopRequestLocation: function() {
         console.log("stopRequestLocation");
+        this.isRequestingLocation = false;
+        hideSpinner();
     }
     
 }
