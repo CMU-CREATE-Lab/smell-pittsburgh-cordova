@@ -37,3 +37,11 @@ div.text-justified {
     text-align: justify;
     text-justify: inter-word;
 }
+
+/* Remove radio/checkbox glitch in android */
+.ui-page-theme-a .ui-btn:hover,html .ui-bar-a .ui-btn:hover,html .ui-body-a .ui-btn:hover,html body .ui-group-theme-a .ui-btn:hover,html head+body .ui-btn.ui-btn-a:hover {
+    background-color: #f6f6f6 !important;
+    border-color: #ddd !important;
+    color: inherit !important;
+    text-shadow: none !important;
+}
