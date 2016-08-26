@@ -9,10 +9,8 @@ var App = {
 
     initialize: function () {
         console.log("onInitialize");
-        localStorage.clear();
         if (!LocalStorage.isStartupDone) {
             $.mobile.pageContainer.pagecontainer("change", "#startup", { changeHash: true, transition: "none" });
-            // $.mobile.changePage($("#startup"), { changeHash: true, transition: "none" });
         } else {
             App.bindEvents();
         }
