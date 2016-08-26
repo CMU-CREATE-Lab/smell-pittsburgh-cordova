@@ -35,8 +35,8 @@ var LocalStorage = {
 		
 		temp = window.localStorage.getItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY);
 		if (temp == null) {
-			temp = false;
-			window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, false);
+			temp = true;
+			window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, true);
 		}
 		if (temp == "false") temp = false;
 		if (temp == "true") temp = true;

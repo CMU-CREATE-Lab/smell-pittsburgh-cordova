@@ -2,8 +2,8 @@
 
 var Constants = {
 
-  LOCATION_SERVICES: true,
-  PLATFORM_CALLBACK_ONREADY: true,
+  LOCATION_SERVICES: false,
+  PLATFORM_CALLBACK_ONREADY: false,
   
     // Page Ids
     STARTUP_PAGE: "startup",

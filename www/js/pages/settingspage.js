@@ -3,6 +3,7 @@
 
 var SettingsPage = {
 
+    flipswitchReady: false,
     activeSmells: new Array(),
 
     validateEmail: function(email) { 
@@ -14,17 +15,19 @@ var SettingsPage = {
         // global notification
         console.log(LocalStorage.isNotification);
         if (LocalStorage.isNotification) {
-            $("#flip_notification").val("on").slider("refresh");
+            $("#flip_notification").val("on");
+            $("#flip_notification").flipswitch("refresh");
             $("#checkbox_smell_notifications").checkboxradio("enable");
         }
         else {
-            $("#flip_notification").val("off").slider("refresh");
+            $("#flip_notification").val("off");
+            $("#flip_notification").flipswitch("refresh");
             $("#checkbox_smell_notifications").checkboxradio("disable");
         }
+        SettingsPage.flipswitchReady = true;
 
         // smell notification
         $("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
-        $("#p_slider_info").text("Receive notifications of smell reports " + $("#slider_smell_notification").val() + " or higher.");
         if (LocalStorage.isSmellNotification) $("#checkboxes input[type='checkbox']").checkboxradio('enable');
         else $("#checkboxes input[type='checkbox']").checkboxradio('disable');
 
@@ -81,6 +84,8 @@ var SettingsPage = {
     },
 
     onToggleNotifications: function() {
+        if (!SettingsPage.flipswitchReady)
+            return;
         if (LocalStorage.isNotification) {
             // make sure to update all of the local storage elements
             LocalStorage.setIsNotification(false);
@@ -115,35 +120,6 @@ var SettingsPage = {
                 if (SettingsPage.activeSmells[i]) SettingsPage.subscribeToSmell(i);
             }
         }
-    },
-
-    previousValue: 0,
-    isSliderStarted: false,
-    onSmellSliderStart: function(event) {
-        console.log("onSmellSliderStart");
-        SettingsPage.isSliderStarted = true;
-        SettingsPage.previousValue = this.value;
-        this.value = null;
-    },
-   
-    onSmellSliderChange: function () {
-        if (SettingsPage.isSliderStarted) {
-            console.log("onSliderChange");
-            if (this.value != null) {
-                SettingsPage.previousValue = this.value;
-            }
-            this.value = NaN;
-            $("#p_slider_info").text("Receive notifications of smell reports " + (5 - SettingsPage.previousValue + 1) + " or higher.");
-        }
-    },
-
-    onSmellSliderStop: function (event) {
-        console.log("onSliderStop");
-        this.value = SettingsPage.previousValue;
-        $("#slider_smell_notification").slider("refresh");
-        this.value = 5 - this.value + 1;
-        SettingsPage.isSliderStarted = false;
-        $("#p_slider_info").text("Receive notifications of smell reports " + this.value + " or higher.");
     },
 
     onEmailChange: function (event) {

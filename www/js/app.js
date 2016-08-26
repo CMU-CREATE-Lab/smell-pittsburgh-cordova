@@ -9,10 +9,10 @@ var App = {
 
     initialize: function () {
         console.log("onInitialize");
+        localStorage.clear();
         if (!LocalStorage.isStartupDone) {
-            // TODO making 'changeHash: true' is required to get the page to change from here
-            //$.mobile.changePage($("#startup"), { changeHash: false, transition: "none" });
-            $.mobile.changePage($("#startup"), { changeHash: true, transition: "none" });
+            $.mobile.pageContainer.pagecontainer("change", "#startup", { changeHash: true, transition: "none" });
+            // $.mobile.changePage($("#startup"), { changeHash: true, transition: "none" });
         } else {
             App.bindEvents();
         }
@@ -41,13 +41,18 @@ var App = {
         App.isDeviceReady = true;
         App.initializeFCM();
         Location.requestLocationPermission();
+        
+        // TODO browser doesn't use onResume
+        if (!Constants.PLATFORM_CALLBACK_ONREADY) {
+            Location.requestLocation();
+        }
     },
 
     onResume: function() {
         console.log("onResume");
-        if (App.isDeviceReady && Location.isAccuracyPrompt && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
+        if (App.isDeviceReady && Location.isRequestingLocation && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
             Location.requestLocation();
-        } else if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED && !Location.isAccuracyPrompt) {
+        } else if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED && !Location.isRequestingLocation) {
             Location.requestLocation();
         }
     },

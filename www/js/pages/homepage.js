@@ -3,10 +3,22 @@
 
 var HomePage = {
 
+    smellValueSelected: false,
     smellValue: 1,
 
     initialize: function () {
 
+    },
+
+    checkSubmitStatus: function() {
+        var isDisabled = false;
+        if (!Location.hasLocation) {
+            isDisabled = true;
+        }
+        if (!this.smellValueSelected) {
+            isDisabled = true;
+        }
+        $("#button_submit_report").attr("disabled",isDisabled);
     },
 
     onClickSubmit: function () {
@@ -81,7 +93,9 @@ var HomePage = {
     onClickSmell: function (item) {
         // $('.remove-active').removeClass('ui-btn-active');
         // $("#smell_value_" + item.value).addClass('ui-btn-active');
+        HomePage.smellValueSelected = true;
         HomePage.smellValue = item.value;
+        HomePage.checkSubmitStatus();
     }
 
 }

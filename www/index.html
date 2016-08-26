@@ -17,7 +17,7 @@
         <!-- css -->
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
         <link rel="stylesheet" href="css/fullscreen-pages.css" />
-        <link rel="stylesheet" href="css/radio-checkbox-widget.css" />
+        <link rel="stylesheet" href="css/index.css" />
 
     </head>
 
@@ -30,7 +30,7 @@
             </div>
 
             <div role="main" class="ui-content" data-iscroll>
-                <h3>How does it smell to you right now?</h3>
+                <h3>How does your air smell right now?</h3>
 
                 <fieldset data-role="controlgroup">
                   <input type="radio" name="radio-choice" id="radio-choice-1" value="1" onclick="HomePage.onClickSmell(this)" /><label for="radio-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
@@ -40,11 +40,11 @@
                   <input type="radio" name="radio-choice" id="radio-choice-5" value="5" onclick="HomePage.onClickSmell(this)" /><label for="radio-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
                 </fieldset>
 
-                <label>Describe the smell (optional)</label>
+                <label>Describe the smell or source of odor (optional)</label>
                 <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
                 <label>Any feelings or symptoms? (optional)</label>
                 <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
-                <i>By pressing submit, this smell report will also be sent to the ACHD Air Quality program. (Unless '1' is selected.) If you wish to receive a reply from them, please go to settings (top right) and provide a response email.</i>
+                <div class="text-justified"><i>By pressing submit, this smell report will also be sent to the ACHD Air Quality program. (Unless '1' is selected.) If you wish to receive a reply from them, please go to settings (top right) and provide a response email.</i></div>
                 <button type="button" id="button_submit_report" disabled>Send Smell Report!</button>
             </div>
 
@@ -82,17 +82,22 @@
 
         <div data-role="page" id="settings" class="page-fullscreened">
             <div data-role="header" data-position="fixed" data-tap-toggle="false">
-                <h1>Settings</h1>
+                <h1>Smell PGH: Settings</h1>
             </div>
 
             <div role="main" class="ui-content">
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
-                    <label for="flip_notification">Enable Notifications</label>
-                    <select name="flip_notification" id="flip_notification" data-role="slider">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select>
+                    <fieldset>
+                      <div data-role="fieldcontain">
+                        <label for="flip_notification">Enable Notifications</label>
+                        <select id="flip_notification" data-role="flipswitch">
+                          <option value="off">Off</option>
+                          <option value="on">On</option>
+                        </select>
+                      </div>
+                    </fieldset>
+
                     <label for="checkbox_smell_notifications">Enable Smell Notifications</label>
                     <input type="checkbox" id="checkbox_smell_notifications" />
                     <p id="p_slider_info"></p>
