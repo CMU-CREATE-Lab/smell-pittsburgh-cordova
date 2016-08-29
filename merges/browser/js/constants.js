@@ -4,6 +4,7 @@ var Constants = {
 
   LOCATION_SERVICES: false,
   PLATFORM_CALLBACK_ONREADY: false,
+  SUBMIT_TO_ACHD: true,
   
     // Page Ids
     STARTUP_PAGE: "startup",

@@ -6,14 +6,23 @@ var SettingsPage = {
     flipswitchReady: false,
     activeSmells: new Array(),
 
-    validateEmail: function(email) { 
+    validateEmail: function(email) {
+        // TODO double-check if this is a valid regex?
         var regexp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regexp.test(email);
-     }, 
+    }, 
+
+    onDeviceReady: function() {
+        $("#flip_notification").change(SettingsPage.onToggleNotifications);
+        $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
+        $("#textfield_email").change(SettingsPage.onEmailChange);
+        $("#textfield_name").change(SettingsPage.onNameChange);
+        $("#textfield_phone").change(SettingsPage.onPhoneChange);
+        $(".checkbox-smell-subscribe").click(function() {SettingsPage.onCheckboxClick(this)});
+    },
 
     initialize: function () {
         // global notification
-        console.log(LocalStorage.isNotification);
         if (LocalStorage.isNotification) {
             $("#flip_notification").val("on");
             $("#flip_notification").flipswitch("refresh");
@@ -127,7 +136,7 @@ var SettingsPage = {
             LocalStorage.setEmail(this.value);
         } else {
             this.value = "";
-            navigator.notification.alert(
+            alert(
                 "Enter a valid email address.",
                 null,
                 "Invalid Email Entry",
