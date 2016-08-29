@@ -1,43 +1,43 @@
 .picker-color-smell-1 {
-    display: inline-block;
-    width: 2em;
-    min-height: 1em;
-    height: 100%;
-    background-color: rgb(0,255,0);
+  display: inline-block;
+  width: 2em;
+  min-height: 1em;
+  height: 100%;
+  background-color: rgb(0,255,0);
 }
 .picker-color-smell-2 {
-    display: inline-block;
-    width: 2em;
-    min-height: 1em;
-    height: 100%;
-    background-color: rgb(248,229,64);
+  display: inline-block;
+  width: 2em;
+  min-height: 1em;
+  height: 100%;
+  background-color: rgb(248,229,64);
 }
 .picker-color-smell-3 {
-    display: inline-block;
-    width: 2em;
-    min-height: 1em;
-    height: 100%;
-    background-color: rgb(218,136,0);
+  display: inline-block;
+  width: 2em;
+  min-height: 1em;
+  height: 100%;
+  background-color: rgb(218,136,0);
 }
 .picker-color-smell-4 {
-    display: inline-block;
-    width: 2em;
-    min-height: 1em;
-    height: 100%;
-    background-color: rgb(235,38,103);
+  display: inline-block;
+  width: 2em;
+  min-height: 1em;
+  height: 100%;
+  background-color: rgb(235,38,103);
 }
 .picker-color-smell-5 {
-    display: inline-block;
-    width: 2em;
-    min-height: 1em;
-    height: 100%;
-    background-color: rgb(95,14,54);
+  display: inline-block;
+  width: 2em;
+  min-height: 1em;
+  height: 100%;
+  background-color: rgb(95,14,54);
 }
 
 /* Remove radio/checkbox glitch in android */
 .ui-page-theme-a .ui-btn:hover,html .ui-bar-a .ui-btn:hover,html .ui-body-a .ui-btn:hover,html body .ui-group-theme-a .ui-btn:hover,html head+body .ui-btn.ui-btn-a:hover {
-    background-color: #f6f6f6 !important;
-    border-color: #ddd !important;
-    color: inherit !important;
-    text-shadow: none !important;
+  background-color: #f6f6f6 !important;
+  border-color: #ddd !important;
+  color: inherit !important;
+  text-shadow: none !important;
 }
