@@ -76,21 +76,21 @@ var SettingsPage = {
         console.log("unsubcribed from: SmellReport-" + value);
     },
 
-    updateSmellInfo: function () {
-        var textInfo = "";
-        for (var i = 0; i < LocalStorage.smellNotifications.length; i++) {
-            if (LocalStorage.smellNotifications[i]) {
-                textInfo += "" + i + ", ";
-            }
-        }
-        if (textInfo != "") {
-            textInfo = textInfo.substr(0, textInfo.length - 2);
-            $("#p_notification_info").text("Receive notifications of smell reports " + textInfo + ".");
-        } else {
-            $("#p_notification_info").text("Reveiving no notifications of smell reports.");
-        }
+    // updateSmellInfo: function () {
+    //     var textInfo = "";
+    //     for (var i = 0; i < LocalStorage.smellNotifications.length; i++) {
+    //         if (LocalStorage.smellNotifications[i]) {
+    //             textInfo += "" + i + ", ";
+    //         }
+    //     }
+    //     if (textInfo != "") {
+    //         textInfo = textInfo.substr(0, textInfo.length - 2);
+    //         $("#p_notification_info").text("Receive notifications of smell reports " + textInfo + ".");
+    //     } else {
+    //         $("#p_notification_info").text("Reveiving no notifications of smell reports.");
+    //     }
         
-    },
+    // },
 
     onToggleNotifications: function() {
         if (!SettingsPage.flipswitchReady)

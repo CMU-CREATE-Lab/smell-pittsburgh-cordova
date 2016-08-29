@@ -70,6 +70,7 @@ var App = {
         // Use this if the page needs initialized everytime the page is viewed
         switch (pageId) {
             case Constants.STARTUP_PAGE:
+                StartupPage.initialize();
                 break;
             case Constants.HOME_PAGE:
                 HomePage.initialize();
