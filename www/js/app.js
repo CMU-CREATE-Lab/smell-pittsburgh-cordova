@@ -9,17 +9,20 @@ var App = {
 
     initialize: function () {
         console.log("onInitialize");
+
         if (!LocalStorage.isStartupDone) {
             $.mobile.pageContainer.pagecontainer("change", "#startup", { changeHash: true, transition: "none" });
+            StartupPage.onDeviceReady();
         } else {
-            App.bindEvents();
+            // App.bindEvents();
+            document.addEventListener("deviceready", this.onDeviceReady, false);
         }
     },
 
-    bindEvents: function () {
-        console.log("onBindEvents");
-        document.addEventListener("deviceready", this.onDeviceReady, false);
-    },
+    // bindEvents: function () {
+    //     console.log("onBindEvents");
+    //     document.addEventListener("deviceready", this.onDeviceReady, false);
+    // },
 
     onDeviceReady: function () {
         console.log("onDeviceReady");
@@ -34,7 +37,7 @@ var App = {
         $("#textfield_email").change(SettingsPage.onEmailChange);
         $("#textfield_name").change(SettingsPage.onNameChange);
         $("#textfield_phone").change(SettingsPage.onPhoneChange);
-        $("#button_submit_report").click(HomePage.onClickSubmit);
+        HomePage.onDeviceReady();
 
         App.isDeviceReady = true;
         App.initializeFCM();
@@ -73,6 +76,7 @@ var App = {
             case Constants.STARTUP_PAGE:
                 break;
             case Constants.HOME_PAGE:
+                HomePage.initialize();
                 break;
             case Constants.MAP_PAGE:
                 console.log("refreshing iframe");
@@ -119,9 +123,10 @@ var App = {
 
 }
 
-function onLoad() {
+// function onLoad() {
+$(function() {
     console.log("onLoad");
     // avoid click delay on ios
     FastClick.attach(document.body);
     App.initialize();
-}
+});

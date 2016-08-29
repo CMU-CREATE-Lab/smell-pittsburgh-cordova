@@ -10,6 +10,12 @@ var HomePage = {
 
     },
 
+    onDeviceReady: function() {
+        console.log("HomePage.onDeviceReady")
+        $("#button_submit_report").click(HomePage.onClickSubmit);
+        $(".radio-smell").click(function() {HomePage.onClickSmell(this);});
+    },
+
     checkSubmitStatus: function() {
         var isDisabled = false;
         if (!Location.hasLocation) {
@@ -32,12 +38,10 @@ var HomePage = {
             var smell_value = HomePage.smellValue;
             var smell_description = $("#textfield_smell_description")[0].value;
             var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
-            var submitACHD = true;
+            var submitACHD = Constants.SUBMIT_TO_ACHD;
             var email = LocalStorage.email;
             var name = LocalStorage.name;
             var phone_number = LocalStorage.phone;
-
-            // userHash
             var userHash = LocalStorage.generateUserHash();
 
             var data = {
@@ -65,22 +69,15 @@ var HomePage = {
                 data,
                 xhrFields: { withCredentials: false },
                 success: function (data) {
-                    console.log("success!");
-                    console.log(data);
                     $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
-                    for (var key in data) {
-                        if (data.hasOwnProperty(key)) {
-                            console.log(key + "-> " + data[key]);
-                        }
-                    }
                 },
                 error: function (msg) {
-                    alert(msg.message);
+                    alert("There was a problem submitting this report.");
                 }
             });
         } else {
             if (App.isDeviceReady) {
-                navigator.notification.alert(
+                alert(
                     "Connect to the internet before submitting a smell report.",
                     null,
                     "No Internet Connection",
@@ -91,8 +88,6 @@ var HomePage = {
     },
 
     onClickSmell: function (item) {
-        // $('.remove-active').removeClass('ui-btn-active');
-        // $("#smell_value_" + item.value).addClass('ui-btn-active');
         HomePage.smellValueSelected = true;
         HomePage.smellValue = item.value;
         HomePage.checkSubmitStatus();

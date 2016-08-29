@@ -2,7 +2,7 @@
 
 var Location = {
 	
-	hasLocation: false,
+	hasLocation: true,
 	isRequestingLocation: false,
 	coords: {},
 
