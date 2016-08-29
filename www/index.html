@@ -86,6 +86,19 @@
             </div>
 
             <div role="main" class="ui-content">
+
+                <div id="reportsCollapsible" data-role="collapsible">
+                    <h3>Reporting Smells</h3>
+                    <label for="textfield_email">Report to ACHD</label>
+                    <div>
+                        <ul style="list-style-type: none;">
+                            <li><input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true" /></li>
+                            <li><input type="text" name="textfield_email" id="textfield_email" placeholder="email" data-clear-btn="true" /></li>
+                            <li><input type="number" name="textfield_phone" id="textfield_phone" placeholder="999-999-9999" data-clear-btn="true" /></li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div id="notificationsCollapsible" data-role="collapsible">
                     <h3>Notifications</h3>
                     <fieldset>
@@ -110,18 +123,6 @@
                         <input type="checkbox" name="checkbox-choice" id="checkbox-choice-5" value="5" onclick="SettingsPage.onCheckboxClick(this)" /><label for="checkbox-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
                     </fieldset>
 
-                </div>
-
-                <div id="reportsCollapsible" data-role="collapsible">
-                    <h3>Reporting Smells</h3>
-                    <label for="textfield_email">Report to ACHD</label>
-                    <div>
-                        <ul style="list-style-type: none;">
-                            <li><input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true" /></li>
-                            <li><input type="text" name="textfield_email" id="textfield_email" placeholder="email" data-clear-btn="true" /></li>
-                            <li><input type="number" name="textfield_phone" id="textfield_phone" placeholder="999-999-9999" data-clear-btn="true" /></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
 
@@ -161,7 +162,6 @@
         </div>
 
         <script src="cordova.js"></script>
-        <script src="statusbar.js"></script>
         <script src="js/constants.js"></script>
         <script src="js/localstorage.js"></script>
         <script src="js/globalfunctions.js"></script>
