@@ -60,6 +60,7 @@ var App = {
 
     // Static Input Bindings
     //$(document).on("pagecreate", App.onPageCreate);
+    // TODO move "needsclick" out to global and add explanation for why it is needed (FastClick!)
     SettingsPage.onDeviceReady();
     HomePage.onDeviceReady();
 

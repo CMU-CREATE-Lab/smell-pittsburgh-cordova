@@ -12,6 +12,7 @@
   onDeviceReady: function() {
     console.log("HomePage.onDeviceReady");
     $("#button_submit_report").click(HomePage.onClickSubmit);
+    $(".radio-smell").addClass("needsclick");
     $(".radio-smell").click(function() {HomePage.onClickSmell(this);});
   },
 
