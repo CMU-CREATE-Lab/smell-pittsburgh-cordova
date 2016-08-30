@@ -1,16 +1,15 @@
 ﻿var SettingsPage = {
 
   flipswitchReady: false,
-  // TODO replace with {}
-  activeSmells: new Array(),
+  activeSmells: {},
 
 
   initialize: function () {
+    this.activeSmells = LocalStorage.get("smell_notification_values");
     this.refreshNotifications();
     this.populateFormSettings();
     this.expandTabs();
 
-    this.activeSmells = LocalStorage.smells;
     this.flipswitchReady = true;
   },
 
@@ -32,19 +31,18 @@
 
   refreshNotifications: function() {
     // enable notifications switch
-    if (LocalStorage.isNotification) {
+    if (LocalStorage.get("receive_notifications")) {
       $("#flip_notification").val("on");
       $("#flip_notification").flipswitch("refresh");
       $("#checkbox_smell_notifications").checkboxradio("enable");
-    }
-    else {
+    } else {
       $("#flip_notification").val("off");
       $("#flip_notification").flipswitch("refresh");
       $("#checkbox_smell_notifications").checkboxradio("disable");
     }
 
     // enable smell notifications checkbox
-    if (LocalStorage.isSmellNotification) {
+    if (LocalStorage.get("receive_smell_notifications")) {
       $("#checkbox_smell_notifications").prop("checked", true).checkboxradio("refresh");
       $(".checkbox-smell-subscribe").checkboxradio('enable');
     } else {
@@ -53,17 +51,20 @@
     }
 
     // smell values checkboxes
-    for (var i = 1; i < LocalStorage.smells.length; i++) {
-      if (LocalStorage.smells[i]) $("#checkbox-choice-" + i).prop("checked", true).checkboxradio("refresh");
-      else $("#checkbox-choice-" + i).prop("checked", false).checkboxradio("refresh");
-    }
+    Object.keys(SettingsPage.activeSmells).forEach(function(key) {
+      if (SettingsPage.activeSmells[key]) {
+        $("#checkbox-choice-" + key).prop("checked", true).checkboxradio("refresh");
+      } else {
+        $("#checkbox-choice-" + key).prop("checked", false).checkboxradio("refresh");
+      }
+    });
   },
 
 
   populateFormSettings: function() {
-    $("#textfield_email").prop("value", LocalStorage.email);
-    $("#textfield_name").prop("value", LocalStorage.name);
-    $("#textfield_phone").prop("value", LocalStorage.phone);
+    $("#textfield_email").prop("value", LocalStorage.get("email"));
+    $("#textfield_name").prop("value", LocalStorage.get("name"));
+    $("#textfield_phone").prop("value", LocalStorage.get("phone"));
   },
 
 
@@ -106,11 +107,11 @@
   onToggleNotifications: function() {
     if (!SettingsPage.flipswitchReady) return;
 
-    if (LocalStorage.isNotification) {
+    if (LocalStorage.get("receive_notifications")) {
       // make sure to update all of the local storage elements
-      LocalStorage.setIsNotification(false);
-      LocalStorage.setIsSmellNotification(false);
-      $("#checkbox_smell_notifications").prop("checked", LocalStorage.isSmellNotification).checkboxradio("refresh");
+      LocalStorage.set("receive_notifications",false);
+      LocalStorage.set("receive_smell_notifications",false)
+      $("#checkbox_smell_notifications").prop("checked", LocalStorage.get("receive_smell_notifications")).checkboxradio("refresh");
       $("#checkbox_smell_notifications").checkboxradio("disable");
       $(".checkbox-smell-subscribe").checkboxradio('disable');
 
@@ -120,7 +121,7 @@
       console.log("unsubcribed from: " + Constants.GLOBAL_TOPIC);
     } else {
       $("#checkbox_smell_notifications").checkboxradio("enable");
-      LocalStorage.setIsNotification(true);
+      LocalStorage.set("receive_notifications",true);
       FCMPlugin.subscribeToTopic(Constants.GLOBAL_TOPIC);
       console.log("subcribed to: " + Constants.GLOBAL_TOPIC);
     }
@@ -128,23 +129,23 @@
 
 
   onToggleSmellNotifications: function() {
-    if (LocalStorage.isSmellNotification) {
-      LocalStorage.setIsSmellNotification(false);
+    if (LocalStorage.get("receive_smell_notifications")) {
+      LocalStorage.set("receive_smell_notifications",false);
       $(".checkbox-smell-subscribe").checkboxradio('disable');
       SettingsPage.clearSmellNotifications();
     } else {
-      LocalStorage.setIsSmellNotification(true);
+      LocalStorage.set("receive_smell_notifications",true);
       $(".checkbox-smell-subscribe").checkboxradio('enable');
-      for (var i = 1; i < SettingsPage.activeSmells.length; i++) {
-        if (SettingsPage.activeSmells[i]) SettingsPage.subscribeToSmell(i);
-      }
+      Object.keys(SettingsPage.activeSmells).forEach(function(key) {
+        if (SettingsPage.activeSmells[key]) SettingsPage.subscribeToSmell(key);
+      });
     }
   },
 
 
   onEmailChange: function (event) {
     if (SettingsPage.validateEmail(this.value) || this.value == "") {
-      LocalStorage.setEmail(this.value);
+      LocalStorage.set("email",this.value);
     } else {
       this.value = "";
       alert("Enter a valid email address.", null, "Invalid Email Entry", "Ok");
@@ -153,12 +154,12 @@
 
 
   onNameChange: function(event) {
-    LocalStorage.setName(this.value);
+    LocalStorage.set("name",this.value);
   },
 
 
   onPhoneChange: function (event) {
-    LocalStorage.setPhone(this.value);
+    LocalStorage.set("phone",this.value);
   },
 
 
@@ -169,11 +170,11 @@
     if (item.checked) {
       SettingsPage.subscribeToSmell(smellValue);
       SettingsPage.activeSmells[smellValue] = true;
-      LocalStorage.setSmells(SettingsPage.activeSmells);
+      LocalStorage.set("smell_notification_values",SettingsPage.activeSmells);
     } else {
       SettingsPage.unsubscribeToSmell(smellValue);
       SettingsPage.activeSmells[smellValue] = false;
-      LocalStorage.setSmells(SettingsPage.activeSmells);
+      LocalStorage.set("smell_notification_values",SettingsPage.activeSmells);
     }
   }
 

@@ -8,7 +8,7 @@
 
   onDeviceReady: function() {
     $("#startup-to-settings").click(function() {
-      LocalStorage.setIsStartUpDone(true);
+      LocalStorage.set("firsttime_startup", false);
       App.initialize();
     });
   }

@@ -7,7 +7,7 @@ var App = {
 
   initialize: function () {
     console.log("onInitialize");
-    if (!LocalStorage.isStartupDone) {
+    if (LocalStorage.get("firsttime_startup")) {
       $.mobile.pageContainer.pagecontainer("change", "#startup", { changeHash: true, transition: "none" });
       StartupPage.onDeviceReady();
     } else {

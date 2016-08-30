@@ -44,10 +44,10 @@
       var smell_description = $("#textfield_smell_description")[0].value;
       var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
       var submitACHD = Constants.SUBMIT_TO_ACHD;
-      var email = LocalStorage.email;
-      var name = LocalStorage.name;
-      var phone_number = LocalStorage.phone;
-      var userHash = LocalStorage.generateUserHash();
+      var email = LocalStorage.get("email");
+      var name = LocalStorage.get("name");
+      var phone_number = LocalStorage.get("phone");
+      var userHash = LocalStorage.get("user_hash");
 
       var data = {
         "user_hash": userHash,

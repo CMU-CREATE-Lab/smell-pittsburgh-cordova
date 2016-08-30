@@ -1,136 +1,62 @@
-
-
 var LocalStorage = {
 
-    isStartupDone: false,
-	
-	isNotification: true,
-	
-	isSmellNotification: false,
-	smells: new Array(),
-	
-	isACHD: true,
-	email: null,
-	name: null,
-    phone: null,
-	
-	initialize: function () {
-	    var temp = window.localStorage.getItem(Constants.STARTUP_KEY);
-	    if (temp == null) {
-	        temp = false;
-	        window.localStorage.setItem(Constants.STARTUP_KEY, false);
-	    }
-	    if (temp == "false") temp = false;
-	    if (temp == "true") temp = true;
-	    this.isStartupDone = Boolean(temp);
+  DEFAULT_SETTINGS: {
+    user_hash: "",
+    receive_notifications: "true",
+    receive_smell_notifications: "true",
+    smell_notification_values: {"4": true, "5": true},
+    //smells: [],
+    email: "",
+    firsttime_startup: "true",
+    name: "",
+    phone: "",
+  },
 
-		temp = window.localStorage.getItem(Constants.NOTIFICATION_ENABLED_KEY);
-		if (temp == null) {
-			temp = true;
-			window.localStorage.setItem(Constants.NOTIFICATION_ENABLED_KEY, true);
-		}
-		if (temp == "false") temp = false;
-		if (temp == "true") temp = true;
-		this.isNotification = Boolean(temp);
-		
-		temp = window.localStorage.getItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY);
-		if (temp == null) {
-			temp = true;
-			window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, true);
-		}
-		if (temp == "false") temp = false;
-		if (temp == "true") temp = true;
-		this.isSmellNotification = Boolean(temp);
 
-		temp = JSON.parse(window.localStorage.getItem(Constants.SMELLS_KEY));
-		if (temp == null) {
-		    temp = new Array();
-		    for (var i = 1; i < 4; i++) {
-		        temp[i] = false;
-		    }
-		    temp[4] = true;
-		    temp[5] = true;
-		}
-		this.smells = temp;
-		
-		temp = window.localStorage.getItem(Constants.ACHD_ENABLED_KEY);
-		this.email = window.localStorage.getItem(Constants.EMAIL_KEY);
-		this.name = window.localStorage.getItem(Constants.NAME_KEY);
-		this.phone = window.localStorage.getItem(Constants.PHONE_KEY);
-		if (temp == null) {
-			temp = true;
-			window.localStorage.setItem(Constants.ACHD_ENABLED_KEY, true);
-		}
-		if (temp == "false") temp = false;
-		if (temp == "true") temp = true;
-		this.isACHD = Boolean(temp);
-	},
-	
-	/* USERHASH STORAGE */
+  initialize: function() {
+    for (key in this.DEFAULT_SETTINGS) {
+      if (this.get(key) == null) this.set(key, this.DEFAULT_SETTINGS[key]);
+    }
+    if (this.DEFAULT_SETTINGS["user_hash"] == null || this.DEFAULT_SETTINGS["user_hash"] == "") {
+      this.set("user_hash", this.generateUserHash());
+    }
+  },
 
-	// generate a hash for the user
-	generateUserHash: function() {
-		
-		var userHash;
-		var storage = window.localStorage;
-		
-		userHash = storage.getItem(Constants.USER_HASH_KEY);
-		if (userHash === null) {
-			var random = Math.floor(Math.random()*9007199254740991);
-			var date = new Date();
-			var epoch = ((date.getTime()-date.getMilliseconds())/1000);
-			var input = "" + random + " " + epoch;
-			userHash = md5(input);
-			storage.setItem(Constants.USER_HASH_KEY, userHash);
-		}
 
-		return userHash;
-	},
-	
-    /* NOTIFICATION STORAGE */
+  get: function(key) {
+    var value = window.localStorage.getItem(key);
+    if (value == null)
+      return null;
+    if (["receive_notifications","receive_smell_notifications","firsttime_startup"].indexOf(key) > -1)
+      return (value == "true");
+    if (["smell_notification_values"].indexOf(key) > -1)
+      return JSON.parse(value);
+    return value;
+  },
 
-	setIsStartUpDone: function(val) {
-	    this.isStartupDone = val;
-	    window.localStorage.setItem(Constants.STARTUP_KEY, val);
-	},
-	
-	setIsNotification: function(val) {
-		this.isNotification = val;
-		window.localStorage.setItem(Constants.NOTIFICATION_ENABLED_KEY, val);
-	},
 
-	setIsSmellNotification: function(val) {
-		this.isSmellNotification = val;
-		window.localStorage.setItem(Constants.SMELL_NOTIFICATION_ENABLED_KEY, val);
-	},
+  set: function(key, value) {
+    if (["smell_notification_values"].indexOf(key) > -1) {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } else {
+      window.localStorage.setItem(key, value);
+    }
+  },
 
-	setSmells: function(val) {
-	    this.smells = val;
-	    window.localStorage.setItem(Constants.SMELLS_KEY, JSON.stringify(val));
-	},
-	
-	/* ACHD STORAGE */
-	
-	setIsACHD: function(val) {
-		this.isACHD = val;
-		window.localStorage.setItem(Constants.ACHD_ENABLED_KEY, val);
-	},
-	
-	setEmail: function(string) {
-		this.email = string;
-		window.localStorage.setItem(Constants.EMAIL_KEY, string);
-	},
 
-	setName: function (string) {
-	    this.name = string;
-	    window.localStorage.setItem(Constants.NAME_KEY, string);
-	},
+  // generate a hash for the user
+  generateUserHash: function() {
+    var userHash;
 
-	setPhone: function (string) {
-	    this.phone = string;
-	    window.localStorage.setItem(Constants.PHONE_KEY, string);
-	}
-	
+    var random = Math.floor(Math.random()*9007199254740991);
+    var date = new Date();
+    var epoch = ((date.getTime()-date.getMilliseconds())/1000);
+    var input = "" + random + " " + epoch;
+    userHash = md5(input);
+
+    return userHash;
+  },
+
 }
 
 LocalStorage.initialize();
