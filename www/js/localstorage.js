@@ -1,13 +1,15 @@
 var LocalStorage = {
 
   DEFAULT_SETTINGS: {
-    user_hash: "",
+    // boolean values
     receive_notifications: "true",
     receive_smell_notifications: "true",
-    smell_notification_values: {"4": true, "5": true},
-    //smells: [],
-    email: "",
     firsttime_startup: "true",
+    // JSON
+    smell_notification_values: {"4": true, "5": true},
+    // strings
+    user_hash: "",
+    email: "",
     name: "",
     phone: "",
   },
@@ -24,23 +26,12 @@ var LocalStorage = {
 
 
   get: function(key) {
-    var value = window.localStorage.getItem(key);
-    if (value == null)
-      return null;
-    if (["receive_notifications","receive_smell_notifications","firsttime_startup"].indexOf(key) > -1)
-      return (value == "true");
-    if (["smell_notification_values"].indexOf(key) > -1)
-      return JSON.parse(value);
-    return value;
+    return JSON.parse(window.localStorage.getItem(key));
   },
 
 
   set: function(key, value) {
-    if (["smell_notification_values"].indexOf(key) > -1) {
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } else {
-      window.localStorage.setItem(key, value);
-    }
+    window.localStorage.setItem(key, JSON.stringify(value));
   },
 
 
