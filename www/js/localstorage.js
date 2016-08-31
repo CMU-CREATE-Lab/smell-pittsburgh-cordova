@@ -1,7 +1,7 @@
 var LocalStorage = {
 
   DEFAULT_SETTINGS: {
-    storage_app_version: "1.0",
+    storage_app_version: "1.1",
     // boolean values
     receive_notifications: "true",
     receive_smell_notifications: "true",
