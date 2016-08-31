@@ -1,6 +1,7 @@
 var LocalStorage = {
 
   DEFAULT_SETTINGS: {
+    storage_app_version: "1.0",
     // boolean values
     receive_notifications: "true",
     receive_smell_notifications: "true",
@@ -16,6 +17,9 @@ var LocalStorage = {
 
 
   initialize: function() {
+    if (this.get("storage_app_version") == null) {
+      window.localStorage.clear();
+    }
     for (key in this.DEFAULT_SETTINGS) {
       if (this.get(key) == null) this.set(key, this.DEFAULT_SETTINGS[key]);
     }
