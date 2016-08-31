@@ -54,18 +54,21 @@ var App = {
 
   onDeviceReady: function () {
     console.log("onDeviceReady");
+
+    // bind App events
     $(document).on("resume", App.onResume);
     $(document).on("pause", App.onPause);
     $(document).on("pagecontainershow", App.onPageContainerShow);
 
-    // Static Input Bindings
-    //$(document).on("pagecreate", App.onPageCreate);
-    // TODO move "needsclick" out to global and add explanation for why it is needed (FastClick!)
+    // remove FastClick glitch from checkboxradio widgets
+    disableUnwantedFastClickElements();
+
     SettingsPage.onDeviceReady();
     HomePage.onDeviceReady();
-
     App.isDeviceReady = true;
+
     App.initializeFCM();
+
     Location.requestLocationPermission();
 
     // listen for keyboard events

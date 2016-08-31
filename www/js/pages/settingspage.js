@@ -6,6 +6,8 @@
 
   initialize: function () {
     this.activeSmells = LocalStorage.get("smell_notification_values");
+    this.flipswitchReady = false;
+
     this.refreshNotifications();
     this.populateFormSettings();
     this.expandTabs();
@@ -16,12 +18,10 @@
 
   onDeviceReady: function() {
     $("#flip_notification").change(SettingsPage.onToggleNotifications);
-    $("#checkbox_smell_notifications").addClass("needsclick");
     $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
     $("#textfield_email").change(SettingsPage.onEmailChange);
     $("#textfield_name").change(SettingsPage.onNameChange);
     $("#textfield_phone").change(SettingsPage.onPhoneChange);
-    $(".checkbox-smell-subscribe").addClass("needsclick");
     $(".checkbox-smell-subscribe").click(function() {SettingsPage.onCheckboxClick(this)});
   },
 
