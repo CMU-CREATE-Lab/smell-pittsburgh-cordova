@@ -17,3 +17,10 @@ function showSpinner() {
 function hideSpinner() {
   SpinnerPlugin.activityStop(null, null);
 }
+
+
+// when keyboard appears, we want to scroll all text fields into view
+function onKeyboardShowInHomePage(keyboardHeight) {
+  console.log("native.keyboardshow");
+  $("#textfield_feelings_symptoms")[0].scrollIntoView();
+}

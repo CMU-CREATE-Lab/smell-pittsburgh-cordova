@@ -68,6 +68,9 @@ var App = {
     App.initializeFCM();
     Location.requestLocationPermission();
 
+    // listen for keyboard events
+    window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+
     // TODO browser doesn't use onResume
     if (!Constants.PLATFORM_CALLBACK_ONREADY) {
       Location.requestLocation();
@@ -99,6 +102,9 @@ var App = {
     var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
     console.log("onPageContainerShow: " + pageId);
 
+    // remove listener for keyboard events
+    window.removeEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+
     // Use this if the page needs initialized everytime the page is viewed
     switch (pageId) {
     case Constants.STARTUP_PAGE:
@@ -106,6 +112,8 @@ var App = {
       break;
     case Constants.HOME_PAGE:
       HomePage.initialize();
+      // listen for keyboard events
+      window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
       break;
     case Constants.MAP_PAGE:
       console.log("refreshing iframe");
