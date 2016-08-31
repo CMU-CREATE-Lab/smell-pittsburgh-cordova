@@ -70,7 +70,7 @@
         type: "POST",
         dataType: "json",
         url: "http://localhost/api/v1/smell_reports",
-        data,
+        data: data,
         xhrFields: { withCredentials: false },
 
         success: function (data) {
