@@ -35,18 +35,29 @@
       <a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
     </div>
     <div role="main" class="ui-content" data-iscroll>
-      <h3>How does your air smell right now?</h3>
-      <fieldset data-role="controlgroup">
-        <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-1" value="1" /><label for="radio-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
-        <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-2" value="2" /><label for="radio-choice-2"><div class="picker-color-smell-2"></div> 2 Barely noticeable</label>
-        <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-3" value="3" /><label for="radio-choice-3"><div class="picker-color-smell-3"></div> 3 Definitely noticeable</label>
-        <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-4" value="4" /><label for="radio-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
-        <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-5" value="5" /><label for="radio-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
-      </fieldset>
-      <label for="textfield_smell_description">Describe the smell or source of odor (optional)</label>
-      <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
-      <label for="textfield_feelings_symptoms">Any feelings or symptoms? (optional)</label>
-      <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
+      <div class="homepage-section">
+        <h3>How does your air smell right now?</h3>
+        <fieldset data-role="controlgroup">
+          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-1" value="1" /><label for="radio-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
+          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-2" value="2" /><label for="radio-choice-2"><div class="picker-color-smell-2"></div> 2 Barely noticeable</label>
+          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-3" value="3" /><label for="radio-choice-3"><div class="picker-color-smell-3"></div> 3 Definitely noticeable</label>
+          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-4" value="4" /><label for="radio-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
+          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-5" value="5" /><label for="radio-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
+        </fieldset>
+      </div>
+      <div class="homepage-section">
+        <label for="textfield_smell_description">Describe the smell or source of odor<br/>(e.g. industrial, woodsmoke, rotten eggs, garbage)</label>
+        <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
+      </div>
+      <div class="homepage-section">
+        <label for="textfield_feelings_symptoms">Any feelings or symptoms? ()</label>
+        <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
+      </div>
+      <div class="homepage-section">
+        <label for="textfield_additional_comments">If you would like to include a personal note about your experience in the report to ACHD, please write it below.</label>
+        <textarea type="text" name="textfield_additional_comments" id="textfield_additional_comments" value="" data-clear-btn="true"></textarea>
+      </div>
+      <br/>
       <div class="submission-disclaimer">
         All smell reports rated 2 or higher will be sent to the Allegheny County Health Department (ACHD). If you’d like to leave your contact information with ACHD, please enter your details in the settings tab (top right).
       </div>

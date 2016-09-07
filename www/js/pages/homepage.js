@@ -42,6 +42,7 @@
       var smell_value = HomePage.smellValue;
       var smell_description = $("#textfield_smell_description")[0].value;
       var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
+      var additional_comments = $("#textfield_additional_comments")[0].value;
       var submitACHD = Constants.SUBMIT_TO_ACHD;
       var email = LocalStorage.get("email");
       var name = LocalStorage.get("name");
@@ -54,7 +55,8 @@
         "longitude": longitude,
         "smell_value": smell_value,
         "smell_description": smell_description,
-        "feelings_symptoms": feelings_symptoms
+        "feelings_symptoms": feelings_symptoms,
+        "additional_comments": additional_comments
       };
 
       if (horizontalAccuracy != null) data["horizontal_accuracy"] = horizontalAccuracy;

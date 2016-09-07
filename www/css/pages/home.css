@@ -4,3 +4,7 @@ div.submission-disclaimer {
   font-style: italic;
   font-size: 10px;
 }
+
+div.homepage-section {
+  padding: 5px 0 5px 0;
+}
