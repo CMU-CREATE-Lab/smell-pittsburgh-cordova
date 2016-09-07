@@ -1,4 +1,6 @@
-div.text-justified {
+div.submission-disclaimer {
   text-align: justify;
   text-justify: inter-word;
+  font-style: italic;
+  font-size: 10px;
 }
