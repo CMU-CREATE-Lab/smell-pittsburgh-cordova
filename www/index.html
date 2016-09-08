@@ -51,16 +51,16 @@
         <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" data-clear-btn="true" />
       </div>
       <div class="homepage-section">
-        <label for="textfield_feelings_symptoms">Any feelings or symptoms? ()</label>
+        <label for="textfield_feelings_symptoms">Did you experience any symptoms because of the odor? (e.g. headache, sore throat, eye irritation, etc.)</label>
         <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" data-clear-btn="true" />
       </div>
       <div class="homepage-section">
-        <label for="textfield_additional_comments">If you would like to include a personal note about your experience in the report to ACHD, please write it below.</label>
+        <label for="textfield_additional_comments">If you would like to include a personal note about your experience in the report to the Allegheny County Health Department (ACHD), please write it below.</label>
         <textarea type="text" name="textfield_additional_comments" id="textfield_additional_comments" value="" data-clear-btn="true"></textarea>
       </div>
       <br/>
       <div class="submission-disclaimer">
-        All smell reports rated 2 or higher will be sent to the Allegheny County Health Department (ACHD). If you’d like to leave your contact information with ACHD, please enter your details in the settings tab (top right).
+        All smell reports rated 2 or higher will be sent to ACHD. If you’d like to leave your contact information with ACHD, please enter your details in the settings tab (top right).
       </div>
       <button type="button" id="button_submit_report" disabled>Send Smell Report</button>
     </div>
@@ -103,7 +103,7 @@
     <div role="main" class="ui-content">
       <div id="reportsCollapsible" data-role="collapsible">
         <h3>ACHD Report</h3>
-        <label class="settings-description">Please provide contact information you would like to include in your smell reports to the health department. While these fields are completely optional, signing your name in these reports can improve their authenticity and effectiveness.</label>
+        <label class="settings-description">Please provide contact information you would like to include in your smell reports to the health department. While these fields are completely optional, signing your name in reports to the health department can improve authenticity and effectiveness.</label>
         <div>
           <input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true" />
           <input type="text" name="textfield_email" id="textfield_email" placeholder="email" data-clear-btn="true" />
@@ -113,16 +113,8 @@
       </div>
       <div id="notificationsCollapsible" data-role="collapsible">
         <h3>Notifications</h3>
-        <fieldset>
-          <div data-role="fieldcontain">
-            <label for="flip_notification">Enable Notifications</label>
-            <select id="flip_notification" data-role="flipswitch">
-            <option value="off">Off</option>
-            <option value="on">On</option>
-            </select>
-          </div>
-        </fieldset>
-        <label for="checkbox_smell_notifications">Enable Smell Notifications</label>
+        <label class="settings-description">Activate smell and air quality notifications that are important to you</label>
+        <label for="checkbox_smell_notifications">Smell Report Alerts <label class="settings-description-smaller">(select smell ratings you want to be notified about)</label></label>
         <input type="checkbox" id="checkbox_smell_notifications" />
         <fieldset data-role="controlgroup" id="checkboxes">
           <input type="checkbox" class="checkbox-smell-subscribe" name="checkbox-choice" id="checkbox-choice-1" value="1" /><label for="checkbox-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
@@ -131,6 +123,8 @@
           <input type="checkbox" class="checkbox-smell-subscribe" name="checkbox-choice" id="checkbox-choice-4" value="4" /><label for="checkbox-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
           <input type="checkbox" class="checkbox-smell-subscribe" name="checkbox-choice" id="checkbox-choice-5" value="5" /><label for="checkbox-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
         </fieldset>
+        <label for="checkbox_aqi_notifications">Pittsburgh Air Quality Index Alerts <label class="settings-description-smaller">(notifications about poor air quality conditions)</label></label>
+        <input type="checkbox" id="checkbox_aqi_notifications" />
       </div>
     </div>
     <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">

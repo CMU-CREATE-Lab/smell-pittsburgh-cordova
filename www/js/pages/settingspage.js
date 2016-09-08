@@ -13,15 +13,22 @@
     this.expandTabs();
 
     this.flipswitchReady = true;
+
+    // TODO this needs to happen in App, not here
+    // subscribe to topics
+    FCMPlugin.subscribeToTopic(Constants.GLOBAL_TOPIC);
+    Object.keys(SettingsPage.activeSmells).forEach(function(key) {
+      if (SettingsPage.activeSmells[key]) SettingsPage.subscribeToSmell(key);
+    });
   },
 
 
   onDeviceReady: function() {
-    $("#flip_notification").change(SettingsPage.onToggleNotifications);
     $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
     $("#textfield_email").change(SettingsPage.onEmailChange);
     $("#textfield_name").change(SettingsPage.onNameChange);
     $("#textfield_phone").change(SettingsPage.onPhoneChange);
+    $("#textfield_address").change(SettingsPage.onAddressChange);
     $(".checkbox-smell-subscribe").click(function() {SettingsPage.onCheckboxClick(this)});
   },
 
@@ -32,12 +39,8 @@
   refreshNotifications: function() {
     // enable notifications switch
     if (LocalStorage.get("receive_notifications")) {
-      $("#flip_notification").val("on");
-      $("#flip_notification").flipswitch("refresh");
       $("#checkbox_smell_notifications").checkboxradio("enable");
     } else {
-      $("#flip_notification").val("off");
-      $("#flip_notification").flipswitch("refresh");
       $("#checkbox_smell_notifications").checkboxradio("disable");
     }
 
@@ -65,6 +68,7 @@
     $("#textfield_email").prop("value", LocalStorage.get("email"));
     $("#textfield_name").prop("value", LocalStorage.get("name"));
     $("#textfield_phone").prop("value", LocalStorage.get("phone"));
+    $("#textfield_address").prop("value", LocalStorage.get("address"));
   },
 
 
@@ -104,30 +108,6 @@
   // callbacks
 
 
-  onToggleNotifications: function() {
-    if (!SettingsPage.flipswitchReady) return;
-
-    if (LocalStorage.get("receive_notifications")) {
-      // make sure to update all of the local storage elements
-      LocalStorage.set("receive_notifications",false);
-      LocalStorage.set("receive_smell_notifications",false)
-      $("#checkbox_smell_notifications").prop("checked", LocalStorage.get("receive_smell_notifications")).checkboxradio("refresh");
-      $("#checkbox_smell_notifications").checkboxradio("disable");
-      $(".checkbox-smell-subscribe").checkboxradio('disable');
-
-      // make sure to unsubscribe from all possible notifications
-      SettingsPage.clearSmellNotifications();
-      FCMPlugin.unsubscribeFromTopic(Constants.GLOBAL_TOPIC);
-      console.log("unsubcribed from: " + Constants.GLOBAL_TOPIC);
-    } else {
-      $("#checkbox_smell_notifications").checkboxradio("enable");
-      LocalStorage.set("receive_notifications",true);
-      FCMPlugin.subscribeToTopic(Constants.GLOBAL_TOPIC);
-      console.log("subcribed to: " + Constants.GLOBAL_TOPIC);
-    }
-  },
-
-
   onToggleSmellNotifications: function() {
     if (LocalStorage.get("receive_smell_notifications")) {
       LocalStorage.set("receive_smell_notifications",false);
@@ -160,6 +140,11 @@
 
   onPhoneChange: function (event) {
     LocalStorage.set("phone",this.value);
+  },
+
+
+  onAddressChange: function(event) {
+    LocalStorage.set("address",this.value);
   },
 
 

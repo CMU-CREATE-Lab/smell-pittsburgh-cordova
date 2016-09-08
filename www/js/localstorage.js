@@ -13,6 +13,7 @@ var LocalStorage = {
     email: "",
     name: "",
     phone: "",
+    address: ""
   },
 
 

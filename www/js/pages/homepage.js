@@ -2,6 +2,7 @@
 
   smellValueSelected: false,
   smellValue: 1,
+  readyToSubmit: false, // when changed to true, we want to scroll to the submit button
 
 
   initialize: function () {
@@ -25,6 +26,10 @@
     if (!this.smellValueSelected) isDisabled = true;
 
     $("#button_submit_report").attr("disabled",isDisabled);
+    if (!isDisabled && !this.readyToSubmit) {
+      $("#button_submit_report")[0].scrollIntoView();
+      this.readyToSubmit = true;
+    }
   },
 
 
