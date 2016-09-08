@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/fullscreen-pages.css" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/pages/home.css" />
+    <link rel="stylesheet" href="css/pages/settings.css" />
     <link rel="stylesheet" href="css/pages/map.css" />
     <!-- libraries -->
     <script src="lib/jquery-1.12.4.min.js"></script>
@@ -101,15 +102,13 @@
     </div>
     <div role="main" class="ui-content">
       <div id="reportsCollapsible" data-role="collapsible">
-        <h3>Reporting Smells</h3>
-        <label>ACHD Report</label>
-        <p>Please provide contact information you would like to include in your smell reports to the health department. Signing your name in these reports can improve their authenticity and effectiveness.</p>
+        <h3>ACHD Report</h3>
+        <label class="settings-description">Please provide contact information you would like to include in your smell reports to the health department. While these fields are completely optional, signing your name in these reports can improve their authenticity and effectiveness.</label>
         <div>
-          <ul style="list-style-type: none;">
-            <li><input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true" /></li>
-            <li><input type="text" name="textfield_email" id="textfield_email" placeholder="email" data-clear-btn="true" /></li>
-            <li><input type="number" name="textfield_phone" id="textfield_phone" placeholder="999-999-9999" data-clear-btn="true" /></li>
-          </ul>
+          <input type="text" name="textfield_name" id="textfield_name" placeholder="name" data-clear-btn="true" />
+          <input type="text" name="textfield_email" id="textfield_email" placeholder="email" data-clear-btn="true" />
+          <input type="text" name="textfield_address" id="textfield_address" placeholder="mailing address" data-clear-btn="true" />
+          <input type="number" name="textfield_phone" id="textfield_phone" placeholder="phone number" data-clear-btn="true" />
         </div>
       </div>
       <div id="notificationsCollapsible" data-role="collapsible">
