@@ -16,39 +16,6 @@ var App = {
   },
 
 
-  initializeFCM: function () {
-    console.log("onInitializeFCM");
-    FCMPlugin.getToken(
-      // success
-      function (token) {
-        // empty for now
-      },
-      // error
-      function (error) {
-        // empty for now
-      }
-    );
-    FCMPlugin.onNotification(
-      // callback
-      function (data) {
-        if (data.wasTapped) {
-          //Notification was received on device tray and tapped by the user. 
-        } else {
-          //Notification was received in foreground. Maybe the user needs to be notified.
-        }
-      },
-      // success
-      function (message) {
-      // empty for now
-      },
-      // error
-      function (error) {
-      // empty for now
-      }
-    );
-  },
-
-
   // callbacks
 
 
@@ -67,7 +34,7 @@ var App = {
     HomePage.onDeviceReady();
     App.isDeviceReady = true;
 
-    App.initializeFCM();
+    initializeFCM();
     // subscribe to topics
     FCMPlugin.subscribeToTopic(Constants.GLOBAL_TOPIC);
     console.log("subcribed to: " + Constants.GLOBAL_TOPIC);
@@ -136,6 +103,7 @@ var App = {
 }
 
 
+// HTML body onLoad
 $(function() {
   console.log("onLoad");
   // avoid click delay on ios

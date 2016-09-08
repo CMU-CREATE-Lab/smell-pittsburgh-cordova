@@ -56,6 +56,7 @@
       var phone_number = LocalStorage.get("phone");
       var userHash = LocalStorage.get("user_hash");
 
+      // TODO make this more like a form submission in HTML? then you don't need to specify all of this
       var data = {
         "user_hash": userHash,
         "latitude": latitude,

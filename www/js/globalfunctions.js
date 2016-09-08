@@ -1,3 +1,8 @@
+
+
+// Internet
+
+
 function isConnected() {
   var result = false;
 
@@ -7,6 +12,9 @@ function isConnected() {
 
   return result;
 }
+
+
+// Spinner
 
 
 function showSpinner() {
@@ -19,6 +27,9 @@ function hideSpinner() {
 }
 
 
+// Firebase helpers
+
+
 function subscribeToSmell(value) {
   FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + value);
   console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC + value);
@@ -29,6 +40,50 @@ function unsubscribeToSmell(value) {
   FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + value);
   console.log("unsubcribed from: SmellReport-" + value);
 }
+
+
+function clearSmellNotifications() {
+  for (var i = 1; i <= 5; i++) {
+    FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + i);
+    console.log("unsubcribed from: SmellReport-" + i);
+  }
+}
+
+
+function initializeFCM() {
+  console.log("onInitializeFCM");
+  FCMPlugin.getToken(
+    // success
+    function (token) {
+      // empty for now
+    },
+    // error
+    function (error) {
+      // empty for now
+    }
+  );
+  FCMPlugin.onNotification(
+    // callback
+    function (data) {
+      if (data.wasTapped) {
+        //Notification was received on device tray and tapped by the user. 
+      } else {
+        //Notification was received in foreground. Maybe the user needs to be notified.
+      }
+    },
+    // success
+    function (message) {
+    // empty for now
+    },
+    // error
+    function (error) {
+    // empty for now
+    }
+  );
+}
+
+
+// App-wide Callbacks
 
 
 // when keyboard appears, we want to scroll all text fields into view
