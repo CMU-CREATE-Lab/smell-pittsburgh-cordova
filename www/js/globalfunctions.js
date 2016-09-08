@@ -86,10 +86,9 @@ function initializeFCM() {
 // App-wide Callbacks
 
 
-// when keyboard appears, we want to scroll all text fields into view
+// when keyboard appears, we want to scroll the focused textfield into view
 function onKeyboardShowInHomePage(keyboardHeight) {
-  console.log("native.keyboardshow");
-  $("#textfield_feelings_symptoms")[0].scrollIntoView();
+  App.textfieldToScrollAfterKeyboard.scrollIntoView();
 }
 
 

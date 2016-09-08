@@ -3,6 +3,7 @@ var App = {
   isDeviceReady: false,
   authorizationStatus: Constants.AuthorizationEnum.NOT_REQUESTED,
   accuracyStatus: Constants.AccuracyEnum.DISABLED,
+  textfieldToScrollAfterKeyboard: null, // this is the textfield you want to scroll to after the keyboard has been opened
 
 
   initialize: function () {
@@ -96,6 +97,8 @@ var App = {
       break;
     case Constants.SETTINGS_PAGE:
       SettingsPage.initialize();
+      // listen for keyboard events
+      window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
       break;
     }
   }

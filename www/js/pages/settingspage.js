@@ -14,12 +14,20 @@
 
   onDeviceReady: function() {
     console.log("SettingsPage.onDeviceReady");
+    
+    // click listeners
     $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
+    $(".checkbox-smell-subscribe").click(function() {SettingsPage.onCheckboxClick(this)});
+    // change (text) listeners
     $("#textfield_email").change(SettingsPage.onEmailChange);
     $("#textfield_name").change(SettingsPage.onNameChange);
     $("#textfield_phone").change(SettingsPage.onPhoneChange);
     $("#textfield_address").change(SettingsPage.onAddressChange);
-    $(".checkbox-smell-subscribe").click(function() {SettingsPage.onCheckboxClick(this)});
+    // focus (textbox) listeners
+    $("#textfield_email").focus(function(){SettingsPage.onFocusTextbox(this)});
+    $("#textfield_name").focus(function(){SettingsPage.onFocusTextbox(this)});
+    $("#textfield_phone").focus(function(){SettingsPage.onFocusTextbox(this)});
+    $("#textfield_address").focus(function(){SettingsPage.onFocusTextbox(this)});
   },
 
 
@@ -124,6 +132,12 @@
       SettingsPage.activeSmells[smellValue] = false;
       LocalStorage.set("smell_notification_values",SettingsPage.activeSmells);
     }
+  },
+
+
+  onFocusTextbox: function(element) {
+    App.textfieldToScrollAfterKeyboard = element;
+    element.scrollIntoView();
   }
 
 }

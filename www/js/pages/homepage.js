@@ -14,8 +14,14 @@
 
   onDeviceReady: function() {
     console.log("HomePage.onDeviceReady");
+
+    // click listeners
     $("#button_submit_report").click(HomePage.onClickSubmit);
     $(".radio-smell").click(function() {HomePage.onClickSmell(this);});
+    // focus (textbox) listeners
+    $("#textfield_smell_description").focus(function(){HomePage.onFocusTextbox(this)});
+    $("#textfield_feelings_symptoms").focus(function(){HomePage.onFocusTextbox(this)});
+    $("#textfield_additional_comments").focus(function(){HomePage.onFocusTextbox(this)});
   },
 
 
@@ -103,6 +109,12 @@
     HomePage.smellValueSelected = true;
     HomePage.smellValue = item.value;
     HomePage.checkSubmitStatus();
+  },
+
+
+  onFocusTextbox: function(element) {
+    App.textfieldToScrollAfterKeyboard = element;
+    element.scrollIntoView();
   }
 
 }
