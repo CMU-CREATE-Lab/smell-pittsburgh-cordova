@@ -13,13 +13,6 @@
     this.expandTabs();
 
     this.flipswitchReady = true;
-
-    // TODO this needs to happen in App, not here
-    // subscribe to topics
-    FCMPlugin.subscribeToTopic(Constants.GLOBAL_TOPIC);
-    Object.keys(SettingsPage.activeSmells).forEach(function(key) {
-      if (SettingsPage.activeSmells[key]) SettingsPage.subscribeToSmell(key);
-    });
   },
 
 
@@ -90,18 +83,6 @@
       FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + i);
       console.log("unsubcribed from: SmellReport-" + i);
     }
-  },
-
-
-  subscribeToSmell: function(value) {
-    FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + value);
-    console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC + value);
-  },
-
-
-  unsubscribeToSmell: function(value) {
-    FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + value);
-    console.log("unsubcribed from: SmellReport-" + value);
   },
 
 

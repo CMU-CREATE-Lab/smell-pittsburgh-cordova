@@ -19,6 +19,18 @@ function hideSpinner() {
 }
 
 
+function subscribeToSmell(value) {
+  FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + value);
+  console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC + value);
+}
+
+
+function unsubscribeToSmell(value) {
+  FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + value);
+  console.log("unsubcribed from: SmellReport-" + value);
+}
+
+
 // when keyboard appears, we want to scroll all text fields into view
 function onKeyboardShowInHomePage(keyboardHeight) {
   console.log("native.keyboardshow");
