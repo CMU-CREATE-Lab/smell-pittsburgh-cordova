@@ -1,6 +1,7 @@
 var LocalStorage = {
 
   DEFAULT_SETTINGS: {
+    // TODO display version number somewhere
     storage_app_version: "1.1",
     // boolean values
     receive_notifications: "true",

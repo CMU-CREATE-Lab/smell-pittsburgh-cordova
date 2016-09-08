@@ -6,7 +6,9 @@
 
 
   initialize: function () {
-
+    Location.hasLocation = false;
+    Location.requestLocation();
+    HomePage.checkSubmitStatus();
   },
 
 

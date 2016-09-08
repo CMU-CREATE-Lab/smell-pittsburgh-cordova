@@ -90,11 +90,9 @@ var App = {
 
   onResume: function() {
     console.log("onResume");
-    if (App.isDeviceReady && Location.isRequestingLocation && App.accuracyStatus === Constants.AccuracyEnum.ENABLED) {
-      Location.requestLocation();
-    } else if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED && !Location.isRequestingLocation) {
-      Location.requestLocation();
-    }
+    // request location again if app is closed and reopened to HomePage
+    // if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id == Constants.HOME_PAGE) Location.requestLocation();
+    if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id == Constants.HOME_PAGE) HomePage.initialize();
   },
 
 
