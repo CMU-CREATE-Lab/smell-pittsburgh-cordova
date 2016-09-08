@@ -88,7 +88,7 @@
       LocalStorage.set("receive_smell_notifications",true);
       $(".checkbox-smell-subscribe").checkboxradio('enable');
       Object.keys(SettingsPage.activeSmells).forEach(function(key) {
-        if (SettingsPage.activeSmells[key]) SettingsPage.subscribeToSmell(key);
+        if (SettingsPage.activeSmells[key]) subscribeToSmell(key);
       });
     }
   },
@@ -124,11 +124,11 @@
     var smellValue = item.value;
 
     if (item.checked) {
-      SettingsPage.subscribeToSmell(smellValue);
+      subscribeToSmell(smellValue);
       SettingsPage.activeSmells[smellValue] = true;
       LocalStorage.set("smell_notification_values",SettingsPage.activeSmells);
     } else {
-      SettingsPage.unsubscribeToSmell(smellValue);
+      unsubscribeToSmell(smellValue);
       SettingsPage.activeSmells[smellValue] = false;
       LocalStorage.set("smell_notification_values",SettingsPage.activeSmells);
     }
