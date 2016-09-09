@@ -39,6 +39,10 @@ var App = {
     // subscribe to topics
     FCMPlugin.subscribeToTopic(Constants.GLOBAL_TOPIC);
     console.log("subcribed to: " + Constants.GLOBAL_TOPIC);
+    if (LocalStorage.get("receive_pghaqi_notifications")) {
+      FCMPlugin.subscribeToTopic(Constants.PITTSBURGH_AQI_TOPIC);
+      console.log("subcribed to: " + Constants.PITTSBURGH_AQI_TOPIC);
+    }
     var activeSmells = LocalStorage.get("smell_notification_values");
     Object.keys(activeSmells).forEach(function(key) {
       if (activeSmells[key]) subscribeToSmell(key);

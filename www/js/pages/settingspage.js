@@ -17,6 +17,7 @@
     
     // click listeners
     $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
+    $("#checkbox_pghaqi_notifications").click(SettingsPage.onTogglePittsburghAqiNotifications);
     $(".checkbox-smell-subscribe").click(function() {SettingsPage.onCheckboxClick(this)});
     // change (text) listeners
     $("#textfield_email").change(SettingsPage.onEmailChange);
@@ -52,6 +53,9 @@
         $("#checkbox-choice-" + key).prop("checked", false).checkboxradio("refresh");
       }
     });
+
+    // pittsburgh aqi notifications checkbox
+    $("#checkbox_pghaqi_notifications").prop("checked", LocalStorage.get("receive_pghaqi_notifications")).checkboxradio("refresh");
   },
 
 
@@ -90,6 +94,17 @@
       Object.keys(SettingsPage.activeSmells).forEach(function(key) {
         if (SettingsPage.activeSmells[key]) subscribeToSmell(key);
       });
+    }
+  },
+
+
+  onTogglePittsburghAqiNotifications: function() {
+    if (LocalStorage.get("receive_pghaqi_notifications")) {
+      LocalStorage.set("receive_pghaqi_notifications",false);
+      FCMPlugin.unsubscribeFromTopic(Constants.PITTSBURGH_AQI_TOPIC);
+    } else {
+      LocalStorage.set("receive_pghaqi_notifications",true);
+      FCMPlugin.subscribeToTopic(Constants.PITTSBURGH_AQI_TOPIC);
     }
   },
 

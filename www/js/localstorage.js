@@ -4,8 +4,9 @@ var LocalStorage = {
     // TODO display version number somewhere
     storage_app_version: "1.1",
     // boolean values
-    receive_smell_notifications: "true",
-    firsttime_startup: "true",
+    receive_smell_notifications: true,
+    receive_pghaqi_notifications: true,
+    firsttime_startup: true,
     // JSON
     smell_notification_values: {"4": true, "5": true},
     // strings

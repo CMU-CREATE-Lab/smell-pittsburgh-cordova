@@ -23,6 +23,7 @@ var Constants = {
 
   // Topic strings
   GLOBAL_TOPIC: "GlobalTopic",
+  PITTSBURGH_AQI_TOPIC: "pghaqi",
   // must append the number for it to work
   // ex. SmellReport-5
   SMELL_REPORT_TOPIC: "SmellReport-",
