@@ -18,9 +18,9 @@
     $("#button_submit_report").click(HomePage.onClickSubmit);
     $(".radio-smell").click(function() {HomePage.onClickSmell(this);});
     // focus (textbox) listeners
-    $("#textfield_smell_description").focus(function(){HomePage.onFocusTextbox( $("label[for="+this.id+"]")[0] )});
-    $("#textfield_feelings_symptoms").focus(function(){HomePage.onFocusTextbox( $("label[for="+this.id+"]")[0] )});
-    $("#textfield_additional_comments").focus(function(){HomePage.onFocusTextbox( $("label[for="+this.id+"]")[0] )});
+    $("#textfield_smell_description").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
+    $("#textfield_feelings_symptoms").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
+    $("#textfield_additional_comments").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
   },
 
 
@@ -107,9 +107,11 @@
   },
 
 
-  onFocusTextbox: function(element) {
-    App.htmlElementToScrollAfterKeyboard = element;
-    element.scrollIntoView();
+  // Opening keyboard should focus the label, closing the keyboard should blur the textbox
+  onFocusTextboxWithLabel: function(element,label) {
+    App.htmlElementToScrollAfterKeyboard = label;
+    App.htmlElementToBlurAfterKeyboardCloses = element;
+    label.scrollIntoView();
   }
 
 }

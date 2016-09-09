@@ -3,7 +3,8 @@ var App = {
   isDeviceReady: false,
   authorizationStatus: Constants.AuthorizationEnum.NOT_REQUESTED,
   accuracyStatus: Constants.AccuracyEnum.DISABLED,
-  htmlElementToScrollAfterKeyboard: null, // this is the textfield you want to scroll to after the keyboard has been opened
+  htmlElementToScrollAfterKeyboard: null, // this is the HTML element you want to scroll to after the keyboard has been opened
+  htmlElementToBlurAfterKeyboardCloses: null, // this is the HTML element you need to blur after the keyboard has been closed to avoid weird glitches on using checkboxradio widgets
 
 
   initialize: function () {
@@ -52,6 +53,7 @@ var App = {
 
     // listen for keyboard events
     window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+    window.addEventListener('native.keyboardhide', onKeyboardHide);
 
     // TODO browser doesn't use onResume
     if (!Constants.PLATFORM_CALLBACK_ONREADY) {
@@ -84,6 +86,7 @@ var App = {
 
     // remove listener for keyboard events
     window.removeEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+    window.removeEventListener('native.keyboardhide', onKeyboardHide);
 
     // Use this if the page needs initialized everytime the page is viewed
     switch (pageId) {
@@ -94,6 +97,7 @@ var App = {
       HomePage.initialize();
       // listen for keyboard events
       window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+      window.addEventListener('native.keyboardhide', onKeyboardHide);
       break;
     case Constants.MAP_PAGE:
       console.log("refreshing iframe");
@@ -103,6 +107,7 @@ var App = {
       SettingsPage.initialize();
       // listen for keyboard events
       window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+      window.addEventListener('native.keyboardhide', onKeyboardHide);
       break;
     }
   }

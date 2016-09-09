@@ -91,6 +91,11 @@ function onKeyboardShowInHomePage(keyboardHeight) {
   App.htmlElementToScrollAfterKeyboard.scrollIntoView();
 }
 
+function onKeyboardHide(e) {
+  console.log("keyboard CLOSE");
+  $(App.htmlElementToBlurAfterKeyboardCloses).blur();
+}
+
 
 /*
  * Okay, rant time.
