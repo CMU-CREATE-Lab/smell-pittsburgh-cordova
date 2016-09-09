@@ -88,7 +88,7 @@ function initializeFCM() {
 
 // when keyboard appears, we want to scroll the focused textfield into view
 function onKeyboardShowInHomePage(keyboardHeight) {
-  App.textfieldToScrollAfterKeyboard.scrollIntoView();
+  App.htmlElementToScrollAfterKeyboard.scrollIntoView();
 }
 
 

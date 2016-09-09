@@ -3,7 +3,7 @@ var App = {
   isDeviceReady: false,
   authorizationStatus: Constants.AuthorizationEnum.NOT_REQUESTED,
   accuracyStatus: Constants.AccuracyEnum.DISABLED,
-  textfieldToScrollAfterKeyboard: null, // this is the textfield you want to scroll to after the keyboard has been opened
+  htmlElementToScrollAfterKeyboard: null, // this is the textfield you want to scroll to after the keyboard has been opened
 
 
   initialize: function () {

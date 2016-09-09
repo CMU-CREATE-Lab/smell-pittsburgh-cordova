@@ -136,7 +136,7 @@
 
 
   onFocusTextbox: function(element) {
-    App.textfieldToScrollAfterKeyboard = element;
+    App.htmlElementToScrollAfterKeyboard = element;
     element.scrollIntoView();
   }
 
