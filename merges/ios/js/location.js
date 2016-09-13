@@ -23,7 +23,7 @@ var Location = {
     }
     var checkAuthorized = function(authorized) {
       if (!authorized) {
-        cordova.plugins.diagnostic.requestLocationAuthorization(statusAuthorized, onError, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
+        cordova.plugins.diagnostic.requestLocationAuthorization(statusAuthorized, onError, cordova.plugins.diagnostic.locationAuthorizationMode.WHEN_IN_USE);
       } else {
         //onError("App is already authorized to use location");
         Location.requestLocation();
