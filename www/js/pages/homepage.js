@@ -55,6 +55,7 @@
       var email = LocalStorage.get("email");
       var name = LocalStorage.get("name");
       var phone_number = LocalStorage.get("phone");
+      var address = LocalStorage.get("address");
       var userHash = LocalStorage.get("user_hash");
 
       // TODO make this more like a form submission in HTML? then you don't need to specify all of this
@@ -75,6 +76,7 @@
         if (email != "") data["email"] = email;
         if (name != "") data["name"] = name;
         if (phone_number != "") data["phone_number"] = phone_number;
+        if (address != "") data["address"] = address;
       }
 
       $.ajax({
