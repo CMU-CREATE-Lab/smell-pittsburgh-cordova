@@ -14,6 +14,8 @@
 
   onDeviceReady: function() {
     console.log("SettingsPage.onDeviceReady");
+    // avoid seeing the collapsed tabs on the first page transition
+    this.expandTabs();
     
     // click listeners
     $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);

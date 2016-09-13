@@ -31,9 +31,15 @@
 
 
   <div data-role="page" id="home" class="page-fullscreened">
+    <div data-role="panel" id="home-panel">
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </div>
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
       <h1>Smell PGH</h1>
-      <a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
+      <a href="#home-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
     </div>
     <div role="main" class="ui-content" data-iscroll>
       <div class="homepage-section">
@@ -76,9 +82,15 @@
 
 
   <div data-role="page" id="map" class="page-fullscreened">
+    <div data-role="panel" id="map-panel">
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </div>
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
       <h1>Smell PGH</h1>
-      <a href="#settings" data-icon="gear" class="ui-btn-right">Settings</a>
+      <a href="#map-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
     </div>
     <div role="main" class="ui-content" id="iframe-map-container" data-iscroll>
       <iframe id="iframe-map" src="http://localhost/visualization">
@@ -97,7 +109,14 @@
 
 
   <div data-role="page" id="settings" class="page-fullscreened">
+    <div data-role="panel" id="settings-panel">
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#settings" class="ui-btn ui-btn-icon-right ui-icon-carat-r ui-btn-active">Settings</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </div>
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <a href="#settings-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
       <h1>Settings</h1>
     </div>
     <div role="main" class="ui-content">
@@ -152,6 +171,32 @@
       <div data-role="navbar">
         <ul>
           <li><a href="#settings" id="startup-to-settings" data-icon="carat-r" data-transition="none">Done</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div data-role="page" id="about" class="page-fullscreened">
+    <div data-role="panel" id="about-panel">
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="#about" class="ui-btn ui-btn-icon-right ui-icon-carat-r ui-btn-active">About</a></li>
+        </ul>
+    </div>
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <a href="#about-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
+      <h1>About</h1>
+    </div>
+    <div role="main" class="ui-content">
+      <h3>This is the about page</h3>
+      <p>Add content here.</p>
+    </div>
+    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
+          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
         </ul>
       </div>
     </div>
