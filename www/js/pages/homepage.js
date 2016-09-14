@@ -71,6 +71,7 @@
 
       if (horizontalAccuracy != null) data["horizontal_accuracy"] = horizontalAccuracy;
       if (altitudeAccuracy != null) data["altitude_accuracy"] = altitudeAccuracy;
+      
       if (submitACHD) {
         data["submit_achd_form"] = Boolean(submitACHD);
         if (email != "") data["email"] = email;

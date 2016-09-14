@@ -28,16 +28,12 @@ var Constants = {
   // ex. SmellReport-5
   SMELL_REPORT_TOPIC: "SmellReport-",
 
-  // Integer Constants
-  MAX_SMELL_NOTIFICATION: 5,
-  MIN_SMELL_NOTIFICATION: 1,
-
+  // Location services enums
   AuthorizationEnum: {
     NOT_REQUESTED: "not requested",
     GRANTED: "granted",
     DENIED: "denied"
   },
-
   AccuracyEnum: {
     ENABLED: "enabled",
     DISABLED: "disabled"
