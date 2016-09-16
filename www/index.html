@@ -41,8 +41,8 @@
       <h1>Smell PGH</h1>
       <a href="#home-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
     </div>
-    <div role="main" class="ui-content" data-iscroll>
-      <div class="homepage-section">
+    <div role="main" class="ui-content no-top" data-iscroll>
+      <div class="homepage-section-top">
         <h3>How does your air smell right now?</h3>
         <fieldset data-role="controlgroup">
           <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-1" value="1" /><label for="radio-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
@@ -53,20 +53,20 @@
         </fieldset>
       </div>
       <div class="homepage-section">
-        <label for="textfield_smell_description">Describe the smell or source of odor<br/>(e.g. industrial, woodsmoke, rotten eggs, garbage)</label>
-        <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" placeholder="e.g. industrial, woodsmoke, rotten eggs, garbage" data-clear-btn="true" />
+        <label for="textfield_smell_description">Describe the smell or source of odor</label>
+        <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" placeholder="e.g. industrial, woodsmoke, rotten-eggs" data-clear-btn="true" />
       </div>
       <div class="homepage-section">
-        <label for="textfield_feelings_symptoms">Did you experience any symptoms because of the odor? (e.g. headache, sore throat, eye irritation, etc.)</label>
-        <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" placeholder="e.g. headache, sore throat, eye irritation, etc." data-clear-btn="true" />
+        <label for="textfield_feelings_symptoms">Any symptoms linked to the odor?</label>
+        <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" placeholder="e.g. headache, sore throat, eye irritation" data-clear-btn="true" />
       </div>
       <div class="homepage-section">
-        <label for="textfield_additional_comments">If you would like to include a personal note about your experience in the report to the Allegheny County Health Department (ACHD), please write it below.</label>
+        <label for="textfield_additional_comments">Add a personal note to the Health Department</label>
         <textarea type="text" name="textfield_additional_comments" id="textfield_additional_comments" value="" data-clear-btn="true"></textarea>
       </div>
       <br/>
       <div class="submission-disclaimer">
-        All smell reports rated 2 or higher will be sent to ACHD. If you’d like to leave your contact information with ACHD, please enter your details in the settings tab (top right).
+        All smell reports rated 2 or higher will be sent to the Allegheny County Health Department (ACHD). If you’d like to receive correspondence from ACHD, please enter your contact info in the settings tab (top right).
       </div>
       <button type="button" id="button_submit_report" disabled>Send Smell Report</button>
     </div>
@@ -133,7 +133,7 @@
       <div id="notificationsCollapsible" data-role="collapsible">
         <h3>Notifications</h3>
         <label class="settings-description">Activate smell and air quality notifications that are important to you</label>
-        <label for="checkbox_smell_notifications">Smell Report Alerts <label class="settings-description-smaller">(select smell ratings you want to be notified about)</label></label>
+        <label for="checkbox_smell_notifications">Smell Report Alerts <label class="settings-description-smaller">(notifications about reports rated 3-5)</label></label>
         <input type="checkbox" id="checkbox_smell_notifications" />
         <fieldset data-role="controlgroup" id="checkboxes">
           <input type="checkbox" class="checkbox-smell-subscribe" name="checkbox-choice" id="checkbox-choice-1" value="1" /><label for="checkbox-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
@@ -142,7 +142,7 @@
           <input type="checkbox" class="checkbox-smell-subscribe" name="checkbox-choice" id="checkbox-choice-4" value="4" /><label for="checkbox-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
           <input type="checkbox" class="checkbox-smell-subscribe" name="checkbox-choice" id="checkbox-choice-5" value="5" /><label for="checkbox-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
         </fieldset>
-        <label for="checkbox_pghaqi_notifications">Pittsburgh Air Quality Index Alerts <label class="settings-description-smaller">(notifications about poor air quality conditions)</label></label>
+        <label for="checkbox_pghaqi_notifications">Pittsburgh Air Quality Index Alerts <label class="settings-description-smaller">(notifications about air quality conditions)</label></label>
         <input type="checkbox" id="checkbox_pghaqi_notifications" />
       </div>
     </div>

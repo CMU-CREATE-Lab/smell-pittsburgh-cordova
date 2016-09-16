@@ -8,3 +8,11 @@ div.submission-disclaimer {
 div.homepage-section {
   padding: 5px 0 5px 0;
 }
+
+div.homepage-section-top {
+  padding: 0 0 5px 0;
+}
+
+div.no-top {
+  padding-top: 0;
+}
