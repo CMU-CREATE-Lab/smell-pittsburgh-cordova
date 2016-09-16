@@ -56,6 +56,7 @@ function initializeFCM() {
     // success
     function (token) {
       // empty for now
+      console.log("Your firebaseInstanceID is "+token);
     },
     // error
     function (error) {

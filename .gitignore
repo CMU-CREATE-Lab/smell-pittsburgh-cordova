@@ -9,3 +9,4 @@ smell-pittsburgh-cordova.jsproj.user
 smell-pittsburgh-cordova.sln
 taco.json
 *.DS_Store
+/www/img/ios-*

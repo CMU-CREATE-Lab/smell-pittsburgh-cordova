@@ -54,7 +54,6 @@ var Location = {
       if (!this.isRequestingLocation) {
         console.log("in requestLocation");
         this.isRequestingLocation = true;
-        showSpinner();
 
         var onSuccess = function(position) {
           Location.coords = position.coords;

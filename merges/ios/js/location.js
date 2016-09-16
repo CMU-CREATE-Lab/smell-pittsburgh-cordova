@@ -48,7 +48,6 @@ var Location = {
     if (isConnected()) {
       if (!this.isRequestingLocation) {
         this.isRequestingLocation = true;
-        showSpinner();
         var onSuccess = function(position) {
           Location.coords = position.coords;
           Location.hasLocation = true;
