@@ -34,6 +34,7 @@ var App = {
 
     SettingsPage.onDeviceReady();
     HomePage.onDeviceReady();
+    MapPage.onDeviceReady();
     App.isDeviceReady = true;
 
     initializeFCM();
@@ -53,7 +54,7 @@ var App = {
 
     // TODO browser doesn't use onResume
     if (!Constants.PLATFORM_CALLBACK_ONREADY) {
-      Location.requestLocation();
+      if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id == Constants.HOME_PAGE) HomePage.initialize();
     }
   },
 
@@ -96,8 +97,7 @@ var App = {
       window.addEventListener('native.keyboardhide', onKeyboardHide);
       break;
     case Constants.MAP_PAGE:
-      console.log("refreshing iframe");
-      $('#iframe-map').attr('src', $('#iframe-map').attr('src'));
+      MapPage.initialize();
       break;
     case Constants.SETTINGS_PAGE:
       SettingsPage.initialize();

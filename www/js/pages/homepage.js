@@ -8,6 +8,10 @@
     Location.hasLocation = false;
     Location.requestLocation();
     HomePage.checkSubmitStatus();
+    if (LocalStorage.get("firsttime_home")) {
+      HomePage.showHomeModal();
+      LocalStorage.set("firsttime_home",false);
+    }
   },
 
 
@@ -33,6 +37,12 @@
     if (!this.smellValueSelected) isDisabled = true;
 
     $("#button_submit_report").attr("disabled",isDisabled);
+  },
+
+
+  showHomeModal: function() {
+    $("#modal-home-firsttime").popup();
+    $("#modal-home-firsttime").popup("open");
   },
 
 

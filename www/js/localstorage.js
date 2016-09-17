@@ -7,6 +7,8 @@ var LocalStorage = {
     receive_smell_notifications: true,
     receive_pghaqi_notifications: true,
     firsttime_startup: true,
+    firsttime_home: true,
+    firsttime_map: true,
     // JSON
     smell_notification_values: {"4": true, "5": true},
     // strings

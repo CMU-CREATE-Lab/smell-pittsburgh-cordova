@@ -50,6 +50,11 @@ div[data-role="panel"] {
   background-color: #f9f9f9 !important;
 }
 
+/* Remove title restriction on modal headers */
+.modal-title {
+  margin: 0 10% 0 !important;
+}
+
 /* Remove radio/checkbox glitch in android */
 .ui-page-theme-a .ui-btn:hover,html .ui-bar-a .ui-btn:hover,html .ui-body-a .ui-btn:hover,html body .ui-group-theme-a .ui-btn:hover,html head+body .ui-btn.ui-btn-a:hover {
   background-color: #f6f6f6 !important;
