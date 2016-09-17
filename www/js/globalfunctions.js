@@ -30,26 +30,6 @@ function hideSpinner() {
 // Firebase helpers
 
 
-function subscribeToSmell(value) {
-  FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC + value);
-  console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC + value);
-}
-
-
-function unsubscribeToSmell(value) {
-  FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + value);
-  console.log("unsubcribed from: SmellReport-" + value);
-}
-
-
-function clearSmellNotifications() {
-  for (var i = 1; i <= 5; i++) {
-    FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC + i);
-    console.log("unsubcribed from: SmellReport-" + i);
-  }
-}
-
-
 function initializeFCM() {
   console.log("onInitializeFCM");
   FCMPlugin.getToken(

@@ -1,11 +1,7 @@
 ﻿var SettingsPage = {
 
-  activeSmells: {},
-
 
   initialize: function () {
-    this.activeSmells = LocalStorage.get("smell_notification_values");
-
     this.refreshNotifications();
     this.populateFormSettings();
     this.expandTabs();
@@ -20,7 +16,6 @@
     // click listeners
     $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
     $("#checkbox_pghaqi_notifications").click(SettingsPage.onTogglePittsburghAqiNotifications);
-    $(".checkbox-smell-subscribe").click(function() {SettingsPage.onCheckboxClick(this)});
     // change (text) listeners
     $("#textfield_email").change(SettingsPage.onEmailChange);
     $("#textfield_name").change(SettingsPage.onNameChange);
@@ -41,20 +36,9 @@
     // enable smell notifications checkbox
     if (LocalStorage.get("receive_smell_notifications")) {
       $("#checkbox_smell_notifications").prop("checked", true).checkboxradio("refresh");
-      $(".checkbox-smell-subscribe").checkboxradio('enable');
     } else {
       $("#checkbox_smell_notifications").prop("checked", false).checkboxradio("refresh");
-      $(".checkbox-smell-subscribe").checkboxradio('disable');
     }
-
-    // smell values checkboxes
-    Object.keys(SettingsPage.activeSmells).forEach(function(key) {
-      if (SettingsPage.activeSmells[key]) {
-        $("#checkbox-choice-" + key).prop("checked", true).checkboxradio("refresh");
-      } else {
-        $("#checkbox-choice-" + key).prop("checked", false).checkboxradio("refresh");
-      }
-    });
 
     // pittsburgh aqi notifications checkbox
     $("#checkbox_pghaqi_notifications").prop("checked", LocalStorage.get("receive_pghaqi_notifications")).checkboxradio("refresh");
@@ -88,14 +72,12 @@
   onToggleSmellNotifications: function() {
     if (LocalStorage.get("receive_smell_notifications")) {
       LocalStorage.set("receive_smell_notifications",false);
-      $(".checkbox-smell-subscribe").checkboxradio('disable');
-      clearSmellNotifications();
+      FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC);
+      console.log("unsubscribed from "+Constants.SMELL_REPORT_TOPIC);
     } else {
       LocalStorage.set("receive_smell_notifications",true);
-      $(".checkbox-smell-subscribe").checkboxradio('enable');
-      Object.keys(SettingsPage.activeSmells).forEach(function(key) {
-        if (SettingsPage.activeSmells[key]) subscribeToSmell(key);
-      });
+      FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC);
+      console.log("subscribed to "+Constants.SMELL_REPORT_TOPIC);
     }
   },
 
@@ -104,9 +86,11 @@
     if (LocalStorage.get("receive_pghaqi_notifications")) {
       LocalStorage.set("receive_pghaqi_notifications",false);
       FCMPlugin.unsubscribeFromTopic(Constants.PITTSBURGH_AQI_TOPIC);
+      console.log("unsubscribed from "+Constants.PITTSBURGH_AQI_TOPIC);
     } else {
       LocalStorage.set("receive_pghaqi_notifications",true);
       FCMPlugin.subscribeToTopic(Constants.PITTSBURGH_AQI_TOPIC);
+      console.log("subscribed to "+Constants.PITTSBURGH_AQI_TOPIC);
     }
   },
 
@@ -133,22 +117,6 @@
 
   onAddressChange: function(event) {
     LocalStorage.set("address",this.value);
-  },
-
-
-  onCheckboxClick: function (item) {
-    // some smell value 1-5 (string)
-    var smellValue = item.value;
-
-    if (item.checked) {
-      subscribeToSmell(smellValue);
-      SettingsPage.activeSmells[smellValue] = true;
-      LocalStorage.set("smell_notification_values",SettingsPage.activeSmells);
-    } else {
-      unsubscribeToSmell(smellValue);
-      SettingsPage.activeSmells[smellValue] = false;
-      LocalStorage.set("smell_notification_values",SettingsPage.activeSmells);
-    }
   },
 
 
