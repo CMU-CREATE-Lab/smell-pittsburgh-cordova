@@ -35,6 +35,7 @@ var App = {
     SettingsPage.onDeviceReady();
     HomePage.onDeviceReady();
     MapPage.onDeviceReady();
+    AboutPage.onDeviceReady();
     App.isDeviceReady = true;
 
     initializeFCM();
@@ -104,6 +105,9 @@ var App = {
       // listen for keyboard events
       window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
       window.addEventListener('native.keyboardhide', onKeyboardHide);
+      break;
+    case Constants.ABOUT_PAGE:
+      AboutPage.initialize();
       break;
     }
   }

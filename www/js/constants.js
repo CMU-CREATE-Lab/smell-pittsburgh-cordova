@@ -3,12 +3,14 @@ var Constants = {
   LOCATION_SERVICES: true,
   PLATFORM_CALLBACK_ONREADY: true,
   SUBMIT_TO_ACHD: true,
+  APP_VERSION: "1.2",
 
   // Page Ids
   STARTUP_PAGE: "startup",
   HOME_PAGE: "home",
   MAP_PAGE: "map",
   SETTINGS_PAGE: "settings",
+  ABOUT_PAGE: "about",
 
   // Local Storage keys
   USER_HASH_KEY: "user_hash",
