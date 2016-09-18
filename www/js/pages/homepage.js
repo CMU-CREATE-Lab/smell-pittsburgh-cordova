@@ -5,9 +5,13 @@
 
 
   initialize: function () {
+    console.log("HomePage.initialize");
+
     Location.hasLocation = false;
     Location.requestLocation();
     HomePage.checkSubmitStatus();
+
+    // first-time modal
     if (LocalStorage.get("firsttime_home")) {
       HomePage.showHomeModal();
       LocalStorage.set("firsttime_home",false);

@@ -2,7 +2,7 @@
 
 
   initialize: function () {
-
+    console.log("StartupPage.initialize");
   },
 
 

@@ -2,6 +2,7 @@
 
 
   initialize: function () {
+    console.log("SettingsPage.initialize");
     this.refreshNotifications();
     this.populateFormSettings();
     this.expandTabs();
