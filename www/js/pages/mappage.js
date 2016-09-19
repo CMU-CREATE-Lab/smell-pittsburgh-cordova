@@ -12,6 +12,9 @@
       MapPage.showMapModal();
       LocalStorage.set("firsttime_map",false);
     }
+
+    // browser compatibility issues (Yay?)
+    $("#map-panel").find(".ui-btn-active").removeClass("ui-btn-active");
   },
 
 

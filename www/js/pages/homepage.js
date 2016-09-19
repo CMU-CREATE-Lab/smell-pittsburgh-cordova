@@ -16,6 +16,9 @@
       HomePage.showHomeModal();
       LocalStorage.set("firsttime_home",false);
     }
+
+    // browser compatibility issues (Yay?)
+    $("#home-panel").find(".ui-btn-active").removeClass("ui-btn-active");
   },
 
 
