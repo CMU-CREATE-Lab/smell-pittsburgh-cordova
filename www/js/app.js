@@ -18,6 +18,41 @@ var App = {
   },
 
 
+  // helper functions
+
+
+  initializePage: function(pageId) {
+    // remove listener for keyboard events
+    window.removeEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+    window.removeEventListener('native.keyboardhide', onKeyboardHide);
+
+    // Use this if the page needs initialized everytime the page is viewed
+    switch (pageId) {
+    case Constants.STARTUP_PAGE:
+      StartupPage.initialize();
+      break;
+    case Constants.HOME_PAGE:
+      HomePage.initialize();
+      // listen for keyboard events
+      window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+      window.addEventListener('native.keyboardhide', onKeyboardHide);
+      break;
+    case Constants.MAP_PAGE:
+      MapPage.initialize();
+      break;
+    case Constants.SETTINGS_PAGE:
+      SettingsPage.initialize();
+      // listen for keyboard events
+      window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
+      window.addEventListener('native.keyboardhide', onKeyboardHide);
+      break;
+    case Constants.ABOUT_PAGE:
+      AboutPage.initialize();
+      break;
+    }
+  },
+
+
   // callbacks
 
 
@@ -53,18 +88,15 @@ var App = {
     window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
     window.addEventListener('native.keyboardhide', onKeyboardHide);
 
-    // TODO browser doesn't use onResume
-    if (!Constants.PLATFORM_CALLBACK_ONREADY) {
-      if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id == Constants.HOME_PAGE) HomePage.initialize();
-    }
+    if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id == Constants.HOME_PAGE) HomePage.initialize();
   },
 
 
   onResume: function() {
     console.log("onResume");
-    // request location again if app is closed and reopened to HomePage
-    // if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id == Constants.HOME_PAGE) Location.requestLocation();
-    if ($.mobile.pageContainer.pagecontainer("getActivePage")[0].id == Constants.HOME_PAGE) HomePage.initialize();
+
+    var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
+    App.initializePage(pageId);
   },
 
 
@@ -81,35 +113,7 @@ var App = {
   onPageContainerShow: function (event, ui) {
     var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
     console.log("onPageContainerShow: " + pageId);
-
-    // remove listener for keyboard events
-    window.removeEventListener("native.keyboardshow", onKeyboardShowInHomePage);
-    window.removeEventListener('native.keyboardhide', onKeyboardHide);
-
-    // Use this if the page needs initialized everytime the page is viewed
-    switch (pageId) {
-    case Constants.STARTUP_PAGE:
-      StartupPage.initialize();
-      break;
-    case Constants.HOME_PAGE:
-      HomePage.initialize();
-      // listen for keyboard events
-      window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
-      window.addEventListener('native.keyboardhide', onKeyboardHide);
-      break;
-    case Constants.MAP_PAGE:
-      MapPage.initialize();
-      break;
-    case Constants.SETTINGS_PAGE:
-      SettingsPage.initialize();
-      // listen for keyboard events
-      window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
-      window.addEventListener('native.keyboardhide', onKeyboardHide);
-      break;
-    case Constants.ABOUT_PAGE:
-      AboutPage.initialize();
-      break;
-    }
+    App.initializePage(pageId);
   }
 
 }

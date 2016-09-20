@@ -28,7 +28,10 @@
 
   showMapModal: function() {
     $("#modal-map-firsttime").popup();
-    $("#modal-map-firsttime").popup("open");
+    // delays opening to avoid issues with iOS < 9.3
+    setTimeout(function() {
+      $("#modal-map-firsttime").popup("open");
+    }, 250);
   },
 
 }

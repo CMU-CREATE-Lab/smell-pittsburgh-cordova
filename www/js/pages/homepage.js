@@ -49,7 +49,10 @@
 
   showHomeModal: function() {
     $("#modal-home-firsttime").popup();
-    $("#modal-home-firsttime").popup("open");
+    // delays opening to avoid issues with iOS < 9.3
+    setTimeout(function() {
+      $("#modal-home-firsttime").popup("open");
+    }, 250);
   },
 
 
