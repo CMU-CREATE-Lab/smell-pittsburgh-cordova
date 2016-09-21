@@ -11,8 +11,11 @@ var Location = {
 
 
   // request the users location
-  requestLocation: function() {
+  requestLocation: function(afterSuccess) {
     console.log("requestLocation");
+    var latitude = 0;
+    var longitude = 0;
+    afterSuccess(latitude,longitude);
   },
 
 

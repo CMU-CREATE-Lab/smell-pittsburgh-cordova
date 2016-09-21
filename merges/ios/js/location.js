@@ -15,7 +15,6 @@ var Location = {
     }
     var handleSuccess = function(str) {
       console.log(str);
-      Location.requestLocation();
     }
     var statusAuthorized = function(status) {
       handleSuccess("Requested location authorization: authorization was " + status);
@@ -24,9 +23,6 @@ var Location = {
     var checkAuthorized = function(authorized) {
       if (!authorized) {
         cordova.plugins.diagnostic.requestLocationAuthorization(statusAuthorized, onError, cordova.plugins.diagnostic.locationAuthorizationMode.WHEN_IN_USE);
-      } else {
-        //onError("App is already authorized to use location");
-        Location.requestLocation();
       }
     }
 
@@ -43,7 +39,7 @@ var Location = {
 
 
   // request the users location
-  requestLocation: function() {
+  requestLocation: function(afterSuccess) {
     console.log("requestLocation");
     if (isConnected()) {
       if (!this.isRequestingLocation) {
@@ -53,7 +49,9 @@ var Location = {
           Location.hasLocation = true;
           console.log("got coords: " + Location.coords.latitude + ", " + Location.coords.longitude);
           Location.stopRequestLocation();
-          HomePage.checkSubmitStatus();
+          var latitude = (Location.coords != null) ? Location.coords.latitude : 0;
+          var longitude = (Location.coords != null) ? Location.coords.longitude : 0;
+          afterSuccess(latitude,longitude);
         };
         var onError = function (error) {
           console.log("error code: " + error.code);
@@ -62,7 +60,7 @@ var Location = {
           confirm("Would you like to retry?", onConfirm, "Failure Requesting Location", ["Retry", "Cancel"]);
           function onConfirm(index) {
             if (index == 1) {
-              Location.requestLocation();
+              Location.requestLocation(afterSuccess);
             }
           }
         };
@@ -77,7 +75,7 @@ var Location = {
     } else {
       alert("Connect to the internet then click 'Retry' in order to request location.", alertDismissed, "No Internet Connection", "Retry");
       function alertDismissed() {
-        Location.requestLocation();
+        //Location.requestLocation(afterSuccess);
       }
     }
   },
