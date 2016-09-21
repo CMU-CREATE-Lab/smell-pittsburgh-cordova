@@ -3,7 +3,7 @@ var Constants = {
   LOCATION_SERVICES: true,
   PLATFORM_CALLBACK_ONREADY: true,
   SUBMIT_TO_ACHD: true,
-  APP_VERSION: "1.2",
+  APP_VERSION: "1.3",
 
   // Page Ids
   STARTUP_PAGE: "startup",
