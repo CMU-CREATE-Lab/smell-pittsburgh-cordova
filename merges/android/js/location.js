@@ -33,7 +33,6 @@ var Location = {
         case cordova.plugins.diagnostic.permissionStatus.GRANTED:
           console.log("Permission granted");
           App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
-          Location.requestLocation();
           break;
         case cordova.plugins.diagnostic.permissionStatus.DENIED:
           console.log("Permission denied");

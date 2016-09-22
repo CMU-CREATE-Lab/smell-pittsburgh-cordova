@@ -12,7 +12,7 @@ var Location = {
 
 
   // request the users location
-  requestLocation: function() {
+  requestLocation: function(afterSuccess) {
     console.log("requestLocation");
 
     // TODO browser location services
@@ -22,7 +22,8 @@ var Location = {
     };
     Location.hasLocation = true;
     Location.stopRequestLocation();
-    HomePage.checkSubmitStatus();
+
+    afterSuccess(Location.coords.latitude,Location.coords.longitude);
   },
 
 
