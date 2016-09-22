@@ -81,6 +81,10 @@ var App = {
       FCMPlugin.subscribeToTopic(Constants.PITTSBURGH_AQI_TOPIC);
       console.log("subcribed to: " + Constants.PITTSBURGH_AQI_TOPIC);
     }
+    if (LocalStorage.get("receive_smell_notifications")) {
+      FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC);
+      console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC);
+    }
 
     Location.requestLocationPermission();
 
