@@ -5,7 +5,7 @@
     console.log("MapPage.initialize");
 
     // refresh iframe
-    $('#iframe-map').attr('src', $('#iframe-map').attr('src'));
+    $('#iframe-map').attr('src', Constants.URL_SMELLPGH+"/visualization?user_hash="+LocalStorage.get("user_hash") );
 
     // first-time modal
     if (LocalStorage.get("firsttime_map")) {

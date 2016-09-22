@@ -4,6 +4,7 @@ var Constants = {
   PLATFORM_CALLBACK_ONREADY: true,
   SUBMIT_TO_ACHD: true,
   APP_VERSION: "1.4",
+  URL_SMELLPGH: "http://localhost",
 
   // Page Ids
   STARTUP_PAGE: "startup",

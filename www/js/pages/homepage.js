@@ -97,7 +97,7 @@
         $.ajax({
           type: "POST",
           dataType: "json",
-          url: "http://localhost/api/v1/smell_reports",
+          url: Constants.URL_SMELLPGH+"/api/v1/smell_reports",
           data: data,
           xhrFields: { withCredentials: false },
 
