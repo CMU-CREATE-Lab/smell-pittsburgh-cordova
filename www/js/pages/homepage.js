@@ -93,6 +93,7 @@
       Location.requestLocation(function(latitude,longitude) {
         data["latitude"] = latitude;
         data["longitude"] = longitude;
+        showSpinner("Submitting Report...");
 
         $.ajax({
           type: "POST",
@@ -102,10 +103,12 @@
           xhrFields: { withCredentials: false },
 
           success: function (data) {
+            hideSpinner();
             $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
           },
 
           error: function (msg) {
+            hideSpinner();
             alert("There was a problem submitting this report.");
           }
         });

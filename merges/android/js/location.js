@@ -73,7 +73,7 @@ var Location = {
           }
         };
         var pushLocation = function() {
-          showSpinner();
+          showSpinner("Requesting Location\nPlease Wait...");
           Location.watchIds.push(navigator.geolocation.watchPosition(onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true }));
         }
 

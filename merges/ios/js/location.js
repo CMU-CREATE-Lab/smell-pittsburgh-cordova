@@ -68,7 +68,7 @@ var Location = {
         // change settings if we need to
         this.isAccuracyPrompt = true;
         App.accuracyStatus = Constants.AccuracyEnum.DISABLED;
-        showSpinner();
+        showSpinner("Requesting Location\nPlease Wait...");
         Location.isRequestingLocation = true;
         navigator.geolocation.getCurrentPosition( onSuccess, onError, { maximumAge: 3000, timeout: 60000, enableHighAccuracy: true } );
       }

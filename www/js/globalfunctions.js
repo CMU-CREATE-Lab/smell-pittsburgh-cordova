@@ -17,8 +17,8 @@ function isConnected() {
 // Spinner
 
 
-function showSpinner() {
-  SpinnerPlugin.activityStart("Requesting Location\nPlease Wait...", {dimBackground: true});
+function showSpinner(text) {
+  SpinnerPlugin.activityStart(text, {dimBackground: true});
 }
 
 
