@@ -6,6 +6,8 @@
     this.refreshNotifications();
     this.populateFormSettings();
     this.expandTabs();
+    // if blank values, highlight in red
+    this.highlightMissingRecommended();
   },
 
 
@@ -64,7 +66,23 @@
     // TODO double-check if this is a valid regex?
     var regexp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regexp.test(email);
-  }, 
+  },
+
+
+  highlightMissingRecommended: function() {
+    // name
+    if (LocalStorage.get("name") == "") {
+      $("#textfield_name").parent().addClass("missing-recommended");
+    } else {
+      $("#textfield_name").parent().removeClass("missing-recommended");
+    }
+    // email
+    if (LocalStorage.get("email") == "") {
+      $("#textfield_email").parent().addClass("missing-recommended");
+    } else {
+      $("#textfield_email").parent().removeClass("missing-recommended");
+    }
+  },
 
 
   // callbacks
@@ -100,14 +118,16 @@
     if (SettingsPage.validateEmail(this.value) || this.value == "") {
       LocalStorage.set("email",this.value);
     } else {
-      this.value = "";
+      this.value = LocalStorage.get("email");
       alert("Enter a valid email address.", null, "Invalid Email Entry", "Ok");
     }
+    SettingsPage.highlightMissingRecommended();
   },
 
 
   onNameChange: function(event) {
     LocalStorage.set("name",this.value);
+    SettingsPage.highlightMissingRecommended();
   },
 
 
