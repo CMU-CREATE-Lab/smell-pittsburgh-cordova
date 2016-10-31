@@ -46,6 +46,7 @@ function initializeFCM() {
   FCMPlugin.onNotification(
     // callback
     function (data) {
+      console.log("FCMPlugin.onNotification callback:data="+JSON.stringify(data));
       if (data.wasTapped) {
         //Notification was received on device tray and tapped by the user. 
       } else {
@@ -54,11 +55,11 @@ function initializeFCM() {
     },
     // success
     function (message) {
-    // empty for now
+      console.log("FCMPlugin.onNotification success:message="+message);
     },
     // error
     function (error) {
-    // empty for now
+      console.log("FCMPlugin.onNotification error:error="+error);
     }
   );
 }
