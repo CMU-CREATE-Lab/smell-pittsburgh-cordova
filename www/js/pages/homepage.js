@@ -2,6 +2,8 @@
 
   smellValueSelected: false,
   smellValue: 1,
+  smellDescriptionPlaceholder: "e.g. industrial, woodsmoke, rotten-eggs",
+  smellFeelingsSymptomsPlaceholder: "e.g. headache, sore throat, eye irritation",
 
 
   initialize: function () {
@@ -15,6 +17,10 @@
       HomePage.showHomeModal();
       LocalStorage.set("firsttime_home",false);
     }
+
+    // set placeholder text
+    $("#textfield_smell_description").attr("placeholder",HomePage.smellDescriptionPlaceholder);
+    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellFeelingsSymptomsPlaceholder);
 
     // browser compatibility issues (Yay?)
     $("#home-panel").find(".ui-btn-active").removeClass("ui-btn-active");
@@ -54,6 +60,24 @@
     setTimeout(function() {
       $("#modal-home-firsttime").popup("open");
     }, 250);
+  },
+
+
+  enabledFields: function() {
+    var smellsJustFine = (HomePage.smellValue == 1);
+
+    // if it smells "just fine!" then don't include smell descriptors and symptoms
+    $("#textfield_smell_description,#textfield_feelings_symptoms").attr("disabled",smellsJustFine);
+    $("#textfield_smell_description,#textfield_feelings_symptoms").textinput({clearBtn:!smellsJustFine});
+    $("#textfield_smell_description").attr("placeholder", smellsJustFine ? "N/A" : HomePage.smellDescriptionPlaceholder);
+    $("#textfield_feelings_symptoms").attr("placeholder", smellsJustFine ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
+    if (smellsJustFine) {
+      $("#textfield_smell_description")[0].value = "";
+      $("#textfield_feelings_symptoms")[0].value = "";
+      $("#textfield_smell_description,#textfield_feelings_symptoms").parent().addClass("textfield-disabled");
+    } else {
+      $("#textfield_smell_description,#textfield_feelings_symptoms").parent().removeClass("textfield-disabled");
+    }
   },
 
 
@@ -125,6 +149,7 @@
     HomePage.smellValueSelected = true;
     HomePage.smellValue = item.value;
     HomePage.checkSubmitStatus();
+    HomePage.enabledFields();
   },
 
 

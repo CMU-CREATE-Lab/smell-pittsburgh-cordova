@@ -16,3 +16,7 @@ div.homepage-section-top {
 div.no-top {
   padding-top: 0;
 }
+
+div.textfield-disabled {
+  background-color: #ddd !important;
+}
