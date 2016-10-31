@@ -80,15 +80,18 @@
 
 
   clearForm: function() {
+    // reset class variables
     HomePage.smellValue = 1;
     HomePage.smellValueSelected = false;
-    HomePage.fieldsDisabled(false);
-    $(".radio-smell").prop("checked",false);
-    $(".radio-smell").checkboxradio("refresh");
+    // clear text fields
     $("#textfield_smell_description")[0].value = "";
     $("#textfield_feelings_symptoms")[0].value = "";
     $("#textfield_additional_comments")[0].value = "";
-    $("#textfield_smell_description,#textfield_feelings_symptoms").textinput({clearBtn:true});
+    // make sure fields aren't disabled
+    HomePage.fieldsDisabled(false);
+    // reset radio buttons
+    $(".radio-smell").prop("checked",false);
+    $(".radio-smell").checkboxradio("refresh");
   },
 
 
