@@ -63,9 +63,7 @@
   },
 
 
-  enabledFields: function() {
-    var smellsJustFine = (HomePage.smellValue == 1);
-
+  fieldsDisabled: function(smellsJustFine) {
     // if it smells "just fine!" then don't include smell descriptors and symptoms
     $("#textfield_smell_description,#textfield_feelings_symptoms").attr("disabled",smellsJustFine);
     $("#textfield_smell_description,#textfield_feelings_symptoms").textinput({clearBtn:!smellsJustFine});
@@ -78,6 +76,19 @@
     } else {
       $("#textfield_smell_description,#textfield_feelings_symptoms").parent().removeClass("textfield-disabled");
     }
+  },
+
+
+  clearForm: function() {
+    HomePage.smellValue = 1;
+    HomePage.smellValueSelected = false;
+    HomePage.fieldsDisabled(false);
+    $(".radio-smell").prop("checked",false);
+    $(".radio-smell").checkboxradio("refresh");
+    $("#textfield_smell_description")[0].value = "";
+    $("#textfield_feelings_symptoms")[0].value = "";
+    $("#textfield_additional_comments")[0].value = "";
+    $("#textfield_smell_description,#textfield_feelings_symptoms").textinput({clearBtn:true});
   },
 
 
@@ -128,6 +139,7 @@
 
           success: function (data) {
             hideSpinner();
+            HomePage.clearForm();
             $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
           },
 
@@ -149,7 +161,7 @@
     HomePage.smellValueSelected = true;
     HomePage.smellValue = item.value;
     HomePage.checkSubmitStatus();
-    HomePage.enabledFields();
+    HomePage.fieldsDisabled((HomePage.smellValue == 1));
   },
 
 
