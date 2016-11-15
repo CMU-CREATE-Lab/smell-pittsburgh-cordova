@@ -20,3 +20,7 @@ div.no-top {
 div.textfield-disabled {
   background-color: #ddd !important;
 }
+
+textarea {
+  height: 104px !important;
+}
