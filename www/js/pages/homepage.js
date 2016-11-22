@@ -1,9 +1,10 @@
 ﻿var HomePage = {
 
   smellValueSelected: false,
-  smellValue: 1,
+  smellValue: 0,
   smellDescriptionPlaceholder: "e.g. industrial, woodsmoke, rotten-eggs",
   smellFeelingsSymptomsPlaceholder: "e.g. headache, sore throat, eye irritation",
+  additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day please let ACHD know",
 
 
   initialize: function () {
@@ -19,8 +20,9 @@
     }
 
     // set placeholder text
-    $("#textfield_smell_description").attr("placeholder",HomePage.smellDescriptionPlaceholder);
-    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellFeelingsSymptomsPlaceholder);
+    $("#textfield_smell_description").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellDescriptionPlaceholder);
+    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
+    $("#textfield_additional_comments").attr("placeholder",HomePage.additionalCommentsPlaceholder);
 
     // browser compatibility issues (Yay?)
     $("#home-panel").find(".ui-btn-active").removeClass("ui-btn-active");
@@ -81,7 +83,7 @@
 
   clearForm: function() {
     // reset class variables
-    HomePage.smellValue = 1;
+    HomePage.smellValue = 0;
     HomePage.smellValueSelected = false;
     // clear text fields
     $("#textfield_smell_description")[0].value = "";
@@ -92,6 +94,9 @@
     // reset radio buttons
     $(".radio-smell").prop("checked",false);
     $(".radio-smell").checkboxradio("refresh");
+    // set placeholder text
+    $("#textfield_smell_description").attr("placeholder",HomePage.smellDescriptionPlaceholder);
+    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellFeelingsSymptomsPlaceholder);
   },
 
 
