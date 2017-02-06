@@ -75,14 +75,14 @@ var App = {
 
     initializeFCM();
     // subscribe to topics
-    FCMPlugin.subscribeToTopic(Constants.GLOBAL_TOPIC);
+    window.FirebasePlugin.subscribe(Constants.GLOBAL_TOPIC);
     console.log("subcribed to: " + Constants.GLOBAL_TOPIC);
     if (LocalStorage.get("receive_pghaqi_notifications")) {
-      FCMPlugin.subscribeToTopic(Constants.PITTSBURGH_AQI_TOPIC);
+      window.FirebasePlugin.subscribe(Constants.PITTSBURGH_AQI_TOPIC);
       console.log("subcribed to: " + Constants.PITTSBURGH_AQI_TOPIC);
     }
     if (LocalStorage.get("receive_smell_notifications")) {
-      FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC);
+      window.FirebasePlugin.subscribe(Constants.SMELL_REPORT_TOPIC);
       console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC);
     }
 

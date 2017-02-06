@@ -1,6 +1,6 @@
 var Location = {
 
-  hasLocation: true,
+  hasLocation: false,
   isRequestingLocation: false,
   coords: {},
 

@@ -91,11 +91,11 @@
   onToggleSmellNotifications: function() {
     if (LocalStorage.get("receive_smell_notifications")) {
       LocalStorage.set("receive_smell_notifications",false);
-      FCMPlugin.unsubscribeFromTopic(Constants.SMELL_REPORT_TOPIC);
+      window.FirebasePlugin.unsubscribe(Constants.SMELL_REPORT_TOPIC);
       console.log("unsubscribed from "+Constants.SMELL_REPORT_TOPIC);
     } else {
       LocalStorage.set("receive_smell_notifications",true);
-      FCMPlugin.subscribeToTopic(Constants.SMELL_REPORT_TOPIC);
+      window.FirebasePlugin.subscribe(Constants.SMELL_REPORT_TOPIC);
       console.log("subscribed to "+Constants.SMELL_REPORT_TOPIC);
     }
   },
@@ -104,11 +104,11 @@
   onTogglePittsburghAqiNotifications: function() {
     if (LocalStorage.get("receive_pghaqi_notifications")) {
       LocalStorage.set("receive_pghaqi_notifications",false);
-      FCMPlugin.unsubscribeFromTopic(Constants.PITTSBURGH_AQI_TOPIC);
+      window.FirebasePlugin.unsubscribe(Constants.PITTSBURGH_AQI_TOPIC);
       console.log("unsubscribed from "+Constants.PITTSBURGH_AQI_TOPIC);
     } else {
       LocalStorage.set("receive_pghaqi_notifications",true);
-      FCMPlugin.subscribeToTopic(Constants.PITTSBURGH_AQI_TOPIC);
+      window.FirebasePlugin.subscribe(Constants.PITTSBURGH_AQI_TOPIC);
       console.log("subscribed to "+Constants.PITTSBURGH_AQI_TOPIC);
     }
   },

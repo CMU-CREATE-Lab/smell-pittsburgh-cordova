@@ -32,36 +32,16 @@ function hideSpinner() {
 
 function initializeFCM() {
   console.log("onInitializeFCM");
-  FCMPlugin.getToken(
-    // success
-    function (token) {
-      // empty for now
+  window.FirebasePlugin.getToken(function(token) {
       console.log("Your firebaseInstanceID is "+token);
-    },
-    // error
-    function (error) {
-      // empty for now
-    }
-  );
-  FCMPlugin.onNotification(
-    // callback
-    function (data) {
-      console.log("FCMPlugin.onNotification callback:data="+JSON.stringify(data));
-      if (data.wasTapped) {
-        //Notification was received on device tray and tapped by the user. 
-      } else {
-        //Notification was received in foreground. Maybe the user needs to be notified.
-      }
-    },
-    // success
-    function (message) {
-      console.log("FCMPlugin.onNotification success:message="+message);
-    },
-    // error
-    function (error) {
-      console.log("FCMPlugin.onNotification error:error="+error);
-    }
-  );
+    }, function(error) {
+      console.error(error);
+  });
+  window.FirebasePlugin.onNotificationOpen(function(notification) {
+      console.log(JSON.stringify(notification));
+    }, function(error) {
+      console.error(error);
+  });
 }
 
 
