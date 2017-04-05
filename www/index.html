@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="css/pages/settings.css" />
     <link rel="stylesheet" href="css/pages/map.css" />
     <link rel="stylesheet" href="css/pages/about.css" />
+    <link rel="stylesheet" href="css/pages/locationselect.css" />
     <!-- libraries -->
     <script src="lib/jquery-1.12.4.min.js"></script>
     <script src="lib/jquery.mobile-1.4.5.min.js"></script>
     <script src="lib/md5.js"></script>
     <script src="lib/fastclick.min.js"></script>
     <script src="cordova.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.25&amp;key=AIzaSyD2nqIondaBl-YWGlaD_mo1L0w3j2yvehQ"></script>
     <!-- app-related scripts -->
     <script src="js/constants.js"></script>
     <script src="js/localstorage.js"></script>
@@ -28,6 +30,7 @@
     <script src="js/pages/mappage.js"></script>
     <script src="js/pages/settingspage.js"></script>
     <script src="js/pages/aboutpage.js"></script>
+    <script src="js/pages/locationselectpage.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body>
@@ -74,6 +77,10 @@
           <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-4" value="4" /><label for="radio-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
           <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-5" value="5" /><label for="radio-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
         </fieldset>
+      </div>
+      <div class="homepage-section">
+        <label for="button_smell_location">Report Location</label>
+        <a id="button_smell_location" href="#locationselect" data-transition="none" data-role="button" data-icon="navigation" data-iconpos="left">Current Location (default)</a>
       </div>
       <div class="homepage-section">
         <label for="textfield_smell_description">Describe the smell or source of odor</label>
@@ -262,6 +269,37 @@
     </div>
     <!-- footer -->
     <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
+          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div data-role="page" id="locationselect" class="page-fullscreened">
+    <!-- panel -->
+    <div data-role="panel" id="map-panel" data-display="overlay">
+      <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
+      <ul data-role="listview" data-inset="true" data-icon="false">
+        <li><a href="#settings" data-transition="none">Settings</a></li>
+        <li><a href="#about" data-transition="none">About</a></li>
+      </ul>
+    </div>
+    <!-- header -->
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <h1>Smell PGH</h1>
+      <a href="#map-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
+    </div>
+    <!-- main -->
+    <div role="main" class="ui-content" id="map-locationselect-container" data-iscroll>
+      <div id="map_locationselect"></div>
+      <div id="middle-circle"></div>
+    </div>
+    <!-- footer -->
+    <div data-role="footer" data-position="fixed" data-id="map_1" data-tap-toggle="false">
       <div data-role="navbar">
         <ul>
           <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>

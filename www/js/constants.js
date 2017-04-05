@@ -12,6 +12,7 @@ var Constants = {
   MAP_PAGE: "map",
   SETTINGS_PAGE: "settings",
   ABOUT_PAGE: "about",
+  LOCATION_SELECT_PAGE: "locationselect",
 
   // Local Storage keys
   USER_HASH_KEY: "user_hash",

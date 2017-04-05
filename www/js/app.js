@@ -6,6 +6,12 @@ var App = {
   htmlElementToScrollAfterKeyboard: null, // this is the HTML element you want to scroll to after the keyboard has been opened
   htmlElementToBlurAfterKeyboardCloses: null, // this is the HTML element you need to blur after the keyboard has been closed to avoid weird glitches on using checkboxradio widgets
 
+  CallbackType: {
+    CREATE: 0,
+    RESUME: 1,
+    PAUSE: 2
+  },
+
 
   initialize: function () {
     console.log("onInitialize");
@@ -21,7 +27,7 @@ var App = {
   // helper functions
 
 
-  initializePage: function(pageId) {
+  initializePage: function(pageId, callbackType) {
     // remove listener for keyboard events
     window.removeEventListener("native.keyboardshow", onKeyboardShowInHomePage);
     window.removeEventListener('native.keyboardhide', onKeyboardHide);
@@ -38,7 +44,9 @@ var App = {
       window.addEventListener('native.keyboardhide', onKeyboardHide);
       break;
     case Constants.MAP_PAGE:
-      MapPage.initialize();
+      if (callbackType == App.CallbackType.CREATE) {
+        MapPage.initialize();
+      }
       break;
     case Constants.SETTINGS_PAGE:
       SettingsPage.initialize();
@@ -48,6 +56,11 @@ var App = {
       break;
     case Constants.ABOUT_PAGE:
       AboutPage.initialize();
+      break;
+    case Constants.LOCATION_SELECT_PAGE:
+      if (callbackType == App.CallbackType.CREATE) {
+        LocationSelectPage.initialize();
+      }
       break;
     }
   },
@@ -71,6 +84,7 @@ var App = {
     HomePage.onDeviceReady();
     MapPage.onDeviceReady();
     AboutPage.onDeviceReady();
+    LocationSelectPage.onDeviceReady();
     App.isDeviceReady = true;
 
     initializeFCM();
@@ -100,7 +114,7 @@ var App = {
     console.log("onResume");
 
     var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
-    App.initializePage(pageId);
+    App.initializePage(pageId, App.CallbackType.RESUME);
   },
 
 
@@ -117,7 +131,7 @@ var App = {
   onPageContainerShow: function (event, ui) {
     var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
     console.log("onPageContainerShow: " + pageId);
-    App.initializePage(pageId);
+    App.initializePage(pageId, App.CallbackType.CREATE);
   }
 
 }
