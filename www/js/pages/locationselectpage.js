@@ -84,8 +84,7 @@
     var result = {"lat": center.lat(), "lng": center.lng()};
     console.log("onClickDone: found center " + JSON.stringify(result));
 
-    HomePage.isLatLngDefined = true;
-    HomePage.location = result;
+    HomePage.useLocation(result);
     $.mobile.pageContainer.pagecontainer("change", "#home", { changeHash: false, transition: "none" });
   },
 

@@ -48,6 +48,14 @@
   // helper functions
 
 
+  useLocation: function(location) {
+    HomePage.isLatLngDefined = true;
+    HomePage.location = location;
+    // TODO geocoder?
+    $("#button_smell_location").text(location["lat"]+", "+location["lng"]);
+  },
+
+
   checkSubmitStatus: function() {
     var isDisabled = false;
 
@@ -97,16 +105,20 @@
     // reset radio buttons
     $(".radio-smell").prop("checked",false);
     $(".radio-smell").checkboxradio("refresh");
+    // reset location
+    HomePage.isLatLngDefined = false;
+    HomePage.location = {"lat": 0, "lng": 0};
     // set placeholder text
     $("#textfield_smell_description").attr("placeholder",HomePage.smellDescriptionPlaceholder);
     $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellFeelingsSymptomsPlaceholder);
+    $("#button_smell_location").text("Current Location (default)");
   },
 
 
   // callbacks
 
 
-  onClickSubmit: function () {
+  onClickSubmit: function() {
     if (isConnected()) {
       var smell_value = HomePage.smellValue;
       var smell_description = $("#textfield_smell_description")[0].value;
@@ -136,30 +148,17 @@
         if (address != "") data["address"] = address;
       }
 
-      Location.requestLocation(function(latitude,longitude) {
-        data["latitude"] = latitude;
-        data["longitude"] = longitude;
-        showSpinner("Submitting Report...");
-
-        $.ajax({
-          type: "POST",
-          dataType: "json",
-          url: Constants.URL_SMELLPGH+"/api/v1/smell_reports",
-          data: data,
-          xhrFields: { withCredentials: false },
-
-          success: function (data) {
-            hideSpinner();
-            HomePage.clearForm();
-            $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
-          },
-
-          error: function (msg) {
-            hideSpinner();
-            alert("There was a problem submitting this report.");
-          }
+      if (HomePage.isLatLngDefined) {
+        data["latitude"] = HomePage.location["lat"];
+        data["longitude"] = HomePage.location["lng"];
+        HomePage.submitAjaxWithData(data);
+      } else {
+        Location.requestLocation(function(latitude,longitude) {
+          data["latitude"] = latitude;
+          data["longitude"] = longitude;
+          HomePage.submitAjaxWithData(data);
         });
-      });
+      }
     } else {
       if (App.isDeviceReady) {
         alert("Connect to the internet before submitting a smell report.", null, "No Internet Connection", "Ok");
@@ -168,7 +167,30 @@
   },
 
 
-  onClickSmell: function (item) {
+  submitAjaxWithData: function(data) {
+    showSpinner("Submitting Report...");
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: Constants.URL_SMELLPGH+"/api/v1/smell_reports",
+      data: data,
+      xhrFields: { withCredentials: false },
+
+      success: function (data) {
+        hideSpinner();
+        HomePage.clearForm();
+        $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
+      },
+
+      error: function (msg) {
+        hideSpinner();
+        alert("There was a problem submitting this report.");
+      }
+    });
+  },
+
+
+  onClickSmell: function(item) {
     HomePage.smellValueSelected = true;
     HomePage.smellValue = item.value;
     HomePage.checkSubmitStatus();
