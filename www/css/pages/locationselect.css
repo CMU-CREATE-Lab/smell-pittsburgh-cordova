@@ -21,3 +21,58 @@
   top: calc(50% - 10px);
   box-shadow: 0 1px 2px #505050;
 }
+
+#locationselect-button-gps {
+  position: absolute;
+  font-size: 11px;
+  left: 9px;
+  top: 54px;
+  width: 45px;
+  height: 45px;
+  border-radius: 23px;
+  opacity: 0.75;
+}
+#locationselect-button-done {
+  position: absolute;
+  font-size: 11px;
+  left: 9px;
+  top: 108px;
+  width: 45px;
+  height: 45px;
+  border-radius: 23px;
+  opacity: 0.75;
+}
+
+.custom-button {
+  background-color: white;
+  color: black;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  outline: none;
+  border: 1px solid #777777;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.custom-button:focus {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  background-color: white;
+}
+
+.custom-button:active {
+  background-color: rgb(210, 210, 210);
+}
+
+.ui-icon-custom-gps {
+  background-image: url("../../img/ic_gps_fixed_black.png");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.ui-icon-custom-done {
+  background-image: url("../../img/ic_done_black.png");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}

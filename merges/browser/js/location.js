@@ -17,8 +17,8 @@ var Location = {
 
     // TODO browser location services
     Location.coords = {
-    latitude: 0.0,
-    longitude: 0.0
+    latitude: 40.45,
+    longitude: -79.93
     };
     Location.hasLocation = true;
     Location.stopRequestLocation();

@@ -5,6 +5,9 @@
   smellDescriptionPlaceholder: "e.g. industrial, woodsmoke, rotten-eggs",
   smellFeelingsSymptomsPlaceholder: "e.g. headache, sore throat, eye irritation",
   additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day please let ACHD know",
+  // TODO implement
+  isLatLngDefined: false,
+  location: {"lat": 0, "lng": 0},
 
 
   initialize: function () {
