@@ -5,7 +5,6 @@
   smellDescriptionPlaceholder: "e.g. industrial, woodsmoke, rotten-eggs",
   smellFeelingsSymptomsPlaceholder: "e.g. headache, sore throat, eye irritation",
   additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day please let ACHD know",
-  // TODO implement
   isLatLngDefined: false,
   location: {"lat": 0, "lng": 0},
 
@@ -139,7 +138,7 @@
         "feelings_symptoms": feelings_symptoms,
         "additional_comments": additional_comments
       };
-      
+
       if (submitACHD) {
         data["submit_achd_form"] = Boolean(submitACHD);
         if (email != "") data["email"] = email;
