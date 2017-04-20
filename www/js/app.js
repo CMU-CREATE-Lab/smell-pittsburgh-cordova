@@ -100,6 +100,7 @@ var App = {
       console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC);
     }
 
+    window.FirebasePlugin.grantPermission();
     Location.requestLocationPermission();
 
     // listen for keyboard events
