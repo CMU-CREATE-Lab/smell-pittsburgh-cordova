@@ -16,6 +16,9 @@
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
+        "cordova-plugin-firebase": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
+        },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
@@ -38,9 +41,6 @@
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
-        },
-        "cordova-plugin-firebase": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         }
     },

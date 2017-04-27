@@ -7,10 +7,16 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
         "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
+        },
+        "cordova-plugin-firebase": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
         "cordova-plugin-geolocation": {
@@ -34,13 +40,7 @@
         "cordova.plugins.diagnostic": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
-        },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
-        },
-        "cordova-plugin-firebase": {
             "PACKAGE_NAME": "org.cmucreatelab.smell_pgh"
         }
     },

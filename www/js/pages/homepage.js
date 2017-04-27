@@ -36,6 +36,7 @@
 
     // click listeners
     $("#button_submit_report").click(HomePage.onClickSubmit);
+    $("#button_smell_location").click(HomePage.onClickLocation);
     $(".radio-smell").click(function() {HomePage.onClickSmell(this);});
     // focus (textbox) listeners
     $("#textfield_smell_description").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
@@ -163,6 +164,11 @@
         alert("Connect to the internet before submitting a smell report.", null, "No Internet Connection", "Ok");
       }
     }
+  },
+
+
+  onClickLocation: function() {
+    $.mobile.pageContainer.pagecontainer("change", "#locationselect", { changeHash: false, transition: "none" });
   },
 
 
