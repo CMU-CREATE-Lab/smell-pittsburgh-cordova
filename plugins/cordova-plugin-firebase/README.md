@@ -7,11 +7,11 @@ See npm package for versions - https://www.npmjs.com/package/cordova-plugin-fire
 
 Install the plugin by adding it your project's config.xml:
 ```
-<plugin name="cordova-plugin-firebase" spec="0.1.19" />
+<plugin name="cordova-plugin-firebase" spec="0.1.20" />
 ```
 or by running:
 ```
-cordova plugin add cordova-plugin-firebase@0.1.19 --save
+cordova plugin add cordova-plugin-firebase@0.1.20 --save
 ```
 Download your Firebase configuration files, GoogleService-Info.plist for ios and google-services.json for android, and place them in the root folder of your cordova project:
 
@@ -31,6 +31,57 @@ See https://support.google.com/firebase/answer/7015592 for details how to downlo
 This plugin uses a hook (after prepare) that copies the configuration files to the right place, namely platforms/ios/\<My Project\>/Resources for ios and platforms/android for android.
 
 **Note that the Firebase SDK requires the configuration files to be present and valid, otherwise your app will crash on boot or Firebase features won't work.**
+
+## Changing Notification Icon
+The plugin will use notification_icon from drawable resources if it exists, otherwise the default app icon will is used.
+To set a big icon and small icon for notifications, define them through drawable nodes.  
+Create the required styles.xml files and add the icons to the  
+`<projectroot>/res/native/android/res/<drawable-DPI>` folders.  
+
+The example below uses a png named "ic_silhouette.png", the app Icon (@mipmap/icon) and sets a base theme.  
+From android version 21 (Lollipop) notifications were changed, needing a seperate setting.  
+If you only target Lollipop and above, you don't need to setup both.  
+Thankfully using the version dependant asset selections, we can make one build/apk supporting all target platforms.  
+`<projectroot>/res/native/android/res/values/styles.xml`
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!-- inherit from the holo theme -->
+    <style name="AppTheme" parent="android:Theme.Light">
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+    <drawable name="notification_big">@mipmap/icon</drawable>
+    <drawable name="notification_icon">@mipmap/icon</drawable>
+</resources>
+```
+and  
+`<projectroot>/res/native/android/res/values-v21/styles.xml`
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!-- inherit from the material theme -->
+    <style name="AppTheme" parent="android:Theme.Material">
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+    <drawable name="notification_big">@mipmap/icon</drawable>
+    <drawable name="notification_icon">@drawable/ic_silhouette</drawable>
+</resources>
+```
+
+## Notification Colors
+
+On Android Lollipop and above you can also set the accent color for the notification by adding a color setting.
+
+`<projectroot>/res/native/android/res/values/colors.xml`
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#FFFFFF00</color>
+    <color name="primary_dark">#FF220022</color>
+    <color name="accent">#FF00FFFF</color>
+</resources>
+```
+
 
 ### Notes about PhoneGap Build
 
@@ -86,13 +137,21 @@ Notification flow:
 
 Notification icon on Android:
 
-The plugin will look for and use notification_icon in drawable resources if it exists, otherwise the default app icon will is used. 
+[Changing notification icon](#changing-notification-icon)
 
 ### grantPermission (iOS only)
 
 Grant permission to recieve push notifications (will trigger prompt):
 ```
 window.FirebasePlugin.grantPermission();
+```
+### hasPermission
+
+Check permission to recieve push notifications:
+```
+window.FirebasePlugin.hasPermission(function(data){
+    console.log(data.isEnabled);
+});
 ```
 
 ### setBadgeNumber
@@ -134,7 +193,14 @@ window.FirebasePlugin.unsubscribe("example");
 
 Log an event using Analytics:
 ```
-window.FirebasePlugin.logEvent("page_view", {page: "dashboard"});
+window.FirebasePlugin.logEvent("select_content", {content_type: "page_view", item_id: "home"});
+```
+
+### setScreenName
+
+Set the name of the current screen in Analytics:
+```
+window.FirebasePlugin.setScreenName("Home");
 ```
 
 ### setUserId
@@ -151,7 +217,7 @@ Set a user property for use in Analytics:
 window.FirebasePlugin.setUserProperty("name", "value");
 ```
 
-### fetch (Android only)
+### fetch
 
 Fetch Remote Config parameter values for your app:
 ```
@@ -160,7 +226,7 @@ window.FirebasePlugin.fetch();
 window.FirebasePlugin.fetch(600);
 ```
 
-### activateFetched (Android only)
+### activateFetched
 
 Activate the Remote Config fetched config:
 ```
@@ -173,7 +239,7 @@ window.FirebasePlugin.activateFetched(function(activated) {
 });
 ```
 
-### getValue (Android only)
+### getValue
 
 Retrieve a Remote Config value:
 ```
