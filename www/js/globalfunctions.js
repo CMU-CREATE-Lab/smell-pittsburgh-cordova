@@ -30,6 +30,23 @@ function hideSpinner() {
 // Firebase helpers
 
 
+function openWithPage(pageName) {
+  console.log("openWithPage");
+  var pageId;
+  switch (pageName) {
+    case "map":
+      pageId = Constants.MAP_PAGE;
+      console.log("openWithPage 'map'");
+      $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
+      break;
+    default:
+      pageId = Constants.HOME_PAGE;
+  }
+
+  App.initializePage(pageId, App.CallbackType.RESUME);
+}
+
+
 function initializeFCM() {
   console.log("onInitializeFCM");
   window.FirebasePlugin.getToken(function(token) {
@@ -39,6 +56,9 @@ function initializeFCM() {
   });
   window.FirebasePlugin.onNotificationOpen(function(notification) {
       console.log(JSON.stringify(notification));
+      if (notification["open_with_page"]) {
+        openWithPage(notification["open_with_page"]);
+      }
     }, function(error) {
       console.error(error);
   });
