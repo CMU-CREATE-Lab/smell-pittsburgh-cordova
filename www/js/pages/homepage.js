@@ -26,6 +26,11 @@
     $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
     $("#textfield_additional_comments").attr("placeholder",HomePage.additionalCommentsPlaceholder);
 
+    // hide/show time/location options
+    HomePage.onClickCurrentTimeLocation();
+    // generate options for custom time
+    HomePage.populateOptionsForSelectReportTime();
+
     // browser compatibility issues (Yay?)
     $("#home-panel").find(".ui-btn-active").removeClass("ui-btn-active");
   },
@@ -38,6 +43,7 @@
     $("#button_submit_report").click(HomePage.onClickSubmit);
     $("#button_smell_location").click(HomePage.onClickLocation);
     $(".radio-smell").click(function() {HomePage.onClickSmell(this);});
+    $("#checkbox_current_time_location").click(HomePage.onClickCurrentTimeLocation);
     // focus (textbox) listeners
     $("#textfield_smell_description").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
     $("#textfield_feelings_symptoms").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
@@ -46,6 +52,51 @@
 
 
   // helper functions
+
+
+  populateOptionsForSelectReportTime: function() {
+    $("#select-report-time").empty();
+    var values = HomePage.generatePastTimes();
+
+    // empty value
+    $("#select-report-time").append("<option value=''></option>");
+    // current time
+    $("#select-report-time").append("<option value='0'>Now</option>");
+    values.forEach(function(time) {
+      var value = time;
+      var hour = new Date(time).getHours();
+      var meridiem = (hour >= 12) ? "PM" : "AM";
+      if (hour == 0) {
+        hour = 12;
+      } else if (hour > 12) {
+        hour = hour % 12;
+      }
+      var text = hour + ":00 " + meridiem;
+      // TODO check for character escapes
+      var str = "<option value='"+value+"'>"+text+"</option>";
+      $("#select-report-time").append(str);
+    });
+
+    $("#select-report-time").selectmenu("refresh", true);
+  },
+
+
+  generatePastTimes: function() {
+    var result = [];
+    var currentTime = new Date();
+    currentTime.setMilliseconds(0);
+    currentTime.setSeconds(0);
+    currentTime.setMinutes(0);
+
+    for (i=0; i<=currentTime.getHours(); i++) {
+      var d = new Date(currentTime);
+      d.setHours(i);
+      result.push(d.toISOString().split(".")[0]+"+00:00");
+    }
+
+    // return times from newest to oldest
+    return result.reverse();
+  },
 
 
   useLocation: function(location) {
@@ -112,6 +163,10 @@
     $("#textfield_smell_description").attr("placeholder",HomePage.smellDescriptionPlaceholder);
     $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellFeelingsSymptomsPlaceholder);
     $("#button_smell_location").text("Current Location (default)");
+    // reset custom time/location
+    $("#checkbox_current_time_location").prop("checked",true).checkboxradio("refresh");
+    $("#display_for_custom_time_location").hide();
+    // TODO clear custom fields
   },
 
 
@@ -131,7 +186,7 @@
       var address = LocalStorage.get("address");
       var userHash = LocalStorage.get("user_hash");
 
-      // TODO make this more like a form submission in HTML? then you don't need to specify all of this
+      // TODO consider custom time/location for data to be sent
       var data = {
         "user_hash": userHash,
         "smell_value": smell_value,
@@ -169,6 +224,16 @@
 
   onClickLocation: function() {
     $.mobile.pageContainer.pagecontainer("change", "#locationselect", { changeHash: false, transition: "none" });
+  },
+
+
+  onClickCurrentTimeLocation: function() {
+    if ($("#checkbox_current_time_location").prop("checked")) {
+      $("#display_for_custom_time_location").hide();
+    } else {
+      $("#display_for_custom_time_location").show();
+    }
+    // TODO determine if submit should be enabled
   },
 
 
