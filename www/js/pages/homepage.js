@@ -26,6 +26,8 @@
     $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
     $("#textfield_additional_comments").attr("placeholder",HomePage.additionalCommentsPlaceholder);
 
+    $("#checkbox_current_time_location").prop("checked", true);
+    $("#checkbox_current_time_location").checkboxradio("refresh", true);
     // hide/show time/location options
     HomePage.onClickCurrentTimeLocation();
     // generate options for custom time
@@ -48,6 +50,7 @@
     $("#textfield_smell_description").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
     $("#textfield_feelings_symptoms").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
     $("#textfield_additional_comments").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
+    $("#select-report-time").change(HomePage.onChangeReportTime);
   },
 
 
@@ -77,6 +80,9 @@
       $("#select-report-time").append(str);
     });
 
+    // select empty by default
+    $("#select-report-time").val("");
+    // refresh widget
     $("#select-report-time").selectmenu("refresh", true);
   },
 
@@ -108,11 +114,14 @@
 
 
   checkSubmitStatus: function() {
+    console.log("checkSubmitStatus()");
     var isDisabled = false;
 
     // conditions for disabling the submit button
     // if (!Location.hasLocation) isDisabled = true;
     if (!this.smellValueSelected) isDisabled = true;
+    // if you haven't selected time when using custom time/location
+    if (!$("#checkbox_current_time_location").prop("checked") && $("#select-report-time").val() == "" ) isDisabled = true;
 
     $("#button_submit_report").attr("disabled",isDisabled);
   },
@@ -166,7 +175,8 @@
     // reset custom time/location
     $("#checkbox_current_time_location").prop("checked",true).checkboxradio("refresh");
     $("#display_for_custom_time_location").hide();
-    // TODO clear custom fields
+    $("#select-report-time").val("");
+    $("#select-report-time").selectmenu("refresh", true);
   },
 
 
@@ -186,7 +196,6 @@
       var address = LocalStorage.get("address");
       var userHash = LocalStorage.get("user_hash");
 
-      // TODO consider custom time/location for data to be sent
       var data = {
         "user_hash": userHash,
         "smell_value": smell_value,
@@ -203,7 +212,18 @@
         if (address != "") data["address"] = address;
       }
 
-      if (HomePage.isLatLngDefined) {
+      // set custom location flag, custom time flag
+      var usesCustomTime  = !$("#checkbox_current_time_location").prop("checked") && $("#select-report-time").val() != "0";
+      var usesCustomLocation = !$("#checkbox_current_time_location").prop("checked") && HomePage.isLatLngDefined;
+      data["custom_time"] = usesCustomTime ? "true" : "false";
+      data["custom_location"] = usesCustomLocation ? "true" : "false";
+
+      // determine if using custom time
+      var time = usesCustomTime ? $("#select-report-time").val() : "";
+      data["observed_at"] = time;
+
+      // determine if using custom location (and send data)
+      if (usesCustomLocation) {
         data["latitude"] = HomePage.location["lat"];
         data["longitude"] = HomePage.location["lng"];
         HomePage.submitAjaxWithData(data);
@@ -214,6 +234,7 @@
           HomePage.submitAjaxWithData(data);
         });
       }
+
     } else {
       if (App.isDeviceReady) {
         alert("Connect to the internet before submitting a smell report.", null, "No Internet Connection", "Ok");
@@ -233,7 +254,15 @@
     } else {
       $("#display_for_custom_time_location").show();
     }
-    // TODO determine if submit should be enabled
+    // determine if submit should be enabled
+    HomePage.checkSubmitStatus();
+  },
+
+
+  onChangeReportTime: function() {
+    console.log("onChangeReportTime()");
+    // determine if submit should be enabled
+    HomePage.checkSubmitStatus();
   },
 
 
@@ -263,8 +292,8 @@
   onClickSmell: function(item) {
     HomePage.smellValueSelected = true;
     HomePage.smellValue = item.value;
-    HomePage.checkSubmitStatus();
     HomePage.fieldsDisabled((HomePage.smellValue == 1));
+    HomePage.checkSubmitStatus();
   },
 
 
