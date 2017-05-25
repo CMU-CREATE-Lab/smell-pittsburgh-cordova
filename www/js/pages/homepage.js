@@ -6,10 +6,16 @@
   smellFeelingsSymptomsPlaceholder: "e.g. headache, sore throat, eye irritation",
   additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day please let ACHD know",
   isLatLngDefined: false,
+  returningFromLocationSelectPage: false,
   location: {"lat": 0, "lng": 0},
 
 
   initialize: function () {
+    if (HomePage.returningFromLocationSelectPage) {
+      console.log("HomePage.initialize: returningFromLocationSelectPage");
+      HomePage.returningFromLocationSelectPage = false;
+      return;
+    }
     console.log("HomePage.initialize");
 
     Location.hasLocation = false;
@@ -110,6 +116,7 @@
     HomePage.location = location;
     // TODO geocoder?
     $("#button_smell_location").text(location["lat"]+", "+location["lng"]);
+    HomePage.returningFromLocationSelectPage = true;
   },
 
 
