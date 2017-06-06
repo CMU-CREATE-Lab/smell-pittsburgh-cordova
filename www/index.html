@@ -59,6 +59,7 @@
       <ul data-role="listview" data-inset="true" data-icon="false">
         <li><a href="#settings" data-transition="none">Settings</a></li>
         <li><a href="#about" data-transition="none">About</a></li>
+        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
       </ul>
     </div>
     <!-- header -->
@@ -105,6 +106,9 @@
       </div>
       <br/>
       <div class="submission-disclaimer">
+        NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map.
+      </div>
+      <div class="submission-disclaimer">
         All smell reports within Alleghency County will be forwarded to the Allegheny County Health Department (ACHD). If you'd like to receive correspondence from ACHD, please enter your contact info in the settings tab.
       </div>
       <button type="button" id="button_submit_report" disabled>Send Smell Report</button>
@@ -145,6 +149,7 @@
       <ul data-role="listview" data-inset="true" data-icon="false">
         <li><a href="#settings" data-transition="none">Settings</a></li>
         <li><a href="#about" data-transition="none">About</a></li>
+        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
       </ul>
     </div>
     <!-- header -->
@@ -177,6 +182,7 @@
       <ul data-role="listview" data-inset="true" data-icon="false">
         <li><a href="#settings" class="ui-btn ui-btn-active" data-transition="none">Settings</a></li>
         <li><a href="#about" data-transition="none">About</a></li>
+        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
       </ul>
     </div>
     <!-- header -->
@@ -199,9 +205,9 @@
       <div id="notificationsCollapsible" data-role="collapsible">
         <h3>Notifications</h3>
         <label class="settings-description">Activate smell and air quality notifications that are important to you</label>
-        <label for="checkbox_smell_notifications">Smell Report Alerts <label class="settings-description-smaller">(notifications about reports rated 3-5)</label></label>
+        <label for="checkbox_smell_notifications">Smell Report Alerts<label class="settings-description-smaller">(notifications about pgh reports rated 3-5)</label></label>
         <input type="checkbox" id="checkbox_smell_notifications" />
-        <label for="checkbox_pghaqi_notifications">Pittsburgh Air Quality Index Alerts <label class="settings-description-smaller">(notifications about air quality conditions)</label></label>
+        <label for="checkbox_pghaqi_notifications">Air Quality Index Changes<label class="settings-description-smaller">(notifications about pgh air quality conditions)</label></label>
         <input type="checkbox" id="checkbox_pghaqi_notifications" />
       </div>
     </div>
@@ -247,6 +253,7 @@
       <ul data-role="listview" data-inset="true" data-icon="false">
         <li><a href="#settings" data-transition="none">Settings</a></li>
         <li><a href="#about" class="ui-btn ui-btn-active" data-transition="none">About</a></li>
+        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
       </ul>
     </div>
     <!-- header -->
@@ -288,6 +295,64 @@
   </div>
 
 
+  <div data-role="page" id="howitworks">
+    <!-- panel -->
+    <div data-role="panel" id="howitworks-panel" data-display="overlay">
+      <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
+      <ul data-role="listview" data-inset="true" data-icon="false">
+        <li><a href="#settings" data-transition="none">Settings</a></li>
+        <li><a href="#about" data-transition="none">About</a></li>
+        <li><a href="#howitworks" class="ui-btn ui-btn-active" data-transition="none">How It Works</a></li>
+      </ul>
+    </div>
+    <!-- header -->
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <a href="#howitworks-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
+      <h1>How It Works</h1>
+    </div>
+    <!-- main -->
+    <div role="main" class="ui-content">
+      <h3>How It Works</h3>
+      <p>We take every precaution to protect any personally identifiable data. All information shown on the public map visualization for Smell PGH is anonymous and location data is skewed to protect your privacy. Personal contact information you enter in the settings tab, is only shared with ACHD and not stored in our database. Our backend database only contains anonymous User ID’s created by your app service (Apple or Google Play).</p>
+
+      <p>The basic function of the Smell PGH app is as follows:</p>
+      <ul>
+        <li>When you experience a pollution odor outdoors, you launch the app and pick a rating for the smell you experience (from 1 through 5)</li>
+        <li>Adding a description of the smell (e.g. "Industrial", "Woodsmoke”, etc.) is highly encouraged, since this can help the county isolate the source</li>
+        <li>You also have the option to (but are not required to):</li>
+        <ul>
+          <li>List any symptoms attributable to the experience</li>
+          <li>Send a personal note/question to ACHD</li>
+        </ul>
+        <li>NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map</li>
+        <li>Once you hit 'Submit’, the information you report is pulled together in an email format that includes:</li>
+        <ul>
+          <li>The location of the smell (based on the GPS location of your phone)</li>
+          <li>Date and Time of smell</li>
+          <li>Rating and description (if provided) of smell</li>
+          <li>Any personal notes and/or questions to ACHD (if provided)</li>
+        </ul>
+        <li>This email is then sent directly to ACHD</li>
+        <li>At the same time your smell report is added to the public Smell PGH map</li>
+        <ul>
+          <li>A triangle icon that's the color of your smell rating represents your report</li>
+          <li>Your location is obscured on the map by slightly shifting the coordinates to protect your privacy</li>
+          <li>Tapping your smell report icon will show the details of your report, including the: date, time, rating, description (if provided) and symptoms (if provided)</li>
+          <li>NO personally identifiable information is shown on the map</li>
+        </ul>
+      </ul>
+    <!-- footer -->
+    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
+          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
   <div data-role="page" id="locationselect" class="page-fullscreened">
     <!-- panel -->
     <div data-role="panel" id="map-panel" data-display="overlay">
@@ -295,6 +360,7 @@
       <ul data-role="listview" data-inset="true" data-icon="false">
         <li><a href="#settings" data-transition="none">Settings</a></li>
         <li><a href="#about" data-transition="none">About</a></li>
+        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
       </ul>
     </div>
     <!-- header -->
