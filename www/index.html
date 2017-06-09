@@ -91,18 +91,20 @@
         <label for="textfield_additional_comments">Add a personal note to the Health Department</label>
         <textarea type="text" name="textfield_additional_comments" id="textfield_additional_comments" value="" data-clear-btn="true"></textarea>
       </div>
-      <label for="checkbox_current_time_location">Report Current Time/Location<label class="settings-description-smaller">Uncheck this box to manually select a time and location for the smell report.</label></label>
-      <input type="checkbox" id="checkbox_current_time_location" checked="checked" />
-      <div class="homepage-section" id="display_for_custom_time_location">
-        <!-- custom location -->
-        <label for="button_smell_location">Report Location</label>
-        <button type="button" id="button_smell_location">Current Location (default)</button>
-        <!-- custom time -->
-        <label for="select-report-time">Report Time</label>
-        <select name="select-report-time" id="select-report-time">
-          <option value=""></option>
-          <option value="">Now</option>
-        </select>
+      <div id="current_time_location">
+        <label for="checkbox_current_time_location">Report Current Time/Location<label class="settings-description-smaller">Uncheck this box to manually select a time and location for the smell report.</label></label>
+        <input type="checkbox" id="checkbox_current_time_location" checked="checked" />
+        <div class="homepage-section" id="display_for_custom_time_location">
+          <!-- custom location -->
+          <label for="button_smell_location">Report Location</label>
+          <button type="button" id="button_smell_location">Current Location (default)</button>
+          <!-- custom time -->
+          <label for="select-report-time">Report Time</label>
+          <select name="select-report-time" id="select-report-time">
+            <option value=""></option>
+            <option value="">Now</option>
+          </select>
+        </div>
       </div>
       <br/>
       <div class="submission-disclaimer">

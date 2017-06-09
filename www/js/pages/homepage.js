@@ -21,6 +21,9 @@
     Location.hasLocation = false;
     HomePage.checkSubmitStatus();
 
+    // TODO hide location/time select for now; remove later
+    $("#current_time_location").hide();
+
     // first-time modal
     if (LocalStorage.get("firsttime_home")) {
       HomePage.showHomeModal();
