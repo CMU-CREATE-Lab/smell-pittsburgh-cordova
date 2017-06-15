@@ -3,7 +3,7 @@ var Constants = {
   LOCATION_SERVICES: false,
   PLATFORM_CALLBACK_ONREADY: false,
   SUBMIT_TO_ACHD: true,
-  APP_VERSION: "1.8.0",
+  APP_VERSION: "1.8.3",
   URL_SMELLPGH: "http://localhost",
 
   // Page Ids
