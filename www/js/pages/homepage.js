@@ -7,6 +7,7 @@
   additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day please let ACHD know",
   isLatLngDefined: false,
   returningFromLocationSelectPage: false,
+  request: null,
   location: {"lat": 0, "lng": 0},
 
 
@@ -19,6 +20,10 @@
     console.log("HomePage.initialize");
 
     Location.hasLocation = false;
+    if (HomePage.request != null) {
+      HomePage.request.abort();
+      HomePage.request = null;
+    }
     HomePage.checkSubmitStatus();
 
     // TODO hide location/time select for now; remove later
@@ -278,7 +283,11 @@
 
   submitAjaxWithData: function(data) {
     showSpinner("Submitting Report...");
-    $.ajax({
+    if (HomePage.request != null) {
+      console.log("WARNING: refusing to send with non-null request.");
+      return;
+    }
+    HomePage.request = $.ajax({
       type: "POST",
       dataType: "json",
       url: Constants.URL_SMELLPGH+"/api/v1/smell_reports",
@@ -288,11 +297,13 @@
       success: function (data) {
         hideSpinner();
         HomePage.clearForm();
+        HomePage.request = null;
         $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
       },
 
       error: function (msg) {
         hideSpinner();
+        HomePage.request = null;
         alert("There was a problem submitting this report.");
       }
     });
