@@ -1,3 +1,8 @@
+/**
+ * Namespace for all app-related calls.
+ * @namespace App
+ */
+
 var App = {
 
   isDeviceReady: false,
@@ -6,6 +11,10 @@ var App = {
   htmlElementToScrollAfterKeyboard: null, // this is the HTML element you want to scroll to after the keyboard has been opened
   htmlElementToBlurAfterKeyboardCloses: null, // this is the HTML element you need to blur after the keyboard has been closed to avoid weird glitches on using checkboxradio widgets
 
+  /**
+   * The type of callback that is being handled for calls to {@link initializePage}.
+   * @enum {number}
+   */
   CallbackType: {
     CREATE: 0,
     RESUME: 1,
@@ -13,6 +22,9 @@ var App = {
   },
 
 
+  /**
+   * Called after the HTML body loads.
+   */
   initialize: function () {
     console.log("onInitialize");
     if (LocalStorage.get("firsttime_startup")) {
@@ -27,6 +39,11 @@ var App = {
   // helper functions
 
 
+  /**
+   * Perform necessary initialization after page loads.
+   * @param {string} pageId - HTML id for the jquerymobile page.
+   * @param {callbackType} callbackType
+   */
   initializePage: function(pageId, callbackType) {
     // remove listener for keyboard events
     window.removeEventListener("native.keyboardshow", onKeyboardShowInHomePage);
@@ -69,6 +86,9 @@ var App = {
   // callbacks
 
 
+  /**
+   * Listener for ondeviceready on document.
+   */
   onDeviceReady: function () {
     console.log("onDeviceReady");
 
@@ -111,6 +131,9 @@ var App = {
   },
 
 
+  /**
+   * Binded "resume" event for document.
+   */
   onResume: function() {
     console.log("onResume");
 
@@ -119,6 +142,9 @@ var App = {
   },
 
 
+  /**
+   * Binded "pause" event for document.
+   */
   onPause: function() {
     console.log("onPause");
     if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED) {
@@ -129,6 +155,9 @@ var App = {
   },
 
 
+  /**
+   * Binded "pagecontainershow" event for document.
+   */
   onPageContainerShow: function (event, ui) {
     var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
     console.log("onPageContainerShow: " + pageId);

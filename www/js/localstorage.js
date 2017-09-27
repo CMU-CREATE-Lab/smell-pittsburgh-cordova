@@ -1,5 +1,13 @@
+/**
+ * A helper for manipulating and accessing window.localStorage.
+ * @namespace Location
+ */
+
 var LocalStorage = {
 
+  /**
+   * The default key-value pairs; use a key-value pair when a key is not yet defined.
+   */
   DEFAULT_SETTINGS: {
     // TODO display version number somewhere
     storage_app_version: "1.1",
@@ -20,6 +28,9 @@ var LocalStorage = {
   },
 
 
+  /**
+   * Called when script is first loaded into HTML.
+   */
   initialize: function() {
     if (this.get("storage_app_version") == null) {
       window.localStorage.clear();
@@ -33,17 +44,29 @@ var LocalStorage = {
   },
 
 
+  /**
+   * Access a value from window.localStorage.
+   * @param {string} key - The key that the value is associated with.
+   * @returns {json} The value for the specified key.
+   */
   get: function(key) {
     return JSON.parse(window.localStorage.getItem(key));
   },
 
 
+  /**
+   * Set a key-value pair for window.localStorage.
+   * @param {string} key
+   * @param {json} value
+   */
   set: function(key, value) {
     window.localStorage.setItem(key, JSON.stringify(value));
   },
 
 
-  // generate a hash for the user
+  /**
+   * Generate a random hash for the user.
+   */
   generateUserHash: function() {
     var userHash;
 
