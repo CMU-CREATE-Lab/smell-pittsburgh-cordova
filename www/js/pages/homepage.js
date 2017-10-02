@@ -298,6 +298,7 @@
         hideSpinner();
         HomePage.clearForm();
         HomePage.request = null;
+        MapPage.centerLocation = [ data["latitude"], data["longitude"] ];
         $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
       },
 
