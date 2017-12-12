@@ -30,13 +30,16 @@ function hideSpinner() {
 // Firebase helpers
 
 
-function openWithPage(pageName) {
+function openWithPage(pageName, notificationType) {
   console.log("openWithPage");
   var pageId;
   switch (pageName) {
     case "map":
       pageId = Constants.MAP_PAGE;
       console.log("openWithPage 'map'");
+      if (notificationType == "prediction") {
+        MapPage.openedPredictionNotification = true;
+      }
       $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
       break;
     default:
@@ -57,7 +60,7 @@ function initializeFCM() {
   window.FirebasePlugin.onNotificationOpen(function(notification) {
       console.log(JSON.stringify(notification));
       if (notification["open_with_page"]) {
-        openWithPage(notification["open_with_page"]);
+        openWithPage(notification["open_with_page"], notification["notification_type"]);
       }
     }, function(error) {
       console.error(error);

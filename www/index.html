@@ -146,6 +146,16 @@
         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">OK</a>
       </div>
     </div>
+    <div id="modal-predict-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
+      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+      <div data-role="header" data-theme="a">
+        <h1 class="modal-title">Smell Event Predictions</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <p>We are currently testing a smell prediction model that can alert Pittsburgh residents about a potential smell event in the area. The predictions' accuracy should improve as we receive more smell reports to verify our algorithm. We hope these notifications are useful to you!</p>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">OK</a>
+      </div>
+    </div>
     <!-- panel -->
     <div data-role="panel" id="map-panel" data-display="overlay">
       <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
@@ -208,7 +218,7 @@
       <div id="notificationsCollapsible" data-role="collapsible">
         <h3>Notifications</h3>
         <label class="settings-description">Activate smell and air quality notifications that are important to you</label>
-        <label for="checkbox_smell_notifications">Smell Report Alerts<label class="settings-description-smaller">(notifications about pgh reports rated 3-5)</label></label>
+        <label for="checkbox_smell_notifications">Smell Event Alerts<label class="settings-description-smaller">(notifications about a potential smell event in the next 4-8 hours)</label></label>
         <input type="checkbox" id="checkbox_smell_notifications" />
         <label for="checkbox_pghaqi_notifications">Air Quality Index Changes<label class="settings-description-smaller">(notifications about pgh air quality conditions)</label></label>
         <input type="checkbox" id="checkbox_pghaqi_notifications" />
