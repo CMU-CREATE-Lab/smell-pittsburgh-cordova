@@ -1,7 +1,6 @@
 ﻿var MapPage = {
 
   centerLocation: [],
-  openedPredictionNotification: false,
 
 
   initialize: function () {
@@ -10,17 +9,9 @@
     // refresh iframe
     $('#iframe-map').attr('src', Constants.URL_SMELLPGH+"/visualization?user_hash="+LocalStorage.get("user_hash") );
 
-    // first-time prediction modal
-    if (MapPage.openedPredictionNotification) {
-      if (LocalStorage.get("firsttime_prediction")) {
-        MapPage.showModal("modal-predict-firsttime");
-        LocalStorage.set("firsttime_prediction",false);
-      }
-      MapPage.openedPredictionNotification = false;
-    }
     // first-time map modals
     if (LocalStorage.get("firsttime_map")) {
-      MapPage.showModal("modal-map-firsttime");
+      MapPage.showMapModal();
       LocalStorage.set("firsttime_map",false);
     }
 
@@ -51,21 +42,7 @@
 
 
   showMapModal: function() {
-    $("#modal-map-firsttime").popup();
-    // delays opening to avoid issues with iOS < 9.3
-    setTimeout(function() {
-      $("#modal-map-firsttime").popup("open");
-    }, 250);
-  },
-
-
-  showModal: function(modalId) {
-    var modal = "#"+modalId
-    $(modal).popup();
-    // delays opening to avoid issues with iOS < 9.3
-    setTimeout(function() {
-      $(modal).popup("open");
-    }, 250);
+    showModal("modal-map-firsttime");
   },
 
 }

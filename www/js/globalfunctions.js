@@ -34,12 +34,15 @@ function openWithPage(pageName, notificationType) {
   console.log("openWithPage");
   var pageId;
   switch (pageName) {
+    case "home":
+      pageId = Constants.HOME_PAGE;
+      if (notificationType == "prediction") {
+        HomePage.openedPredictionNotification = true;
+      }
+      $.mobile.pageContainer.pagecontainer("change", "#home", { changeHash: false, transition: "none" });
+      break;
     case "map":
       pageId = Constants.MAP_PAGE;
-      console.log("openWithPage 'map'");
-      if (notificationType == "prediction") {
-        MapPage.openedPredictionNotification = true;
-      }
       $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
       break;
     default:
@@ -76,9 +79,21 @@ function onKeyboardShowInHomePage(keyboardHeight) {
   App.htmlElementToScrollAfterKeyboard.scrollIntoView();
 }
 
+
 function onKeyboardHide(e) {
   console.log("keyboard CLOSE");
   $(App.htmlElementToBlurAfterKeyboardCloses).blur();
+}
+
+
+function showModal(modalId) {
+  var modal = "#"+modalId;
+  console.log("showModal "+modal);
+  $(modal).popup();
+  // delays opening to avoid issues with iOS < 9.3
+  setTimeout(function() {
+    $(modal).popup("open");
+  }, 250);
 }
 
 

@@ -9,6 +9,7 @@
   returningFromLocationSelectPage: false,
   request: null,
   location: {"lat": 0, "lng": 0},
+  openedPredictionNotification: false,
 
 
   initialize: function () {
@@ -29,6 +30,14 @@
     // TODO hide location/time select for now; remove later
     $("#current_time_location").hide();
 
+    // first-time predict modal
+    if (HomePage.openedPredictionNotification) {
+      if (LocalStorage.get("firsttime_prediction")) {
+        HomePage.showPredictModal();
+        LocalStorage.set("firsttime_prediction",false);
+      }
+      HomePage.openedPredictionNotification = false;
+    }
     // first-time modal
     if (LocalStorage.get("firsttime_home")) {
       HomePage.showHomeModal();
@@ -142,15 +151,6 @@
   },
 
 
-  showHomeModal: function() {
-    $("#modal-home-firsttime").popup();
-    // delays opening to avoid issues with iOS < 9.3
-    setTimeout(function() {
-      $("#modal-home-firsttime").popup("open");
-    }, 250);
-  },
-
-
   fieldsDisabled: function(smellsJustFine) {
     // if it smells "just fine!" then don't include smell descriptors and symptoms
     $("#textfield_smell_description,#textfield_feelings_symptoms").attr("disabled",smellsJustFine);
@@ -192,6 +192,16 @@
     $("#display_for_custom_time_location").hide();
     $("#select-report-time").val("");
     $("#select-report-time").selectmenu("refresh", true);
+  },
+
+
+  showPredictModal: function() {
+    showModal("modal-predict-firsttime");
+  },
+
+
+  showHomeModal: function() {
+    showModal("modal-home-firsttime");
   },
 
 
