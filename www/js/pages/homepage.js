@@ -251,12 +251,12 @@
       if (usesCustomLocation) {
         data["latitude"] = HomePage.location["lat"];
         data["longitude"] = HomePage.location["lng"];
-        HomePage.submitAjaxWithDataToV1Api(data);
+        HomePage.submitAjaxWithData(data);
       } else {
         Location.requestLocation(function(latitude,longitude) {
           data["latitude"] = latitude;
           data["longitude"] = longitude;
-          HomePage.submitAjaxWithDataToV1Api(data);
+          HomePage.submitAjaxWithData(data);
         });
       }
 
@@ -292,7 +292,14 @@
 
 
   submitAjaxWithData: function(data) {
-    // TODO debug info, client token to `data`
+    var userAgent = (typeof navigator != "undefined" && navigator.userAgent != undefined ) ? navigator.userAgent : "undefined";
+    data["debug_info"] = {
+      "app_version": Constants.APP_VERSION,
+      "naviator.userAgent": userAgent,
+    };
+    data["client_token"] = Constants.CLIENT_ID;
+    var url = Constants.URL_SMELLPGH+"/api/v2/smell_reports";
+    HomePage.submitAjaxToUrlWithData(url,data);
   },
 
 

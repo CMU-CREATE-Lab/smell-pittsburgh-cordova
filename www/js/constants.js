@@ -5,6 +5,7 @@
 
 var Constants = {
 
+  CLIENT_ID: "KEEP-IT-SECRET",
   LOCATION_SERVICES: true,
   PLATFORM_CALLBACK_ONREADY: true,
   SUBMIT_TO_ACHD: true,
