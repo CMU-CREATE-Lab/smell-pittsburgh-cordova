@@ -251,12 +251,12 @@
       if (usesCustomLocation) {
         data["latitude"] = HomePage.location["lat"];
         data["longitude"] = HomePage.location["lng"];
-        HomePage.submitAjaxWithData(data);
+        HomePage.submitAjaxWithDataToV1Api(data);
       } else {
         Location.requestLocation(function(latitude,longitude) {
           data["latitude"] = latitude;
           data["longitude"] = longitude;
-          HomePage.submitAjaxWithData(data);
+          HomePage.submitAjaxWithDataToV1Api(data);
         });
       }
 
@@ -292,6 +292,17 @@
 
 
   submitAjaxWithData: function(data) {
+    // TODO debug info, client token to `data`
+  },
+
+
+  submitAjaxWithDataToV1Api: function(data) {
+    var url = Constants.URL_SMELLPGH+"/api/v1/smell_reports";
+    HomePage.submitAjaxToUrlWithData(url,data);
+  },
+
+
+  submitAjaxToUrlWithData: function(url, data) {
     showSpinner("Submitting Report...");
     if (HomePage.request != null) {
       console.log("WARNING: refusing to send with non-null request.");
@@ -300,7 +311,7 @@
     HomePage.request = $.ajax({
       type: "POST",
       dataType: "json",
-      url: Constants.URL_SMELLPGH+"/api/v1/smell_reports",
+      url: url,
       data: data,
       xhrFields: { withCredentials: false },
 
