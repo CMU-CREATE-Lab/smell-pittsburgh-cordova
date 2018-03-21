@@ -295,7 +295,7 @@
     var userAgent = (typeof navigator != "undefined" && navigator.userAgent != undefined ) ? navigator.userAgent : "undefined";
     data["debug_info"] = {
       "app_version": Constants.APP_VERSION,
-      "naviator.userAgent": userAgent,
+      "navigator.userAgent": userAgent,
     };
     data["client_token"] = Constants.CLIENT_ID;
     var url = Constants.URL_SMELLPGH+"/api/v2/smell_reports";
