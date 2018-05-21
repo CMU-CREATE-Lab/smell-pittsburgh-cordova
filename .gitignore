@@ -11,3 +11,6 @@ smell-pittsburgh-cordova.sln
 taco.json
 *.DS_Store
 /www/img/ios-*
+node_modules/
+package-lock.json
+package.json
