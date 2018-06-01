@@ -49,9 +49,6 @@ var App = {
     window.removeEventListener("native.keyboardshow", onKeyboardShowInHomePage);
     window.removeEventListener('native.keyboardhide', onKeyboardHide);
 
-    // TODO firebase
-    window.FirebasePlugin.logEvent("select_content", {content_type: "page_view", item_id: "xxx"});
-
     // Use this if the page needs initialized everytime the page is viewed
     switch (pageId) {
     case Constants.STARTUP_PAGE:
