@@ -19,6 +19,7 @@ var Analytics = {
 
 
   initializeUserProperties: function(userHash) {
+    window.FirebasePlugin.setUserId(userHash);
     window.FirebasePlugin.setUserProperty("user_hash", userHash);
   },
 
@@ -71,6 +72,3 @@ var Analytics = {
   },
 
 }
-
-
-Analytics.initialize();

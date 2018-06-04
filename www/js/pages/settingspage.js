@@ -15,7 +15,7 @@
     console.log("SettingsPage.onDeviceReady");
     // avoid seeing the collapsed tabs on the first page transition
     this.expandTabs();
-    
+
     // click listeners
     $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
     $("#checkbox_pghaqi_notifications").click(SettingsPage.onTogglePittsburghAqiNotifications);
@@ -89,27 +89,35 @@
 
 
   onToggleSmellNotifications: function() {
+    var topicName = Constants.SMELL_REPORT_TOPIC;
+
     if (LocalStorage.get("receive_smell_notifications")) {
       LocalStorage.set("receive_smell_notifications",false);
-      window.FirebasePlugin.unsubscribe(Constants.SMELL_REPORT_TOPIC);
-      console.log("unsubscribed from "+Constants.SMELL_REPORT_TOPIC);
+      window.FirebasePlugin.unsubscribe(topicName);
+      console.log("unsubscribed from "+topicName);
+      Analytics.logOnUnsubscribeEvent(topicName);
     } else {
       LocalStorage.set("receive_smell_notifications",true);
-      window.FirebasePlugin.subscribe(Constants.SMELL_REPORT_TOPIC);
-      console.log("subscribed to "+Constants.SMELL_REPORT_TOPIC);
+      window.FirebasePlugin.subscribe(topicName);
+      console.log("subscribed to "+topicName);
+      Analytics.logOnSubscribeEvent(topicName);
     }
   },
 
 
   onTogglePittsburghAqiNotifications: function() {
+    var topicName = Constants.PITTSBURGH_AQI_TOPIC;
+
     if (LocalStorage.get("receive_pghaqi_notifications")) {
       LocalStorage.set("receive_pghaqi_notifications",false);
-      window.FirebasePlugin.unsubscribe(Constants.PITTSBURGH_AQI_TOPIC);
-      console.log("unsubscribed from "+Constants.PITTSBURGH_AQI_TOPIC);
+      window.FirebasePlugin.unsubscribe(topicName);
+      console.log("unsubscribed from "+topicName);
+      Analytics.logOnUnsubscribeEvent(topicName);
     } else {
       LocalStorage.set("receive_pghaqi_notifications",true);
-      window.FirebasePlugin.subscribe(Constants.PITTSBURGH_AQI_TOPIC);
-      console.log("subscribed to "+Constants.PITTSBURGH_AQI_TOPIC);
+      window.FirebasePlugin.subscribe(topicName);
+      console.log("subscribed to "+topicName);
+      Analytics.logOnSubscribeEvent(topicName);
     }
   },
 

@@ -62,6 +62,7 @@ function initializeFCM() {
   });
   window.FirebasePlugin.onNotificationOpen(function(notification) {
       console.log(JSON.stringify(notification));
+      Analytics.logOnClickNotificationEvent(notification["notification_type"]);
       if (notification["open_with_page"]) {
         openWithPage(notification["open_with_page"], notification["notification_type"]);
       }

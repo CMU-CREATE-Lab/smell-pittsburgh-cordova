@@ -49,6 +49,9 @@ var App = {
     window.removeEventListener("native.keyboardshow", onKeyboardShowInHomePage);
     window.removeEventListener('native.keyboardhide', onKeyboardHide);
 
+    // set Screen name for Firebase Analytics (NOTE: pageId might be nonsense)
+    Analytics.setScreenName(pageId);
+
     // Use this if the page needs initialized everytime the page is viewed
     switch (pageId) {
     case Constants.STARTUP_PAGE:
@@ -123,6 +126,9 @@ var App = {
     window.FirebasePlugin.grantPermission();
     Location.requestLocationPermission();
 
+    // start Analytics
+    Analytics.initialize();
+
     // listen for keyboard events
     window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
     window.addEventListener('native.keyboardhide', onKeyboardHide);
@@ -136,6 +142,7 @@ var App = {
    */
   onResume: function() {
     console.log("onResume");
+    Analytics.logOnResumeEvent();
 
     var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
     App.initializePage(pageId, App.CallbackType.RESUME);
@@ -147,6 +154,8 @@ var App = {
    */
   onPause: function() {
     console.log("onPause");
+    Analytics.logOnPauseEvent();
+
     if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED) {
       Location.stopRequestLocation();
     } else if (App.isDeviceReady) {
