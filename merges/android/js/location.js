@@ -46,13 +46,14 @@ var Location = {
 
 
   // request the users location
+  // TODO @tasota rename afterSuccess to callback
   requestLocation: function(afterSuccess) {
     console.log("requestLocation");
 
     if (isConnected()) {
-      if (!this.isRequestingLocation) {
+      if (!Location.isRequestingLocation) {
         console.log("in requestLocation");
-        this.isRequestingLocation = true;
+        Location.isRequestingLocation = true;
 
         var onSuccess = function(position) {
           Location.coords = position.coords;
@@ -67,8 +68,9 @@ var Location = {
           console.log("error code: " + error.code);
           console.log("error message: " + error.message);
           Location.stopRequestLocation();
-          confirm("Would you like to retry?", onConfirm, "Failure Requesting Location", ["Retry", "Cancel"]);
+          navigator.notification.confirm("Would you like to retry?", onConfirm, "Failure Requesting Location", ["Retry", "Cancel"]);
           function onConfirm(index) {
+            // TODO @tasota callback
             if (index == 1) Location.requestLocation(afterSuccess);
           }
         };
@@ -85,7 +87,7 @@ var Location = {
           }, function(error) {
             console.log("error code: " + error.code + "\nerror message: " + error.message);
             App.accuracyStatus = Constants.AccuracyEnum.DISABLED;
-            confirm("The app may not function as expected without the appropiate location settings enabled.", pushLocation, "Failure Changing Location Settings", ["Ok"]);
+            navigator.notification.confirm("The app may not function as expected without the appropiate location settings enabled.", pushLocation, "Failure Changing Location Settings", ["Ok"]);
           }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
       }
     } else {
@@ -100,12 +102,12 @@ var Location = {
   // stop requesting the users location
   stopRequestLocation: function() {
     console.log("stopRequestLocation");
-    this.isRequestingLocation = false;
+    Location.isRequestingLocation = false;
     hideSpinner();
-    var l = this.watchIds.length;
+    var l = Location.watchIds.length;
     for (var i = l-1; i >= 0; i--) {
-      navigator.geolocation.clearWatch(this.watchIds[i]);
-      this.watchIds.pop();
+      navigator.geolocation.clearWatch(Location.watchIds[i]);
+      Location.watchIds.pop();
     }
   }
 

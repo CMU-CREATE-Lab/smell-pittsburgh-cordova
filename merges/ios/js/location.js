@@ -42,8 +42,8 @@ var Location = {
   requestLocation: function(afterSuccess) {
     console.log("requestLocation");
     if (isConnected()) {
-      if (!this.isRequestingLocation) {
-        this.isRequestingLocation = true;
+      if (!Location.isRequestingLocation) {
+        Location.isRequestingLocation = true;
         var onSuccess = function(position) {
           Location.coords = position.coords;
           Location.hasLocation = true;
@@ -57,16 +57,17 @@ var Location = {
           console.log("error code: " + error.code);
           console.log("error message: " + error.message);
           Location.stopRequestLocation();
-          confirm("Would you like to retry?", onConfirm, "Failure Requesting Location", ["Retry", "Cancel"]);
+          navigator.notification.confirm("Would you like to retry?", onConfirm, "Failure Requesting Location", ["Retry", "Cancel"]);
           function onConfirm(index) {
             if (index == 1) {
               Location.requestLocation(afterSuccess);
+            } else {
+              // TODO @tasota callback
             }
           }
         };
 
         // change settings if we need to
-        this.isAccuracyPrompt = true;
         App.accuracyStatus = Constants.AccuracyEnum.DISABLED;
         showSpinner("Requesting Location\nPlease Wait...");
         Location.isRequestingLocation = true;
@@ -84,7 +85,7 @@ var Location = {
   // stop requesting the users location
   stopRequestLocation: function() {
     console.log("stopRequestLocation");
-    this.isRequestingLocation = false;
+    Location.isRequestingLocation = false;
     hideSpinner();
   }
 
