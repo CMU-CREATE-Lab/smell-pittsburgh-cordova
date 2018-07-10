@@ -4,7 +4,7 @@
   smellValue: 0,
   smellDescriptionPlaceholder: "e.g. industrial, woodsmoke, rotten-eggs",
   smellFeelingsSymptomsPlaceholder: "e.g. headache, sore throat, eye irritation",
-  additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day please let ACHD know",
+  additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day",
   isLatLngDefined: false,
   returningFromLocationSelectPage: false,
   request: null,
