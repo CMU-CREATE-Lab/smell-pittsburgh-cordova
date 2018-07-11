@@ -46,8 +46,8 @@ var Location = {
 
 
   // request the users location
-  // TODO @tasota rename afterSuccess to callback
-  requestLocation: function(afterSuccess) {
+  //now takes two callbacks the second fires on failure to get location
+  requestLocation: function(afterSuccess,afterFailure) {
     console.log("requestLocation");
 
     if (isConnected()) {
@@ -70,8 +70,12 @@ var Location = {
           Location.stopRequestLocation();
           navigator.notification.confirm("Would you like to retry?", onConfirm, "Failure Requesting Location", ["Retry", "Cancel"]);
           function onConfirm(index) {
-            // TODO @tasota callback
-            if (index == 1) Location.requestLocation(afterSuccess);
+            if (index == 1){
+               Location.requestLocation(afterSuccess);
+            }else{
+              //if getting location failed and they do not want to retry then fire afterFailure callback
+              afterFailure(error)
+            }
           }
         };
         var pushLocation = function() {

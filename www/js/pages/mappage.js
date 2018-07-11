@@ -6,10 +6,6 @@
   initialize: function () {
     console.log("MapPage.initialize");
 
-    // TODO @tasota we only want to reload ONCE (since we moved from hash to query string)
-    // refresh iframe
-    $('#iframe-map').attr('src', Constants.URL_SMELLPGH+"/visualization?user_hash="+LocalStorage.get("user_hash") );
-
     // first-time map modals
     if (LocalStorage.get("firsttime_map")) {
       MapPage.showMapModal();
@@ -21,6 +17,10 @@
       Location.requestLocation(function(latitude,longitude) {
         console.log("got latlong: "+latitude+","+longitude);
         $('#iframe-map').attr('src', Constants.URL_SMELLPGH+"/visualization?user_hash="+LocalStorage.get("user_hash")+"&latLng="+latitude+","+longitude);
+      },function (error){
+        console.log(error);
+        //if unable to get location use this src to at display something
+         $('#iframe-map').attr('src', Constants.URL_SMELLPGH+"/visualization?user_hash="+LocalStorage.get("user_hash") );
       });
     } else {
       var latitude = MapPage.centerLocation[0], longitude = MapPage.centerLocation[1];

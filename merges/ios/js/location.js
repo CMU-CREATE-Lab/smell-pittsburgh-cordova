@@ -39,7 +39,8 @@ var Location = {
 
 
   // request the users location
-  requestLocation: function(afterSuccess) {
+  //now takes two callbacks the second fires on failure to get location
+  requestLocation: function(afterSuccess,afterFailure) {
     console.log("requestLocation");
     if (isConnected()) {
       if (!Location.isRequestingLocation) {
@@ -62,7 +63,8 @@ var Location = {
             if (index == 1) {
               Location.requestLocation(afterSuccess);
             } else {
-              // TODO @tasota callback
+               //if getting location failed and they do not want to retry then fire afterFailure callback
+              afterFailure(error)
             }
           }
         };
