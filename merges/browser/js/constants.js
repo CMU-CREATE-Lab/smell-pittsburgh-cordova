@@ -3,8 +3,7 @@ var Constants = {
   CLIENT_ID: "KEEP-IT-SECRET",
   LOCATION_SERVICES: false,
   PLATFORM_CALLBACK_ONREADY: false,
-  SUBMIT_TO_ACHD: true,
-  APP_VERSION: "2.1.5",
+  APP_VERSION: "2.1.6",
   URL_SMELLPGH: "http://localhost",
 
   // Page Ids
@@ -20,7 +19,6 @@ var Constants = {
   NOTIFICATION_ENABLED_KEY: "notification",
   SMELL_NOTIFICATION_ENABLED_KEY: "smell_notification",
   SMELLS_KEY: "smells",
-  ACHD_ENABLED_KEY: "achd_enabled",
   EMAIL_KEY: "email",
   STARTUP_KEY: "startup",
   NAME_KEY: "name",
