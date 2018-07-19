@@ -10,6 +10,7 @@ var App = {
   accuracyStatus: Constants.AccuracyEnum.DISABLED,
   htmlElementToScrollAfterKeyboard: null, // this is the HTML element you want to scroll to after the keyboard has been opened
   htmlElementToBlurAfterKeyboardCloses: null, // this is the HTML element you need to blur after the keyboard has been closed to avoid weird glitches on using checkboxradio widgets
+  pastPage:"home",
 
   /**
    * The type of callback that is being handled for calls to {@link initializePage}.
@@ -33,6 +34,7 @@ var App = {
     } else {
       document.addEventListener("deviceready", this.onDeviceReady, false);
     }
+    $(".back-x").click(function(){App.navToPageID(App.pastPage)});
   },
 
 
@@ -59,6 +61,7 @@ var App = {
       break;
     case Constants.HOME_PAGE:
       HomePage.initialize();
+      App.pastPage=Constants.HOME_PAGE;
       // listen for keyboard events
       window.addEventListener("native.keyboardshow", onKeyboardShowInHomePage);
       window.addEventListener('native.keyboardhide', onKeyboardHide);
@@ -67,6 +70,7 @@ var App = {
       if (callbackType == App.CallbackType.CREATE) {
         MapPage.initialize();
       }
+      App.pastPage=Constants.MAP_PAGE;
       break;
     case Constants.SETTINGS_PAGE:
       SettingsPage.initialize();
@@ -171,6 +175,9 @@ var App = {
     var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
     console.log("onPageContainerShow: " + pageId);
     App.initializePage(pageId, App.CallbackType.CREATE);
+  },
+  navToPageID: function(pageId){
+    window.location="#"+pageId;
   }
 
 }

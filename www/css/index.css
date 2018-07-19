@@ -62,3 +62,11 @@ div[data-role="panel"] {
   color: inherit !important;
   text-shadow: none !important;
 }
+.close-button{
+  position:absolute;
+  left:0px;
+}
+.back-x{
+  height:30px;
+  width:30px
+}
