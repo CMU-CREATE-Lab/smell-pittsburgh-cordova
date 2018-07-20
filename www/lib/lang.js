@@ -106,6 +106,14 @@ var english={
 			label5:"(notifications about pgh air quality conditions)"
 		},
 		footer:constants.defaultFooter
-	}
+	},
+	startup:{
+		header:constants.defaultHeader,
+		h3:"Welcome to Smell PGH!",
+		p1:"Thank you for installing the Smell PGH App!",
+		p2:"This app is created by the CMU CREATE Lab and is designed to track pollution odors across the Pittsburgh region. If you detect a foul odor while you're outside, please report it through this app.",
+		p3:"All Smell PGH reports from Pittsburgh are made available to the local health department.",
+		footer:"Done"
+	},
 }
 //~~~~

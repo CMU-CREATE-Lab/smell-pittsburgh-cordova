@@ -231,6 +231,26 @@
       </div>
     </div>
     </script>
+    <script id="startup-tpl" type="text/template"><!-- header -->
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <h1>{{header.h1}}</h1>
+    </div>
+    <!-- main -->
+    <div role="main" class="ui-content">
+      <h3>{{h3}}</h3>
+      <p>{{p1}}</p>
+      <p>{{p2}}</p>
+      <p style="font-weight:bold;">{{p3}}</p>
+    </div>
+    <!-- footer -->
+    <div data-role="footer" data-position="fixed" data-id="startup_1" data-tap-toggle="false">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#settings" id="startup-to-settings" data-icon="carat-r" data-transition="none">{{footer}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </script>
 
 
   <div data-role="page" id="home">
@@ -246,25 +266,6 @@
 
 
   <div data-role="page" id="startup">
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <h1>Smell PGH</h1>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content">
-      <h3>Welcome to Smell PGH!</h3>
-      <p>Thank you for installing the Smell PGH App!</p>
-      <p>This app is created by the CMU CREATE Lab and is designed to track pollution odors across the Pittsburgh region. If you detect a foul odor while you're outside, please report it through this app.</p>
-      <p style="font-weight:bold;">All Smell PGH reports from Pittsburgh are made available to the local health department.</p>
-    </div>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="startup_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#settings" id="startup-to-settings" data-icon="carat-r" data-transition="none">Done</a></li>
-        </ul>
-      </div>
-    </div>
   </div>
 
 
