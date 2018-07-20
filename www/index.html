@@ -303,6 +303,64 @@
       </div>
     </div>
     </script>
+    <!--howitworks page template-->
+  <script id="howitworks-tpl" type="text/template">
+   <!-- panel -->
+    <div data-role="panel" id="howitworks-panel" data-display="overlay">
+      <ul data-role="listview" data-inset="false" data-icon="false">
+        <li><a href="#settings" data-transition="none">{{panel.li1}}</a></li>
+        <li><a href="#about" data-transition="none">{{panel.li2}}</a></li>
+        <li><a href="#howitworks" class="ui-btn ui-btn-active" data-transition="none">{{panel.li3}}</a></li>
+      </ul><br/>
+      <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a>
+    </div>
+    <!-- header -->
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <a href="#howitworks-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+      <h1>{{header.h1}}</h1>
+      <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
+    </div>
+    <!-- main -->
+    <div role="main" class="ui-content">
+      <h3>{{h3}}</h3>
+      <p>{{p1}}</p>
+
+      <p>{{p2}}</p>
+      <ul>
+        <li>{{li1}}</li>
+        <li>{{li2}}</li>
+        <li>{{li3}}</li>
+        <ul>
+          <li>{{li4}}</li>
+          <li>{{li5}}</li>
+        </ul>
+        <li>{{li6}}</li>
+        <li>{{li7}}</li>
+        <ul>
+          <li>{{li8}}</li>
+          <li>{{li9}}</li>
+          <li>{{li10}}</li>
+          <li>{{li11}}</li>
+        </ul>
+        <li>{{li12}}</li>
+        <li>{{li13}}</li>
+        <ul>
+          <li>{{li14}}</li>
+          <li>{{li15}}</li>
+          <li>{{li16}}</li>
+          <li>{{li17}}</li>
+        </ul>
+      </ul>
+    <!-- footer -->
+    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-icon="home" data-transition="none">{{footer.li1}}</a></li>
+          <li><a href="#map" data-icon="star" data-transition="none">{{footer.li2}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </script>
 
 
   <div data-role="page" id="home">
@@ -326,61 +384,6 @@
 
 
   <div data-role="page" id="howitworks">
-    <!-- panel -->
-    <div data-role="panel" id="howitworks-panel" data-display="overlay">
-      <ul data-role="listview" data-inset="false" data-icon="false">
-        <li><a href="#settings" data-transition="none">Settings</a></li>
-        <li><a href="#about" data-transition="none">About</a></li>
-        <li><a href="#howitworks" class="ui-btn ui-btn-active" data-transition="none">How It Works</a></li>
-      </ul><br/>
-      <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
-    </div>
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <a href="#howitworks-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-      <h1>How It Works</h1>
-      <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content">
-      <h3>How It Works</h3>
-      <p>We take every precaution to protect any personally identifiable data. All information shown on the public map visualization for Smell PGH is anonymous and location data is skewed to protect your privacy. Personal contact information you enter in the settings tab is only made available to the local health department. Our backend database only contains anonymous User ID's created by your app service (Apple or Google Play).</p>
-
-      <p>The basic function of the Smell PGH app is as follows:</p>
-      <ul>
-        <li>When you experience a pollution odor outdoors, you launch the app and pick a rating for the smell you experience (from 1 through 5)</li>
-        <li>Adding a description of the smell (e.g. "Industrial", "Woodsmoke", etc.) is highly encouraged, since this can help the county isolate the source</li>
-        <li>You also have the option to (but are not required to):</li>
-        <ul>
-          <li>List any symptoms attributable to the experience</li>
-          <li>Send a personal note/question to the local health department</li>
-        </ul>
-        <li>NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map</li>
-        <li>Once you hit 'Submit', the information you report is pulled together in an email format that includes:</li>
-        <ul>
-          <li>The location of the smell (based on the GPS location of your phone)</li>
-          <li>Date and Time of smell</li>
-          <li>Rating and description (if provided) of smell</li>
-          <li>Any personal notes and/or questions (if provided)</li>
-        </ul>
-        <li>This information is then made available to the local health department</li>
-        <li>At the same time your smell report is added to the public Smell PGH map</li>
-        <ul>
-          <li>A triangle icon that's the color of your smell rating represents your report</li>
-          <li>Your location is obscured on the map by slightly shifting the coordinates to protect your privacy</li>
-          <li>Tapping your smell report icon will show the details of your report, including the: date, time, rating, description (if provided) and symptoms (if provided)</li>
-          <li>NO personally identifiable information is shown on the map</li>
-        </ul>
-      </ul>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-        </ul>
-      </div>
-    </div>
   </div>
 
 

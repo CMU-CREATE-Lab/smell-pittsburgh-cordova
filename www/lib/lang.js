@@ -143,5 +143,33 @@ var english={
 		version:"version: ###",
 		footer:constants.defaultFooter
 	},
+	howitworks:{
+		panel:constants.defaultPanel,
+		header:{
+			h1:"How It Works",
+			a:constants.defaultHeader.a
+		},
+		h3:"How It Works",
+		p1:"We take every precaution to protect any personally identifiable data. All information shown on the public map visualization for Smell PGH is anonymous and location data is skewed to protect your privacy. Personal contact information you enter in the settings tab is only made available to the local health department. Our backend database only contains anonymous User ID's created by your app service (Apple or Google Play).",
+		p2:"The basic function of the Smell PGH app is as follows:",
+		li1:"When you experience a pollution odor outdoors, you launch the app and pick a rating for the smell you experience (from 1 through 5)",
+		li2:"Adding a description of the smell (e.g. \"Industrial\", \"Woodsmoke\", etc.) is highly encouraged, since this can help the county isolate the source",
+		li3:"You also have the option to (but are not required to):",
+		li4:"List any symptoms attributable to the experience",
+		li5:"Send a personal note/question to the local health department",
+		li6:"NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map",
+		li7:"Once you hit 'Submit', the information you report is pulled together in an email format that includes:",
+		li8:"The location of the smell (based on the GPS location of your phone)",
+		li9:"Date and Time of smell",
+		li10:"Rating and description (if provided) of smell",
+		li11:"Any personal notes and/or questions (if provided)",
+		li12:"This information is then made available to the local health department",
+		li13:"At the same time your smell report is added to the public Smell PGH map",
+		li14:"A triangle icon that's the color of your smell rating represents your report",
+		li15:"Your location is obscured on the map by slightly shifting the coordinates to protect your privacy",
+		li16:"Tapping your smell report icon will show the details of your report, including the: date, time, rating, description (if provided) and symptoms (if provided)",
+		li17:"NO personally identifiable information is shown on the map",
+		footer:constants.defaultFooter
+	}
 }
 //~~~~

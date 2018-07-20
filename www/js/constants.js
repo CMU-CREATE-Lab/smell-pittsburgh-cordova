@@ -18,6 +18,7 @@ var Constants = {
   SETTINGS_PAGE: "settings",
   ABOUT_PAGE: "about",
   LOCATION_SELECT_PAGE: "locationselect",
+  HOW_IT_WORKS_PAGE:"howitworks",
 
   // Local Storage keys
   USER_HASH_KEY: "user_hash",

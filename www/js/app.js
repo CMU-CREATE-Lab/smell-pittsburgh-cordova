@@ -81,6 +81,11 @@ var App = {
     case Constants.ABOUT_PAGE:
       AboutPage.initialize();
       break;
+    case Constants.HOW_IT_WORKS_PAGE:
+       var howitworksTpl=Handlebars.compile($("#howitworks-tpl").html());
+       $('#howitworks').html(howitworksTpl(english.howitworks));
+       $('#howitworks').trigger('create');
+      break;
     case Constants.LOCATION_SELECT_PAGE:
       if (callbackType == App.CallbackType.CREATE) {
         LocationSelectPage.initialize();
@@ -88,6 +93,7 @@ var App = {
       break;
     }
   },
+     
 
 
   // callbacks

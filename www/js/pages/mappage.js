@@ -49,33 +49,4 @@
   showMapModal: function() {
     showModal("modal-map-firsttime");
   },
-  //doesnt work just an idea
-/*
-  getCurrentCity:function(lat,lng,callback){
-    let city="";
-    if(city!=localStorage.get("current_city")){
-      localStorage.set("current_city",city);
-    }
-    callback(city);
-  },
-
-  checkPlaceList:function(city,time){
-    let  placesObj=localStorage.get("recent_places");
-    var time=placesObj.time;
-    var places=placesObj.places;
-    for(var i=0;i<places.length;i++){
-      if(city===places[i]){
-        return;
-      }
-    }
-    //current city
-    welsomeMessage(city)
-    placesObj={
-      time:time,
-      places:places
-    };
-    localStorage.set("recent_places",placesObj)
-    App.setPlace(city);
-  }*/
-
 }
