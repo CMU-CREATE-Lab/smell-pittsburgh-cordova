@@ -6,6 +6,7 @@
     var aboutTpl=Handlebars.compile($("#about-tpl").html());
     $('#about').html(aboutTpl(english.about));
     $('#about').trigger('create');
+    $(".back-x").click(function(){App.navToPageID(App.pastPage)});
   },
 
 

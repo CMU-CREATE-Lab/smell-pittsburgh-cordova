@@ -33,7 +33,6 @@ var App = {
     } else {
       document.addEventListener("deviceready", this.onDeviceReady, false);
     }
-    $(".back-x").click(function(){App.navToPageID(App.pastPage)});
   },
 
 
@@ -85,6 +84,7 @@ var App = {
        var howitworksTpl=Handlebars.compile($("#howitworks-tpl").html());
        $('#howitworks').html(howitworksTpl(english.howitworks));
        $('#howitworks').trigger('create');
+       $(".back-x").click(function(){App.navToPageID(App.pastPage)});
       break;
     case Constants.LOCATION_SELECT_PAGE:
       if (callbackType == App.CallbackType.CREATE) {

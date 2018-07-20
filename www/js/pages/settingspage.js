@@ -6,6 +6,7 @@
     var settingsTpl=Handlebars.compile($("#settings-tpl").html());
     $('#settings').html(settingsTpl(english.settings));
     $('#settings').trigger('create');
+    $(".back-x").click(function(){App.navToPageID(App.pastPage)});
     this.refreshNotifications();
     this.populateFormSettings();
     this.expandTabs();
