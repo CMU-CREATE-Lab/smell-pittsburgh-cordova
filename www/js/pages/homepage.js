@@ -2,9 +2,9 @@
 
   smellValueSelected: false,
   smellValue: 0,
-  smellDescriptionPlaceholder: "e.g. industrial, woodsmoke, rotten-eggs",
-  smellFeelingsSymptomsPlaceholder: "e.g. headache, sore throat, eye irritation",
-  additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day",
+  smellDescriptionPlaceholder: english.home.describe.placeholder,
+  smellFeelingsSymptomsPlaceholder: english.home.symptoms.placeholder,
+  additionalCommentsPlaceholder: english.home.note.placeholder,
   isLatLngDefined: false,
   returningFromLocationSelectPage: false,
   request: null,
@@ -44,10 +44,7 @@
       LocalStorage.set("firsttime_home",false);
     }
 
-    // set placeholder text
-    $("#textfield_smell_description").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellDescriptionPlaceholder);
-    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
-    $("#textfield_additional_comments").attr("placeholder",HomePage.additionalCommentsPlaceholder);
+   
 
     $("#checkbox_current_time_location").prop("checked", true);
     $("#checkbox_current_time_location").checkboxradio("refresh", true);
@@ -58,6 +55,14 @@
 
     // browser compatibility issues (Yay?)
     $("#home-panel").find(".ui-btn-active").removeClass("ui-btn-active");
+     //$("#home").trigger('pagecreate');
+     var homeTpl=Handlebars.compile($("#home-tpl").html());
+    $('#home').html(homeTpl(english.home));
+    $('#home').trigger('create')
+     // set placeholder text
+    $("#textfield_smell_description").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellDescriptionPlaceholder);
+    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
+    $("#textfield_additional_comments").attr("placeholder",HomePage.additionalCommentsPlaceholder);
   },
 
 
@@ -214,6 +219,7 @@
       var smell_description = $("#textfield_smell_description")[0].value;
       var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
       var additional_comments = $("#textfield_additional_comments")[0].value;
+      var submitACHD = Constants.SUBMIT_TO_ACHD;
       var email = LocalStorage.get("email");
       var name = LocalStorage.get("name");
       var phone_number = LocalStorage.get("phone");
@@ -228,10 +234,13 @@
         "additional_comments": additional_comments
       };
 
-      if (email != "") data["email"] = email;
-      if (name != "") data["name"] = name;
-      if (phone_number != "") data["phone_number"] = phone_number;
-      if (address != "") data["address"] = address;
+      if (submitACHD) {
+        data["submit_achd_form"] = Boolean(submitACHD);
+        if (email != "") data["email"] = email;
+        if (name != "") data["name"] = name;
+        if (phone_number != "") data["phone_number"] = phone_number;
+        if (address != "") data["address"] = address;
+      }
 
       // set custom location flag, custom time flag
       var usesCustomTime  = !$("#checkbox_current_time_location").prop("checked") && $("#select-report-time").val() != "0";

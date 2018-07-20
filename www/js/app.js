@@ -2,7 +2,9 @@
  * Namespace for all app-related calls.
  * @namespace App
  */
-
+var hi="hello";
+var z={ll:"frog","1":{t:"5"},"2":{t:"3"}};
+var oddArr=[{title:"hello"},{title:"cat"}];
 var App = {
 
   isDeviceReady: false,
@@ -27,7 +29,11 @@ var App = {
    * Called after the HTML body loads.
    */
   initialize: function () {
+    var a="cat";
     console.log("onInitialize");
+      console.log(english.home.panel)
+
+
     if (LocalStorage.get("firsttime_startup")) {
       $.mobile.pageContainer.pagecontainer("change", "#startup", { changeHash: true, transition: "none" });
       StartupPage.onDeviceReady();
@@ -55,6 +61,7 @@ var App = {
     Analytics.setScreenName(pageId);
 
     // Use this if the page needs initialized everytime the page is viewed
+    console.log("switching")
     switch (pageId) {
     case Constants.STARTUP_PAGE:
       StartupPage.initialize();
@@ -92,7 +99,10 @@ var App = {
 
   // callbacks
 
-
+do:function(){
+    //$('#home').popup()
+    //$('#home').page('refresh')
+},
   /**
    * Listener for ondeviceready on document.
    */
@@ -103,7 +113,6 @@ var App = {
     $(document).on("resume", App.onResume);
     $(document).on("pause", App.onPause);
     $(document).on("pagecontainershow", App.onPageContainerShow);
-
     // remove FastClick glitch from checkboxradio widgets
     disableUnwantedFastClickElements();
 
@@ -169,7 +178,7 @@ var App = {
 
 
   /**
-   * Binded "pagecontainershow" event for document.
+   * Binded "pagecontainershow" event for document. switch
    */
   onPageContainerShow: function (event, ui) {
     var pageId = $.mobile.pageContainer.pagecontainer("getActivePage")[0].id;
@@ -188,5 +197,6 @@ $(function() {
   console.log("onLoad");
   // avoid click delay on ios
   FastClick.attach(document.body);
+    App.do()
   App.initialize();
 });
