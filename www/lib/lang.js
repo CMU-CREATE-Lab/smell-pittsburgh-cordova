@@ -20,12 +20,13 @@ var constants={
 var english={
 	home:{
 		firstModal:{
+			a1:"Close",
 			h1:"Submitting Smell Reports",
 			li1:"Rate the odor on a scale of 1-5",
 			li2:"Describe the smell, source of odor and any symptoms (recommended",
 			li3:"Write a personal note to the health department (optional)",
 			li4:"Endorse your reports - see Settings (recommended)",
-			a:"OK",
+			a2:"OK",
 		},
 		perditionModal:{
 			a1:"Close",
@@ -114,6 +115,33 @@ var english={
 		p2:"This app is created by the CMU CREATE Lab and is designed to track pollution odors across the Pittsburgh region. If you detect a foul odor while you're outside, please report it through this app.",
 		p3:"All Smell PGH reports from Pittsburgh are made available to the local health department.",
 		footer:"Done"
+	},
+	about:{
+		panel:constants.defaultPanel,
+		header:{
+			h1:"About",
+			a:constants.defaultHeader.a
+		},
+		h3:"About Smell PGH",
+		link:{
+			p:"Official Website",
+			url_notDisplayed:"http://smellpgh.org/"
+		},
+		p1:"Pittsburgh was named one of the top 15 most livable cities in the US, but our air quality is often worse than other cities on that list. Foul odors outside are typically symptoms of a serious pollution problem in our region. We, our children, our friends and families all breathe in this air. If our air smells toxic, then we are likely inhaling toxins.",
+		p2:"Smell PGH was designed to crowdsource smell reports so we can track how pollutants travel through our air across Pittsburgh. All odor complaints submitted through the app are publicly available through our website, and made available to the local health department so it can better monitor and act on these complaints.",
+		center:"-- Smell -- Submit -- Share --",
+		p3:"Smell PGH was developed by the CMU CREATE Lab with support from the Heinz Endowments, and in collaboration with:",
+		li1:"ACCAN",
+		li2:"PennEnvironment",
+		li3:"GASP",
+		li4:"Sierra Club",
+		li5:"ROCIS",
+		li6:"Blue Lens, LLC",
+		li7:"PennFuture",
+		li8:"Clean Water Action",
+		li9:"Clean Air Council",
+		version:"version: ###",
+		footer:constants.defaultFooter
 	},
 }
 //~~~~

@@ -3,6 +3,9 @@
 
   initialize: function () {
     console.log("AboutPage.initialize");
+    var aboutTpl=Handlebars.compile($("#about-tpl").html());
+    $('#about').html(aboutTpl(english.about));
+    $('#about').trigger('create');
   },
 
 

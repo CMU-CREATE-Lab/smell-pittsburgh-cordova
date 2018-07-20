@@ -41,7 +41,7 @@
     <script id="home-tpl" type="text/template">
      <!-- modals -->
     <div id="modal-home-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
-      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">{{firstModal.a1}}</a>
       <div data-role="header" data-theme="a">
         <h1 class="modal-title">{{firstModal.h1}}</h1>
       </div>
@@ -52,7 +52,7 @@
           <li>{{firstModal.li3}}</li>
           <li>{{firstModal.li4}}</li>
         </ul>
-        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">{{firstModal.a}}</a>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">{{firstModal.a2}}</a>
       </div>
     </div>
     <div id="modal-predict-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
@@ -183,6 +183,7 @@
       </div>
     </div>
   </script>
+  <!--settings page template-->
   <script id="settings-tpl" type="text/template">
   <!-- panel -->
     <div data-role="panel" id="settings-panel" data-display="overlay">
@@ -231,6 +232,7 @@
       </div>
     </div>
     </script>
+    <!--startup page template-->
     <script id="startup-tpl" type="text/template"><!-- header -->
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
       <h1>{{header.h1}}</h1>
@@ -251,6 +253,56 @@
       </div>
     </div>
   </script>
+  <!--about page template-->
+  <script id="about-tpl" type="text/template">
+   <!-- panel -->
+    <div data-role="panel" id="about-panel" data-display="overlay">
+      <ul data-role="listview" data-inset="false" data-icon="false">
+        <li><a href="#settings" data-transition="none">{{panel.li1}}</a></li>
+        <li><a href="#about" class="ui-btn ui-btn-active" data-transition="none">{{panel.li2}}</a></li>
+        <li><a href="#howitworks" data-transition="none">{{panel.li3}}</a></li>
+      </ul><br/>
+      <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a>
+    </div>
+    <!-- header -->
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <a href="#about-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+      <h1>{{header.h1}}</h1>
+      <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
+    </div>
+    <!-- main -->
+    <div role="main" class="ui-content">
+      <h3>{{h3}}</h3>
+      <p><a href="{{link.url_notDisplayed}}" target="_blank">{{link.p}}</a></p>
+      <p>{{p1}}</p>
+      <p>{{p2}}</p>
+      <center class="smell-submit-share">{{center}}</center>
+      <p>{{p3}}</p>
+      <ul>
+        <li>{{li1}}</li>
+        <li>{{li2}}</li>
+        <li>{{li3}}</li>
+        <li>{{li4}}</li>
+        <li>{{li5}}</li>
+        <li>{{li6}}</li>
+        <li>{{li7}}</li>
+        <li>{{li8}}</li>
+        <li>{{li9}}</li>
+      </ul>
+      <div id="about-version-number">
+        {{version}}
+      </div>
+    </div>
+    <!-- footer -->
+    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-icon="home" data-transition="none">{{footer.li1}}</a></li>
+          <li><a href="#map" data-icon="star" data-transition="none">{{footer.li2}}</a></li>
+        </ul>
+      </div>
+    </div>
+    </script>
 
 
   <div data-role="page" id="home">
@@ -270,53 +322,6 @@
 
 
   <div data-role="page" id="about">
-    <!-- panel -->
-    <div data-role="panel" id="about-panel" data-display="overlay">
-      <ul data-role="listview" data-inset="false" data-icon="false">
-        <li><a href="#settings" data-transition="none">Settings</a></li>
-        <li><a href="#about" class="ui-btn ui-btn-active" data-transition="none">About</a></li>
-        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
-      </ul><br/>
-      <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
-    </div>
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <a href="#about-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-      <h1>About</h1>
-      <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content">
-      <h3>About Smell PGH</h3>
-      <p><a href="http://smellpgh.org/" target="_blank">Official Website</a></p>
-      <p>Pittsburgh was named one of the top 15 most livable cities in the US, but our air quality is often worse than other cities on that list. Foul odors outside are typically symptoms of a serious pollution problem in our region. We, our children, our friends and families all breathe in this air. If our air smells toxic, then we are likely inhaling toxins.</p>
-      <p>Smell PGH was designed to crowdsource smell reports so we can track how pollutants travel through our air across Pittsburgh. All odor complaints submitted through the app are publicly available through our website, and made available to the local health department so it can better monitor and act on these complaints.</p>
-      <center class="smell-submit-share">-- Smell -- Submit -- Share --</center>
-      <p>Smell PGH was developed by the CMU CREATE Lab with support from the Heinz Endowments, and in collaboration with:</p>
-      <ul>
-        <li>ACCAN</li>
-        <li>PennEnvironment</li>
-        <li>GASP</li>
-        <li>Sierra Club</li>
-        <li>ROCIS</li>
-        <li>Blue Lens, LLC</li>
-        <li>PennFuture</li>
-        <li>Clean Water Action</li>
-        <li>Clean Air Council</li>
-      </ul>
-      <div id="about-version-number">
-        version: ###
-      </div>
-    </div>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-        </ul>
-      </div>
-    </div>
   </div>
 
 
