@@ -3,6 +3,9 @@
 
   initialize: function () {
     console.log("SettingsPage.initialize");
+    var settingsTpl=Handlebars.compile($("#settings-tpl").html());
+    $('#settings').html(settingsTpl(english.settings));
+    $('#settings').trigger('create');
     this.refreshNotifications();
     this.populateFormSettings();
     this.expandTabs();

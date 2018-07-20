@@ -183,39 +183,41 @@
       </div>
     </div>
   </script>
-  <script id="settings-tpl" type="text/template"><!-- panel -->
+  <script id="settings-tpl" type="text/template">
+  <!-- panel -->
     <div data-role="panel" id="settings-panel" data-display="overlay">
       <ul data-role="listview" data-inset="false" data-icon="false">
-        <li><a href="#settings" class="ui-btn ui-btn-active" data-transition="none">Settings</a></li>
-        <li><a href="#about" data-transition="none">About</a></li>
-        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
+        <li><a href="#settings" class="ui-btn ui-btn-active" data-transition="none">{{panel.li1}}</a></li>
+        <li><a href="#about" data-transition="none">{{panel.li2}}</a></li>
+        <li><a href="#howitworks" data-transition="none">{{panel.li3}}</a></li>
       </ul><br/>
-       <a class="close-button"href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
+       <a class="close-button"href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a>
     </div>
     <!-- header -->
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <a href="#settings-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-      <h1>Settings</h1>
+      <a href="#settings-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+      <h1>{{header.h1}}</h1>
       <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
     </div>
     <!-- main -->
     <div role="main" class="ui-content">
       <div id="reportsCollapsible" data-role="collapsible">
-        <h3>Contact Information</h3>
-        <label class="settings-description">While these fields are optional, signing your name in reports to the health department can improve authenticity and effectiveness.</label>
+        {{log contact}}
+        <h3>{{contact.h3}}</h3>
+        <label class="settings-description">{{contact.label}}</label>
         <div>
-          <input type="text" name="textfield_name" id="textfield_name" placeholder="name (recommended)" data-clear-btn="true" />
-          <input type="text" name="textfield_email" id="textfield_email" placeholder="email (recommended)" data-clear-btn="true" />
-          <input type="text" name="textfield_address" id="textfield_address" placeholder="mailing address" data-clear-btn="true" />
-          <input type="text" name="textfield_phone" id="textfield_phone" placeholder="phone number" data-clear-btn="true" />
+          <input type="text" name="textfield_name" id="textfield_name" placeholder="{{contact.placeholder1}}" data-clear-btn="true" />
+          <input type="text" name="textfield_email" id="textfield_email" placeholder="{{contact.placeholder2}}" data-clear-btn="true" />
+          <input type="text" name="textfield_address" id="textfield_address" placeholder="{{contact.placeholder3}}" data-clear-btn="true" />
+          <input type="text" name="textfield_phone" id="textfield_phone" placeholder="{{contact.placeholder4}}" data-clear-btn="true" />
         </div>
       </div>
       <div id="notificationsCollapsible" data-role="collapsible">
-        <h3>Notifications</h3>
-        <label class="settings-description">Activate smell and air quality notifications that are important to you</label>
-        <label for="checkbox_smell_notifications">Smell Event Alerts<label class="settings-description-smaller">(notifications about a potential smell event in the next 4-8 hours)</label></label>
+        <h3>{{notification.h3}}</h3>
+        <label class="settings-description">{{notification.label1}}</label>
+        <label for="checkbox_smell_notifications">{{notification.label2}}<label class="settings-description-smaller">{{notification.label3}}</label></label>
         <input type="checkbox" id="checkbox_smell_notifications" />
-        <label for="checkbox_pghaqi_notifications">Air Quality Index Changes<label class="settings-description-smaller">(notifications about pgh air quality conditions)</label></label>
+        <label for="checkbox_pghaqi_notifications">{{notification.label4}}<label class="settings-description-smaller">{{notification.label5}}</label></label>
         <input type="checkbox" id="checkbox_pghaqi_notifications" />
       </div>
     </div>
@@ -223,8 +225,8 @@
     <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
       <div data-role="navbar">
         <ul>
-          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
+          <li><a href="#home" data-icon="home" data-transition="none">{{footer.li1}}</a></li>
+          <li><a href="#map" data-icon="star" data-transition="none">{{footer.li2}}</a></li>
         </ul>
       </div>
     </div>
