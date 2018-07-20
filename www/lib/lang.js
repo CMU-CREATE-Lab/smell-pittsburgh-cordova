@@ -44,11 +44,11 @@ var english={
 			input5:" 5 About as bad as it gets!"
 		},
 		describe:{
-			label:"Any symptoms linked to the odor?",
+			label:"Describe the smell or source of odor",
 			placeholder:"e.g. industrial, woodsmoke, rotten-eggs"
 		},
 		symptoms:{
-			lable:"Any symptoms linked to the odor?",
+			label:"Any symptoms linked to the odor?",
 			placeholder:"e.g. headache, sore throat, eye irritation",
 		},
 		note:{
@@ -80,7 +80,32 @@ var english={
 		},
 		panel:constants.defaultPanel,
 		header:constants.defaultHeader,
-		
+		p_iframe:"Your browser does not support iframes.",
+		footer:constants.defaultFooter
+	},
+	settings:{
+		panel:constants.defaultPanel,
+		header:{
+			h1:"Settings",
+			a:constants.defaultHeader.a
+		},
+		contact:{
+			h3:"Contact Information",
+			label:"While these fields are optional, signing your name in reports to the health department can improve authenticity and effectiveness.",
+			placeholder1:"name (recommended)",
+			placeholder2:"email (recommended)",
+			placeholder3:"mailing address",
+			placeholder4:"phone number"
+		},
+		notification:{
+			h3:"Notifications",
+			label1:"Activate smell and air quality notifications that are important to you",
+			label2:"Smell Event Alerts",
+			label3:"(notifications about a potential smell event in the next 4-8 hours)",
+			label4:"Air Quality Index Changes",
+			label5:"(notifications about pgh air quality conditions)"
+		},
+		footer:constants.defaultFooter
 	}
 }
 //~~~~

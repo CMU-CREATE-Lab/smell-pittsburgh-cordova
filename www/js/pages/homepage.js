@@ -13,6 +13,9 @@
 
 
   initialize: function () {
+    var homeTpl=Handlebars.compile($("#home-tpl").html());
+    $('#home').html(homeTpl(english.home));
+    $('#home').trigger('create');
     if (HomePage.returningFromLocationSelectPage) {
       console.log("HomePage.initialize: returningFromLocationSelectPage");
       HomePage.returningFromLocationSelectPage = false;
@@ -43,8 +46,10 @@
       HomePage.showHomeModal();
       LocalStorage.set("firsttime_home",false);
     }
-
-   
+  // set placeholder text
+    $("#textfield_smell_description").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellDescriptionPlaceholder);
+    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
+    $("#textfield_additional_comments").attr("placeholder",HomePage.additionalCommentsPlaceholder);
 
     $("#checkbox_current_time_location").prop("checked", true);
     $("#checkbox_current_time_location").checkboxradio("refresh", true);
@@ -55,14 +60,6 @@
 
     // browser compatibility issues (Yay?)
     $("#home-panel").find(".ui-btn-active").removeClass("ui-btn-active");
-     //$("#home").trigger('pagecreate');
-     var homeTpl=Handlebars.compile($("#home-tpl").html());
-    $('#home').html(homeTpl(english.home));
-    $('#home').trigger('create')
-     // set placeholder text
-    $("#textfield_smell_description").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellDescriptionPlaceholder);
-    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
-    $("#textfield_additional_comments").attr("placeholder",HomePage.additionalCommentsPlaceholder);
   },
 
 
