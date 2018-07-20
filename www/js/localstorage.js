@@ -25,7 +25,8 @@ var LocalStorage = {
     email: "",
     name: "",
     phone: "",
-    address: ""
+    address: "",
+    langauge:"english"
   },
 
 

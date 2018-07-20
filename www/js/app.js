@@ -9,7 +9,8 @@ var App = {
   accuracyStatus: Constants.AccuracyEnum.DISABLED,
   htmlElementToScrollAfterKeyboard: null, // this is the HTML element you want to scroll to after the keyboard has been opened
   htmlElementToBlurAfterKeyboardCloses: null, // this is the HTML element you need to blur after the keyboard has been closed to avoid weird glitches on using checkboxradio widgets
-  pastPage:"home",
+  pastPage:"home",//The page one was on before switching used for x button
+  text:getText(LocalStorage.get("langauge")),//parameter doesnt matter until more languages and method of selecting and getting them is desided
 
   /**
    * The type of callback that is being handled for calls to {@link initializePage}.
@@ -53,7 +54,6 @@ var App = {
     Analytics.setScreenName(pageId);
 
     // Use this if the page needs initialized everytime the page is viewed
-    console.log("switching")
     switch (pageId) {
     case Constants.STARTUP_PAGE:
       StartupPage.initialize();
@@ -80,9 +80,10 @@ var App = {
     case Constants.ABOUT_PAGE:
       AboutPage.initialize();
       break;
-    case Constants.HOW_IT_WORKS_PAGE:
+    case "howitworks":
        var howitworksTpl=Handlebars.compile($("#howitworks-tpl").html());
-       $('#howitworks').html(howitworksTpl(english.howitworks));
+       //initialization for howitworks page
+       $('#howitworks').html(howitworksTpl(App.text.howitworks));
        $('#howitworks').trigger('create');
        $(".back-x").click(function(){App.navToPageID(App.pastPage)});
       break;

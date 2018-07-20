@@ -1,6 +1,14 @@
+//handles language selection and hold language text
+/*currently always returns english
+ * in the future the parameter will determin the language returned
+ */
+function getText(language){
+	return english;
+}
+
+
 //The object keys are the names of the html element they correspond to. This is just to help show how  they line up. 
 //Changing these will not change the element but it will break things
-//!ENGLISH!~~~~~
 var constants={
 	defaultPanel:{
 		li1:"Settings",

@@ -1,12 +1,16 @@
 ﻿var SettingsPage = {
 
+  text:null, //the text for the page's template
 
   initialize: function () {
+    //load template
+    this.text=App.text.settings;
     console.log("SettingsPage.initialize");
     var settingsTpl=Handlebars.compile($("#settings-tpl").html());
-    $('#settings').html(settingsTpl(english.settings));
+    $('#settings').html(settingsTpl(this.text));
     $('#settings').trigger('create');
     $(".back-x").click(function(){App.navToPageID(App.pastPage)});
+    
     this.refreshNotifications();
     this.populateFormSettings();
     this.expandTabs();

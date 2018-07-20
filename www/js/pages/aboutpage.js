@@ -1,10 +1,13 @@
 ﻿var AboutPage = {
+  text:null, //the text for the page's template
 
 
   initialize: function () {
     console.log("AboutPage.initialize");
+    //load template
+    this.text=App.text.about;
     var aboutTpl=Handlebars.compile($("#about-tpl").html());
-    $('#about').html(aboutTpl(english.about));
+    $('#about').html(aboutTpl(this.text));
     $('#about').trigger('create');
     $(".back-x").click(function(){App.navToPageID(App.pastPage)});
   },

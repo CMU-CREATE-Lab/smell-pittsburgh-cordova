@@ -10,11 +10,14 @@
   request: null,
   location: {"lat": 0, "lng": 0},
   openedPredictionNotification: false,
+   text:null, //the text for the page's template
 
 
   initialize: function () {
+    //load template
+    this.text=App.text.home;
     var homeTpl=Handlebars.compile($("#home-tpl").html());
-    $('#home').html(homeTpl(english.home));
+    $('#home').html(homeTpl(this.text));
     $('#home').trigger('create');
     if (HomePage.returningFromLocationSelectPage) {
       console.log("HomePage.initialize: returningFromLocationSelectPage");

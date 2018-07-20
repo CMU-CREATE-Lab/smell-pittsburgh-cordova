@@ -2,11 +2,13 @@
 
   centerLocation: [],
   maxTimeForPlaces:24*60*60,
-
+  text:null, //the text for the page's template
 
   initialize: function () {
+    //load template
+    this.text=App.text.map;
     var mapTpl=Handlebars.compile($("#map-tpl").html());
-    $('#map').html(mapTpl(english.map));
+    $('#map').html(mapTpl(this.text));
     $('#map').trigger('create');
     console.log("MapPage.initialize");
 
