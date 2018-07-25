@@ -12,6 +12,7 @@
 
 
   onDeviceReady: function() {
+    StartupPage.initialize();//must initialize to load template before page can be displayed
     console.log("StartupPage.onDeviceReady");
     $("#startup-to-settings").click(function() {
       LocalStorage.set("firsttime_startup", false);
