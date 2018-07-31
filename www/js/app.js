@@ -10,7 +10,7 @@ var App = {
   htmlElementToScrollAfterKeyboard: null, // this is the HTML element you want to scroll to after the keyboard has been opened
   htmlElementToBlurAfterKeyboardCloses: null, // this is the HTML element you need to blur after the keyboard has been closed to avoid weird glitches on using checkboxradio widgets
   pastPage:"home",//The page one was on before switching used for x button
-  text:getText(LocalStorage.get("langauge")),//parameter doesnt matter until more languages and method of selecting and getting them is desided
+  text:getText(LocalStorage.get("language")),//parameter doesnt matter until more languages and method of selecting and getting them is desided
 
   /**
    * The type of callback that is being handled for calls to {@link initializePage}.
