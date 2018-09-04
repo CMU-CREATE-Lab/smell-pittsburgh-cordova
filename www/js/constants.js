@@ -8,7 +8,7 @@ var Constants = {
   CLIENT_ID: "KEEP-IT-SECRET",
   LOCATION_SERVICES: true,
   PLATFORM_CALLBACK_ONREADY: true,
-  APP_VERSION: "2.1.6",
+  APP_VERSION: "2.2.0",
   URL_SMELLPGH: "http://localhost",
 
   // Page Ids
