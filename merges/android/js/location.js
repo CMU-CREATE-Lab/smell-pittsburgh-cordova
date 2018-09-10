@@ -47,7 +47,7 @@ var Location = {
 
   // request the users location
   //now takes two callbacks the second fires on failure to get location
-  requestLocation: function(afterSuccess,afterFailure) {
+  requestLocation: function(afterSuccess, afterFailure) {
     console.log("requestLocation");
 
     if (isConnected()) {

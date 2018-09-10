@@ -26,8 +26,9 @@ var Location = {
   /**
    * Request the most recent device location.
    * @param {requestLocationCallback} afterSuccess - Callback when a location is received.
+   * @param {requestLocationCallback} afterFailure - Callback when a location request fails (note: never happens in here, just documenting it).
    */
-  requestLocation: function(afterSuccess) {
+  requestLocation: function(afterSuccess, afterFailure) {
     console.log("requestLocation");
     var latitude = 0;
     var longitude = 0;

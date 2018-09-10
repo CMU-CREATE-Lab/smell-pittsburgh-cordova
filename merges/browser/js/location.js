@@ -13,7 +13,7 @@ var Location = {
 
   // request the users location
   //now takes two callbacks the second should fire on failure to get location
-  requestLocation: function(afterSuccess,afterFailures) {
+  requestLocation: function(afterSuccess, afterFailure) {
     console.log("requestLocation");
 
     // TODO browser location services
