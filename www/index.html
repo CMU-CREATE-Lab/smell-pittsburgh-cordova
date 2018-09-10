@@ -49,7 +49,7 @@
           <li>Rate the odor on a scale of 1-5</li>
           <li>Describe the smell, source of odor and any symptoms (recommended)</li>
           <li>Write a personal note to the health department (optional)</li>
-          <li>Endorse your reports - see Settings (recommended)</li>
+          <li>Endorse your report to ACHD - see Settings (recommended)</li>
         </ul>
         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">OK</a>
       </div>
@@ -99,7 +99,7 @@
         <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" placeholder="" data-clear-btn="true" />
       </div>
       <div class="homepage-section">
-        <label for="textfield_additional_comments">Add a personal note to the health department</label>
+        <label for="textfield_additional_comments">Add a personal note to the Health Department</label>
         <textarea type="text" name="textfield_additional_comments" id="textfield_additional_comments" value="" data-clear-btn="true"></textarea>
       </div>
       <div id="current_time_location">
@@ -120,6 +120,10 @@
       <br/>
       <div class="submission-disclaimer">
         NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map.
+      </div>
+      <br/>
+      <div class="submission-disclaimer">
+        All smell reports within Allegheny County will be forwarded to Allegheny County's health department (ACHD). If you'd like to receive correspondence from ACHD, enter your contact info in the settings tab.
       </div>
       <button type="button" id="button_submit_report" disabled>Send Smell Report</button>
     </div>
@@ -242,8 +246,8 @@
     <div role="main" class="ui-content">
       <h3>Welcome to Smell PGH!</h3>
       <p>Thank you for installing the Smell PGH App!</p>
-      <p>This app is created by the CMU CREATE Lab and is designed to track pollution odors across the Pittsburgh region. If you detect a foul odor while you're outside, please report it through this app.</p>
-      <p style="font-weight:bold;">All Smell PGH reports from Pittsburgh are made available to the local health department.</p>
+      <p>This app is designed to track pollution odors across the Pittsburgh region. If you detect a foul odor while you're outside, please report it through this app.</p>
+      <p style="font-weight:bold;">Smell PGH will automatically submit these reports to the Allegheny County Health Department (ACHD) so they can take action.</p>
     </div>
     <!-- footer -->
     <div data-role="footer" data-position="fixed" data-id="startup_1" data-tap-toggle="false">
@@ -276,7 +280,7 @@
       <h3>About Smell PGH</h3>
       <p><a href="http://smellpgh.org/" target="_blank">Official Website</a></p>
       <p>Pittsburgh was named one of the top 15 most livable cities in the US, but our air quality is often worse than other cities on that list. Foul odors outside are typically symptoms of a serious pollution problem in our region. We, our children, our friends and families all breathe in this air. If our air smells toxic, then we are likely inhaling toxins.</p>
-      <p>Smell PGH was designed to crowdsource smell reports so we can track how pollutants travel through our air across Pittsburgh. All odor complaints submitted through the app are publicly available through our website, and made available to the local health department so it can better monitor and act on these complaints.</p>
+      <p>Smell PGH was designed to crowdsource smell reports so we can track how pollutants travel through our air across Pittsburgh. All odor complaints submitted through the app go directly to the health department (ACHD) so they can better monitor and act on these complaints.</p>
       <center class="smell-submit-share">-- Smell -- Submit -- Share --</center>
       <p>Smell PGH was developed by the CMU CREATE Lab with support from the Heinz Endowments, and in collaboration with:</p>
       <ul>
@@ -324,7 +328,7 @@
     <!-- main -->
     <div role="main" class="ui-content">
       <h3>How It Works</h3>
-      <p>We take every precaution to protect any personally identifiable data. All information shown on the public map visualization for Smell PGH is anonymous and location data is skewed to protect your privacy. Personal contact information you enter in the settings tab is only made available to the local health department. Our backend database only contains anonymous User ID's created by your app service (Apple or Google Play).</p>
+      <p>We take every precaution to protect any personally identifiable data. All information shown on the public map visualization for Smell PGH is anonymous and location data is skewed to protect your privacy. Personal contact information you enter in the settings tab, is only shared with ACHD and not stored in our database. Our backend database only contains anonymous User ID’s created by your app service (Apple or Google Play).</p>
 
       <p>The basic function of the Smell PGH app is as follows:</p>
       <ul>
@@ -333,7 +337,7 @@
         <li>You also have the option to (but are not required to):</li>
         <ul>
           <li>List any symptoms attributable to the experience</li>
-          <li>Send a personal note/question to the local health department</li>
+          <li>Send a personal note/question to ACHD</li>
         </ul>
         <li>NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map</li>
         <li>Once you hit 'Submit', the information you report is pulled together in an email format that includes:</li>
@@ -341,9 +345,9 @@
           <li>The location of the smell (based on the GPS location of your phone)</li>
           <li>Date and Time of smell</li>
           <li>Rating and description (if provided) of smell</li>
-          <li>Any personal notes and/or questions (if provided)</li>
+          <li>Any personal notes and/or questions to ACHD (if provided)</li>
         </ul>
-        <li>This information is then made available to the local health department</li>
+        <li>This information is then made available to ACHD</li>
         <li>At the same time your smell report is added to the public Smell PGH map</li>
         <ul>
           <li>A triangle icon that's the color of your smell rating represents your report</li>
