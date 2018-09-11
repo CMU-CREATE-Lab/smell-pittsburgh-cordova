@@ -63,8 +63,12 @@ var Location = {
             if (index == 1) {
               Location.requestLocation(afterSuccess);
             } else {
-               //if getting location failed and they do not want to retry then fire afterFailure callback
-              afterFailure(error)
+              //if getting location failed and they do not want to retry then fire afterFailure callback
+              if (typeof afterFailure === "function") {
+                afterFailure(error);
+              } else {
+                console.log("requestLocation: afterFailure callback not specified");
+              }
             }
           }
         };

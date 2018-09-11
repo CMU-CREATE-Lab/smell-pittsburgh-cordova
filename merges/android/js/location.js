@@ -70,11 +70,15 @@ var Location = {
           Location.stopRequestLocation();
           navigator.notification.confirm("Would you like to retry?", onConfirm, "Failure Requesting Location", ["Retry", "Cancel"]);
           function onConfirm(index) {
-            if (index == 1){
+            if (index == 1) {
                Location.requestLocation(afterSuccess);
-            }else{
+            } else {
               //if getting location failed and they do not want to retry then fire afterFailure callback
-              afterFailure(error)
+              if (typeof afterFailure === "function") {
+                afterFailure(error);
+              } else {
+                console.log("requestLocation: afterFailure callback not specified");
+              }
             }
           }
         };
