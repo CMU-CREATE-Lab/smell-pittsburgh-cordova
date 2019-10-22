@@ -23,23 +23,86 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <splash src="www/img/smellpgh.png" />
+<!--         <preference name="backgroundColor" value="0xffffffff" />
+        <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png" />
+        <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png" />
+        <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png" />
+        <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" />
+        </edit-config>
+        <resource-file src="res/icon/android/mipmap-hdpi/ic_launcher.png" target="app/src/main/res/mipmap-hdpi/ic_launcher.png" />
+        <resource-file src="res/icon/android/mipmap-hdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
+        <resource-file src="res/icon/android/mipmap-mdpi/ic_launcher.png" target="app/src/main/res/mipmap-mdpi/ic_launcher.png" />
+        <resource-file src="res/icon/android/mipmap-mdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
+        <resource-file src="res/icon/android/mipmap-xhdpi/ic_launcher.png" target="app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+        <resource-file src="res/icon/android/mipmap-xhdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
+        <resource-file src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" target="app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+        <resource-file src="res/icon/android/mipmap-xxhdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
+        <resource-file src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" target="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+        <resource-file src="res/icon/android/mipmap-xxxhdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />   -->      
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <splash src="www/img/smellpgh.png" />
+       <!--  <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
+        <splash src="res/screen/ios/Default@2x~universal~comany.png" />
+        <splash src="res/screen/ios/Default@2x~universal~comcom.png" />
+        <splash src="res/screen/ios/Default@3x~universal~anyany.png" />
+        <splash src="res/screen/ios/Default@3x~universal~anycom.png" />
+        <splash src="res/screen/ios/Default@3x~universal~comany.png" />
+        <icon height="57" src="res/icon/ios/icon.png" width="57" />
+        <icon height="1114" src="res/icon/ios/icon@2x.png" width="114" />
+        <icon height="20" src="res/icon/ios/icon-20.png" width="20" />
+        <icon height="60" src="res/icon/ios/icon-60.png" width="60" />
+        <icon height="120" src="res/icon/ios/icon-60@2x.png" width="120" />
+        <icon height="180" src="res/icon/ios/icon-60@3x.png" width="180" />
+        <icon height="72" src="res/icon/ios/icon-72.png" width="72" />
+        <icon height="144" src="res/icon/ios/icon-72@2x.png" width="144" />
+        <icon height="76" src="res/icon/ios/icon-76.png" width="76" />
+        <icon height="152" src="res/icon/ios/icon-76@2x.png" width="152" />
+        <icon height="167" src="res/icon/ios/icon-83.5@2x.png" width="167" />
+        <icon height="67" src="res/icon/ios/icon-167.png" width="67" />
+        <icon height="29" src="res/icon/ios/icon-small.png" width="29" />
+        <icon height="58" src="res/icon/ios/icon-small@2x.png" width="58" />
+        <icon height="87" src="res/icon/ios/icon-small@3x.png" width="87" />
+        <icon height="40" src="res/icon/ios/icon-small-40.png" width="40" />
+        <icon height="80" src="res/icon/ios/icon-small-40@2x.png" width="80" />
+        <icon height="120" src="res/icon/ios/icon-small-40@3x.png" width="120" />
+        <icon height="50" src="res/icon/ios/icon-small-50.png" width="50" />
+        <icon height="100" src="res/icon/ios/icon-small-50@2x.png" width="100" />
+        <icon height="512" src="res/icon/ios/iTunesArtwork.png" width="512" />
+        <icon height="1024" src="res/icon/ios/iTunesArtwork@2x.png" width="1024" />
+        <icon height="48" src="res/icon/ios/AppIcon24x24@2x.png" width="48" />
+        <icon height="55" src="res/icon/ios/AppIcon27.5x27.5@2x.png" width="55" />
+        <icon height="58" src="res/icon/ios/AppIcon29x29@2x.png" width="58" />
+        <icon height="87" src="res/icon/ios/AppIcon29x29@3x.png" width="87" />
+        <icon height="80" src="res/icon/ios/AppIcon40x40@2x.png" width="80" />
+        <icon height="88" src="res/icon/ios/AppIcon44x44@2x.png" width="88" />
+        <icon height="172" src="res/icon/ios/AppIcon86x86@2x.png" width="172" />
+        <icon height="196" src="res/icon/ios/AppIcon98x98@2x.png" width="196" /> -->
     </platform>
-    <plugin name="cordova-plugin-device" spec="1.1.2" />
-    <plugin name="cordova-plugin-dialogs" spec="1.2.1" />
-    <plugin name="cordova-plugin-network-information" spec="1.2.1" />
-    <plugin name="cordova-plugin-request-location-accuracy" spec="2.0.0" />
+    <plugin name="cordova-plugin-device" spec="2.0.3" />
+    <plugin name="cordova-plugin-dialogs" spec="2.0.2" />
+    <plugin name="cordova-plugin-network-information" spec="2.0.2" />
+    <plugin name="cordova-plugin-request-location-accuracy" spec="2.3.0" />
     <plugin name="cordova-plugin-spinner" spec="1.1.0" />
-    <plugin name="cordova-plugin-statusbar" spec="2" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova.plugins.diagnostic" spec="3.1.1" />
-    <plugin name="cordova-plugin-firebase" spec="~1.0.5" />
-    <plugin name="cordova-plugin-geolocation" spec="~3.0.0" />
-    <engine name="ios" spec="^4.5.4" />
-    <engine name="browser" spec="^5.0.3" />
-    <engine name="android" spec="^6.3.0" />
+    <plugin name="cordova-plugin-statusbar" spec="2.4.3" />
+    <plugin name="cordova-plugin-whitelist" spec="1.3.4" />
+    <plugin name="cordova.plugins.diagnostic" spec="5.0.0" />
+    <plugin name="cordova-plugin-geolocation" spec="4.0.2" />
+    <plugin name="cordova-plugin-splashscreen" spec="5.0.3" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="DisallowOverscroll" value="true" />
+    <plugin name="cordova-plugin-nativegeocoder" spec="3.2.2" />
+    <plugin name="cordova-plugin-ionic-keyboard" spec="2.1.3" />
+    <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
+    <plugin name="cordova-plugin-firebasex" spec="6.0.7" />
+    <plugin name="cordova-plugin-androidx" spec="1.0.2" />
+    <plugin name="cordova-plugin-androidx-adapter" spec="1.1.0" />
+    <engine name="browser" spec="^5.0.4" />
+    <engine name="ios" spec="^5.0.1" />
+    <engine name="android" spec="^8.1.0" />
 </widget>

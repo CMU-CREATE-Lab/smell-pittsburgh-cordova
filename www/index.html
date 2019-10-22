@@ -1,405 +1,529 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- css -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/fullscreen-pages.css" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/pages/home.css" />
     <link rel="stylesheet" href="css/pages/settings.css" />
     <link rel="stylesheet" href="css/pages/map.css" />
-    <link rel="stylesheet" href="css/pages/about.css" />
-    <link rel="stylesheet" href="css/pages/locationselect.css" />
+    <link rel="stylesheet" href="css/pages/overview.css" />
+    <!-- <link rel="stylesheet" href="css/pages/locationselect.css" /> -->
     <!-- libraries -->
-    <script src="lib/jquery-1.12.4.min.js"></script>
+    <script src="lib/jquery-2.2.4.min.js"></script>
     <script src="lib/jquery.mobile-1.4.5.min.js"></script>
     <script src="lib/md5.js"></script>
     <script src="lib/fastclick.min.js"></script>
+    <script src="lib/handlebars-v4.0.11.js"></script>
     <script src="cordova.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.25&amp;key=AIzaSyD2nqIondaBl-YWGlaD_mo1L0w3j2yvehQ"></script>
     <!-- app-related scripts -->
     <script src="js/constants.js"></script>
+    <script src="langs/english.js"></script>
+    <!-- <script src="langs/espanol.js"></script> -->
     <script src="js/localstorage.js"></script>
     <script src="js/globalfunctions.js"></script>
     <script src="js/location.js"></script>
     <script src="js/pages/startuppage.js"></script>
+    <script src="js/pages/updatespage.js"></script>
     <script src="js/pages/homepage.js"></script>
     <script src="js/pages/mappage.js"></script>
     <script src="js/pages/settingspage.js"></script>
     <script src="js/pages/aboutpage.js"></script>
-    <script src="js/pages/locationselectpage.js"></script>
+    <script src="js/pages/overviewpage.js"></script>
+    <script src="js/pages/howitworkspage.js"></script>
+    <!-- <script src="js/pages/locationselectpage.js"></script> -->
+    <script src="js/firebase.js"></script>
     <script src="js/analytics.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body>
+    <!--home template-->
+    <script id="home-tpl" type="text/template">
+      <!-- modals -->
+      <div id="modal-home-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
+       <!-- <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">{{firstModal.a1}}</a> -->
+       <div data-role="header" data-theme="a">
+         <h1 class="modal-title">{{firstModal.h1}}</h1>
+       </div>
+       <div role="main" class="ui-content">
+         <ul class="custom-ul">
+           <li class="li-parent">{{firstModal.li1}}</li>
+           <li class="li-parent">{{firstModal.li2}}</li>
+           <li class="li-parent">{{firstModal.li3}}</li>
+           <li class="li-parent">{{firstModal.li4}}</li>
+           <li class="li-parent">{{firstModal.li5}}</li>
+           <li class="li-parent">{{firstModal.li6}}</li>
+         </ul>
+         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">{{firstModal.a2}}</a>
+       </div>
+      </div>
+      <div id="modal-predict-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
+       <!-- <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">{{predictionModal.a1}}</a> -->
+       <div data-role="header" data-theme="a">
+         <h1 class="modal-title">{{predictionModal.h1}}</h1>
+       </div>
+       <div role="main" class="ui-content">
+         <p>{{predictionModal.p}}</p>
+         <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">{{predictionModal.a2}}</a>
+       </div>
+      </div>
+      <!-- panel -->
+      <div data-role="panel" id="home-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
+       <ul data-role="listview" data-inset="false" data-icon="false">
+         <!-- <li><a href="#overview" data-transition="none">{{panel.li1}}</a></li> -->
+         <li><a href="#howitworks" data-transition="none">{{panel.li2}}</a></li>
+         <li><a href="#settings" data-transition="none">{{panel.li3}}</a></li>
+         <li><a href="#about" data-transition="none">{{panel.li4}}</a></li>
+       </ul><br/>
+       <!-- <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a> -->
+      </div>
+      <!-- header -->
+      <div data-role="header" data-position="fixed" data-tap-toggle="false">
+       <h1>{{header.h1}}</h1>
+       <a href="#home-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+      </div>
+      <!-- main -->
+      <div role="main" class="ui-content no-top">
+       <div class="homepage-section-top">
+         <h3>{{{rating.h3}}}</h3>
+         <fieldset data-role="controlgroup">
+           <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-1" value="1" /><label for="radio-choice-1"><div class="picker-color-smell picker-color-smell-1"></div>{{rating.input1}}</label>
+           <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-2" value="2" /><label for="radio-choice-2"><div class="picker-color-smell picker-color-smell-2"></div>{{rating.input2}}</label>
+           <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-3" value="3" /><label for="radio-choice-3"><div class="picker-color-smell picker-color-smell-3"></div>{{rating.input3}}</label>
+           <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-4" value="4" /><label for="radio-choice-4"><div class="picker-color-smell picker-color-smell-4"></div>{{rating.input4}}</label>
+           <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-5" value="5" /><label for="radio-choice-5"><div class="picker-color-smell picker-color-smell-5"></div>{{rating.input5}}</label>
+         </fieldset>
+       </div>
+       <div class="homepage-section">
+         <label for="textfield_smell_description">{{describe.label}}<span class="requirement-indicator">{{describe.span}}</span></label>
+         <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" placeholder="" data-clear-btn="true" />
+       </div>
+       <div class="homepage-section">
+         <label for="textfield_feelings_symptoms">{{symptoms.label}}<span class="requirement-indicator">{{symptoms.span}}</span></label>
+         <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" placeholder="" data-clear-btn="true" />
+       </div>
+       <div class="homepage-section">
+         <label for="textfield_additional_comments">{{note.label}}<span class="requirement-indicator">{{note.span}}</span></label>
+         <textarea type="text" name="textfield_additional_comments" id="textfield_additional_comments" value="" data-clear-btn="true"></textarea>
+       </div>
+       <div id="current_time_location">
+         <label for="checkbox_current_time_location">{{custom.label1}}<label class="settings-description-smaller">{{custom.label2}}</label></label>
+         <input type="checkbox" id="checkbox_current_time_location" checked="checked" />
+         <div class="homepage-section" id="display_for_custom_time_location">
+           <!-- custom location -->
+           <label for="button_smell_location">{{custom.label3}}</label>
+           <button type="button" id="button_smell_location">{{custom.button}}</button>
+           <!-- custom time -->
+           <label for="select-report-time">{{custom.label4}}</label>
+           <select name="select-report-time" id="select-report-time">
+             <option value=""></option>
+             <option value="">{{custome.option}}</option>
+           </select>
+         </div>
+       </div>
+       <br/>
+       <div class="regulatory-agency-note">
+         {{{regulatoryAgencyNote}}}
+       </div>
+       <div class="submission-disclaimer">
+         {{disclaimer}}
+       </div>
+       <button type="button" id="button_submit_report" disabled>{{button}}</button>
+      </div>
+      <!-- footer -->
+      <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
+       <div data-role="navbar">
+         <ul>
+           <li><a href="#" class="ui-btn-active ui-state-persist" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+           <li><a href="#map" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+         </ul>
+       </div>
+      </div>
+    </script>
+    <!--map template-->
+    <script id="map-tpl" type="text/template">
+      <!-- modals -->
+      <div id="modal-map-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
+        <!-- <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">{{modal.a1}}</a> -->
+        <div data-role="header" data-theme="a">
+          <h1 class="modal-title">{{modal.h1}}</h1>
+        </div>
+        <div role="main" class="ui-content">
+          <ul class="custom-ul">
+            <li class="li-parent">{{{modal.li1}}}</li>
+            <li class="li-parent">{{modal.li2}}</li>
+            <ul class="custom-ul">
+              <li>{{modal.li3}}</li>
+            </ul>
+            <li class="li-parent">{{modal.li4}}</li>
+            <ul class="custom-ul">
+              <li>{{modal.li5}}</li>
+            </ul>
+          </ul>
+          <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">{{modal.a2}}</a>
+        </div>
+      </div>
+      <!-- panel -->
+      <div data-role="panel" id="map-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
+        <ul data-role="listview" data-inset="false" data-icon="false">
+          <!-- <li><a href="#overview" data-transition="none">{{panel.li1}}</a></li> -->
+          <li><a href="#howitworks" data-transition="none">{{panel.li2}}</a></li>
+          <li><a href="#settings" data-transition="none">{{panel.li3}}</a></li>
+          <li><a href="#about" data-transition="none">{{panel.li4}}</a></li>
+        </ul><br/>
+        <!-- <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a> -->
+      </div>
+      <!-- header -->
+      <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h1>{{header.h1}}</h1>
+        <a href="#map-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+      </div>
+      <!-- main -->
+      <div id = "success-popup" >Report Submitted Successfully</div>
+      <div role="main" class="ui-content" id="iframe-map-container">
 
+        <iframe id="iframe-map">
+          <p>{{iframeWarning}}</p>
+        </iframe>
+      </div>
+      <!-- footer -->
+      <div data-role="footer" data-position="fixed" data-id="map_1" data-tap-toggle="false">
+        <div id="new-city-popup" style="display:none">
+          <h3>{{{newCity.h3}}}</h3>
+          <p>{{{newCity.p}}}</p>
+          <div id="close-popup">x</div>
+        </div>
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#home" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+            <li><a href="#" class="ui-btn-active ui-state-persist" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </script>
+    <!--settings page template-->
+    <script id="settings-tpl" type="text/template">
+      <!-- panel -->
+        <div data-role="panel" id="settings-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
+          <ul data-role="listview" data-inset="false" data-icon="false">
+            <!-- <li><a href="#overview" data-transition="none">{{panel.li1}}</a></li> -->
+            <li><a href="#howitworks" data-transition="none">{{panel.li2}}</a></li>
+            <li><a href="#" class="ui-btn ui-btn-active" data-transition="none">{{panel.li3}}</a></li>
+            <li><a href="#about" data-transition="none">{{panel.li4}}</a></li>
+          </ul><br/>
+           <!-- <a class="close-button"href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a> -->
+        </div>
+        <!-- header -->
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+          <a href="#settings-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+          <h1>{{header.h1}}</h1>
+          <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
+        </div>
+        <!-- main -->
+        <div role="main" class="ui-content">
+          <div id="reportsCollapsible" data-role="collapsible">
+            <h3>{{contact.h3}}</h3>
+            <label class="settings-description">{{contact.label}}</label>
+            <div>
+              <input type="text" name="textfield_name" id="textfield_name" placeholder="{{contact.placeholder1}}" data-clear-btn="true" />
+              <input type="email" name="textfield_email" id="textfield_email" placeholder="{{contact.placeholder2}}" data-clear-btn="true" />
+              <input type="text" name="textfield_address" id="textfield_address" placeholder="{{contact.placeholder3}}" data-clear-btn="true" />
+              <input type="text" name="textfield_phone" id="textfield_phone" placeholder="{{contact.placeholder4}}" data-clear-btn="true" />
+            </div>
+            <p class="regulatory-agency-note">{{{contact.regulatoryAgencyNote}}}</p>
+          </div>
+          <div id="notificationsCollapsible" data-role="collapsible">
+            <h3>{{notification.h3}}</h3>
+            <label class="settings-description">{{notification.label1}}</label>
+            <label for="checkbox_smell_notifications">{{notification.label2}}<label class="settings-description-smaller">{{notification.label3}}</label>
+            <input type="checkbox" id="checkbox_smell_notifications" />
+          </label>
+            <label for="checkbox_pqhaqi_notifications">{{notification.label4}}<label class="settings-description-smaller">{{notification.label5}}</label>
+                      <input type="checkbox" id="checkbox_pghaqi_notifications" /></label>
+          </div>
 
-  <div data-role="page" id="home">
-    <!-- modals -->
-    <div id="modal-home-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
-      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-      <div data-role="header" data-theme="a">
-        <h1 class="modal-title">Submitting Smell Reports</h1>
       </div>
+          <div id="langsCollapsible" data-role="collapsible">
+            <h3>{{lang.h3}}</h3>
+            <div>
+              <select class="langSelect">
+                 <option value="0">{{lang.label}}</option>
+                <option value="0">{{lang.l0}}</option>
+                <option value="1">{{lang.l1}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- footer -->
+        <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+          <div data-role="navbar">
+            <ul>
+              <li><a href="#home" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+              <li><a href="#map" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+            </ul>
+          </div>
+        </div>
+
+    </script>
+    <!--startup page template-->
+    <script id="startup-tpl" type="text/template"><!-- header -->
+      <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h1>{{header.h1}}</h1>
+      </div>
+      <!-- main -->
       <div role="main" class="ui-content">
-        <ul>
-          <li>Rate the odor on a scale of 1-5</li>
-          <li>Describe the smell, source of odor and any symptoms (recommended)</li>
-          <li>Write a personal note to the health department (optional)</li>
-          <li>Endorse your report to ACHD - see Settings (recommended)</li>
-        </ul>
-        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">OK</a>
-      </div>
-    </div>
-    <div id="modal-predict-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
-      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-      <div data-role="header" data-theme="a">
-        <h1 class="modal-title">Smell Event Predictions</h1>
-      </div>
-      <div role="main" class="ui-content">
-        <p>We are currently testing a smell prediction model that can alert Pittsburgh residents about a potential smell event in the area. The predictions' accuracy should improve as we receive more smell reports to verify our algorithm. We hope these notifications are useful to you!</p>
-        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">OK</a>
-      </div>
-    </div>
-    <!-- panel -->
-    <div data-role="panel" id="home-panel" data-display="overlay">
-      <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
-      <ul data-role="listview" data-inset="true" data-icon="false">
-        <li><a href="#settings" data-transition="none">Settings</a></li>
-        <li><a href="#about" data-transition="none">About</a></li>
-        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
-      </ul>
-    </div>
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <h1>Smell PGH</h1>
-      <a href="#home-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content no-top" data-iscroll>
-      <div class="homepage-section-top">
-        <h3>How does your air smell right now?</h3>
-        <fieldset data-role="controlgroup">
-          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-1" value="1" /><label for="radio-choice-1"><div class="picker-color-smell-1"></div> 1 Just fine!</label>
-          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-2" value="2" /><label for="radio-choice-2"><div class="picker-color-smell-2"></div> 2 Barely noticeable</label>
-          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-3" value="3" /><label for="radio-choice-3"><div class="picker-color-smell-3"></div> 3 Definitely noticeable</label>
-          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-4" value="4" /><label for="radio-choice-4"><div class="picker-color-smell-4"></div> 4 It's getting pretty bad</label>
-          <input class="radio-smell" type="radio" name="radio-choice" id="radio-choice-5" value="5" /><label for="radio-choice-5"><div class="picker-color-smell-5"></div> 5 About as bad as it gets!</label>
-        </fieldset>
-      </div>
-      <div class="homepage-section">
-        <label for="textfield_smell_description">Describe the smell or source of odor</label>
-        <input type="text" name="textfield_smell_description" id="textfield_smell_description" value="" placeholder="" data-clear-btn="true" />
-      </div>
-      <div class="homepage-section">
-        <label for="textfield_feelings_symptoms">Any symptoms linked to the odor?</label>
-        <input type="text" name="textfield_feelings_symptoms" id="textfield_feelings_symptoms" value="" placeholder="" data-clear-btn="true" />
-      </div>
-      <div class="homepage-section">
-        <label for="textfield_additional_comments">Add a personal note to the Health Department</label>
-        <textarea type="text" name="textfield_additional_comments" id="textfield_additional_comments" value="" data-clear-btn="true"></textarea>
-      </div>
-      <div id="current_time_location">
-        <label for="checkbox_current_time_location">Report Current Time/Location<label class="settings-description-smaller">Uncheck this box to manually select a time and location for the smell report.</label></label>
-        <input type="checkbox" id="checkbox_current_time_location" checked="checked" />
-        <div class="homepage-section" id="display_for_custom_time_location">
-          <!-- custom location -->
-          <label for="button_smell_location">Report Location</label>
-          <button type="button" id="button_smell_location">Current Location (default)</button>
-          <!-- custom time -->
-          <label for="select-report-time">Report Time</label>
-          <select name="select-report-time" id="select-report-time">
-            <option value=""></option>
-            <option value="">Now</option>
+        <h3>{{h3}}</h3>
+        <p>{{p1}}</p>
+        <p>{{p2}}</p>
+        <p>{{p3}}</p>
+        <div id="langSelectContainer">
+          <select class="langSelect">
+            <option value="0">{{lang.label}}</option>
+            <option value="0">{{lang.l0}}</option>
+            <option value="1">{{lang.l1}}</option>
           </select>
         </div>
       </div>
-      <br/>
-      <div class="submission-disclaimer">
-        NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map.
-      </div>
-      <br/>
-      <div class="submission-disclaimer">
-        All smell reports within Allegheny County will be forwarded to Allegheny County's health department (ACHD). If you'd like to receive correspondence from ACHD, enter your contact info in the settings tab.
-      </div>
-      <button type="button" id="button_submit_report" disabled>Send Smell Report</button>
-    </div>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="home_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#home" data-icon="home" class="ui-btn-active ui-state-persist" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div data-role="page" id="map" class="page-fullscreened">
-    <!-- modals -->
-    <div id="modal-map-firsttime" data-role="popup" data-dismissible="false" data-overlay-theme="b" data-history="false">
-      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-      <div data-role="header" data-theme="a">
-        <h1 class="modal-title">Using The Map</h1>
-      </div>
-      <div role="main" class="ui-content">
-        <ul>
-          <li>This map shows smell reports from all across Pittsburgh</li>
-          <li>We offset smell report locations to protect your privacy</li>
-          <li>Scroll through the timeline to view reports from any day</li>
-          <li>Dates highlighted with a darker color indicate avg. rating of smell reports</li>
-          <li>Click on a smell report or monitoring station to view more details</li>
-        </ul>
-        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">OK</a>
-      </div>
-    </div>
-    <!-- panel -->
-    <div data-role="panel" id="map-panel" data-display="overlay">
-      <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
-      <ul data-role="listview" data-inset="true" data-icon="false">
-        <li><a href="#settings" data-transition="none">Settings</a></li>
-        <li><a href="#about" data-transition="none">About</a></li>
-        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
-      </ul>
-    </div>
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <h1>Smell PGH</h1>
-      <a href="#map-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content" id="iframe-map-container" data-iscroll>
-      <iframe id="iframe-map">
-        <p>Your browser does not support iframes.</p>
-      </iframe>
-    </div>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="map_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" class="ui-btn-active ui-state-persist" data-transition="none">Map</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div data-role="page" id="settings">
-    <!-- panel -->
-    <div data-role="panel" id="settings-panel" data-display="overlay">
-      <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
-      <ul data-role="listview" data-inset="true" data-icon="false">
-        <li><a href="#settings" class="ui-btn ui-btn-active" data-transition="none">Settings</a></li>
-        <li><a href="#about" data-transition="none">About</a></li>
-        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
-      </ul>
-    </div>
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <a href="#settings-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-      <h1>Settings</h1>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content">
-      <div id="reportsCollapsible" data-role="collapsible">
-        <h3>Contact Information</h3>
-        <label class="settings-description">While these fields are optional, signing your name in reports to the health department can improve authenticity and effectiveness.</label>
-        <div>
-          <input type="text" name="textfield_name" id="textfield_name" placeholder="name (recommended)" data-clear-btn="true" />
-          <input type="text" name="textfield_email" id="textfield_email" placeholder="email (recommended)" data-clear-btn="true" />
-          <input type="text" name="textfield_address" id="textfield_address" placeholder="mailing address" data-clear-btn="true" />
-          <input type="text" name="textfield_phone" id="textfield_phone" placeholder="phone number" data-clear-btn="true" />
+      <!-- footer -->
+      <div data-role="footer" data-position="fixed" data-id="startup_1" data-tap-toggle="false">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#settings" id="startup-to-settings" data-transition="none"><span class="ui-icon-carat-r ui-btn-icon-notext inlineIcon"></span>{{footer}}</a></li>
+          </ul>
         </div>
       </div>
-      <div id="notificationsCollapsible" data-role="collapsible">
-        <h3>Notifications</h3>
-        <label class="settings-description">Activate smell and air quality notifications that are important to you</label>
-        <label for="checkbox_smell_notifications">Smell Event Alerts<label class="settings-description-smaller">(notifications about a potential smell event in the next 4-8 hours)</label></label>
-        <input type="checkbox" id="checkbox_smell_notifications" />
-        <label for="checkbox_pghaqi_notifications">Air Quality Index Changes<label class="settings-description-smaller">(notifications about pgh air quality conditions)</label></label>
-        <input type="checkbox" id="checkbox_pghaqi_notifications" />
+    </script>
+    <!--updates page template-->
+    <script id="updates-tpl" type="text/template"><!-- header -->
+      <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h1>{{header.h1}}</h1>
+      </div>
+      <!-- main -->
+      <div role="main" class="ui-content">
+        <h3>{{h3}}</h3>
+        <p>{{p1}}</p>
+      </div>
+      <!-- footer -->
+      <div data-role="footer" data-position="fixed" data-id="updates_1" data-tap-toggle="false">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="" id="see-new-updates" data-transition="none"><span class="ui-icon-carat-r ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+            <li><a href="" id="take-me-back" data-transition="none"><span class="ui-icon-carat-r ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </script>
+    <!--about page template-->
+    <script id="about-tpl" type="text/template">
+      <!-- panel -->
+       <div data-role="panel" id="about-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
+         <ul data-role="listview" data-inset="false" data-icon="false">
+            <!-- <li><a href="#overview" data-transition="none">{{panel.li1}}</a></li> -->
+            <li><a href="#howitworks" data-transition="none">{{panel.li2}}</a></li>
+            <li><a href="#settings" data-transition="none">{{panel.li3}}</a></li>
+            <li><a href="#" class="ui-btn ui-btn-active"  data-transition="none">{{panel.li4}}</a></li>
+         </ul><br/>
+         <!-- <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a> -->
+       </div>
+       <!-- header -->
+       <div data-role="header" data-position="fixed" data-tap-toggle="false">
+         <a href="#about-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+         <h1>{{header.h1}}</h1>
+         <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
+       </div>
+       <!-- main -->
+       <div role="main" class="ui-content">
+         <h2>{{h2_1}}</h2>
+         <p>{{{p1}}}</p>
+         <p>{{{p2}}}</p>
+         <p>{{{p3}}}</p>
+         <center class="smell-submit-share">{{center}}</center>
+         <p>{{{p4}}}</p>
+         <ul>
+         	<li>{{li1}}</li>
+         	<li>{{li2}}</li>
+         	<li>{{li3}}</li>
+         	<li>{{li4}}</li>
+         	<li>{{li5}}</li>
+         	<li>{{li6}}</li>
+         	<li>{{li7}}</li>
+         	<li>{{li8}}</li>
+         	<li>{{li9}}</li>
+         </ul>
+         <div id ="about-version-number">{{version}}</div>
+       </div>
+       <!-- footer -->
+       <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+         <div data-role="navbar">
+           <ul>
+             <li><a href="#home" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+             <li><a href="#map" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+           </ul>
+         </div>
+       </div>
+    </script><!-- 
+    <!--overview page template-->
+    <script id="overview-tpl" type="text/template">
+      <!-- panel -->
+       <div data-role="panel" id="overview-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
+         <ul data-role="listview" data-inset="false" data-icon="false">
+            <li><a href="#" class="ui-btn ui-btn-active" data-transition="none">{{panel.li1}}</a></li>
+            <li><a href="#howitworks" data-transition="none">{{panel.li2}}</a></li>
+            <li><a href="#settings" data-transition="none">{{panel.li3}}</a></li>
+            <li><a href="#about" data-transition="none">{{panel.li4}}</a></li>
+         </ul><br/>
+         <!-- <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a> -->
+       </div>
+       <!-- header -->
+       <div data-role="header" data-position="fixed" data-tap-toggle="false">
+         <a href="#overview-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+         <h1>{{header.h1}}</h1>
+         <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
+       </div>
+       <!-- main -->
+       <div role="main" class="ui-content">
+         <h2>{{h2_1}}</h2>
+         <p>{{p1}}</p>
+         <h2>{{h2_2}}</h2>
+         <p>{{p2}}</p>
+         <h2>{{h2_3}}</h2>
+         <p>{{{p3}}}</p>
+         <h2>{{h2_4}}</h2>
+         <p>{{{p4}}}</p>
+         <p>{{{p5}}}</p>
+         <h2>{{h2_5}}</h2>
+         <p>{{{p6}}}</p>
+         <p>{{p7}}</p>
+         <div id="version-number">
+           {{version}}
+         </div>
+       </div>
+       <!-- footer -->
+       <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+         <div data-role="navbar">
+           <ul>
+             <li><a href="#home" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+             <li><a href="#map" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+           </ul>
+         </div>
+       </div>
+    </script> -->
+    <!--howitworks page template-->
+    <script id="howitworks-tpl" type="text/template">
+      <!-- panel -->
+       <div data-role="panel" id="howitworks-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
+         <ul data-role="listview" data-inset="false" data-icon="false">
+           <!-- <li><a href="#overview" data-transition="none">{{panel.li1}}</a></li> -->
+           <li><a href="#" class="ui-btn ui-btn-active" data-transition="none">{{panel.li2}}</a></li>
+           <li><a href="#settings" data-transition="none">{{panel.li3}}</a></li>
+           <li><a href="#about" data-transition="none">{{panel.li4}}</a></li>
+         </ul><br/>
+         <!-- <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a> -->
+       </div>
+       <!-- header -->
+       <div data-role="header" data-position="fixed" data-tap-toggle="false">
+         <a href="#howitworks-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+         <h1>{{header.h1}}</h1>
+         <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
+       </div>
+       <!-- main -->
+       <div role="main" class="ui-content">
+       	<h3>{{h3}}</h3>
+       	<p>{{p2}}</p>
+         <p class="no-top-margin">{{p1}}</p>
+         <ul class="custom-ul">
+           <li>{{li1}}</li>
+           <li>{{li2}}</li>
+           <li>{{li3}}</li>
+           <ul class="custom-ul">             
+             <li>{{li4}}</li>
+             <li>{{li5}}</li>
+           </ul>
+           <li>{{li6}}</li>
+           <li>{{li7}}</li>
+           <ul class="custom-ul">
+             <li>{{li8}}</li>
+             <li>{{li9}}</li>
+             <li>{{li10}}</li>
+             <li>{{li11}}</li>
+           </ul>
+           <li>{{li12}}</li>
+           <li>{{li13}}</li>
+           <ul class="custom-ul">
+             <li>{{li14}}</li>
+             <li>{{li15}}</li>
+             <li>{{li16}}</li>
+             <li>{{li17}}</li>
+           </ul>
+         </ul>
+       </div>
+       <!-- footer -->
+       <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+         <div data-role="navbar">
+           <ul>
+             <li><a href="#home" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+             <li><a href="#map" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+           </ul>
+         </div>
+       </div>
+    </script>
+    <!--locationselect page template-->
+    <script id="locationselect-tpl" type="text/template"></script>
+    <div data-role="page" id="home">
+    </div>
+    <div data-role="page" id="map" class="page-fullscreened">
+    </div>
+    <div data-role="page" id="settings">
+    </div>
+    <div data-role="page" id="startup">
+    </div>
+    <div data-role="page" id="updates">
+    </div>
+    <div data-role="page" id="about">
+    </div>
+<!--     <div data-role="page" id="overview">
+    </div> -->
+    <div data-role="page" id="howitworks">
+    </div>
+    <div data-role="page" id="locationselect" class="page-fullscreened">
+      <!-- panel -->
+      <div data-role="panel" id="map-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
+        <ul data-role="listview" data-inset="false" data-icon="false">
+           <!-- <li><a href="#overview" data-transition="none">{{panel.li1}}</a></li> -->
+           <li><a href="#howitworks" data-transition="none">{{panel.li2}}</a></li>
+           <li><a href="#settings" data-transition="none">{{panel.li3}}</a></li>
+           <li><a href="#about" data-transition="none">{{panel.li4}}</a></li>
+        </ul>
+        <br/>
+        <!-- <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a> -->
+      </div>
+      <!-- header -->
+      <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h1>Smell PGH</h1>
+        <a href="#map-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
+      </div>
+      <!-- main -->
+      <div role="main" class="ui-content" id="map-locationselect-container">
+        <div id="map_locationselect"></div>
+        <div id="middle-circle"></div>
+        <div id="locationselect-button-gps" class="custom-button ui-icon-custom-gps noselect"></div>
+        <div id="locationselect-button-done" class="custom-button ui-icon-custom-done noselect"></div>
+      </div>
+      <!-- footer -->
+      <div data-role="footer" data-position="fixed" data-id="map_1" data-tap-toggle="false">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#home" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+            <li><a href="#map" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div data-role="page" id="startup">
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <h1>Smell PGH</h1>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content">
-      <h3>Welcome to Smell PGH!</h3>
-      <p>Thank you for installing the Smell PGH App!</p>
-      <p>This app is designed to track pollution odors across the Pittsburgh region. If you detect a foul odor while you're outside, please report it through this app.</p>
-      <p style="font-weight:bold;">Smell PGH will automatically submit these reports to the Allegheny County Health Department (ACHD) so they can take action.</p>
-    </div>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="startup_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#settings" id="startup-to-settings" data-icon="carat-r" data-transition="none">Done</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div data-role="page" id="about">
-    <!-- panel -->
-    <div data-role="panel" id="about-panel" data-display="overlay">
-      <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
-      <ul data-role="listview" data-inset="true" data-icon="false">
-        <li><a href="#settings" data-transition="none">Settings</a></li>
-        <li><a href="#about" class="ui-btn ui-btn-active" data-transition="none">About</a></li>
-        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
-      </ul>
-    </div>
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <a href="#about-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-      <h1>About</h1>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content">
-      <h3>About Smell PGH</h3>
-      <p><a href="http://smellpgh.org/" target="_blank">Official Website</a></p>
-      <p>Pittsburgh was named one of the top 15 most livable cities in the US, but our air quality is often worse than other cities on that list. Foul odors outside are typically symptoms of a serious pollution problem in our region. We, our children, our friends and families all breathe in this air. If our air smells toxic, then we are likely inhaling toxins.</p>
-      <p>Smell PGH was designed to crowdsource smell reports so we can track how pollutants travel through our air across Pittsburgh. All odor complaints submitted through the app go directly to the health department (ACHD) so they can better monitor and act on these complaints.</p>
-      <center class="smell-submit-share">-- Smell -- Submit -- Share --</center>
-      <p>Smell PGH was developed by the CMU CREATE Lab with support from the Heinz Endowments, and in collaboration with:</p>
-      <ul>
-        <li>ACCAN</li>
-        <li>PennEnvironment</li>
-        <li>GASP</li>
-        <li>Sierra Club</li>
-        <li>ROCIS</li>
-        <li>Blue Lens, LLC</li>
-        <li>PennFuture</li>
-        <li>Clean Water Action</li>
-        <li>Clean Air Council</li>
-      </ul>
-      <div id="about-version-number">
-        version: ###
-      </div>
-    </div>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div data-role="page" id="howitworks">
-    <!-- panel -->
-    <div data-role="panel" id="howitworks-panel" data-display="overlay">
-      <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
-      <ul data-role="listview" data-inset="true" data-icon="false">
-        <li><a href="#settings" data-transition="none">Settings</a></li>
-        <li><a href="#about" data-transition="none">About</a></li>
-        <li><a href="#howitworks" class="ui-btn ui-btn-active" data-transition="none">How It Works</a></li>
-      </ul>
-    </div>
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <a href="#howitworks-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-      <h1>How It Works</h1>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content">
-      <h3>How It Works</h3>
-      <p>We take every precaution to protect any personally identifiable data. All information shown on the public map visualization for Smell PGH is anonymous and location data is skewed to protect your privacy. Personal contact information you enter in the settings tab, is only shared with ACHD and not stored in our database. Our backend database only contains anonymous User ID’s created by your app service (Apple or Google Play).</p>
-
-      <p>The basic function of the Smell PGH app is as follows:</p>
-      <ul>
-        <li>When you experience a pollution odor outdoors, you launch the app and pick a rating for the smell you experience (from 1 through 5)</li>
-        <li>Adding a description of the smell (e.g. "Industrial", "Woodsmoke", etc.) is highly encouraged, since this can help the county isolate the source</li>
-        <li>You also have the option to (but are not required to):</li>
-        <ul>
-          <li>List any symptoms attributable to the experience</li>
-          <li>Send a personal note/question to ACHD</li>
-        </ul>
-        <li>NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map</li>
-        <li>Once you hit 'Submit', the information you report is pulled together in an email format that includes:</li>
-        <ul>
-          <li>The location of the smell (based on the GPS location of your phone)</li>
-          <li>Date and Time of smell</li>
-          <li>Rating and description (if provided) of smell</li>
-          <li>Any personal notes and/or questions to ACHD (if provided)</li>
-        </ul>
-        <li>This information is then made available to ACHD</li>
-        <li>At the same time your smell report is added to the public Smell PGH map</li>
-        <ul>
-          <li>A triangle icon that's the color of your smell rating represents your report</li>
-          <li>Your location is obscured on the map by slightly shifting the coordinates to protect your privacy</li>
-          <li>Tapping your smell report icon will show the details of your report, including the: date, time, rating, description (if provided) and symptoms (if provided)</li>
-          <li>NO personally identifiable information is shown on the map</li>
-        </ul>
-      </ul>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-
-  <div data-role="page" id="locationselect" class="page-fullscreened">
-    <!-- panel -->
-    <div data-role="panel" id="map-panel" data-display="overlay">
-      <a href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">Close</a>
-      <ul data-role="listview" data-inset="true" data-icon="false">
-        <li><a href="#settings" data-transition="none">Settings</a></li>
-        <li><a href="#about" data-transition="none">About</a></li>
-        <li><a href="#howitworks" data-transition="none">How It Works</a></li>
-      </ul>
-    </div>
-    <!-- header -->
-    <div data-role="header" data-position="fixed" data-tap-toggle="false">
-      <h1>Smell PGH</h1>
-      <a href="#map-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">Settings</a>
-    </div>
-    <!-- main -->
-    <div role="main" class="ui-content" id="map-locationselect-container" data-iscroll>
-      <div id="map_locationselect"></div>
-      <div id="middle-circle"></div>
-      <div id="locationselect-button-gps" class="custom-button ui-icon-custom-gps noselect"></div>
-      <div id="locationselect-button-done" class="custom-button ui-icon-custom-done noselect"></div>
-    </div>
-    <!-- footer -->
-    <div data-role="footer" data-position="fixed" data-id="map_1" data-tap-toggle="false">
-      <div data-role="navbar">
-        <ul>
-          <li><a href="#home" data-icon="home" data-transition="none">Smell Report</a></li>
-          <li><a href="#map" data-icon="star" data-transition="none">Map</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
   </body>
 </html>

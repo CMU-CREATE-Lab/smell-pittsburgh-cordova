@@ -1,26 +1,61 @@
-﻿var HomePage = {
+var HomePage = {
 
   smellValueSelected: false,
   smellValue: 0,
-  smellDescriptionPlaceholder: "e.g. industrial, woodsmoke, rotten-eggs",
-  smellFeelingsSymptomsPlaceholder: "e.g. headache, sore throat, eye irritation",
-  additionalCommentsPlaceholder: "e.g. if you submit more than one report in the same day",
+  smellDescriptionPlaceholder: null,
+  smellFeelingsSymptomsPlaceholder: null,
+  additionalCommentsPlaceholder: null,
   isLatLngDefined: false,
   returningFromLocationSelectPage: false,
   request: null,
   location: {"lat": 0, "lng": 0},
   openedPredictionNotification: false,
+  text: null, //the text for the page's template
+  ajaxTimeout: 3000, // the number of milliseconds to wait for the ajax request to timeout (for submitting smell reports)
+  didInitialLoad: false,
+  submittingReport: false,
 
 
-  initialize: function () {
+  loadTemplate: function() {
+    this.text = App.text.home;
+    // placeholder set up
+    HomePage.smellDescriptionPlaceholder = this.text.describe.placeholder;
+    HomePage.smellFeelingsSymptomsPlaceholder = this.text.symptoms.placeholder;
+    HomePage.additionalCommentsPlaceholder = this.text.note.placeholder;
+    var homeTpl = Handlebars.compile($("#home-tpl").html());
+    $('#home').html(homeTpl(this.text));
+    $('#home').trigger('create');
+  },
+
+
+  setListeners: function() {
+    // click listeners
+    $("#button_submit_report").click(HomePage.onClickSubmit);
+    $("#button_smell_location").click(HomePage.onClickLocation);
+    $(".radio-smell").click(function() {HomePage.onClickSmell(this);});
+    $("#checkbox_current_time_location").click(HomePage.onClickCurrentTimeLocation);
+    // focus (textbox) listeners
+    $("#textfield_smell_description").focus(function(){HomePage.onFocusTextboxWithLabel(this, $("label[for="+this.id+"]")[0] )});
+    $("#textfield_feelings_symptoms").focus(function(){HomePage.onFocusTextboxWithLabel(this, $("label[for="+this.id+"]")[0] )});
+    $("#textfield_additional_comments").focus(function(){HomePage.onFocusTextboxWithLabel(this, $("label[for="+this.id+"]")[0] )});
+    $("#select-report-time").change(HomePage.onChangeReportTime);
+  },
+
+
+  onCreate: function() {
+    console.log("HomePage.onCreate");
+    if (!HomePage.didInitialLoad) {
+      HomePage.didInitialLoad = true;
+      this.loadTemplate();
+      this.setListeners();
+    }
+
     if (HomePage.returningFromLocationSelectPage) {
       console.log("HomePage.initialize: returningFromLocationSelectPage");
       HomePage.returningFromLocationSelectPage = false;
       return;
     }
-    console.log("HomePage.initialize");
 
-    Location.hasLocation = false;
     if (HomePage.request != null) {
       HomePage.request.abort();
       HomePage.request = null;
@@ -34,20 +69,20 @@
     if (HomePage.openedPredictionNotification) {
       if (LocalStorage.get("firsttime_prediction")) {
         HomePage.showPredictModal();
-        LocalStorage.set("firsttime_prediction",false);
+        LocalStorage.set("firsttime_prediction", false);
       }
       HomePage.openedPredictionNotification = false;
     }
     // first-time modal
     if (LocalStorage.get("firsttime_home")) {
       HomePage.showHomeModal();
-      LocalStorage.set("firsttime_home",false);
+      LocalStorage.set("firsttime_home", false);
     }
 
     // set placeholder text
-    $("#textfield_smell_description").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellDescriptionPlaceholder);
-    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
-    $("#textfield_additional_comments").attr("placeholder",HomePage.additionalCommentsPlaceholder);
+    $("#textfield_smell_description").attr("placeholder", HomePage.smellValue == 1 ? "N/A" : HomePage.smellDescriptionPlaceholder);
+    $("#textfield_feelings_symptoms").attr("placeholder", HomePage.smellValue == 1 ? "N/A" : HomePage.smellFeelingsSymptomsPlaceholder);
+    $("#textfield_additional_comments").attr("placeholder", HomePage.additionalCommentsPlaceholder);
 
     $("#checkbox_current_time_location").prop("checked", true);
     $("#checkbox_current_time_location").checkboxradio("refresh", true);
@@ -57,22 +92,31 @@
     HomePage.populateOptionsForSelectReportTime();
 
     // browser compatibility issues (Yay?)
-    $("#home-panel").find(".ui-btn-active").removeClass("ui-btn-active");
+    $("#home").resize();
+
+    // Update current city name and coressponding info
+    // App.refreshCity();
+  },
+
+
+  // NOTE: this displays some what inconsistent behavior as the home page seems to be initialized 90% of the time the user loads it but not 100%
+  initialize: function () {
+    console.log("HomePage.initialize (deprecated; start using onCreate instead)");
+    HomePage.onCreate();
   },
 
 
   onDeviceReady: function() {
     console.log("HomePage.onDeviceReady");
-
     // click listeners
     $("#button_submit_report").click(HomePage.onClickSubmit);
     $("#button_smell_location").click(HomePage.onClickLocation);
     $(".radio-smell").click(function() {HomePage.onClickSmell(this);});
     $("#checkbox_current_time_location").click(HomePage.onClickCurrentTimeLocation);
     // focus (textbox) listeners
-    $("#textfield_smell_description").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
-    $("#textfield_feelings_symptoms").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
-    $("#textfield_additional_comments").focus(function(){HomePage.onFocusTextboxWithLabel( this, $("label[for="+this.id+"]")[0] )});
+    $("#textfield_smell_description").focus(function(){HomePage.onFocusTextboxWithLabel(this, $("label[for="+this.id+"]")[0] )});
+    $("#textfield_feelings_symptoms").focus(function(){HomePage.onFocusTextboxWithLabel(this, $("label[for="+this.id+"]")[0] )});
+    $("#textfield_additional_comments").focus(function(){HomePage.onFocusTextboxWithLabel(this, $("label[for="+this.id+"]")[0] )});
     $("#select-report-time").change(HomePage.onChangeReportTime);
   },
 
@@ -99,7 +143,7 @@
       }
       var text = hour + ":00 " + meridiem;
       // TODO check for character escapes
-      var str = "<option value='"+value+"'>"+text+"</option>";
+      var str = "<option value='" + value + "'>" + text + "</option>";
       $("#select-report-time").append(str);
     });
 
@@ -132,7 +176,7 @@
     HomePage.isLatLngDefined = true;
     HomePage.location = location;
     // TODO geocoder?
-    $("#button_smell_location").text(location["lat"]+", "+location["lng"]);
+    $("#button_smell_location").text(location["lat"] + ", " + location["lng"]);
     HomePage.returningFromLocationSelectPage = true;
   },
 
@@ -184,8 +228,8 @@
     HomePage.isLatLngDefined = false;
     HomePage.location = {"lat": 0, "lng": 0};
     // set placeholder text
-    $("#textfield_smell_description").attr("placeholder",HomePage.smellDescriptionPlaceholder);
-    $("#textfield_feelings_symptoms").attr("placeholder",HomePage.smellFeelingsSymptomsPlaceholder);
+    $("#textfield_smell_description").attr("placeholder", HomePage.smellDescriptionPlaceholder);
+    $("#textfield_feelings_symptoms").attr("placeholder", HomePage.smellFeelingsSymptomsPlaceholder);
     $("#button_smell_location").text("Current Location (default)");
     // reset custom time/location
     $("#checkbox_current_time_location").prop("checked",true).checkboxradio("refresh");
@@ -210,6 +254,8 @@
 
   onClickSubmit: function() {
     if (isConnected()) {
+      showSpinner("Submitting Report...");
+      HomePage.submittingReport = true;
       var smell_value = HomePage.smellValue;
       var smell_description = $("#textfield_smell_description")[0].value;
       var feelings_symptoms = $("#textfield_feelings_symptoms")[0].value;
@@ -228,20 +274,21 @@
         "additional_comments": additional_comments
       };
 
-      if (email != "") data["email"] = email;
-      if (name != "") data["name"] = name;
-      if (phone_number != "") data["phone_number"] = phone_number;
-      if (address != "") data["address"] = address;
+     if (email != "") data["email"] = email;
+     if (name != "") data["name"] = name;
+     if (phone_number != "") data["phone_number"] = phone_number;
+     if (address != "") data["address"] = address;
 
       // set custom location flag, custom time flag
-      var usesCustomTime  = !$("#checkbox_current_time_location").prop("checked") && $("#select-report-time").val() != "0";
+      var usesCustomTime = !$("#checkbox_current_time_location").prop("checked") && $("#select-report-time").val() != "0";
       var usesCustomLocation = !$("#checkbox_current_time_location").prop("checked") && HomePage.isLatLngDefined;
       data["custom_time"] = usesCustomTime ? "true" : "false";
       data["custom_location"] = usesCustomLocation ? "true" : "false";
 
       // determine if using custom time
-      var time = usesCustomTime ? $("#select-report-time").val() : "";
+      var time = usesCustomTime ? $("#select-report-time").val() : (new Date()).toISOString(); //parseInt((new Date).getTime());
       data["observed_at"] = time;
+      data["custom_time"] = usesCustomTime;
 
       // determine if using custom location (and send data)
       if (usesCustomLocation) {
@@ -254,8 +301,26 @@
           data["longitude"] = longitude;
           HomePage.submitAjaxWithData(data);
         });
+        // navigator.globalization.getDatePattern(function(dateInfo) {
+          // Force city refresh when submitting a report
+          // App.refreshCity(true, function(response) {
+          //   if (response.status == "failure") {
+          //     alert("There was a problem submitting this report. Error code: S1");
+          //     return;
+          //   }
+          //   var currentCity = LocalStorage.get("current_city");
+          //   data["latitude"] = currentCity.lat;
+          //   data["longitude"] = currentCity.lng;
+          //   // Note: If streetName ends up being empty, we will do a reverse geo lookup on the server,
+          //   // which seems to always return a street no matter the lat/lng.
+          //   data["street_name"] = currentCity.streetName;
+          //   data["zip"] = currentCity.zip;
+          //   data["state"] = currentCity.state;
+          //   data["timezone"] = dateInfo.iana_timezone;
+          //   HomePage.submitAjaxWithData(data);
+          // });
+        // });
       }
-
     } else {
       if (App.isDeviceReady) {
         alert("Connect to the internet before submitting a smell report.", null, "No Internet Connection", "Ok");
@@ -265,7 +330,7 @@
 
 
   onClickLocation: function() {
-    $.mobile.pageContainer.pagecontainer("change", "#locationselect", { changeHash: false, transition: "none" });
+    App.navigateToPage(Constants.LOCATION_SELECT_PAGE);
   },
 
 
@@ -294,48 +359,67 @@
       "navigator.userAgent": userAgent,
     };
     data["client_token"] = Constants.CLIENT_ID;
-    var url = Constants.URL_SMELLPGH+"/api/v2/smell_reports";
-    HomePage.submitAjaxToUrlWithData(url,data);
+    var url = Constants.URL_API + "/api/v2/smell_reports";
+    HomePage.submitAjaxToUrlWithData(url, data);
   },
 
 
   submitAjaxWithDataToV1Api: function(data) {
-    var url = Constants.URL_SMELLPGH+"/api/v1/smell_reports";
-    HomePage.submitAjaxToUrlWithData(url,data);
+    var url = Constants.URL_API + "/api/v1/smell_reports";
+    HomePage.submitAjaxToUrlWithData(url, data);
   },
 
 
   submitAjaxToUrlWithData: function(url, data) {
-    showSpinner("Submitting Report...");
     if (HomePage.request != null) {
       console.log("WARNING: refusing to send with non-null request.");
       return;
     }
+    
     HomePage.request = $.ajax({
       type: "POST",
       dataType: "json",
       url: url,
       data: data,
+      timeout: HomePage.ajaxTimeout,
       xhrFields: { withCredentials: false },
 
-      success: function (data) {
+      success: function(data) {
         hideSpinner();
         HomePage.clearForm();
         HomePage.request = null;
+        HomePage.submittingReport = false;
         MapPage.centerLocation = [ data["latitude"], data["longitude"] ];
-        $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
+        App.navigateToPage(Constants.MAP_PAGE);
+        //Popup notifying user of successful submission
+        App.showPopup("success-popup",5000);
       },
 
-      error: function (msg) {
+      error: function(msg) {
+        // TODO in the future we should run the statusText / error code through to Analytics
         hideSpinner();
         HomePage.request = null;
-        alert("There was a problem submitting this report.");
-      }
+        HomePage.submittingReport = false;
+        switch(msg.statusText) {
+          case "Internal Server Error":
+            alert("Smell report received but may not have been saved. Please check the map.");
+            MapPage.centerLocation = [ data["latitude"], data["longitude"] ];
+            App.navigateToPage(Constants.MAP_PAGE);
+            break;
+          case "timeout":
+            alert("Request timed out. Please try again.");
+            break;
+          default:
+            alert("There was a problem submitting this report. Error code: S2");
+            break;
+        }
+      },
     });
   },
 
 
   onClickSmell: function(item) {
+    console.log("onClickSmell");
     HomePage.smellValueSelected = true;
     HomePage.smellValue = item.value;
     HomePage.fieldsDisabled((HomePage.smellValue == 1));
@@ -344,10 +428,10 @@
 
 
   // Opening keyboard should focus the label, closing the keyboard should blur the textbox
-  onFocusTextboxWithLabel: function(element,label) {
+  onFocusTextboxWithLabel: function(element, label) {
     App.htmlElementToScrollAfterKeyboard = label;
-    App.htmlElementToBlurAfterKeyboardCloses = element;
+    //App.htmlElementToBlurAfterKeyboardCloses = element;
     label.scrollIntoView();
-  }
+  },
 
 }

@@ -1,4 +1,4 @@
-﻿var LocationSelectPage = {
+var LocationSelectPage = {
 
   map: null,
 
@@ -7,7 +7,7 @@
     console.log("LocationSelectPage.initialize");
 
     // request location before initializing the map
-    Location.requestLocation(function(lat,long) {
+    Location.requestLocation(function(lat, long) {
       // create map
       LocationSelectPage.initMap(lat,long);
     });
@@ -24,29 +24,28 @@
   },
 
 
-  initMap: function(lat,long) {
-    //var uluru = {"lat": 40.45, "lng": -79.93};
+  initMap: function(lat, long) {
     var uluru = {"lat": lat, "lng": long};
     var styleArray = [
       {
         featureType: "all",
         stylers: [
-          {saturation: -80}
-        ]
+          {saturation: -80},
+        ],
       }, {
         featureType: "road.arterial",
         elementType: "geometry",
         stylers: [
           {hue: "#00ffee"},
-          {saturation: 50}
-        ]
+          {saturation: 50},
+        ],
       }, {
         featureType: "poi.business",
         elementType: "labels",
         stylers: [
-          {visibility: "off"}
-        ]
-      }
+          {visibility: "off"},
+        ],
+      },
     ];
 
     LocationSelectPage.map = new google.maps.Map(document.getElementById("map_locationselect"), {
@@ -55,7 +54,7 @@
       // zoom: 11,
       zoom: 15,
       disableDefaultUI: true,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
   },
 
@@ -69,7 +68,7 @@
   onClickGps: function() {
     console.log("onClickGps");
 
-    Location.requestLocation(function(lat,long) {
+    Location.requestLocation(function(lat, long) {
       LocationSelectPage.map.setCenter({"lat": lat, "lng": long});
       LocationSelectPage.map.setZoom(15);
     });
@@ -85,7 +84,7 @@
     console.log("onClickDone: found center " + JSON.stringify(result));
 
     HomePage.useLocation(result);
-    $.mobile.pageContainer.pagecontainer("change", "#home", { changeHash: false, transition: "none" });
+    App.navigateToPage(Constants.HOME_PAGE);
   },
 
 }

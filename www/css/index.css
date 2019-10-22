@@ -1,3 +1,26 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Open Sans', Arial, sans-serif !important;
+}
+
+html {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 .ui-page-theme-a .ui-btn:focus {
   outline: none !important;
   -webkit-box-shadow: none !important;
@@ -11,43 +34,80 @@
   box-shadow: none !important;
 }
 
-.picker-color-smell-1 {
+.picker-color-smell {
   display: inline-block;
   width: 2em;
   min-height: 1em;
   height: 100%;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+.picker-color-smell-1 {
   background-color: rgb(0,255,0);
 }
 .picker-color-smell-2 {
-  display: inline-block;
-  width: 2em;
-  min-height: 1em;
-  height: 100%;
   background-color: rgb(248,229,64);
 }
 .picker-color-smell-3 {
-  display: inline-block;
-  width: 2em;
-  min-height: 1em;
-  height: 100%;
   background-color: rgb(218,136,0);
 }
 .picker-color-smell-4 {
-  display: inline-block;
-  width: 2em;
-  min-height: 1em;
-  height: 100%;
   background-color: rgb(235,38,103);
 }
 .picker-color-smell-5 {
-  display: inline-block;
-  width: 2em;
-  min-height: 1em;
-  height: 100%;
   background-color: rgb(95,14,54);
 }
 div[data-role="panel"] {
-  background-color: #f9f9f9 !important;
+  background-image: url("../img/side-menu-backgrounds/default.png");
+  background-color: #97c93c;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.ui-content .ui-listview, .ui-panel-inner>.ui-listview {
+  margin: 0 !important;
+}
+
+.ui-panel-inner {
+  position: absolute !important;
+  width: calc(100% - 60px) !important;
+  padding-left: 30px !important;
+  bottom: 5% !important;
+}
+
+.ui-panel-inner>.ui-listview {
+  border-radius: 5px !important;
+}
+
+.ui-panel-inner .ui-listview>li.ui-first-child, .ui-listview>li.ui-first-child>a.ui-btn {
+  border-top: none !important;
+}
+
+.ui-panel-inner .ui-listview a.ui-btn {
+  border-bottom: none !important;
+  background: #234c5a !important;
+  font-weight: normal !important;
+  color: white !important;
+  text-shadow: none !important;
+  outline: none !important;
+  border-color: #ddd !important;
+}
+
+.ui-footer .ui-navbar .ui-btn {
+  text-align: center !important;
+  padding-top: 20px !important;
+  padding-bottom: 15px !important;
+  font-size: 16px !important;
+}
+
+.ui-page:not(.overlay-enabled) .ui-footer-fixed.ui-fixed-hidden{
+  position: fixed !important;
+}
+
+.ui-panel-inner .ui-listview a.ui-btn.ui-btn-active, .ui-btn-active {
+  background-color: #23373d !important;
+  border-color: white !important;
 }
 
 /* Remove title restriction on modal headers */
@@ -55,10 +115,128 @@ div[data-role="panel"] {
   margin: 0 10% 0 !important;
 }
 
-/* Remove radio/checkbox glitch in android */
-.ui-page-theme-a .ui-btn:hover,html .ui-bar-a .ui-btn:hover,html .ui-body-a .ui-btn:hover,html body .ui-group-theme-a .ui-btn:hover,html head+body .ui-btn.ui-btn-a:hover {
-  background-color: #f6f6f6 !important;
-  border-color: #ddd !important;
-  color: inherit !important;
-  text-shadow: none !important;
+.ui-btn:hover, .ui-btn.ui-btn-a:hover {
+  background-color: inherit;
+  border-color: inherit;
+  color: inherit;
+  text-shadow: inherit;
+}
+
+.ui-radio-off.ui-btn:hover, .ui-radio-off.ui-btn.ui-btn-a:hover {
+  background-color: #f6f6f6;
+  border-color: #ddd;
+  color: inherit;
+  text-shadow: none;
+}
+
+.close-button{
+  position:absolute;
+  left:0px;
+}
+
+.inlineIcon {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 6px;
+  margin-top: -4px;
+}
+
+.ui-mobile .ui-page-active {
+  overflow: hidden;
+}
+
+body:not(.overlay-enabled) {
+  overflow: hidden;
+}
+
+.ui-page:not(#map):not(.overlay-enabled) {
+  height: calc(100% - 16px);
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ui-page:not(.overlay-enabled) .ui-content.no-top {
+  height: 100%;
+}
+
+#langsCollapsible, #langSelectContainer {
+  display: none !important;
+}
+
+h2 {
+  margin-top: 0px;
+}
+
+.no-scroll {
+  overflow: hidden !important;
+  position: fixed !important;
+}
+
+.ui-footer-fixed {
+  padding-bottom: 0 !important;
+  left: -1px;
+}
+
+.custom-ul {
+  padding-left: 16px;
+  margin: 0px 0px 10px 0px;
+}
+
+.ui-popup ul {
+  padding-left: 20px;
+  margin-top: 0px;
+}
+
+.li-parent {
+  margin: 10px 0px 0px 0px;
+}
+
+.requirement-indicator {
+  font-size: 13px;
+  font-style: italic;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.no-top-margin {
+  margin-top: 0px;
+}
+
+.regulatory-agency-note {
+  text-align: justify;
+  text-justify: inter-word;
+  font-style: italic;
+  font-size: 10px;
+  margin-bottom: 10px;
+  display: none;
+}
+
+a.ui-btn {
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+}
+
+.ui-input-has-clear {
+  padding-right: initial;
+}
+
+.ui-input-has-clear input:placeholder-shown {
+  padding-right: 0.2em;
+}
+
+.ui-input-has-clear input {
+  padding-right: 2.375em;
+}
+
+.popup-fadeout{
+  opacity:0 !important;
+  visibility: visible !important;
+  transition-timing-function: cubic-bezier(1, 0.5, 0.1, 0.1) !important;
+  transition-property: opacity !important;
 }

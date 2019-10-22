@@ -7,7 +7,7 @@ var Analytics = {
 
 
   /**
-   * Called when file is loaded.
+   * Should be called from app.js on device ready (and after Firebase.initialize).
    */
   initialize: function () {
     console.log("Analytics.initialize");
@@ -19,13 +19,13 @@ var Analytics = {
 
 
   initializeUserProperties: function(userHash) {
-    window.FirebasePlugin.setUserId(userHash);
-    window.FirebasePlugin.setUserProperty("user_hash", userHash);
+    Firebase.setUserId(userHash);
+    Firebase.setUserProperty("user_hash", userHash);
   },
 
 
   setScreenName: function(name) {
-    window.FirebasePlugin.setScreenName(name);
+    Firebase.setScreenName(name);
   },
 
 
@@ -35,40 +35,40 @@ var Analytics = {
   logOnPauseEvent: function() {
     var eventName = "on_pause";
     var params = {};
-    window.FirebasePlugin.logEvent(eventName, params);
+    Firebase.logEvent(eventName, params);
   },
 
 
   logOnResumeEvent: function() {
     var eventName = "on_resume";
     var params = {};
-    window.FirebasePlugin.logEvent(eventName, params);
+    Firebase.logEvent(eventName, params);
   },
 
 
   logOnClickNotificationEvent: function(notificationName) {
     var eventName = "on_click_notification";
     var params = {name: notificationName};
-    window.FirebasePlugin.logEvent(eventName, params);
+    Firebase.logEvent(eventName, params);
   },
 
 
   logOnUnsubscribeEvent: function(topicName) {
     var eventName = "on_unsubscribe";
     var params = {name: topicName};
-    window.FirebasePlugin.logEvent(eventName, params);
+    Firebase.logEvent(eventName, params);
   },
 
 
   logOnSubscribeEvent: function(topicName) {
     var eventName = "on_subscribe";
     var params = {name: topicName};
-    window.FirebasePlugin.logEvent(eventName, params);
+    Firebase.logEvent(eventName, params);
   },
 
 
   logEvent: function(eventName, params) {
-    window.FirebasePlugin.logEvent(eventName, params);
+    Firebase.logEvent(eventName, params);
   },
 
 }
