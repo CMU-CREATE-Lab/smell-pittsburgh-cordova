@@ -12,6 +12,7 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000" />
     <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="cordova.plugins.diagnostic.modules" value="LOCATION" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -20,6 +21,8 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="http://localhost/visualization" />
+    <allow-navigation href="https://api.smellpittsburgh.org/*" />
+    <allow-navigation href="https://staging.api.smellpittsburgh.org/*" />
     <platform name="android">
         <allow-intent href="market:*" />
         <splash src="www/img/smellpgh.png" />
@@ -90,7 +93,7 @@
     <plugin name="cordova-plugin-spinner" spec="1.1.0" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.3" />
     <plugin name="cordova-plugin-whitelist" spec="1.3.4" />
-    <plugin name="cordova.plugins.diagnostic" spec="5.0.0" />
+    <plugin name="cordova.plugins.diagnostic" spec="5.0.1" />
     <plugin name="cordova-plugin-geolocation" spec="4.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.3" />
     <preference name="ShowSplashScreenSpinner" value="false" />
@@ -99,7 +102,7 @@
     <plugin name="cordova-plugin-nativegeocoder" spec="3.2.2" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.1.3" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
-    <plugin name="cordova-plugin-firebasex" spec="6.0.7" />
+    <plugin name="cordova-plugin-firebasex" spec="6.1.0" />
     <plugin name="cordova-plugin-androidx" spec="1.0.2" />
     <plugin name="cordova-plugin-androidx-adapter" spec="1.1.0" />
     <engine name="browser" spec="^5.0.4" />
