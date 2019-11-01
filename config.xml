@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.cmucreatelab.smell_pgh" version="2.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.cmucreatelab.smell_pgh" version="2.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Smell PGH</name>
     <icon density="mdpi" height="57" src="www/img/smellpgh.png" width="57" />
     <description>
@@ -26,7 +26,7 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <splash src="www/img/smellpgh.png" />
-<!--         <preference name="backgroundColor" value="0xffffffff" />
+        <preference name="backgroundColor" value="0xffffffff" />
         <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png" />
         <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png" />
         <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png" />
@@ -43,13 +43,13 @@
         <resource-file src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" target="app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
         <resource-file src="res/icon/android/mipmap-xxhdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
         <resource-file src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" target="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
-        <resource-file src="res/icon/android/mipmap-xxxhdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />   -->      
+        <resource-file src="res/icon/android/mipmap-xxxhdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <splash src="www/img/smellpgh.png" />
-       <!--  <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
+        <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
         <splash src="res/screen/ios/Default@2x~universal~comany.png" />
         <splash src="res/screen/ios/Default@2x~universal~comcom.png" />
         <splash src="res/screen/ios/Default@3x~universal~anyany.png" />
@@ -84,7 +84,7 @@
         <icon height="80" src="res/icon/ios/AppIcon40x40@2x.png" width="80" />
         <icon height="88" src="res/icon/ios/AppIcon44x44@2x.png" width="88" />
         <icon height="172" src="res/icon/ios/AppIcon86x86@2x.png" width="172" />
-        <icon height="196" src="res/icon/ios/AppIcon98x98@2x.png" width="196" /> -->
+        <icon height="196" src="res/icon/ios/AppIcon98x98@2x.png" width="196" />
     </platform>
     <plugin name="cordova-plugin-device" spec="2.0.3" />
     <plugin name="cordova-plugin-dialogs" spec="2.0.2" />
