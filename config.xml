@@ -25,7 +25,7 @@
     <allow-navigation href="https://staging.api.smellpittsburgh.org/*" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <splash src="www/img/smellpgh.png" />
+        <!-- <splash src="www/img/smellpgh.png" /> -->
         <preference name="backgroundColor" value="0xffffffff" />
         <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png" />
         <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png" />
@@ -48,7 +48,7 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <splash src="www/img/smellpgh.png" />
+        <!-- <splash src="www/img/smellpgh.png" /> -->
         <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
         <splash src="res/screen/ios/Default@2x~universal~comany.png" />
         <splash src="res/screen/ios/Default@2x~universal~comcom.png" />
