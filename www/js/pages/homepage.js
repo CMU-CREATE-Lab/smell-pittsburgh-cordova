@@ -93,6 +93,7 @@ var HomePage = {
 
     // browser compatibility issues (Yay?)
     $("#home").resize();
+    $("#home .ui-panel-inner").find(".ui-btn-active").removeClass("ui-btn-active");
 
     // Update current city name and coressponding info
     // App.refreshCity();
@@ -392,7 +393,7 @@ var HomePage = {
         MapPage.centerLocation = [ data["latitude"], data["longitude"] ];
         App.navigateToPage(Constants.MAP_PAGE);
         //Popup notifying user of successful submission
-        App.showPopup("success-popup",5000);
+        App.showPopup("success-popup",4000);
       },
 
       error: function(msg) {

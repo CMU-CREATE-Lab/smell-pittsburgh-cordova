@@ -32,6 +32,9 @@ var MapPage = {
     }
 
     // var mapUrl = Constants.URL_MAP + "?user_hash=" + LocalStorage.get("user_hash") + "&client_token=" + Constants.CLIENT_ID;
+    
+    // browser compatibility issues (Yay?)
+    $("#map .ui-panel-inner").find(".ui-btn-active").removeClass("ui-btn-active");
 
     if (MapPage.centerLocation.length != 2) {
       Location.requestLocation(function(latitude,longitude) {

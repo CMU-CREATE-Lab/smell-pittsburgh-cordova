@@ -135,6 +135,10 @@ div[data-role="panel"] {
   text-shadow: none;
 }
 
+.ui-radio-on {
+  background-color: #ededed !important;
+}
+
 .close-button{
   position:absolute;
   left:0px;
@@ -243,6 +247,14 @@ a.ui-btn {
 .popup-fadeout{
   opacity:0 !important;
   visibility: visible !important;
-  transition-timing-function: cubic-bezier(1, 0.5, 0.1, 0.1) !important;
+  transition-timing-function: cubic-bezier(1, 0, 0, 0) !important;
   transition-property: opacity !important;
+}
+
+.ui-footer {
+  border-bottom: none !important;
+}
+
+.ui-footer-fixed {
+  bottom: 0px !important;
 }
