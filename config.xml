@@ -12,6 +12,7 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000" />
     <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="Orientation" value="portrait" />
     <preference name="cordova.plugins.diagnostic.modules" value="LOCATION" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

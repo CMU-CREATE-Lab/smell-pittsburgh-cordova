@@ -20,11 +20,11 @@ var AboutPage = {
 
   onCreate: function() {
     var that = this;
-    AboutPage.displayVersionNumber();
     if (!AboutPage.didInitialLoad) {
       AboutPage.didInitialLoad = true;
       this.loadTemplate();
       this.setListeners();
+      this.displayVersionNumber();
     }
 
     // // Update current city name and corresponding info
