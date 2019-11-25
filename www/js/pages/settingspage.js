@@ -21,7 +21,6 @@ var SettingsPage = {
     // ticking (checkbox) listeners
     $("#checkbox_smell_notifications").click(SettingsPage.onToggleSmellNotifications);
     $("#checkbox_pghaqi_notifications").click(SettingsPage.onTogglePittsburghAqiNotifications);
-    // $("#checkbox_smcaqi_notifications").click(SettingsPage.onToggleSmellMyCityAqiNotifications);
     // change (text) listeners
     $("#textfield_email").change(SettingsPage.onEmailChange);
     $("#textfield_name").change(SettingsPage.onNameChange);
@@ -50,8 +49,6 @@ var SettingsPage = {
       this.highlightMissingRecommended();
     }
 
-    // // Update current city name and corresponding info
-    // App.refreshCity();
   },
 
 

@@ -44,7 +44,7 @@ var LocalStorage = {
     for (key in this.DEFAULT_SETTINGS) {
       if (this.get(key) == null) this.set(key, this.DEFAULT_SETTINGS[key]);
     }
-    if (this.DEFAULT_SETTINGS["user_hash"] == null || this.DEFAULT_SETTINGS["user_hash"] == "") {
+    if (this.get("user_hash") == null || this.get("user_hash") == "") {
       this.set("user_hash", this.generateUserHash());
     }
   },

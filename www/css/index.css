@@ -59,7 +59,6 @@ html {
   background-color: rgb(95,14,54);
 }
 div[data-role="panel"] {
-  /*background-image: url("../img/side-menu-backgrounds/default.png");*/
   background-color: white;
   background-size: contain;
   background-repeat: no-repeat;
@@ -113,7 +112,6 @@ div[data-role="panel"] {
 .ui-panel-inner .ui-listview a.ui-btn.ui-btn-active, .ui-btn-active {
   background-color: rgba(77, 144, 255, 0.8) !important;
   color: white !important;
-  /*border-color: white !important;*/
 }
 
 /* Remove title restriction on modal headers */

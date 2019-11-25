@@ -95,8 +95,6 @@ var HomePage = {
     $("#home").resize();
     $("#home .ui-panel-inner").find(".ui-btn-active").removeClass("ui-btn-active");
 
-    // Update current city name and coressponding info
-    // App.refreshCity();
   },
 
 
@@ -302,25 +300,6 @@ var HomePage = {
           data["longitude"] = longitude;
           HomePage.submitAjaxWithData(data);
         });
-        // navigator.globalization.getDatePattern(function(dateInfo) {
-          // Force city refresh when submitting a report
-          // App.refreshCity(true, function(response) {
-          //   if (response.status == "failure") {
-          //     alert("There was a problem submitting this report. Error code: S1");
-          //     return;
-          //   }
-          //   var currentCity = LocalStorage.get("current_city");
-          //   data["latitude"] = currentCity.lat;
-          //   data["longitude"] = currentCity.lng;
-          //   // Note: If streetName ends up being empty, we will do a reverse geo lookup on the server,
-          //   // which seems to always return a street no matter the lat/lng.
-          //   data["street_name"] = currentCity.streetName;
-          //   data["zip"] = currentCity.zip;
-          //   data["state"] = currentCity.state;
-          //   data["timezone"] = dateInfo.iana_timezone;
-          //   HomePage.submitAjaxWithData(data);
-          // });
-        // });
       }
     } else {
       if (App.isDeviceReady) {

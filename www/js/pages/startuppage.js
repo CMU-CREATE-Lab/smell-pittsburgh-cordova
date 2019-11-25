@@ -22,9 +22,6 @@ var StartupPage = {
   onCreate: function() {
     this.loadTemplate();
     this.setListeners();
-
-    // Update current city name and corresponding info
-    // App.refreshCity();
   },
 
 

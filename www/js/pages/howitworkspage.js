@@ -24,9 +24,6 @@ var HowItWorksPage = {
       this.loadTemplate();
       this.setListeners();
     }
-
-    // Update current city name and corresponding info
-    // App.refreshCity();
   },
 
 
