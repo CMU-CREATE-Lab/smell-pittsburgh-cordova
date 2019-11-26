@@ -45,6 +45,17 @@
         <resource-file src="res/icon/android/mipmap-xxhdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
         <resource-file src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" target="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
         <resource-file src="res/icon/android/mipmap-xxxhdpi/ic_launcher_round.png" target="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
+
+        <!-- Notification Icons -->
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_silhouette" />
+            <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/primary" />
+        </config-file>
+        <resource-file src="res/icon/android/drawable-mdpi/ic_silhouette.png" target="app/src/main/res/drawable-mdpi/ic_silhouette.png"/>
+        <resource-file src="res/icon/android/drawable-hdpi/ic_silhouette.png" target="app/src/main/res/drawable-hdpi/ic_silhouette.png"/>
+        <resource-file src="res/icon/android/drawable-xhdpi/ic_silhouette.png" target="app/src/main/res/drawable-xhdpi/ic_silhouette.png"/>
+        <resource-file src="res/icon/android/drawable-xxhdpi/ic_silhouette.png" target="app/src/main/res/drawable-xxhdpi/ic_silhouette.png"/>
+        <resource-file src="res/colors.xml" target="app/src/main/res/values/colors.xml"/>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
