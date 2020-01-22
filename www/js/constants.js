@@ -56,6 +56,6 @@ var Constants = {
   APP_TEXT: [],
 
   //string with the date for last version of the app that required showing the user the updated features message
-  UPDATE_NEEDING_NOTIFICATION_DATE : "2019-09-06T00:00:00.000Z"
+  UPDATE_NEEDING_NOTIFICATION_DATE : "1970-01-01T00:00:00.000Z"
 
 }

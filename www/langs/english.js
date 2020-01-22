@@ -145,7 +145,7 @@ var english = {
   //Contains only text for HTML objects, use updates.js to change footer link locaitons
   updates: {
     header: constants.defaultHeader,
-    h3: "New Update For Smell My City!",
+    h3: "New Update For Smell Pittsburgh!",
     p1: "We’ve added notifications to this app! See Settings for more details.",
     footer: {
               li1: "See new features",
@@ -203,10 +203,10 @@ var english = {
       a: constants.defaultHeader.a,
     },
     h3: "How It Works",
-    p2: "We take every precaution to protect any personally identifiable data. All information shown on the public map visualization for Smell PGH is anonymous and location data is skewed to protect your privacy. Personal contact information you enter in the settings tab, is only shared with ACHD and not stored in our database. Our backend database only contains anonymous User ID’s created by your app service (Apple or Google Play).",
+    p2: "We take every precaution to protect any personally identifiable data. All information shown on the public map visualization for Smell PGH is anonymous and location data is skewed to protect your privacy. Personal contact information you enter in the settings tab, is only shared with ACHD, so that they can follow up if beneficial to the odor investigation, and not stored in our database. Our backend database only contains anonymous User ID's created by your app service (Apple or Google Play).",
     p1: "The basic function of the Smell PGH app is as follows:",
     li1: "When you experience a pollution odor outdoors, you launch the app and pick a rating for the smell you experience (from 1 through 5)",
-    li2: 'Adding a description of the smell (e.g. "Industrial", "Woodsmoke", etc.) is highly encouraged, since this can help the county isolate the source',
+    li2: 'Adding a description of the smell (e.g. "Industrial", "Woodsmoke", etc.) is highly encouraged, since this can help the county determine likely or potential sources',
     li3: "You also have the option to (but are not required to):",
     li4: "List any symptoms attributable to the experience",
     li5: "Send a personal note/question to ACHD",
