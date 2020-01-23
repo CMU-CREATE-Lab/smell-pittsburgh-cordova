@@ -49,10 +49,8 @@
         <!-- Notification Icons -->
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
             <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_silhouette" />
-        </config-file>
-        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/primary" />
-        </edit-config>
+        </config-file>
         <resource-file src="res/icon/android/drawable-mdpi/ic_silhouette.png" target="app/src/main/res/drawable-mdpi/ic_silhouette.png"/>
         <resource-file src="res/icon/android/drawable-hdpi/ic_silhouette.png" target="app/src/main/res/drawable-hdpi/ic_silhouette.png"/>
         <resource-file src="res/icon/android/drawable-xhdpi/ic_silhouette.png" target="app/src/main/res/drawable-xhdpi/ic_silhouette.png"/>
