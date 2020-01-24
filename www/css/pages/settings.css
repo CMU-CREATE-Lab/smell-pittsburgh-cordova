@@ -10,3 +10,7 @@ label.settings-description-smaller {
 .ui-input-text.missing-recommended {
    border-color: red;
 }
+.back-x{
+  height:30px;
+  width:30px
+}

@@ -24,3 +24,10 @@ div.textfield-disabled {
 textarea {
   height: 104px !important;
 }
+
+#button_submit_report {
+  background-color: #97c93c;
+  color: white;
+  font-weight: bold;
+  text-shadow: none;
+}

@@ -39,11 +39,11 @@ function openWithPage(pageName, notificationType) {
       if (notificationType == "prediction") {
         HomePage.openedPredictionNotification = true;
       }
-      $.mobile.pageContainer.pagecontainer("change", "#home", { changeHash: false, transition: "none" });
+      App.navigateToPage(Constants.HOME_PAGE);
       break;
     case "map":
       pageId = Constants.MAP_PAGE;
-      $.mobile.pageContainer.pagecontainer("change", "#map", { changeHash: false, transition: "none" });
+      App.navigateToPage(Constants.MAP_PAGE);
       break;
     default:
       pageId = Constants.HOME_PAGE;
@@ -53,44 +53,35 @@ function openWithPage(pageName, notificationType) {
 }
 
 
-function initializeFCM() {
-  console.log("onInitializeFCM");
-  window.FirebasePlugin.getToken(function(token) {
-      console.log("Your firebaseInstanceID is "+token);
-    }, function(error) {
-      console.error(error);
-  });
-  window.FirebasePlugin.onNotificationOpen(function(notification) {
-      console.log(JSON.stringify(notification));
-      Analytics.logOnClickNotificationEvent(notification["notification_type"]);
-      if (notification["open_with_page"]) {
-        openWithPage(notification["open_with_page"], notification["notification_type"]);
-      }
-    }, function(error) {
-      console.error(error);
-  });
-}
-
-
 // App-wide Callbacks
 
 
 // when keyboard appears, we want to scroll the focused textfield into view
 function onKeyboardShowInHomePage(keyboardHeight) {
+  console.log("keyboard OPEN");
+  $(".ui-page, body").addClass("overlay-enabled");
   App.htmlElementToScrollAfterKeyboard.scrollIntoView();
 }
 
 
 function onKeyboardHide(e) {
   console.log("keyboard CLOSE");
-  $(App.htmlElementToBlurAfterKeyboardCloses).blur();
+  $(".ui-page, body").removeClass("overlay-enabled");
+  //$(App.htmlElementToBlurAfterKeyboardCloses).blur();
 }
 
 
 function showModal(modalId) {
   var modal = "#"+modalId;
   console.log("showModal "+modal);
-  $(modal).popup();
+  $(modal).popup({
+    afteropen: function() {
+      $(".ui-page, body").addClass("overlay-enabled no-scroll");
+    },
+    afterclose: function() {
+      $(".ui-page, body").removeClass("overlay-enabled no-scroll");
+    }
+  });
   // delays opening to avoid issues with iOS < 9.3
   setTimeout(function() {
     $(modal).popup("open");
@@ -115,4 +106,29 @@ function disableUnwantedFastClickElements() {
   // Settings
   $("#checkbox_smell_notifications").addClass("needsclick");
   $(".checkbox-smell-subscribe").addClass("needsclick");
+}
+
+
+// text handling
+
+
+/**Parse int from param and returns the template text object
+ * for that language
+ * @param {language} int -the index of the language object in Constants.APP_TEXT
+ */
+function getText(language) {
+  if (Constants.APP_TEXT.length > 0) {
+    return Constants.APP_TEXT[language];
+  } else {
+    populateLangs();
+    return getText(language);
+  }
+}
+
+
+// populates Constants.APP_TEXT
+function populateLangs() {
+  Constants.APP_TEXT = [];
+  Constants.APP_TEXT.push(english);
+  //Constants.APP_TEXT.push(espanol);
 }

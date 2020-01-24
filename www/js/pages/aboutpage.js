@@ -1,22 +1,41 @@
-﻿var AboutPage = {
+var AboutPage = {
+
+  text: null, //the text for the page's template
+  didInitialLoad: false,
+
+
+  loadTemplate: function() {
+    this.text = App.text.about;
+    var aboutTpl = Handlebars.compile($("#about-tpl").html());
+    $('#about').html(aboutTpl(this.text));
+    $('#about').trigger('create');
+  },
+
+
+  setListeners: function() {
+    // add back (x) button functionality
+    $(".back-x").click(function() {App.navigateToPastPage()});
+  },
+
+
+  onCreate: function() {
+    var that = this;
+    if (!AboutPage.didInitialLoad) {
+      AboutPage.didInitialLoad = true;
+      this.loadTemplate();
+      this.setListeners();
+      this.displayVersionNumber();
+    }
+  },
 
 
   initialize: function () {
-    console.log("AboutPage.initialize");
+    console.log("AboutPage.initialize (deprecated; start using onCreate instead)");
+    AboutPage.onCreate();
   },
-
-
-  onDeviceReady: function() {
-    console.log("AboutPage.onDeviceReady");
-    AboutPage.displayVersionNumber();
-  },
-
 
   // helper functions
-
-
   displayVersionNumber: function() {
     $("#about-version-number").text("version: "+Constants.APP_VERSION);
   },
-
 }
