@@ -145,8 +145,12 @@ var english = {
   //Contains only text for HTML objects, use updates.js to change footer link locaitons
   updates: {
     header: constants.defaultHeader,
-    h3: "New Update For Smell Pittsburgh!",
-    p1: "We’ve added notifications to this app! See Settings for more details.",
+    h3: "New Updates For Smell Pittsburgh!",
+    p1: "We’ve added two new features:",
+    li1: "When you successfully submit a smell report, you will see a 'submission confirmation' pop up at the top of your screen.",
+    li2: "There is a new 'Share' button on the map; you can use that to create and share a URL for a specific smell report visualization from any day/time.",
+    p2: "We've also made some design upgrades to make the report submission button more visible and the overall app look better (we hope!).",
+    p3: "We've also made some backend updates to improve data analytics.",
     footer: {
               li1: "See new features",
               li2: "Ok",}

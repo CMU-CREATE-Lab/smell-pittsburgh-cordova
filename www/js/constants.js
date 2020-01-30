@@ -7,7 +7,7 @@ var Constants = {
   CLIENT_ID: "e431cd0eb45ae1619d5208410060470c",
   LOCATION_SERVICES: true,
   PLATFORM_CALLBACK_ONREADY: true,
-  APP_VERSION: "2.2.1",
+  APP_VERSION: "2.2.4",
   URL_API: "https://staging.api.smellpittsburgh.org",
   STAGING: "https://staging.api.smellpittsburgh.org",
   URL_MAP: "https://staging.api.smellpittsburgh.org/visualization",
@@ -56,6 +56,6 @@ var Constants = {
   APP_TEXT: [],
 
   //string with the date for last version of the app that required showing the user the updated features message
-  UPDATE_NEEDING_NOTIFICATION_DATE : "1970-01-01T00:00:00.000Z"
+  UPDATE_NEEDING_NOTIFICATION_DATE : "2020-01-28T00:00:00.000Z"
 
 }
