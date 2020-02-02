@@ -92,7 +92,7 @@ function showModal(modalId) {
 /*
  * Okay, rant time.
  * Due to delay issues with handling clicks in iOS, the FastClick library was
- * included in the project and attached to HTML onLoad. However, this inotrudced
+ * included in the project and attached to HTML onLoad. However, this introduced
  * a new problem within iOS: clicks on checkboxradio widgets would first have to
  * focus the widget, then the desired click action would fire after a second
  * click. Luckily, FastClick implements the "needsclick" class, which tells

@@ -21,7 +21,7 @@ div.textfield-disabled {
   background-color: #ddd !important;
 }
 
-textarea {
+textarea:not(.input-equivalent) {
   height: 104px !important;
 }
 
