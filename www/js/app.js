@@ -62,6 +62,9 @@ var App = {
       case Constants.STARTUP_PAGE:
         StartupPage.initialize();
         break;
+      case Constants.MAP_ERROR_PAGE:
+        MapErrorPage.initialize();
+        break;
       case Constants.HOME_PAGE:
         HomePage.initialize();
         // change pastPage so the x sends the user here
