@@ -4,6 +4,24 @@ var MapPage = {
   centerLocation: [],
   didInitialLoad: false,
 
+  initialIFrameLoaded: false,
+  timer: null,
+
+  mapCheck: function() {
+      console.log("Checking if map loaded");
+      initialIFrameLoaded = true;
+      var $iframe = $($("#iframe-map")[0].contentWindow.document.body.innerHTML);
+      if($iframe){
+        if($iframe.find("#map-container").length == 0){
+          console.log("Map Error")
+          App.navigateToPage(Constants.MAP_ERROR_PAGE);
+        }else{
+          console.log("Map Loaded")
+        }
+      }
+      console.log("IFrame not found")
+
+  },
 
   loadTemplate: function() {
     this.text = App.text.map;
@@ -15,10 +33,26 @@ var MapPage = {
 
   setListeners: function() {
     // (future listeners will go here)
+
+    //If IFrame has loaded
+    $('#iframe-map').load(function (e) {
+      console.log("IFrame has loaded");
+      clearTimeout(timer);
+      //Check if map page is not 404
+      if(!initialIFrameLoaded){
+        MapPage.mapCheck();
+      }
+
+    });
   },
 
 
   onCreate: function() {
+
+    //IFrame Loading Check
+    initialIFrameLoaded = false;
+    timer = setTimeout(MapPage.mapCheck,10000);
+
     if (!MapPage.didInitialLoad) {
       MapPage.didInitialLoad = true;
       this.loadTemplate();

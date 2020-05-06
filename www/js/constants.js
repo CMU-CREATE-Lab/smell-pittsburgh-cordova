@@ -4,14 +4,14 @@
  */
 var Constants = {
 
-  CLIENT_ID: "e431cd0eb45ae1619d5208410060470c",
+  CLIENT_ID: "2839865f2eeba9e3b441f249b2c217a3",
   LOCATION_SERVICES: true,
   PLATFORM_CALLBACK_ONREADY: true,
-  APP_VERSION: "2.2.4",
+  APP_VERSION: "2.2.5",
   URL_API: "https://api.smellpittsburgh.org",
   STAGING: "https://staging.api.smellpittsburgh.org",
   URL_MAP: "https://api.smellpittsburgh.org/visualization",
-
+  
   // Page Ids
   UPDATES_PAGE: "updates",
   STARTUP_PAGE: "startup",
@@ -21,7 +21,8 @@ var Constants = {
   ABOUT_PAGE: "about",
   LOCATION_SELECT_PAGE: "locationselect",
   HOW_IT_WORKS_PAGE: "howitworks",
-
+  MAP_ERROR_PAGE: "maperror",
+  
   // Local Storage keys
   USER_HASH_KEY: "user_hash",
   NOTIFICATION_ENABLED_KEY: "notification",

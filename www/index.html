@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, user-scalable = "no", initial-scale=1">
     <!-- css -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
@@ -37,6 +37,7 @@
     <script src="js/pages/aboutpage.js"></script>
     <script src="js/pages/overviewpage.js"></script>
     <script src="js/pages/howitworkspage.js"></script>
+    <script src="js/pages/maperrorpage.js"></script>
     <!-- <script src="js/pages/locationselectpage.js"></script> -->
     <script src="js/firebase.js"></script>
     <script src="js/analytics.js"></script>
@@ -322,6 +323,37 @@
         </div>
       </div>
     </script>
+    <!--maperror page template-->
+    <script id="maperror-tpl" type="text/template">
+      <!-- panel -->
+      <div data-role="panel" id="map-error-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
+       <ul data-role="listview" data-inset="false" data-icon="false">
+         <li><a href="#howitworks" data-transition="none">{{panel.li2}}</a></li>
+         <li><a href="#settings" data-transition="none">{{panel.li3}}</a></li>
+         <li><a href="#about" data-transition="none">{{panel.li4}}</a></li>
+       </ul><br/>
+       <!-- <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a> -->
+      </div>
+      <!-- header -->
+      <div data-role="header" data-position="fixed" data-tap-toggle="false">
+       <h1>{{header.h1}}</h1>
+       <a href="#map-error-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
+      </div>
+      <!-- main -->
+      <div role="main" class="ui-content">
+        <h3>{{h3}}</h3>
+        <p>{{p1}}</p>
+      </div>
+        <!-- footer -->
+        <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
+          <div data-role="navbar">
+            <ul>
+              <li><a href="#home" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
+              <li><a href="#map" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
+            </ul>
+          </div>
+        </div>
+    </script>
     <!--about page template-->
     <script id="about-tpl" type="text/template">
       <!-- panel -->
@@ -489,6 +521,8 @@
     <div data-role="page" id="about">
     </div>
     <div data-role="page" id="howitworks">
+    </div>
+    <div data-role="page" id="maperror">
     </div>
     <div data-role="page" id="locationselect" class="page-fullscreened">
       <!-- panel -->
