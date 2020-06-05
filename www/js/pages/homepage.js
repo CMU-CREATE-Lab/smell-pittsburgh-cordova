@@ -355,7 +355,7 @@ var HomePage = {
       console.log("WARNING: refusing to send with non-null request.");
       return;
     }
-    
+
     HomePage.request = $.ajax({
       type: "POST",
       dataType: "json",

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="width=device-width, user-scalable = "no", initial-scale=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
     <!-- css -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/pages/home.css" />
     <link rel="stylesheet" href="css/pages/settings.css" />
     <link rel="stylesheet" href="css/pages/map.css" />
-    <link rel="stylesheet" href="css/pages/overview.css" />
     <!-- <link rel="stylesheet" href="css/pages/locationselect.css" /> -->
     <!-- libraries -->
     <script src="lib/jquery-2.2.4.min.js"></script>
@@ -35,7 +34,6 @@
     <script src="js/pages/mappage.js"></script>
     <script src="js/pages/settingspage.js"></script>
     <script src="js/pages/aboutpage.js"></script>
-    <script src="js/pages/overviewpage.js"></script>
     <script src="js/pages/howitworkspage.js"></script>
     <script src="js/pages/maperrorpage.js"></script>
     <!-- <script src="js/pages/locationselectpage.js"></script> -->
@@ -132,7 +130,7 @@
          {{{regulatoryAgencyNote}}}
        </div>
        <div class="submission-disclaimer">
-         {{disclaimer}}
+         {{{disclaimer}}}
        </div>
        <button type="button" id="button_submit_report" disabled>{{button}}</button>
       </div>
@@ -401,53 +399,7 @@
            </ul>
          </div>
        </div>
-    </script><!--
-    <!--overview page template-->
-    <script id="overview-tpl" type="text/template">
-      <!-- panel -->
-       <div data-role="panel" id="overview-panel" data-display="overlay" data-theme="none" data-position-fixed="true">
-         <ul data-role="listview" data-inset="false" data-icon="false">
-            <li><a href="#" class="ui-btn ui-btn-active" data-transition="none">{{panel.li1}}</a></li>
-            <li><a href="#howitworks" data-transition="none">{{panel.li2}}</a></li>
-            <li><a href="#settings" data-transition="none">{{panel.li3}}</a></li>
-            <li><a href="#about" data-transition="none">{{panel.li4}}</a></li>
-         </ul><br/>
-         <!-- <a class="close-button" href="#" data-rel="close" data-role="button" data-icon="carat-l" data-inline="true">{{panel.a}}</a> -->
-       </div>
-       <!-- header -->
-       <div data-role="header" data-position="fixed" data-tap-toggle="false">
-         <a href="#overview-panel" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-left">{{header.a}}</a>
-         <h1>{{header.h1}}</h1>
-         <a class="back-x ui-btn ui-btn-right ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext"></a>
-       </div>
-       <!-- main -->
-       <div role="main" class="ui-content">
-         <h2>{{h2_1}}</h2>
-         <p>{{p1}}</p>
-         <h2>{{h2_2}}</h2>
-         <p>{{p2}}</p>
-         <h2>{{h2_3}}</h2>
-         <p>{{{p3}}}</p>
-         <h2>{{h2_4}}</h2>
-         <p>{{{p4}}}</p>
-         <p>{{{p5}}}</p>
-         <h2>{{h2_5}}</h2>
-         <p>{{{p6}}}</p>
-         <p>{{p7}}</p>
-         <div id="version-number">
-           {{version}}
-         </div>
-       </div>
-       <!-- footer -->
-       <div data-role="footer" data-position="fixed" data-id="settings_1" data-tap-toggle="false">
-         <div data-role="navbar">
-           <ul>
-             <li><a href="#home" data-transition="none"><span class="ui-icon-edit ui-btn-icon-notext inlineIcon"></span>{{footer.li1}}</a></li>
-             <li><a href="#map" data-transition="none"><span class="ui-icon-user ui-btn-icon-notext inlineIcon"></span>{{footer.li2}}</a></li>
-           </ul>
-         </div>
-       </div>
-    </script> -->
+    </script>
     <!--howitworks page template-->
     <script id="howitworks-tpl" type="text/template">
       <!-- panel -->

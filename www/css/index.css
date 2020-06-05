@@ -82,12 +82,7 @@ div[data-role="panel"] {
   border-radius: 5px !important;
 }
 
-.ui-panel-inner .ui-listview>li.ui-first-child, .ui-listview>li.ui-first-child>a.ui-btn {
-  /*border-top: none !important;*/
-}
-
 .ui-panel-inner .ui-listview a.ui-btn {
-  /*border-bottom: none !important;*/
   border-right: solid black;
   border-left: solid black;
   background: #f9f9f9 !important;
@@ -255,4 +250,22 @@ a.ui-btn {
 
 .ui-footer-fixed {
   bottom: 0px !important;
+}
+
+/* Unfortunately, these cannot be combined into a single selector.
+   Chrome and perhaps other browsers are unable to parse them that way. */
+::-webkit-input-placeholder {
+    opacity: 0.5 !important;
+}
+
+::-moz-placeholder {
+    opacity: 0.5 !important;
+}
+
+::-ms-placeholder {
+    opacity: 0.5 !important;
+}
+
+::placeholder {
+    opacity: 0.5 !important;
 }

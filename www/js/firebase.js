@@ -52,7 +52,9 @@ var Firebase = {
      if (Firebase.verboseLogging) console.log("subcribed to: " + Constants.SMELL_REPORT_TOPIC);
     }
 
-    window.FirebasePlugin.grantPermission();
+    window.FirebasePlugin.grantPermission(function(status) {
+      console.log("FirebasePlugin permission granted: " + status);
+    });
   },
 
 

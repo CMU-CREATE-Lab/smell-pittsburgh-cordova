@@ -9,7 +9,7 @@ var LocalStorage = {
    */
   DEFAULT_SETTINGS: {
     // TODO display version number somewhere
-    storage_app_version: "1.1",
+    storage_app_version: "1.1.1",
     // boolean values
     receive_smell_notifications: true,
     receive_notifications: true,
