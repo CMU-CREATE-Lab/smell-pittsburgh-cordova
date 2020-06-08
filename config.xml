@@ -134,6 +134,7 @@
     <plugin name="cordova-plugin-androidx" spec="1.0.2" />
     <plugin name="cordova-plugin-androidx-adapter" spec="1.1.1" />
     <plugin name="cordova-plugin-wkwebview-engine" spec="1.2.1" />
+    <plugin name="cordova-plugin-migrate-localstorage" spec="0.0.2" />
     <plugin name="cordova-custom-config" spec="5.1.0" />
     <engine name="browser" spec="^5.0.4" />
     <engine name="ios" spec="^5.1.1" />
