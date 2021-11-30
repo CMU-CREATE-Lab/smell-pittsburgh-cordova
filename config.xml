@@ -3,10 +3,10 @@
     <name>Smell PGH</name>
     <icon density="mdpi" height="57" src="www/img/smellpgh.png" width="57" />
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Smell PGH crowdsources smell reports so we all can better track how odors from pollutants travel through the air across the Pittsburgh region.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="info@cmucreatelab.org" href="https://smellpgh.org">
+        CREATE Lab
     </author>
     <content src="index.html" />
     <preference name="StatusBarOverlaysWebView" value="false" />
@@ -14,6 +14,8 @@
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="portrait" />
     <preference name="cordova.plugins.diagnostic.modules" value="LOCATION" />
+    <!-- This is required as of Cordova Android 10.x. It now uses the WebViewAssetLoader, which loads files from https://localhost by default. Previously Cordova used the file:// scheme, which we still need for CORS reasons. -->
+    <preference name="AndroidInsecureFileModeEnabled" value="true" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -109,34 +111,24 @@
     </platform>
     <plugin name="cordova-plugin-device" spec="2.0.3" />
     <plugin name="cordova-plugin-dialogs" spec="2.0.2" />
-    <plugin name="cordova-plugin-network-information" spec="2.0.2" />
+    <plugin name="cordova-plugin-network-information" spec="3.0.0" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="2.3.0" />
     <plugin name="cordova-plugin-spinner" spec="1.1.0" />
-    <plugin name="cordova-plugin-statusbar" spec="2.4.3" />
-    <plugin name="cordova-plugin-whitelist" spec="1.3.4" />
-    <plugin name="cordova.plugins.diagnostic" spec="5.0.2" />
-    <plugin name="cordova-plugin-geolocation" spec="4.0.2" />
-    <plugin name="cordova-plugin-splashscreen" spec="5.0.3" />
+    <plugin name="cordova-plugin-statusbar" spec="https://github.com/apache/cordova-plugin-statusbar#49bb5ec69e8897458caa994878e1534b37e222ca" />
+    <plugin name="cordova.plugins.diagnostic" spec="6.1.0" />
+    <plugin name="cordova-plugin-geolocation" spec="4.1.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="6.0.0" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="DisallowOverscroll" value="true" />
     <plugin name="cordova-plugin-nativegeocoder" spec="3.4.1" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.1.3" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
-    <!--
-       Any version higher causes a Multidex build error because of the addtional firebase methods added.
-       We can either use the https://github.com/adriano-di-giovanni/cordova-plugin-enable-multidex plugin
-       or wait until the firebase plugin gets split up into modules.
-    -->
-    <plugin name="cordova-plugin-firebasex" spec="7.0.2" >
+    <plugin name="cordova-plugin-firebasex" spec="13.0.1-cli" >
         <variable name="ANDROID_ICON_ACCENT" value="#333333"/>
     </plugin>
-    <plugin name="cordova-plugin-androidx" spec="1.0.2" />
-    <plugin name="cordova-plugin-androidx-adapter" spec="1.1.1" />
-    <plugin name="cordova-plugin-wkwebview-engine" spec="1.2.1" />
-    <plugin name="cordova-plugin-migrate-localstorage" spec="0.0.2" />
     <plugin name="cordova-custom-config" spec="5.1.0" />
-    <engine name="browser" spec="^5.0.4" />
-    <engine name="ios" spec="^5.1.1" />
-    <engine name="android" spec="^8.1.0" />
+    <engine name="browser" spec="^6.0.0" />
+    <engine name="ios" spec="^6.2.0" />
+    <engine name="android" spec="^10.1.1" />
 </widget>
