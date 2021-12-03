@@ -202,7 +202,7 @@ var english = {
     li4: "List any symptoms attributable to the experience",
     li5: "Include additional information relevant to the report",
     li6: "NOTE: Please only enter information that you are comfortable with sharing anonymously on the public Smell PGH map",
-    li7: "Once you hit 'Submit', the information you report is pulled together in an email format that includes:",
+    li7: "Once you hit 'Submit', the information you report is pulled together to include:",
     li8: "The location of the smell (based on the GPS location of your phone)",
     li9: "Date and Time of smell",
     li10: "Rating and description (if provided) of smell",
