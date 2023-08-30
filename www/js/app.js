@@ -91,6 +91,9 @@ var App = {
       case Constants.HOW_IT_WORKS_PAGE:
         HowItWorksPage.initialize();
         break;
+      case Constants.COMMUNITY_GUIDELINES:
+        CommunityGuidelines.initialize();
+        break;
       case Constants.LOCATION_SELECT_PAGE:
         if (callbackType == App.CallbackType.CREATE) {
           LocationSelectPage.initialize();

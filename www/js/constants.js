@@ -21,6 +21,7 @@ var Constants = {
   ABOUT_PAGE: "about",
   LOCATION_SELECT_PAGE: "locationselect",
   HOW_IT_WORKS_PAGE: "howitworks",
+  COMMUNITY_GUIDELINES: "communityguidelines",
   MAP_ERROR_PAGE: "maperror",
 
   // Local Storage keys
