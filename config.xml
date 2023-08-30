@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="org.cmucreatelab.smell_pgh" version="2.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Smell PGH</name>
-    <icon density="mdpi" height="57" src="www/img/smellpgh.png" width="57" />
     <description>
         Smell PGH crowdsources smell reports so we all can better track how odors from pollutants travel through the air across the Pittsburgh region.
     </description>
@@ -27,51 +26,61 @@
     <allow-navigation href="https://api.smellpittsburgh.org/*" />
     <allow-navigation href="https://staging.api.smellpittsburgh.org/*" />
     <platform name="android">
+        <preference name="AndroidXEnabled" value="true" />
         <allow-intent href="market:*" />
-        <!-- <splash src="www/img/smellpgh.png" /> -->
         <preference name="backgroundColor" value="0xffffffff" />
-        <splash density="port-hdpi" src="res/screen/android/splash-port-hdpi.png" />
-        <splash density="port-ldpi" src="res/screen/android/splash-port-ldpi.png" />
-        <splash density="port-mdpi" src="res/screen/android/splash-port-mdpi.png" />
-        <splash density="port-xhdpi" src="res/screen/android/splash-port-xhdpi.png" />
+        <resource-file src="res/colors.xml" target="app/src/main/res/values/colors.xml" />
+        <!-- Splash Screen -->
+        <!-- Edit 'cdv_splashscreen_background' and 'cdv_splashscreen_icon_background' in colors.xml when changing the background color of the splash screen -->
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splash_universal.png" />
+        <!-- End Splash Screen -->
         <!-- App Icons -->
         <resource-file src="res/icon/android/values/ic_launcher_background.xml" target="app/src/main/res/values/ic_launcher_background.xml" />
-        <icon background="@color/ic_launcher_background" density="mdpi" foreground="res/icon/android/mipmap-mdpi/ic_launcher_foreground.png" src="res/icon/android/mipmap-mdpi/ic_launcher.png" />
-        <icon background="@color/ic_launcher_background" density="hdpi" foreground="res/icon/android/mipmap-hdpi/ic_launcher_foreground.png" src="res/icon/android/mipmap-hdpi/ic_launcher.png" />
-        <icon background="@color/ic_launcher_background" density="xhdpi" foreground="res/icon/android/mipmap-xhdpi/ic_launcher_foreground.png" src="res/icon/android/mipmap-xhdpi/ic_launcher.png" />
-        <icon background="@color/ic_launcher_background" density="xxhdpi" foreground="res/icon/android/mipmap-xxhdpi/ic_launcher_foreground.png" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" />
-        <icon background="@color/ic_launcher_background" density="xxxhdpi" foreground="res/icon/android/mipmap-xxxhdpi/ic_launcher_foreground.png" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
+        <!-- foreground and background are required for adaptive icon sets. Foreground image will be used as the fallback icon for Android devices that do not support the adaptive icons. The fallback icon can be overridden by setting the src attribute -->
+        <icon background="@color/ic_launcher_background" density="mdpi" foreground="res/icon/android/mipmap-mdpi/ic_launcher_foreground.png" monochrome="res/icon/android/mipmap-mdpi/ic_launcher_foreground_monochrome.png" src="res/icon/android/mipmap-mdpi/ic_launcher.png" />
+        <icon background="@color/ic_launcher_background" density="hdpi" foreground="res/icon/android/mipmap-hdpi/ic_launcher_foreground.png" monochrome="res/icon/android/mipmap-hdpi/ic_launcher_foreground_monochrome.png" src="res/icon/android/mipmap-hdpi/ic_launcher.png" />
+        <icon background="@color/ic_launcher_background" density="xhdpi" foreground="res/icon/android/mipmap-xhdpi/ic_launcher_foreground.png" monochrome="res/icon/android/mipmap-xhdpi/ic_launcher_foreground_monochrome.png" src="res/icon/android/mipmap-xhdpi/ic_launcher.png" />
+        <icon background="@color/ic_launcher_background" density="xxhdpi" foreground="res/icon/android/mipmap-xxhdpi/ic_launcher_foreground.png" monochrome="res/icon/android/mipmap-xxhdpi/ic_launcher_foreground_monochrome.png" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" />
+        <icon background="@color/ic_launcher_background" density="xxxhdpi" foreground="res/icon/android/mipmap-xxxhdpi/ic_launcher_foreground.png" monochrome="res/icon/android/mipmap-xxxhdpi/ic_launcher_foreground_monochrome.png" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
         <!-- End App icons -->
         <!-- Notification Icons -->
-        <config-file parent="/manifest/application" target="AndroidManifest.xml">
-            <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_silhouette" />
+        <resource-file src="res/icon/android/drawable-mdpi/notification_icon.png" target="app/src/main/res/drawable-mdpi/notification_icon.png" />
+        <resource-file src="res/icon/android/drawable-hdpi/notification_icon.png" target="app/src/main/res/drawable-hdpi/notification_icon.png" />
+        <resource-file src="res/icon/android/drawable-xhdpi/notification_icon.png" target="app/src/main/res/drawable-xhdpi/notification_icon.png" />
+        <resource-file src="res/icon/android/drawable-xxhdpi/notification_icon.png" target="app/src/main/res/drawable-xxhdpi/notification_icon.png" />
+        <resource-file src="res/icon/android/drawable-xxxhdpi/notification_icon.png" target="app/src/main/res/drawable-xxxhdpi/notification_icon.png" />
+        <config-file parent="/manifest/application" target="app/src/main/AndroidManifest.xml">
+            <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon" />
         </config-file>
-        <resource-file src="res/icon/android/drawable-mdpi/ic_silhouette.png" target="app/src/main/res/drawable-mdpi/ic_silhouette.png"/>
-        <resource-file src="res/icon/android/drawable-hdpi/ic_silhouette.png" target="app/src/main/res/drawable-hdpi/ic_silhouette.png"/>
-        <resource-file src="res/icon/android/drawable-xhdpi/ic_silhouette.png" target="app/src/main/res/drawable-xhdpi/ic_silhouette.png"/>
-        <resource-file src="res/icon/android/drawable-xxhdpi/ic_silhouette.png" target="app/src/main/res/drawable-xxhdpi/ic_silhouette.png"/>
         <!-- End Notification Icons -->
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
+           <application android:exported="true" />
+        </edit-config>
+        <!-- Note that Cordova technically sets the minSdkVersion, which we can override here.  -->
+        <!-- API 24 (Android 7) is what they have as the min version, starting with Cordova v12. We set it to the same version here for transparency. -->
+        <preference name="android-minSdkVersion" value="24" />
+        <preference name="android-targetSdkVersion" value="33" />
+        <preference name="android-compileSdkVersion" value="33" />
     </platform>
     <platform name="ios">
         <!-- Cordova's edit-config does not edit plists correctly, so we have to use the custom config plugin. -->
-        <custom-config-file platform="ios" target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-          <string>Your location will be used to record relative locations of smell reports that you submit.</string>
+        <custom-config-file parent="NSLocationWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Your location will be used to record relative locations of smell reports that you submit.</string>
         </custom-config-file>
-        <custom-config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
-          <string>Your location will be used to record relative locations of smell reports that you submit.</string>
+        <custom-config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Your location will be used to record relative locations of smell reports that you submit.</string>
         </custom-config-file>
-        <custom-config-file platform="ios" target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-          <string>Your location will be used to record relative locations of smell reports that you submit.</string>
+        <custom-config-file parent="NSLocationAlwaysUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Your location will be used to record relative locations of smell reports that you submit.</string>
         </custom-config-file>
         <preference name="WKWebViewOnly" value="true" />
         <feature name="CDVWKWebViewEngine">
-          <param name="ios-package" value="CDVWKWebViewEngine" />
+            <param name="ios-package" value="CDVWKWebViewEngine" />
         </feature>
         <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
         <preference name="Allow3DTouchLinkPreview" value="false" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <!-- <splash src="www/img/smellpgh.png" /> -->
         <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
         <splash src="res/screen/ios/Default@2x~universal~comany.png" />
         <splash src="res/screen/ios/Default@2x~universal~comcom.png" />
@@ -109,26 +118,28 @@
         <icon height="172" src="res/icon/ios/AppIcon86x86@2x.png" width="172" />
         <icon height="196" src="res/icon/ios/AppIcon98x98@2x.png" width="196" />
     </platform>
-    <plugin name="cordova-plugin-device" spec="2.0.3" />
+    <plugin name="cordova-plugin-device" spec="2.1.0" />
     <plugin name="cordova-plugin-dialogs" spec="2.0.2" />
     <plugin name="cordova-plugin-network-information" spec="3.0.0" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="2.3.0" />
     <plugin name="cordova-plugin-spinner" spec="1.1.0" />
-    <plugin name="cordova-plugin-statusbar" spec="https://github.com/apache/cordova-plugin-statusbar#49bb5ec69e8897458caa994878e1534b37e222ca" />
-    <plugin name="cordova.plugins.diagnostic" spec="6.1.0" />
+    <plugin name="cordova-plugin-statusbar" spec="3.0.0" />
+    <plugin name="cordova.plugins.diagnostic" spec="7.1.2" />
     <plugin name="cordova-plugin-geolocation" spec="4.1.0" />
-    <plugin name="cordova-plugin-splashscreen" spec="6.0.0" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="DisallowOverscroll" value="true" />
-    <plugin name="cordova-plugin-nativegeocoder" spec="3.4.1" />
+    <plugin name="cordova-plugin-nativegeocoder" spec="3.5.1" />
+    <!-- Version 2.2.0+ of keyboard plugin misbehaves with the app -->
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.1.3" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
-    <plugin name="cordova-plugin-firebasex" spec="13.0.1-cli" >
-        <variable name="ANDROID_ICON_ACCENT" value="#333333"/>
+    <plugin name="cordova-plugin-firebasex" spec="16.1.0" >
+      <!-- Sets the color of the notification icon. Apparently has to be done here or within each notification message payload -->
+      <!-- Overrides whatever is set as 'accent' in colors.xml -->
+      <variable name="ANDROID_ICON_ACCENT" value="#323232"/>
     </plugin>
-    <plugin name="cordova-custom-config" spec="5.1.0" />
-    <engine name="browser" spec="^6.0.0" />
+    <plugin name="cordova-custom-config" spec="5.1.1" />
+    <engine name="browser" spec="^7.0.0" />
     <engine name="ios" spec="^6.2.0" />
-    <engine name="android" spec="^10.1.1" />
+    <engine name="android" spec="^12.0.1" />
 </widget>
