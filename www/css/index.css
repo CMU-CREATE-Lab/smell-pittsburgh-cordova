@@ -59,7 +59,8 @@ html {
   background-color: rgb(95,14,54);
 }
 div[data-role="panel"] {
-  background-color: white;
+  background-image: url("../img/side-menu-backgrounds/smellpgh.png");
+  background-color: #97c93c;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -72,7 +73,7 @@ div[data-role="panel"] {
   position: absolute !important;
   width: calc(100% - 60px) !important;
   padding-left: 30px !important;
-  top: 5% !important;
+  bottom: -6px !important;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -82,12 +83,15 @@ div[data-role="panel"] {
   border-radius: 5px !important;
 }
 
+.ui-panel-inner .ui-listview>li.ui-first-child, .ui-listview>li.ui-first-child>a.ui-btn {
+  border-top: none !important;
+}
+
 .ui-panel-inner .ui-listview a.ui-btn {
-  border-right: solid black;
-  border-left: solid black;
-  background: #f9f9f9 !important;
-  font-weight: bold !important;
-  color: black;
+  border-bottom: none !important;
+  background: #333333 !important;
+  font-weight: normal !important;
+  color: white !important;
   text-shadow: none !important;
   outline: none !important;
   border-color: #ddd !important;
@@ -105,8 +109,8 @@ div[data-role="panel"] {
 }
 
 .ui-panel-inner .ui-listview a.ui-btn.ui-btn-active, .ui-btn-active {
-  background-color: rgba(77, 144, 255, 0.8) !important;
-  color: white !important;
+  background-color: #234c5a !important;
+  border-color: white !important;
 }
 
 /* Remove title restriction on modal headers */
