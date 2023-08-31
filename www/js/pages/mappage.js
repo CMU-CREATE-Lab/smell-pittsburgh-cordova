@@ -5,7 +5,7 @@ var MapPage = {
   didInitialLoad: false,
   initialIFrameLoaded: false,
   timer: null,
-  iFrameTimeoutInMs: 8000,
+  iFrameTimeoutInMs: 10000,
 
 
 
