@@ -13,11 +13,9 @@
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="portrait" />
     <preference name="cordova.plugins.diagnostic.modules" value="LOCATION" />
-    <!-- This is required as of Cordova Android 10.x. It now uses the WebViewAssetLoader, which loads files from https://localhost by default. Previously Cordova used the file:// scheme, which we still need for CORS reasons. -->
-    <preference name="AndroidInsecureFileModeEnabled" value="true" />
     <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
+    <allow-intent href="http://*" />
+    <allow-intent href="https://*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
@@ -26,6 +24,8 @@
     <allow-navigation href="https://api.smellpittsburgh.org/*" />
     <allow-navigation href="https://staging.api.smellpittsburgh.org/*" />
     <platform name="android">
+        <!-- This is required as of Cordova Android 10.x. It now uses the WebViewAssetLoader, which loads files from https://localhost by default. Previously Cordova used the file:// scheme, which we still need for CORS reasons. -->
+        <preference name="AndroidInsecureFileModeEnabled" value="true" />
         <preference name="AndroidXEnabled" value="true" />
         <allow-intent href="market:*" />
         <preference name="backgroundColor" value="0xffffffff" />
@@ -59,8 +59,8 @@
         <!-- Note that Cordova technically sets the minSdkVersion, which we can override here.  -->
         <!-- API 24 (Android 7) is what they have as the min version, starting with Cordova v12. We set it to the same version here for transparency. -->
         <preference name="android-minSdkVersion" value="24" />
-        <preference name="android-targetSdkVersion" value="33" />
-        <preference name="android-compileSdkVersion" value="33" />
+        <preference name="android-targetSdkVersion" value="35" />
+        <preference name="android-compileSdkVersion" value="35" />
     </platform>
     <platform name="ios">
         <!-- Cordova's edit-config does not edit plists correctly, so we have to use the custom config plugin. -->
@@ -77,6 +77,8 @@
         <feature name="CDVWKWebViewEngine">
             <param name="ios-package" value="CDVWKWebViewEngine" />
         </feature>
+        <preference name="Scheme" value="app" />
+        <preference name="Hostname" value="localhost" />
         <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
         <preference name="Allow3DTouchLinkPreview" value="false" />
         <allow-intent href="itms:*" />
@@ -118,14 +120,14 @@
         <icon height="172" src="res/icon/ios/AppIcon86x86@2x.png" width="172" />
         <icon height="196" src="res/icon/ios/AppIcon98x98@2x.png" width="196" />
     </platform>
-    <plugin name="cordova-plugin-device" spec="2.1.0" />
+    <plugin name="cordova-plugin-device" spec="3.0.0" />
     <plugin name="cordova-plugin-dialogs" spec="2.0.2" />
     <plugin name="cordova-plugin-network-information" spec="3.0.0" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="2.3.0" />
     <plugin name="cordova-plugin-spinner" spec="1.1.0" />
-    <plugin name="cordova-plugin-statusbar" spec="3.0.0" />
-    <plugin name="cordova.plugins.diagnostic" spec="7.1.2" />
-    <plugin name="cordova-plugin-geolocation" spec="4.1.0" />
+    <plugin name="cordova-plugin-statusbar" spec="4.0.0" />
+    <plugin name="cordova.plugins.diagnostic" spec="7.2.5" />
+    <plugin name="cordova-plugin-geolocation" spec="5.0.0" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="DisallowOverscroll" value="true" />
@@ -133,7 +135,7 @@
     <!-- Version 2.2.0+ of keyboard plugin misbehaves with the app -->
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.1.3" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
-    <plugin name="cordova-plugin-firebasex" spec="16.1.0" >
+    <plugin name="cordova-plugin-firebasex" spec="18.0.7" >
       <!-- Sets the color of the notification icon. Apparently has to be done here or within each notification message payload -->
       <!-- Overrides whatever is set as 'accent' in colors.xml -->
       <variable name="ANDROID_ICON_ACCENT" value="#323232"/>
@@ -144,6 +146,6 @@
     <!-- This is the updated version of the original plugin, done for cordova-ios 6+ -->
     <plugin name="@ahovakimyan/cordova-plugin-wkwebviewxhrfix" spec="1.0.2" />
     <engine name="browser" spec="^7.0.0" />
-    <engine name="ios" spec="^7.0.0" />
-    <engine name="android" spec="^12.0.1" />
+    <engine name="ios" spec="^7.1.1" />
+    <engine name="android" spec="^14.0.1" />
 </widget>
