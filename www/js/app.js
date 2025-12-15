@@ -188,7 +188,7 @@ var App = {
   onPause: function() {
     console.log("onPause");
     Analytics.logOnPauseEvent();
-    if (App.isDeviceReady && App.authorizationStatus === Constants.AuthorizationEnum.GRANTED) {
+    if (App.isDeviceReady && (App.authorizationStatus === Constants.AuthorizationEnum.GRANTED || App.authorizationStatus === Constants.AuthorizationEnum.GRANTED_WHEN_IN_USE)) {
       Location.stopRequestLocation();
     } else if (App.isDeviceReady) {
       hideSpinner();

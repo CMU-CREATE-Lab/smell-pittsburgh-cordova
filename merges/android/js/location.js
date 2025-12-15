@@ -61,6 +61,10 @@ var Location = {
           console.log("Location permission granted");
           App.authorizationStatus = Constants.AuthorizationEnum.GRANTED;
           break;
+        case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+          console.log("Location permission granted when in use");
+          App.authorizationStatus = Constants.AuthorizationEnum.GRANTED_WHEN_IN_USE;
+          break;
       }
     }, onError);
   },
