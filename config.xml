@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.cmucreatelab.smell_pgh" version="2.4.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.cmucreatelab.smell_pgh" version="2.4.2" xmlns="http://www.w3.org/ns/widgets" xmlns:android="schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Smell PGH</name>
     <description>
         Smell PGH crowdsources smell reports so we all can better track how odors from pollutants travel through the air across the Pittsburgh region.
